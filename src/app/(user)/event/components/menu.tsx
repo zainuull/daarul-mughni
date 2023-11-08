@@ -1,6 +1,6 @@
 'use client';
 import { BsChevronDoubleDown } from 'react-icons/bs';
-import { GetDataById, getDataEventsById } from '@/services/api';
+import { getDataEventsById } from '@/services/api';
 import { useEffect, useState } from 'react';
 interface IMenu {
   id?: any;
@@ -13,7 +13,7 @@ const Menu = (props: IMenu) => {
   const [event, setEvent]: any = useState();
 
   useEffect(() => {
-    GetDataById(id)
+    getDataEventsById(id)
       .then((res) => {
         setEvent(res?.data?.data);
         console.log(res?.data?.data);

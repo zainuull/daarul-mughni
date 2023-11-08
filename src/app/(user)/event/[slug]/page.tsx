@@ -1,5 +1,5 @@
 'use client';
-import { GetDataById } from '@/services/api';
+import { getDataEventsById } from '@/services/api';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import banner from '../../../../../public/assets/banner.png';
@@ -15,7 +15,7 @@ const DetailEventPage = (props: DetailEventPageProps) => {
   const [event, setEvent]: any = useState();
 
   useEffect(() => {
-    GetDataById(params?.slug)
+    getDataEventsById(params?.slug)
       .then((res) => {
         setEvent(res?.data?.data);
         console.log(res?.data?.data);
@@ -30,7 +30,7 @@ const DetailEventPage = (props: DetailEventPageProps) => {
       <div className="flex flex-col w-full relative">
         <div className="relative">
           <Image
-            src={banner}
+            src={banner.src}
             alt="Logo"
             width={700}
             height={400}
@@ -52,7 +52,7 @@ const DetailEventPage = (props: DetailEventPageProps) => {
               <div className="w-2/3 h-full relative">
                 <Image
                   src={event?.background_detail}
-                  alt="Logo"
+                  alt={event?.name}
                   width={300}
                   height={330}
                   className="w-full h-full object-cover"
@@ -60,12 +60,12 @@ const DetailEventPage = (props: DetailEventPageProps) => {
                 <div className="absolute top-6 left-10 flex flex-col gap-y-4">
                   <Image
                     src={event?.img}
-                    alt="Logo"
+                    alt={event?.name}
                     width={300}
                     height={330}
                     className="w-[300px] object-cover"
                   />
-                  <p className='text-xl font-bold'>{event?.tokoh}</p>
+                  <p className="text-xl font-bold">{event?.tokoh}</p>
                 </div>
               </div>
             </div>
