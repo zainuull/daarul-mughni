@@ -23,7 +23,7 @@ const DetailEventPage = (props: DetailEventPageProps) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [params?.slug]);
 
   return (
     <div className="w-full min-h-screen mb-10 lg:mb-0">

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Image from 'next/image';
 import banner from '../../../../public/assets/banner.png';
 
@@ -15,19 +15,21 @@ const AboutPage = () => {
             className="lg:h-screen lg:w-full"
           />
         </div>
-        <div className='lg:w-full lg:flex flex-col items-center'>
+        <div className="lg:w-full lg:flex flex-col items-center">
           <div className="px-2 mt-4 text-sm leading-relaxed lg:absolute lg:top-[100px] lg:bg-white lg:p-10 lg:rounded-xl lg:w-1/2 lg:h-2/3">
             <div className="w-full text-center font-bold my-3 lg:text-xl">
               <h1>Pondok Pesantren Modern Perpaduan</h1>
               <h1 className="text-xl lg:text-2xl">Daarul Mughni Al - Malliki</h1>
             </div>
-            <h1 className='lg:mt-10 lg:leading-relaxed lg:mb-2'>
+            <h1 className="lg:mt-10 lg:leading-relaxed lg:mb-2">
               Adalah pesantren modern Pesantren modern, juga dikenal dengan istilah khalafiyah,
-              'ashriyah atau al-haditsiyyah, adalah kebalikan dari pesantren salaf (salafiyah).
-              Tidak ada definisi dan kriteria pasti tentang pondok pesantren sebagai syarat untuk
-              bisa disebut pesantren modern.
+              ashriyah atau al-haditsiyyah, adalah kebalikan dari pesantren salaf (salafiyah). Tidak
+              ada definisi dan kriteria pasti tentang pondok pesantren sebagai syarat untuk bisa
+              disebut pesantren modern.
             </h1>
-            <span className="font-medium lg:font-semibold lg:border-b lg:border-black">Berikut adalah beberapa ciri khas pesantren modern:</span>
+            <span className="font-medium lg:font-semibold lg:border-b lg:border-black">
+              Berikut adalah beberapa ciri khas pesantren modern:
+            </span>
             <div className="list-disc pl-4 flex flex-col gap-y-1 whitespace-break-spaces lg:gap-y-2 lg:mt-2">
               <li>Penekanan pada bahasa asing Arab dan Inggris dalam percakapan.</li>
               <li>

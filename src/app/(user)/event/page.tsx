@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import banner from '../../../../public/assets/banner.png';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import event1 from '../../../../public/assets/event/event1.png';
 import event2 from '../../../../public/assets/event/event2.png';
 import event3 from '../../../../public/assets/event/event3.png';
@@ -24,7 +24,7 @@ export default function EventPage() {
     <div className="w-full min-h-screen overflow-hidden">
       <div className="relative w-full h-full flex flex-col">
         <Image
-          src={banner}
+          src={banner.src}
           alt="Logo"
           width={700}
           height={400}

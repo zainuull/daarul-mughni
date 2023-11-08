@@ -21,7 +21,7 @@ const Menu = (props: IMenu) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [id]);
 
   return (
     <div
