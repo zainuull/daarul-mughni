@@ -1,12 +1,15 @@
 'use client';
 import Image from 'next/image';
 import banner from '../../../../public/assets/banner.png';
-import { getDataEvents } from '@/services/api';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import event1 from '../../../../public/assets/event/event1.png';
 import event2 from '../../../../public/assets/event/event2.png';
 import event3 from '../../../../public/assets/event/event3.png';
-import DetailEventPage from './[slug]/page';
+import event4 from '../../../../public/assets/event/event4.png';
+import event5 from '../../../../public/assets/event/event5.png';
+import Menu from './components/menu';
+import CardEvent from './components/card.event';
+import Link from 'next/link';
 
 export default function EventPage() {
   const [menu, setMenu] = useState(false);
@@ -27,73 +30,41 @@ export default function EventPage() {
           height={400}
           className="h-screen object-cover lg:w-full"
         />
-        <div className="absolute w-full h-3/4 grid grid-cols-4 gap-4">
-          <div className="col-span-1 flex items-center">
-            <div onClick={(e) => handleMenu(e)} className="group relative cursor-pointer">
-              <Image
-                src={event1}
-                id="event 1"
-                alt="event 1"
-                width={250}
-                className={`object-cover group-hover:scale-105 transition-all duration-300`}
-              />
-            </div>
-          </div>
-          <div className="col-span-2 flex items-center">
-            <div onClick={(e) => handleMenu(e)} className="group relative cursor-pointer">
-              <Image
-                src={event2}
-                id="event 2"
-                alt="event 2"
-                width={350}
-                className={`object-cover group-hover:scale-105 transition-all duration-300`}
-              />
-            </div>
-          </div>
-          <div className="col-span-1 flex items-center">
-            <div onClick={(e) => handleMenu(e)} className="group relative cursor-pointer">
-              <Image
-                src={event3}
-                id="event 3"
-                alt="event 3"
-                width={250}
-                className={`object-cover group-hover:scale-105 transition-all duration-300`}
-              />
-            </div>
-          </div>
+        <div className="absolute w-full h-3/4 grid grid-cols-4 gap-2 lg:grid-cols-12 lg:min-h-screen lg:px-6">
+          <Link
+            href={`${window.innerWidth >= 650 ? '/event/1' : ''}`}
+            className="flex col-span-1 lg:flex items-center justify-center lg:col-span-2">
+            <CardEvent id="1" handleMenu={handleMenu} image={event1.src} />
+          </Link>
+          <Link
+            href={`${window.innerWidth >= 650 ? '/event/4' : ''}`}
+            className="hidden col-span-1 lg:flex items-center justify-center lg:col-span-2">
+            <CardEvent id="4" handleMenu={handleMenu} image={event4.src} />
+          </Link>
+          <Link
+            href={`${window.innerWidth >= 650 ? '/event/2' : ''}`}
+            className="flex col-span-2 lg:flex items-center justify-center lg:col-span-4">
+            <CardEvent id="2" handleMenu={handleMenu} image={event2.src} />
+          </Link>
+          <Link
+            href={`${window.innerWidth >= 650 ? '/event/3' : ''}`}
+            className="flex col-span-1 lg:flex items-center justify-center lg:col-span-2">
+            <CardEvent id="3" handleMenu={handleMenu} image={event3.src} />
+          </Link>
+          <Link
+            href={`${window.innerWidth >= 650 ? '/event/5' : ''}`}
+            className="hidden col-span-1 lg:flex items-center justify-center lg:col-span-2">
+            <CardEvent id="5" handleMenu={handleMenu} image={event5.src} />
+          </Link>
         </div>
-        {id === 'event 1' ? (
-          <DetailEventPage
-            menu={menu}
-            setMenu={setMenu}
-            event="01 - Kegiatan"
-            name="Pembukaan Pramuka & Paskibra (Tahun ajaran 2023 - 2024)"
-            description1={`Dengan Motto "Satya-Ku Darmakan - Darmaku Ku Baktikan "`}
-            description2="Yang dibuka secara resmi oleh : Masugi Adi Jaluli, S.Pd "
-          />
+        {id == '1' && window.innerWidth <= 650 ? (
+          <Menu id={id} menu={menu} setMenu={setMenu} />
         ) : null}
-        {id === 'event 2' ? (
-          <DetailEventPage
-            menu={menu}
-            setMenu={setMenu}
-            event="02 - Kegiatan"
-            name="Tawaquf atau (Penutupan Seluruh Kegiatan Ekstrakurikuler)"
-            description1="Dengan tujuan agar seluruh santri tidak terlalu banyak beraktifitas pada waktu ujian dalam
-          menjalankannya, dan sekaligus pemberian penghargaan kepada santri yang berprestasi di
-          berbagai bidang masing-masing."
-            description2="Kegiatan yang dihadiri seluruh santri dan Jajaran dewan Asatidz & Ustadzah ini berlangsung
-          sangat meriah, mulai dari pembukaan Tawaquf nya sampai dengan Penampilan - penampilannya."
-          />
+        {id == '2' && window.innerWidth <= 650 ? (
+          <Menu id={id} menu={menu} setMenu={setMenu} />
         ) : null}
-        {id === 'event 3' ? (
-          <DetailEventPage
-            menu={menu}
-            setMenu={setMenu}
-            event="03 - Kegiatan"
-            name="Acara Musabaqoh Rampak Bedug"
-            description1="Yang diadakan di Pondok Pesantren Modern Perpaduan Daarul Mughni Al Maaliki untuk memperingati malam Iedul Adha 1444 H."
-            description2={`Kegiatan ini berlangsung setelah Sholat Isya dan dimeriahkan oleh seluruh santri dengan peserta dari kelas 1 Tsanawiyah s/d kelas 4 Aliyah putra dan putri, Dengan Tema "Menggapai rahmat, Merebut Maghfirah, dengan Gema Takbir untuk Karakter Muda Generasi Islami", bertempatan di Aula Serbaguna Pondok Pesantren Modern Perpaduan Daarul Mughni Al Maaliki.`}
-          />
+        {id == '3' && window.innerWidth <= 650 ? (
+          <Menu id={id} menu={menu} setMenu={setMenu} />
         ) : null}
       </div>
     </div>
