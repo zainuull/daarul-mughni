@@ -7,3 +7,4 @@ export function getDataEvents() {
 export function getDataEventsById(id: any) {
   return axios.get(`http://localhost:3000/api/event?id=${id}`);
 }
+
