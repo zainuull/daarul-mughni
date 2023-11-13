@@ -1,5 +1,4 @@
 'use client';
-import { BiMenuAltRight } from 'react-icons/bi';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -41,8 +40,8 @@ const Navbar = () => {
         <div className="flex items-center gap-x-2 lg:gap-x-4">
           <Image src={Logo} alt="Logo" width={50} height={50} />
           <Link href="/" className="font-bold lg:text-xl">
-            <div className='flex flex-col uppercase'>
-              <h1 className='border-b-2 border-black'>Daarul Mughni</h1>
+            <div className="flex flex-col uppercase">
+              <h1 className="border-b-2 border-black">Daarul Mughni</h1>
               <h1>Al-Maaliki</h1>
             </div>
           </Link>
@@ -84,6 +83,15 @@ const Navbar = () => {
                 : 'hover:text-gray-600 transition-all'
             }`}>
             Kontak
+          </Link>
+          <Link
+            href="/dashboard/guru"
+            className={`${
+              pathanme === '/dashboard'
+                ? 'bg-white text-gray-800 px-4 py-2 rounded-md font-semibold transition-all'
+                : 'hover:text-gray-600 transition-all'
+            }`}>
+            Dashboard
           </Link>
         </div>
         <div onClick={handleNav} className="md:hidden cursor-pointer">
