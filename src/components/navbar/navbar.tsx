@@ -100,7 +100,7 @@ const Navbar = () => {
       </div>
       {/* Menu in Phone */}
       {nav ? (
-        <div className="absolute top-0 right-0 h-screen bg-gray-200 w-1/2 z-30 transition-all duration-700">
+        <div className="absolute top-0 right-0 h-screen bg-white shadow-xl w-1/2 z-30 transition-all duration-700">
           <div className="w-full h-full relative pt-20">
             <div className="flex flex-col items-center justify-center gap-y-12  p-1">
               <Link
@@ -142,6 +142,16 @@ const Navbar = () => {
                     : ''
                 }`}>
                 Kontak
+              </Link>
+              <Link
+                onClick={() => setNav(false)}
+                href={'/dashboard/guru'}
+                className={`${
+                  pathanme == '/dashboard/guru'
+                    ? 'bg-white w-full text-center rounded-md py-2 font-semibold transition-all duration-500'
+                    : ''
+                }`}>
+                Dashboard
               </Link>
             </div>
             <AiOutlineClose
