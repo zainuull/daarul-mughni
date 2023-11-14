@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 export function getDataEvents() {
-  return axios.get(`http://localhost:3000/api/event`);
+  return axios.get(`${process.env.NEXT_PUBLIC_API}/api/event`);
 }
 
 export function getDataEventsById(id: any) {
-  return axios.get(`http://localhost:3000/api/event?id=${id}`);
+  return axios.get(`${process.env.NEXT_PUBLIC_API}/api/event?id=${id}`);
 }
 
