@@ -1,6 +1,4 @@
-'use client';
-import { getDataEventsById } from '@/services/api';
-import { useEffect, useState } from 'react';
+import { getDataById, getDataEventsById } from '@/services/api';
 import Image from 'next/image';
 import banner from '../../../../../public/assets/banner.png';
 
@@ -10,20 +8,10 @@ interface DetailEventPageProps {
   };
 }
 
-const DetailEventPage = (props: DetailEventPageProps) => {
+const DetailEventPage = async (props: DetailEventPageProps) => {
   const { params } = props;
-  const [event, setEvent]: any = useState();
-
-  useEffect(() => {
-    getDataEventsById(params?.slug)
-      .then((res) => {
-        setEvent(res?.data?.data);
-        console.log(res?.data?.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [params?.slug]);
+  const events = await getDataById(params?.slug);
+  const event = events?.data || [];
 
   return (
     <div className="w-full min-h-screen mb-10 lg:mb-0">
@@ -59,7 +47,7 @@ const DetailEventPage = (props: DetailEventPageProps) => {
                 />
                 <div className="absolute top-6 left-10 flex flex-col gap-y-4">
                   <Image
-                    src={event?.img}
+                    src={event?.img || ''}
                     alt={event?.name}
                     width={300}
                     height={330}

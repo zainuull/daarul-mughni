@@ -17,6 +17,8 @@ export default function EventPage() {
   const [windowWidth, setWindowWidth] = useState(0); // State to store window width
 
   const handleMenu = (e: any) => {
+    console.log(e);
+    
     setMenu(!menu);
     setId(e.target.id);
   };
@@ -73,15 +75,9 @@ export default function EventPage() {
             <CardEvent id="5" handleMenu={handleMenu} image={event5.src} />
           </Link>
         </div>
-        {id == '1' && windowWidth <= 650 ? (
-          <Menu id={id} menu={menu} setMenu={setMenu} />
-        ) : null}
-        {id == '2' && windowWidth <= 650 ? (
-          <Menu id={id} menu={menu} setMenu={setMenu} />
-        ) : null}
-        {id == '3' && windowWidth <= 650 ? (
-          <Menu id={id} menu={menu} setMenu={setMenu} />
-        ) : null}
+        {id == '1' && windowWidth <= 650 ? <Menu id={id} menu={menu} setMenu={setMenu} /> : null}
+        {id == '2' && windowWidth <= 650 ? <Menu id={id} menu={menu} setMenu={setMenu} /> : null}
+        {id == '3' && windowWidth <= 650 ? <Menu id={id} menu={menu} setMenu={setMenu} /> : null}
       </div>
     </div>
   );

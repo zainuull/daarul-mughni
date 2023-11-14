@@ -34,8 +34,8 @@ const event = [
     event: '02 - Kegiatan',
     name: 'Tawaquf atau (Penutupan Seluruh Kegiatan Ekstrakurikuler)',
     description: `Dengan tujuan agar seluruh santri tidak terlalu banyak beraktifitas pada waktu ujian dalam menjalankannya, dan sekaligus pemberian penghargaan kepada santri yang berprestasi di berbagai bidang masing-masing. Kegiatan yang dihadiri seluruh santri dan Jajaran dewan Asatidz & Ustadzah ini berlangsung sangat meriah, mulai dari pembukaan Tawaquf nya sampai dengan Penampilan - penampilannya.`,
-    img: event2.src,
-    background_detail: bgEvent2.src,
+    img: event2,
+    background_detail: bgEvent2,
     tokoh: 'Abdul Hadzik, S.Pd',
   },
   {

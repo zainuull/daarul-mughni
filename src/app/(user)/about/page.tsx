@@ -16,7 +16,7 @@ const AboutPage = () => {
           />
         </div>
         <div className="lg:w-full lg:flex flex-col items-center">
-          <div className="px-2 mt-4 text-sm leading-relaxed lg:absolute lg:top-[100px] lg:bg-white lg:p-10 lg:rounded-xl lg:w-1/2 lg:h-2/3">
+          <div className="px-2 mt-4 text-sm leading-relaxed lg:absolute lg:top-[100px] lg:bg-white lg:p-10 lg:rounded-xl lg:w-1/2 lg:min-h-2/3">
             <div className="w-full text-center font-bold my-3 lg:text-xl">
               <h1>Pondok Pesantren Modern Perpaduan</h1>
               <h1 className="text-xl lg:text-2xl">Daarul Mughni Al - Malliki</h1>
