@@ -17,8 +17,6 @@ export default function EventPage() {
   const [windowWidth, setWindowWidth] = useState(0); // State to store window width
 
   const handleMenu = (e: any) => {
-    console.log(e);
-    
     setMenu(!menu);
     setId(e.target.id);
   };

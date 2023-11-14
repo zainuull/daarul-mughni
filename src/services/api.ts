@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 export async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/event`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/event`, {
+    cache: 'no-store',
+  });
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -11,7 +13,9 @@ export async function getData() {
 }
 
 export async function getDataById(id: any) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/event?id=${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/event?id=${id}`, {
+    cache: 'no-store',
+  });
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
