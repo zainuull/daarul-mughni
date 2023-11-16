@@ -15,7 +15,7 @@ const Menu = (props) => {
     <div
       className={`${
         menu ? 'w-[150px] transition-all duration-700' : 'w-1/4 transition-all duration-700'
-      } h-full p-4 shadow-2xl shadow-gray-300`}>
+      } min-h-screen p-4 shadow-2xl shadow-gray-300`}>
       <div className="w-full h-full flex flex-col gap-y-2 mt-4">
         <div className="w-full flex items-center justify-center gap-x-4">
           <RxDashboard size={30} />

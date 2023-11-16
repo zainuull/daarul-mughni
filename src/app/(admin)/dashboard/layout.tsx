@@ -11,7 +11,7 @@ const LayoutPage = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full min-h-screen">
       <div className="w-full h-full flex gap-x-6 relative">
         <Menu menu={menu} />
         {children}

@@ -9,6 +9,7 @@ import bgEvent2 from '../../../../public/assets/event/bgEvent2.png';
 import bgEvent3 from '../../../../public/assets/event/bgEvent3.png';
 import bgEvent4 from '../../../../public/assets/event/bgEvent4.png';
 import bgEvent5 from '../../../../public/assets/event/bgEvent5.png';
+import { retrieveData } from '@/lib/firebase/service';
 
 const event = [
   {
@@ -69,6 +70,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ status: 404, message: 'Not Found', data: {} });
     }
   } else {
-    return NextResponse.json({ status: 200, message: 'Success', data: event });
+    const data = await retrieveData('products');
+    return NextResponse.json({ status: 200, message: 'Success', data });
   }
 }
