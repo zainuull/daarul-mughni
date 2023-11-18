@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 const DataGuru = () => {
   return (
-    <div className="w-4/5">
-      <div className="p-20 w-full h-full flex flex-col gap-y-4 ">
+    <div className="w-full">
+      <div className="p-10 w-full h-full flex flex-col gap-y-4 ">
         <h1 className="text-2xl uppercase font-medium">Data Guru</h1>
         <div className="w-full flex items-center justify-between mt-2">
           <h2 className="font-light uppercase">Data Guru / Pengajar</h2>

@@ -2,12 +2,12 @@ import DataGlobal from './component/global/golbal';
 import DataPersonal from './component/personal/personal';
 import Submit from './component/submit/submit';
 
-const AddDataSiswa = () => {
+const AddDataActivity = () => {
   return (
     <div className="w-full min-h-screen p-6">
       <div className="w-full h-full flex flex-col">
         <div className="p-4">
-          <h1 className="text-2xl uppercase font-medium">Tambah Data Siswa</h1>
+          <h1 className="text-2xl uppercase font-medium">Tambah Data Kegiatan</h1>
         </div>
         <div className="w-full p-4 bg-white rounded-lg shadow-lg">
           <DataPersonal />
@@ -23,4 +23,4 @@ const AddDataSiswa = () => {
   );
 };
 
-export default AddDataSiswa;
+export default AddDataActivity;

@@ -1,10 +1,14 @@
-'use client'
-import { useState } from 'react';
+'use client';
 import Menu from './components/menu/menu';
 import { BiChevronLeft } from 'react-icons/bi';
+import useStatus from './store/store.status';
+import { atom } from 'jotai';
+import NavbarDashboard from './components/navbar/navbar';
+
+export const themeAtom = atom("Light")
 
 const LayoutPage = ({ children }: { children: React.ReactNode }) => {
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useStatus();
 
   const handleMenu = () => {
     setMenu(!menu);
@@ -12,10 +16,19 @@ const LayoutPage = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="w-full min-h-screen">
-      <div className="w-full h-full flex gap-x-6 relative">
+      <div className="w-full h-full flex relative">
         <Menu menu={menu} />
-        {children}
-        <div onClick={handleMenu} className="absolute top-10 left-[390px] cursor-pointer">
+        <div className='w-full flex flex-col'>
+          <NavbarDashboard/>
+          <div className='w-full h-full'>{children}</div>
+        </div>
+        <div
+          onClick={handleMenu}
+          className={`absolute top-28 ${
+            menu
+              ? 'left-[160px] transition-all duration-700'
+              : 'left-[370px] transition-all duration-700'
+          } cursor-pointer`}>
           <BiChevronLeft size={30} />
         </div>
       </div>

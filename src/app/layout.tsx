@@ -15,9 +15,11 @@ const disbaledNavigation = [
   '/dashboard/guru/add-data-guru',
   '/dashboard/siswa',
   '/dashboard/siswa/add-data-siswa',
-  '/dashboard/event',
-  '/dashboard/help',
+  '/dashboard/activity',
+  '/dashboard/activity/add-data-activity',
   '/dashboard/absensi',
+  '/dashboard/absensi/add-data-absensi',
+  '/dashboard/help',
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

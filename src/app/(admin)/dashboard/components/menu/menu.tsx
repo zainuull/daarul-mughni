@@ -14,8 +14,8 @@ const Menu = (props) => {
   return (
     <div
       className={`${
-        menu ? 'w-[150px] transition-all duration-700' : 'w-1/4 transition-all duration-700'
-      } min-h-screen p-4 shadow-2xl shadow-gray-300`}>
+        menu ? 'w-[150px] transition-all duration-700' : 'w-1/3 transition-all duration-700'
+      } min-h-screen p-4 shadow-lg shadow-gray-300`}>
       <div className="w-full h-full flex flex-col gap-y-2 mt-4">
         <div className="w-full flex items-center justify-center gap-x-4">
           <RxDashboard size={30} />
@@ -36,7 +36,7 @@ const Menu = (props) => {
           <Link
             href={'/dashboard/guru'}
             className={`${
-              pathname == '/dashboard/guru'
+              pathname == '/dashboard/guru' || pathname == '/dashboard/guru/add-data-guru'
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>
@@ -49,7 +49,7 @@ const Menu = (props) => {
           <Link
             href={'/dashboard/siswa'}
             className={`${
-              pathname == '/dashboard/siswa'
+              pathname == '/dashboard/siswa' || pathname == '/dashboard/siswa/add-data-siswa'
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>
@@ -60,9 +60,10 @@ const Menu = (props) => {
             <BiChevronRight size={20} />
           </Link>
           <Link
-            href={'/dashboard/event'}
+            href={'/dashboard/activity'}
             className={`${
-              pathname == '/dashboard/event'
+              pathname == '/dashboard/activity' ||
+              pathname == '/dashboard/activity/add-data-activity'
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>
@@ -75,7 +76,8 @@ const Menu = (props) => {
           <Link
             href={'/dashboard/absensi'}
             className={`${
-              pathname == '/dashboard/absensi'
+              pathname == '/dashboard/absensi' ||
+              pathname == '/dashboard/absensi/add-data-absensi'
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>

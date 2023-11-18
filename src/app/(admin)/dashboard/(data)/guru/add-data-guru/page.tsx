@@ -4,8 +4,8 @@ import Submit from './component/submit/submit';
 
 const AddDataGuru = () => {
   return (
-    <div className="w-4/5 min-h-screen">
-      <div className="w-full h-full flex flex-col pt-20">
+    <div className="w-full min-h-screen p-6">
+      <div className="w-full h-full flex flex-col">
         <div className="p-4">
           <h1 className="text-2xl uppercase font-medium">Tambah Data Guru</h1>
         </div>
