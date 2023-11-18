@@ -24,7 +24,7 @@ const LayoutPage = ({ children }: { children: React.ReactNode }) => {
         </div>
         <div
           onClick={handleMenu}
-          className={`absolute top-[115px] ${
+          className={`absolute top-[125px] ${
             menu
               ? 'left-[160px] transition-all duration-700'
               : 'left-[370px] transition-all duration-700'
