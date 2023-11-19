@@ -3,20 +3,14 @@ import useForm from '@/app/(admin)/dashboard/store/store.status';
 import { ICategory, IEventDataModel } from '@/model/event.model';
 import { getEventsById } from '@/services/api';
 import { useEffect, useState } from 'react';
+import DropdownCategory from '../dropdown/dropdown.category';
+import DropdownStatus from '../dropdown/dropdown.status';
 
 const DataGlobal = ({ id }: { id: string }) => {
-  const [categories, setCategories] = useState<ICategory[]>([]);
   const [form, setForm] = useForm();
   const [data, setData] = useState<IEventDataModel>();
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await fetch('/api/categories');
-      const catName = await res.json();
-      setCategories(catName);
-    };
-    fetchCategories();
-
     const fetchDataById = async () => {
       const res = await getEventsById(id);
       setData(res?.events);
@@ -24,14 +18,12 @@ const DataGlobal = ({ id }: { id: string }) => {
     fetchDataById();
   }, []);
 
-
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.id]: e.target.value,
     });
   };
-
 
   return (
     <div className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">
@@ -71,18 +63,7 @@ const DataGlobal = ({ id }: { id: string }) => {
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Jenis Kategori</h1>
-        <select onChange={handleChange} id="selected_category">
-          <option>Pilih Kategori</option>
-          {categories &&
-            categories.map((category: ICategory) => (
-              <option
-                defaultValue={data?.selected_category}
-                key={category?.id}
-                value={category?.catName}>
-                {category?.catName}
-              </option>
-            ))}
-        </select>
+        <DropdownCategory />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Modal Pembiayaan</h1>
@@ -98,11 +79,7 @@ const DataGlobal = ({ id }: { id: string }) => {
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Status Kegiatan</h1>
-        <select onChange={handleChange} id="status">
-          <option>Status Kegiatan</option>
-          <option defaultChecked={data?.status == "Selesai" ? true : false} value={'Selesai'}>Selesai</option>
-          <option defaultChecked={data?.status == "Pending" ? true : false} value={'Pending'}>Pending</option>
-        </select>
+        <DropdownStatus />
       </div>
     </div>
   );

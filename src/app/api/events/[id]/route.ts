@@ -14,8 +14,20 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
 
 export const PUT = async (req: Request, { params }: { params: { id: string } }) => {
   const id = params.id;
-  const { title, description, person_responsible, selectedCategory, imageUrl, publicId } =
-    await req.json();
+  const {
+    title,
+    description,
+    person_responsible,
+    telp_person_responsible,
+    selected_category,
+    imageUrl,
+    publicId,
+    place_event,
+    date_event,
+    section,
+    total_cost,
+    status,
+  } = await req.json();
 
   try {
     const events = await prisma.events.update({
@@ -24,9 +36,15 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
         title,
         description,
         person_responsible,
-        catName: selectedCategory,
+        telp_person_responsible,
+        catName: selected_category,
         imageUrl,
         publicId,
+        place_event,
+        date_event,
+        section,
+        total_cost,
+        status,
       },
     });
     return NextResponse.json({ status_code: 200, message: 'Success to update', events });

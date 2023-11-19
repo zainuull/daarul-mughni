@@ -17,6 +17,7 @@ export interface IEventDataModel {
   imageUrl?: string;
   publicId?: number;
   selected_category?: string;
+  catName?: string;
   total_cost?: string;
   status?: string;
 }

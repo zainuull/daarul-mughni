@@ -23,6 +23,7 @@ const DataPersonal = ({ id }: { id: string }) => {
     });
   };
 
+
   return (
     <form className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">
       <div className="flex flex-col gap-y-2 col-span-1">

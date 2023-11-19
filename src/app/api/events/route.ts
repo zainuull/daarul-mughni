@@ -40,7 +40,7 @@ export const POST = async (req: Request) => {
         status,
       },
     });
-    console.log('Success to created');
+    console.log('Success to created',newEvent);
     return NextResponse.json(newEvent);
   } catch (error) {
     console.log(error);

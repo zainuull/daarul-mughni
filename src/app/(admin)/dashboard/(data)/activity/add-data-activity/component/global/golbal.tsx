@@ -2,9 +2,10 @@
 import useForm from '@/app/(admin)/dashboard/store/store.status';
 import { ICategory } from '@/model/event.model';
 import { useEffect, useState } from 'react';
+import DropdownCategory from '../dropdown/dropdown.category';
+import DropdownStatus from '../dropdown/dropdown.status';
 
 const DataGlobal = () => {
-  const [categories, setCategories] = useState<ICategory[]>([]);
   const [form, setForm] = useForm();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -13,16 +14,6 @@ const DataGlobal = () => {
       [e.target.id]: e.target.value,
     });
   };
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await fetch('/api/categories');
-      const catName = await res.json();
-      setCategories(catName);
-    };
-
-    fetchCategories();
-  }, []);
 
   return (
     <div className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">
@@ -59,15 +50,7 @@ const DataGlobal = () => {
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Jenis Kategori</h1>
-        <select onChange={handleChange} id="selected_category">
-          <option>Pilih Kategori</option>
-          {categories &&
-            categories.map((category: ICategory) => (
-              <option key={category?.id} value={category?.catName}>
-                {category?.catName}
-              </option>
-            ))}
-        </select>
+        <DropdownCategory />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Modal Pembiayaan</h1>
@@ -82,11 +65,7 @@ const DataGlobal = () => {
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Status Kegiatan</h1>
-        <select onChange={handleChange} id="status">
-          <option>Status Kegiatan</option>
-          <option value={'Selesai'}>Selesai</option>
-          <option value={'Pending'}>Pending</option>
-        </select>
+        <DropdownStatus />
       </div>
     </div>
   );

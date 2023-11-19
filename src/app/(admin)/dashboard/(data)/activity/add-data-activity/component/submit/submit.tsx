@@ -6,8 +6,8 @@ import { useState } from 'react';
 const Submit = () => {
   const [error, setError] = useState('');
   const [form] = useForm();
-  const router = useRouter()
-  
+  const router = useRouter();
+  console.log(form);
 
   const handleSubmit = async () => {
     if (!form?.title || !form?.description) {
@@ -25,7 +25,7 @@ const Submit = () => {
       });
 
       if (res.ok) {
-        router.push('/dashboard/activity')
+        router.push('/dashboard/activity');
       }
     } catch (error) {
       console.log(error);

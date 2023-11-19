@@ -7,6 +7,7 @@ const Submit = ({ id }: { id: string }) => {
   const [error, setError] = useState('');
   const [form] = useForm();
   const router = useRouter();
+  console.log(form);
 
   const handleSubmit = async () => {
     if (!form?.title || !form?.description) {
