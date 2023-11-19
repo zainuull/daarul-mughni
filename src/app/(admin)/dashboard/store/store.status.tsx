@@ -7,7 +7,7 @@ const store = atom({
   telp_person_responsible: '',
   place_event: '',
   date_event: '',
-  cooperation: '',
+  section: '',
   imageUrl: '',
   publicId: '123',
   selected_category: '',

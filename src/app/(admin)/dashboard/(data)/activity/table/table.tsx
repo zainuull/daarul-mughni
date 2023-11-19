@@ -1,12 +1,33 @@
-import { getEvents } from '@/services/api';
+'use client';
+import { IEventDataModel } from '@/model/event.model';
+import { deleteEvent, getEventsOnClient, getEventsOnServer } from '@/services/api';
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '@tremor/react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
 
-const TableList = async () => {
-  const events = await getEvents();
-  const event = events?.events;
+const TableList = () => {
+  const [event, setEvent] = useState<IEventDataModel | any>();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const events = await getEventsOnClient();
+      setEvent(events?.events);
+    };
+    fetchData();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    await deleteEvent(id);
+    router.refresh();
+  };
+
+  const handleUpdate = (id: string) => {
+    router.push(`/dashboard/activity/update/${id}`);
+  };
 
   return (
     <Table className="mt-5">
@@ -22,34 +43,37 @@ const TableList = async () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {event.map((item) => (
-          <TableRow key={item.id}>
-            <TableCell>{item.title}</TableCell>
-            <TableCell>{item.cooperation}</TableCell>
-            <TableCell>Ustdz. {item.person_responsible}</TableCell>
-            <TableCell>{item.date_event}</TableCell>
-            <TableCell>{item.place_event}</TableCell>
-            <TableCell>
-              {item?.status ? (
-                <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
-                  Selesai
-                </button>
-              ) : (
-                <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
-                  Pending
-                </button>
-              )}
-            </TableCell>
-            <TableCell className="py-4">
-              <div className="flex gap-x-4 items-center">
-                <Link href={`/dashboard/activity/${item?.id}`}>
-                  <PiPencilLineLight />
-                </Link>
-                <FaTrash className="text-red-400" />
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
+        {event &&
+          event.map((item: IEventDataModel) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.title}</TableCell>
+              <TableCell>{item.section}</TableCell>
+              <TableCell>Ustdz. {item.person_responsible}</TableCell>
+              <TableCell>{item.date_event}</TableCell>
+              <TableCell>{item.place_event}</TableCell>
+              <TableCell>
+                {item?.status === 'Selesai' ? (
+                  <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
+                    Selesai
+                  </button>
+                ) : (
+                  <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
+                    Pending
+                  </button>
+                )}
+              </TableCell>
+              <TableCell className="py-4">
+                <div className="flex gap-x-4 items-center">
+                  <button onClick={() => handleUpdate(item?.id)}>
+                    <PiPencilLineLight />
+                  </button>
+                  <button onClick={() => handleDelete(item?.id)}>
+                    <FaTrash className="text-red-400" />
+                  </button>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
       </TableBody>
     </Table>
   );

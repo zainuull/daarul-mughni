@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import Menu from './components/menu';
 import CardEvent from './components/card.event';
 import Link from 'next/link';
+import { IEventDataModel } from '@/model/event.model';
+import { getEventsOnClient } from '@/services/api';
 
 export default function EventPage() {
   const [menu, setMenu] = useState(false);
@@ -19,18 +21,9 @@ export default function EventPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch('http://localhost:3000/api/events');
-        if (res.ok) {
-          const events = await res.json();
-          setEvent(events?.events);
-          return events;
-        }
-      } catch (error) {
-        console.log(error);
-      }
+      const events = await getEventsOnClient();
+      setEvent(events?.events);
     };
-
     fetchData();
 
     function handleResize() {
@@ -46,6 +39,7 @@ export default function EventPage() {
       window.removeEventListener('resize', handleResize);
     };
   }, []); // Empty dependency array to run this effect only once
+  console.log(event);
 
   return (
     <div className="w-full min-h-screen overflow-hidden">
@@ -59,17 +53,17 @@ export default function EventPage() {
         />
         <div className="absolute w-full h-3/4 grid grid-cols-4 gap-2 lg:grid-cols-12 lg:min-h-screen lg:px-6">
           {event &&
-            event?.map((data: any) => (
+            event?.map((data: IEventDataModel, index: number) => (
               <>
                 <Link
-                  id={data?.od}
+                  id={data?.id}
                   href={`${windowWidth >= 650 ? `event/${data?.id}` : ''}`}
                   onClick={() => handleMenu(data?.id)}
                   className="flex col-span-1 lg:flex items-center justify-center lg:col-span-2">
                   <CardEvent id={data?.id} handleMenu={handleMenu} image={data?.imageUrl} />
                 </Link>
                 {id == data?.id && windowWidth <= 650 ? (
-                  <Menu id={data?.id} menu={menu} setMenu={setMenu} />
+                  <Menu id={data?.id} menu={menu} setMenu={setMenu} index={index} />
                 ) : null}
               </>
             ))}

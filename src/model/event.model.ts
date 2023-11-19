@@ -6,9 +6,19 @@ export interface IEventModel {
 }
 
 export interface IEventDataModel {
-  id: number;
-  img: string;
-  name: string;
+  id?: string;
+  title?: string;
+  description?: string;
+  person_responsible?: string;
+  telp_person_responsible?: string;
+  place_event?: string;
+  date_event?: string;
+  section?: string;
+  imageUrl?: string;
+  publicId?: number;
+  selected_category?: string;
+  total_cost?: string;
+  status?: string;
 }
 
 export interface ICategory {
