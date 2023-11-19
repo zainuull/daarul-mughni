@@ -1,5 +1,4 @@
 export interface IEventModel {
-  name?: string;
   totalData?: number;
   totalPage?: number;
   data?: IEventDataModel[];
@@ -15,7 +14,7 @@ export interface IEventDataModel {
   date_event?: string;
   section?: string;
   imageUrl?: string;
-  publicId?: number;
+  publicId?: string;
   selected_category?: string;
   catName?: string;
   total_cost?: string;
@@ -25,4 +24,25 @@ export interface IEventDataModel {
 export interface ICategory {
   id: string;
   catName: string;
+}
+
+export interface ITeacherModel {
+  totalData?: number;
+  totalPage?: number;
+  data?: ITeacherDataModel[];
+}
+
+export interface ITeacherDataModel {
+  id?: string;
+  name?: string;
+  date_of_birth?: string;
+  telp?: string;
+  email?: string;
+  nip?: string;
+  ijazah?: string;
+  level?: string;
+  period_work?: string;
+  gender?: string;
+  age?: string;
+  status?: string;
 }

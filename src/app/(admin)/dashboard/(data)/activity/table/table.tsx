@@ -64,7 +64,7 @@ const TableList = () => {
           event.map((item: IEventDataModel) => (
             <TableRow key={item.id}>
               <TableCell>{item.title}</TableCell>
-              <TableCell>{item.section}</TableCell>
+              <TableCell>Bag. {item.section}</TableCell>
               <TableCell>{item.person_responsible}</TableCell>
               <TableCell>{item.date_event}</TableCell>
               <TableCell>{item.place_event}</TableCell>

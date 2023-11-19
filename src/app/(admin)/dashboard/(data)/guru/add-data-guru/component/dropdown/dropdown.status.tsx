@@ -1,17 +1,18 @@
-import useForm from '@/app/(admin)/dashboard/store/store.status';
+'use client';
 import Select from 'react-select';
+import useDataTeacher from '../../../store/store.teacher';
 
 const DropdownStatus = () => {
-  const [form, setForm] = useForm();
+  const [data, setData] = useDataTeacher();
 
   const statusOption = [
-    { value: 'Pending', label: 'Pending' },
-    { value: 'Selesai', label: 'Selesai' },
+    { value: 'Aktif', label: 'Aktif' },
+    { value: 'Tidak Aktif', label: 'Tidak Aktif' },
   ];
 
   const handleStatus = (option: any) => {
-    setForm({
-      ...form,
+    setData({
+      ...data,
       status: option.label,
     });
   };
@@ -20,7 +21,7 @@ const DropdownStatus = () => {
     <Select
       closeMenuOnSelect={true}
       options={statusOption}
-      value={statusOption.find((option) => option.label === form?.status) || ''}
+      value={statusOption.find((option) => option.label === data?.status) || ''}
       isClearable={true}
       onChange={handleStatus}
       placeholder="Pilih Status"

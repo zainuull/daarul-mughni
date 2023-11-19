@@ -1,7 +1,5 @@
 'use client';
 import useForm from '@/app/(admin)/dashboard/store/store.status';
-import { ICategory } from '@/model/event.model';
-import { useEffect, useState } from 'react';
 import DropdownCategory from '../dropdown/dropdown.category';
 import DropdownStatus from '../dropdown/dropdown.status';
 

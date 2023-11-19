@@ -1,4 +1,4 @@
-import DataGlobal from './component/global/golbal';
+import DataGlobal from './component/global/global';
 import DataPersonal from './component/personal/personal';
 import Submit from './component/submit/submit';
 

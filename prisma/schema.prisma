@@ -84,3 +84,21 @@ model Category {
      events Events[]
      eventIDs String[] @db.ObjectId
 }
+
+
+model Teacher {
+    id  String  @id @default(auto()) @map("_id") @db.ObjectId
+    name String
+    date_of_birth String
+    telp String
+    email String?
+    nip String?
+    ijazah String?
+    level String?
+    period_work String?
+    gender String?
+    age String?
+    status String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

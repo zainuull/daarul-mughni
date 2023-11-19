@@ -1,13 +1,13 @@
 'use client';
 import useForm from '@/app/(admin)/dashboard/store/store.status';
+import { postEvent } from '@/services/api';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const Submit = () => {
   const [error, setError] = useState('');
-  const [form] = useForm();
+  const [form, setForm] = useForm();
   const router = useRouter();
-  console.log(form);
 
   const handleSubmit = async () => {
     if (!form?.title || !form?.description) {
@@ -15,21 +15,23 @@ const Submit = () => {
       return;
     }
 
-    try {
-      const res = await fetch('http://localhost:3000/api/events', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(form || ''),
-      });
-
-      if (res.ok) {
-        router.push('/dashboard/activity');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    await postEvent(form);
+    router.push('/dashboard/activity');
+    setForm({
+      ...form,
+      title: '',
+      description: '',
+      person_responsible: '',
+      telp_person_responsible: '',
+      place_event: '',
+      date_event: '',
+      section: '',
+      imageUrl: '',
+      publicId: '123',
+      selected_category: '',
+      total_cost: '',
+      status: '',
+    });
   };
 
   return (
