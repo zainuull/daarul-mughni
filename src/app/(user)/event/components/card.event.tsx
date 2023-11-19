@@ -10,6 +10,7 @@ interface CardEventProps {
 
 const CardEvent = (props: CardEventProps) => {
   const { id, image, handleMenu, hidden } = props;
+  console.log(id);
 
   return (
     <div>

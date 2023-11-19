@@ -1,33 +1,31 @@
-import axios from 'axios';
+import { ICategory } from '@/model/event.model';
 
-export async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/event`, {
-    cache: 'no-store',
-  });
+export const getCategories = async (): Promise<ICategory> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_BASE_URL}/api/categories`);
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    if (res.ok) {
+      const categories = await res.json();
+      return categories;
+    }
+  } catch (error) {
+    console.log(error);
   }
 
-  return res.json();
-}
+  return null;
+};
 
-export async function getDataById(id: any) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/event?id=${id}`, {
-    cache: 'no-store',
-  });
+export const getEvents = async (): Promise<any> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_BASE_URL}/api/events`);
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    if (res.ok) {
+      const events = await res.json();
+      return events;
+    }
+  } catch (error) {
+    console.log(error);
   }
 
-  return res.json();
-}
-
-export function getDataEvents() {
-  return axios.get(`${process.env.NEXT_PUBLIC_API}/api/event`);
-}
-
-export function getDataEventsById(id: any) {
-  return axios.get(`${process.env.NEXT_PUBLIC_API}/api/event?id=${id}`);
-}
+  return null;
+};

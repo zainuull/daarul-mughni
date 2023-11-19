@@ -1,10 +1,7 @@
 import { BsSearch } from 'react-icons/bs';
 import TableList from './table/table';
 import Link from 'next/link';
-import useStatus from '../../store/store.status';
 import React from 'react';
-import { themeAtom } from '../../layout';
-import { useAtom } from 'jotai';
 
 const DataActivity = () => {
   return (

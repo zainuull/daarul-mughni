@@ -1,59 +1,13 @@
-'use client';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from '@tremor/react';
+import { getEvents } from '@/services/api';
+import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '@tremor/react';
+import Link from 'next/link';
 import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
 
-const data = [
-  {
-    name: 'Pembukaan Pramuka',
-    section: 'Bag. Pramuka',
-    person_responsible: 'Ustdz. Zainul',
-    tgl_activity:'16-02-2023',
-    place:'Aula',
-    status: true,
-  },
-  {
-    name: 'Stadium General',
-    section: 'Bag. Kesehatan',
-    person_responsible: 'Ustdz. Zainul',
-    tgl_activity:'16-02-2023',
-    place:'Aula',
-    status: true,
-  },
-  {
-    name: 'Panggung Gembira',
-    section: 'Bag. Kesenian',
-    person_responsible: 'Ustdz. Zainul',
-    tgl_activity:'16-02-2023',
-    place:'Aula',
-    status: false,
-  },
-  {
-    name: 'Tawaquf',
-    section: 'Bag. Kesenian',
-    person_responsible: 'Ustdz. Zainul',
-    tgl_activity:'16-02-2023',
-    place:'Aula',
-    status: true,
-  },
-  {
-    name: 'Vocab Drill',
-    section: 'Bag. Bahasa',
-    person_responsible: 'Ustdz. Zainul',
-    tgl_activity:'16-02-2023',
-    place:'Aula',
-    status: true,
-  },
-];
+const TableList = async () => {
+  const events = await getEvents();
+  const event = events?.events;
 
-const TableList = () => {
   return (
     <Table className="mt-5">
       <TableHead>
@@ -63,18 +17,18 @@ const TableList = () => {
           <TableHeaderCell>Penanggung Jawab</TableHeaderCell>
           <TableHeaderCell>Tanggal Kegiatan</TableHeaderCell>
           <TableHeaderCell>Tempat Acara</TableHeaderCell>
-          <TableHeaderCell className='text-center'>Status</TableHeaderCell>
+          <TableHeaderCell className="text-center">Status</TableHeaderCell>
           <TableHeaderCell>Edit</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map((item) => (
-          <TableRow key={item.name}>
-            <TableCell>{item.name}</TableCell>
-            <TableCell>{item.section}</TableCell>
-            <TableCell>{item.person_responsible}</TableCell>
-            <TableCell>{item.tgl_activity}</TableCell>
-            <TableCell>{item.place}</TableCell>
+        {event.map((item) => (
+          <TableRow key={item.id}>
+            <TableCell>{item.title}</TableCell>
+            <TableCell>{item.cooperation}</TableCell>
+            <TableCell>Ustdz. {item.person_responsible}</TableCell>
+            <TableCell>{item.date_event}</TableCell>
+            <TableCell>{item.place_event}</TableCell>
             <TableCell>
               {item?.status ? (
                 <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
@@ -88,7 +42,9 @@ const TableList = () => {
             </TableCell>
             <TableCell className="py-4">
               <div className="flex gap-x-4 items-center">
-                <PiPencilLineLight />
+                <Link href={`/dashboard/activity/${item?.id}`}>
+                  <PiPencilLineLight />
+                </Link>
                 <FaTrash className="text-red-400" />
               </div>
             </TableCell>

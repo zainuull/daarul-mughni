@@ -10,3 +10,8 @@ export interface IEventDataModel {
   img: string;
   name: string;
 }
+
+export interface ICategory {
+  id: string;
+  catName: string;
+}

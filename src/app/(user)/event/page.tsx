@@ -2,26 +2,37 @@
 import Image from 'next/image';
 import banner from '../../../../public/assets/banner.png';
 import { useEffect, useState } from 'react';
-import event1 from '../../../../public/assets/event/event1.png';
-import event2 from '../../../../public/assets/event/event2.png';
-import event3 from '../../../../public/assets/event/event3.png';
-import event4 from '../../../../public/assets/event/event4.png';
-import event5 from '../../../../public/assets/event/event5.png';
 import Menu from './components/menu';
 import CardEvent from './components/card.event';
 import Link from 'next/link';
 
 export default function EventPage() {
   const [menu, setMenu] = useState(false);
+  const [event, setEvent] = useState<any>();
   const [id, setId] = useState('');
   const [windowWidth, setWindowWidth] = useState(0); // State to store window width
 
-  const handleMenu = (e: any) => {
+  const handleMenu = (id: string) => {
     setMenu(!menu);
-    setId(e.target.id);
+    setId(id);
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/api/events');
+        if (res.ok) {
+          const events = await res.json();
+          setEvent(events?.events);
+          return events;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+
     function handleResize() {
       setWindowWidth(window.innerWidth); // Update window width in state
     }
@@ -47,35 +58,22 @@ export default function EventPage() {
           className="h-screen object-cover lg:w-full"
         />
         <div className="absolute w-full h-3/4 grid grid-cols-4 gap-2 lg:grid-cols-12 lg:min-h-screen lg:px-6">
-          <Link
-            href={`${windowWidth >= 650 ? '/event/1' : ''}`}
-            className="flex col-span-1 lg:flex items-center justify-center lg:col-span-2">
-            <CardEvent id="1" handleMenu={handleMenu} image={event1.src} />
-          </Link>
-          <Link
-            href={`${windowWidth >= 650 ? '/event/4' : ''}`}
-            className="hidden col-span-1 lg:flex items-center justify-center lg:col-span-2">
-            <CardEvent id="4" handleMenu={handleMenu} image={event4.src} />
-          </Link>
-          <Link
-            href={`${windowWidth >= 650 ? '/event/2' : ''}`}
-            className="flex col-span-2 lg:flex items-center justify-center lg:col-span-4">
-            <CardEvent id="2" handleMenu={handleMenu} image={event2.src} />
-          </Link>
-          <Link
-            href={`${windowWidth >= 650 ? '/event/3' : ''}`}
-            className="flex col-span-1 lg:flex items-center justify-center lg:col-span-2">
-            <CardEvent id="3" handleMenu={handleMenu} image={event3.src} />
-          </Link>
-          <Link
-            href={`${windowWidth >= 650 ? '/event/5' : ''}`}
-            className="hidden col-span-1 lg:flex items-center justify-center lg:col-span-2">
-            <CardEvent id="5" handleMenu={handleMenu} image={event5.src} />
-          </Link>
+          {event &&
+            event?.map((data: any) => (
+              <>
+                <Link
+                  id={data?.od}
+                  href={`${windowWidth >= 650 ? `event/${data?.id}` : ''}`}
+                  onClick={() => handleMenu(data?.id)}
+                  className="flex col-span-1 lg:flex items-center justify-center lg:col-span-2">
+                  <CardEvent id={data?.id} handleMenu={handleMenu} image={data?.imageUrl} />
+                </Link>
+                {id == data?.id && windowWidth <= 650 ? (
+                  <Menu id={data?.id} menu={menu} setMenu={setMenu} />
+                ) : null}
+              </>
+            ))}
         </div>
-        {id == '1' && windowWidth <= 650 ? <Menu id={id} menu={menu} setMenu={setMenu} /> : null}
-        {id == '2' && windowWidth <= 650 ? <Menu id={id} menu={menu} setMenu={setMenu} /> : null}
-        {id == '3' && windowWidth <= 650 ? <Menu id={id} menu={menu} setMenu={setMenu} /> : null}
       </div>
     </div>
   );

@@ -1,29 +1,26 @@
 import { BsChevronDoubleDown } from 'react-icons/bs';
-import { getDataById } from '@/services/api';
-import { useEffect, useState } from 'react';
 interface IMenu {
-  id?: any;
+  id?: string;
   menu?: boolean;
   setMenu?: any;
 }
+export const getEvents = async (id: string): Promise<any> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_BASE_URL}/api/events/${id}`);
 
-const Menu = (props: IMenu) => {
-  const { setMenu, menu, id } = props;
-  const [event, setEvent]: any = useState<any[]>([]);
+    if (res.ok) {
+      const events = await res.json();
+      return events;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const events = await getDataById(id);
-        setEvent(events?.data || []);
-      } catch (error) {
-        // Handle error
-        console.error('Error fetching data:', error);
-      }
-    };
+  return null;
+};
 
-    fetchData();
-  }, [id]);
+const Menu = async (props: IMenu) => {
+  const { id, setMenu, menu } = props;
 
   return (
     <div
@@ -38,9 +35,9 @@ const Menu = (props: IMenu) => {
           className="bg-white h-4 p-4 w-20 rounded-md absolute -top-5 flex items-center justify-center group cursor-pointer">
           <BsChevronDoubleDown size={20} className="group-hover:text-gray-600 transition-all" />
         </div>
-        <h1 className="font-semibold text-lg">{event?.event}</h1>
+        {/* <h1 className="font-semibold text-lg">{event?.event}</h1>
         <p className="w-2/3 font-medium">{event?.name}</p>
-        <p>{event?.description}</p>
+        <p>{event?.description}</p> */}
         <p className="w-11/12">
           Pondok Pesantren Modern Perpaduan Daarul Mughni Al Maaliki, Klapanunggal - Bogor..
         </p>
