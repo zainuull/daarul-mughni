@@ -1,6 +1,7 @@
 import { atom, useAtom } from 'jotai';
 
 const store = atom({
+  id:'',
   name: '',
   date_of_birth: '',
   telp: '',

@@ -1,4 +1,4 @@
-import { ICategory, IEventDataModel, IEventModel, ITeacherDataModel, ITeacherModel } from '@/model/event.model';
+import { ICategory, IEventDataModel, ITeacherDataModel, ITeacherModel } from '@/model/event.model';
 
 export const getCategories = async (): Promise<ICategory> => {
   try {
@@ -30,7 +30,7 @@ export const getEventsOnServer = async (): Promise<any> => {
   return null;
 };
 
-export const getEventsOnClient = async (): Promise<any> => {
+export const getEvents = async (): Promise<any> => {
   try {
     const res = await fetch(`http://localhost:3000/api/events`, {
       next: {
@@ -70,13 +70,13 @@ export const getEventsById = async (id: string): Promise<any> => {
 
 export const postEvent = async (data: IEventDataModel): Promise<any> => {
   try {
-      const res = await fetch('http://localhost:3000/api/events', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(data || ''),
-      });
+    const res = await fetch('http://localhost:3000/api/events', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data || ''),
+    });
 
     if (res.ok) {
       const events = await res.json();
@@ -131,6 +131,24 @@ export const getTeachers = async (): Promise<ITeacherModel> => {
   return null;
 };
 
+export const getTeachersById = async (id: string): Promise<ITeacherModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/teachers/${id}`, {
+      next: {
+        revalidate: 0,
+      },
+    });
+
+    if (res.ok) {
+      const teachers = await res.json();
+      return teachers;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
 export const postTeacher = async (data: ITeacherDataModel): Promise<ITeacherModel> => {
   try {
     const res = await fetch('http://localhost:3000/api/teachers', {
@@ -149,5 +167,46 @@ export const postTeacher = async (data: ITeacherDataModel): Promise<ITeacherMode
     console.log(error);
   }
 
+  return null;
+};
+
+export const deleteTeacher = async (id: string): Promise<ITeacherDataModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/teachers/${id}`, {
+      next: {
+        revalidate: 0,
+      },
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+    if (res.ok) {
+      const teachers = await res.json();
+      return teachers;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+export const updateTeacher = async (id: string, data: ITeacherDataModel): Promise<any> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/teachers/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data || ''),
+    });
+
+    if (res.ok) {
+      const teachers = await res.json();
+      return teachers;
+    }
+  } catch (error) {
+    console.log(error);
+  }
   return null;
 };

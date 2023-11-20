@@ -7,8 +7,7 @@ import { BsCalendarCheck, BsQuestionCircle, BsGlobe2 } from 'react-icons/bs';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const Menu = (props) => {
-  const { menu } = props;
+const Menu = ({ menu }: { menu: boolean }) => {
   const pathname = usePathname();
 
   return (
@@ -36,7 +35,8 @@ const Menu = (props) => {
           <Link
             href={'/dashboard/guru'}
             className={`${
-              pathname == '/dashboard/guru' || pathname == '/dashboard/guru/add-data-guru'
+              pathname == '/dashboard/guru' ||
+              pathname == '/dashboard/guru/add-data-guru' 
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>
@@ -76,8 +76,7 @@ const Menu = (props) => {
           <Link
             href={'/dashboard/absensi'}
             className={`${
-              pathname == '/dashboard/absensi' ||
-              pathname == '/dashboard/absensi/add-data-absensi'
+              pathname == '/dashboard/absensi' || pathname == '/dashboard/absensi/add-data-absensi'
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>

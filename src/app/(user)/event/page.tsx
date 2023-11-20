@@ -6,7 +6,7 @@ import Menu from './components/menu';
 import CardEvent from './components/card.event';
 import Link from 'next/link';
 import { IEventDataModel } from '@/model/event.model';
-import { getEventsOnClient } from '@/services/api';
+import { getEvents } from '@/services/api';
 
 export default function EventPage() {
   const [menu, setMenu] = useState(false);
@@ -21,7 +21,7 @@ export default function EventPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const events = await getEventsOnClient();
+      const events = await getEvents();
       setEvent(events?.events);
     };
     fetchData();

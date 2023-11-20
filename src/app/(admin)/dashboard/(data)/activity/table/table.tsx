@@ -1,8 +1,7 @@
 'use client';
 import { IEventDataModel } from '@/model/event.model';
-import { deleteEvent, getEventsOnClient, getEventsOnServer } from '@/services/api';
+import { deleteEvent, getEvents } from '@/services/api';
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '@tremor/react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
@@ -10,21 +9,27 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import useForm from '../../../store/store.status';
 
 const TableList = () => {
-  const [event, setEvent] = useState<IEventDataModel | any>();
+  const [datas, setDatas] = useState<IEventDataModel[]>();
   const router = useRouter();
   const [form, setForm] = useForm();
-
+  console.log(datas);
+  
   useEffect(() => {
     const fetchData = async () => {
-      const events = await getEventsOnClient();
-      setEvent(events?.events);
+      const res = await getEvents();
+      setDatas(res?.events);
     };
     fetchData();
   }, []);
 
   const handleDelete = async (id: string) => {
-    await deleteEvent(id);
-    router.refresh();
+    try {
+      await deleteEvent(id);
+      const fetchData = await getEvents();
+      setDatas(fetchData?.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleUpdate = (data: IEventDataModel) => {
@@ -55,21 +60,21 @@ const TableList = () => {
           <TableHeaderCell>Penanggung Jawab</TableHeaderCell>
           <TableHeaderCell>Tanggal Kegiatan</TableHeaderCell>
           <TableHeaderCell>Tempat Acara</TableHeaderCell>
-          <TableHeaderCell className="text-center">Status</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
           <TableHeaderCell>Edit</TableHeaderCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {event &&
-          event.map((item: IEventDataModel) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.title}</TableCell>
-              <TableCell>Bag. {item.section}</TableCell>
-              <TableCell>{item.person_responsible}</TableCell>
-              <TableCell>{item.date_event}</TableCell>
-              <TableCell>{item.place_event}</TableCell>
+        {datas &&
+          datas?.map((data: IEventDataModel) => (
+            <TableRow key={data.id}>
+              <TableCell>{data.title}</TableCell>
+              <TableCell>Bag. {data.section}</TableCell>
+              <TableCell>{data.person_responsible}</TableCell>
+              <TableCell>{data.date_event}</TableCell>
+              <TableCell>{data.place_event}</TableCell>
               <TableCell>
-                {item?.status === 'Selesai' ? (
+                {data?.status === 'Selesai' ? (
                   <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
                     Selesai
                   </button>
@@ -81,10 +86,10 @@ const TableList = () => {
               </TableCell>
               <TableCell className="py-4">
                 <div className="flex gap-x-4 items-center">
-                  <button onClick={() => handleUpdate(item)}>
+                  <button onClick={() => handleUpdate(data)}>
                     <PiPencilLineLight />
                   </button>
-                  <button onClick={() => handleDelete(item?.id)}>
+                  <button onClick={() => handleDelete(data?.id)}>
                     <FaTrash className="text-red-400" />
                   </button>
                 </div>
