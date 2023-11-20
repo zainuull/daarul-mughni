@@ -1,4 +1,11 @@
-import { ICategory, IEventDataModel, ITeacherDataModel, ITeacherModel } from '@/model/event.model';
+import {
+  ICategory,
+  IEventDataModel,
+  IStudentDataModel,
+  IStudentModel,
+  ITeacherDataModel,
+  ITeacherModel,
+} from '@/model/event.model';
 
 export const getCategories = async (): Promise<ICategory> => {
   try {
@@ -112,6 +119,7 @@ export const deleteEvent = async (id: string): Promise<any> => {
   return null;
 };
 
+// Teacher API
 export const getTeachers = async (): Promise<ITeacherModel> => {
   try {
     const res = await fetch(`http://localhost:3000/api/teachers`, {
@@ -204,6 +212,105 @@ export const updateTeacher = async (id: string, data: ITeacherDataModel): Promis
     if (res.ok) {
       const teachers = await res.json();
       return teachers;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+// Student
+export const getStudent = async (): Promise<IStudentModel> => {
+  try {
+    const res = await fetch('http://localhost:3000/api/students', {
+      next: {
+        revalidate: 0,
+      },
+    });
+    if (res.ok) {
+      const students = await res.json();
+      return students;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+export const getStudentById = async (id: string): Promise<IStudentModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+      next: {
+        revalidate: 0,
+      },
+    });
+    if (res.ok) {
+      const students = await res.json();
+      return students;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+};
+
+export const postStudent = async (data: ITeacherDataModel): Promise<IStudentModel> => {
+  try {
+    const res = await fetch('http://localhost:3000/api/students', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      const students = await res.json();
+      return students;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+export const deleteStudent = async (id: string): Promise<IStudentDataModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+      next: {
+        revalidate: 0,
+      },
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+    if (res.ok) {
+      const students = await res.json();
+      return students;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+};
+
+export const updateStudent = async (
+  id: string,
+  data: IStudentDataModel
+): Promise<IStudentModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      const students = await res.json();
+      return students;
     }
   } catch (error) {
     console.log(error);

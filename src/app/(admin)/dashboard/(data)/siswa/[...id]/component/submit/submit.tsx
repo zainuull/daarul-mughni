@@ -1,37 +1,38 @@
 'use client';
-import { postTeacher } from '@/services/api';
-import useDataTeacher from '../../../store/store.teacher';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import useDataStudent from '../../../store/store.student';
+import { useRouter } from 'next/navigation';
+import { postStudent, updateStudent } from '@/services/api';
 
-const Submit = () => {
+const Submit = ({ id }: { id: string }) => {
   const [error, setError] = useState('');
-  const [formTeacher, setFormTeacher] = useDataTeacher();
+  const [datas, setDatas] = useDataStudent();
   const router = useRouter();
 
   const handleSubmit = async () => {
-    if (!formTeacher.name && !formTeacher.email) {
-      setError('Name and email must be fill');
+    if (!datas.name && !datas.guardian_name) {
+      setError('Nama dan Nama Wali wajib diisi');
       return;
     }
-    await postTeacher(formTeacher);
-    router.push('/dashboard/guru');
-    setFormTeacher({
-      ...formTeacher,
+    await updateStudent(id, datas);
+    router.push('/dashboard/siswa');
+    setDatas({
+      ...datas,
+      id: '',
       name: '',
       date_of_birth: '',
-      telp: '',
-      email: '',
-      nip: '',
       ijazah: '',
-      level: '',
-      period_work: '',
       gender: '',
-      age: '',
-      status: '',
+      nisn: '',
+      guardian_name: '',
+      guardian_status: '',
+      guardian_telp: '',
+      guardian_email: '',
+      status_payment: '',
+      address: '',
+      kelas: '',
     });
   };
-
   return (
     <div className="w-full flex justify-end items-center gap-x-6">
       {error && <p className="text-red-600">{error}</p>}

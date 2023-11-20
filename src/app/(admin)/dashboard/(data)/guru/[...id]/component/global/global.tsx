@@ -7,6 +7,7 @@ import DropdownPeriodWork from '../dropdown/dropdown.period.work';
 import DropdownStatus from '../dropdown/dropdown.status';
 import { getTeachersById } from '@/services/api';
 
+
 const DataGlobal = ({ id }: { id: string }) => {
   const [data, setData] = useDataTeacher();
   const [defaultData, setDefaultData] = useState<any>();
