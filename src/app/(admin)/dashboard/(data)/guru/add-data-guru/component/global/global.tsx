@@ -1,7 +1,7 @@
 'use client';
 import useDataTeacher from '../../../store/store.teacher';
 import DropdownJazah from '../dropdown/dropdown.ijazah';
-import DropdownLevel from '../dropdown/dropdown.level';
+import DropdownPosition from '../dropdown/dropdown.position';
 import DropdownPeriodWork from '../dropdown/dropdown.period.work';
 import DropdownStatus from '../dropdown/dropdown.status';
 
@@ -33,7 +33,7 @@ const DataGlobal = () => {
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Level Pangkat / Golongan</h1>
-        <DropdownLevel />
+        <DropdownPosition />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Masa Kerja (Tahun)</h1>

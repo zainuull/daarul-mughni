@@ -2,7 +2,7 @@ import prisma from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 
 export const POST = async (req: Request) => {
-  const { name, date_of_birth, telp, email, nip, ijazah, level, period_work, gender, age,status } =
+  const { name, date_of_birth, telp, email, nip, ijazah, positionName, period_work, gender, age,status } =
     await req.json();
 
   if (!name && !email) {
@@ -18,7 +18,7 @@ export const POST = async (req: Request) => {
         email,
         nip,
         ijazah,
-        level,
+        positionName,
         period_work,
         gender,
         age,
@@ -26,7 +26,7 @@ export const POST = async (req: Request) => {
       },
     });
     console.log('Success to created', newTeacher);
-    return NextResponse.json(newTeacher);
+    return NextResponse.json({ status_code: 200, message: 'Success to created', newTeacher });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status_code: 500, message: 'Some error occurred' });

@@ -10,8 +10,8 @@ import { useRouter } from 'next/navigation';
 
 const TableList = () => {
   const [datas, setDatas] = useState<IStudentDataModel[]>();
-  const [studentForm ,setStudentForm] = useDataStudent()
-  const router = useRouter()
+  const [studentForm, setStudentForm] = useDataStudent();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ const TableList = () => {
   };
 
   const handleUpdate = async (data: IStudentDataModel) => {
-    router.push(`/dashboard/siswa/update/${data?.id}`)
+    router.push(`/dashboard/siswa/update/${data?.id}`);
     setStudentForm({
       ...studentForm,
       name: data?.name,
@@ -46,7 +46,7 @@ const TableList = () => {
       guardian_email: data?.guardian_email,
       status_payment: data?.status_payment,
       address: data?.address,
-      kelas: data?.kelas,
+      className: data?.className,
     });
   };
 
@@ -66,7 +66,7 @@ const TableList = () => {
           datas?.map((data) => (
             <TableRow key={data.id}>
               <TableCell>{data.name}</TableCell>
-              <TableCell>{data.kelas}</TableCell>
+              <TableCell>{data.className}</TableCell>
               <TableCell>{data.nisn}</TableCell>
               <TableCell>
                 {data?.status_payment === 'Lunas' ? (

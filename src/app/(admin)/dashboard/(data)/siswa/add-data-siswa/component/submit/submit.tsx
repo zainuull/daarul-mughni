@@ -9,12 +9,12 @@ const Submit = () => {
   const [formStudent, setFormStudent] = useDataStudent();
   const router = useRouter();
 
-  const handleSubmit = async() => {
-    if(!formStudent.name && !formStudent.guardian_name) {
-      setError("Nama dan Nama Wali wajib diisi")
-      return
+  const handleSubmit = async () => {
+    if (!formStudent.name && !formStudent.guardian_name) {
+      setError('Nama dan Nama Wali wajib diisi');
+      return;
     }
-    await postStudent(formStudent)
+    await postStudent(formStudent);
     router.push('/dashboard/siswa');
     setFormStudent({
       ...formStudent,
@@ -30,11 +30,10 @@ const Submit = () => {
       guardian_email: '',
       status_payment: '',
       address: '',
-      kelas: '',
+      className: '',
     });
-  }
-  console.log('formStudent', formStudent);
-  
+  };
+
   return (
     <div className="w-full flex justify-end items-center gap-x-6">
       {error && <p className="text-red-600">{error}</p>}

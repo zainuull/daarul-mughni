@@ -41,7 +41,7 @@ export const POST = async (req: Request) => {
       },
     });
     console.log('Success to created',newEvent);
-    return NextResponse.json(newEvent);
+    return NextResponse.json({ status_code: 200, message: 'Success to created', newEvent });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status_code: 500, message: 'Internal Server Error' });

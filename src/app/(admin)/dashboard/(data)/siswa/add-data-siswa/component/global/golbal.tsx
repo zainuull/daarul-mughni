@@ -45,7 +45,7 @@ const DataGlobal = () => {
         <DropdownGuardianStatus />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">No Telp</h1>
+        <h1 className="uppercase">No Telp (Wali)</h1>
         <input
           onChange={handleChange}
           id="guardian_telp"

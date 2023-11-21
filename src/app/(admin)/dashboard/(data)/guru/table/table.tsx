@@ -41,7 +41,7 @@ const TableList = () => {
       email: data?.email,
       nip: data?.nip,
       ijazah: data?.ijazah,
-      level: data?.level,
+      positionName: data?.positionName,
       period_work: data?.period_work,
       gender: data?.gender,
       age: data?.age,
@@ -65,7 +65,7 @@ const TableList = () => {
           datas?.map((data) => (
             <TableRow key={data.id}>
               <TableCell>{data.name}</TableCell>
-              <TableCell>{data.level}</TableCell>
+              <TableCell>{data.positionName}</TableCell>
               <TableCell>{data.nip}</TableCell>
               <TableCell>
                 {data?.status == 'Aktif' ? (

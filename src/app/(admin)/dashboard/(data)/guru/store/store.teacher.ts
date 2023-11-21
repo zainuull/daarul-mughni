@@ -1,14 +1,14 @@
 import { atom, useAtom } from 'jotai';
 
 const store = atom({
-  id:'',
+  id: '',
   name: '',
   date_of_birth: '',
   telp: '',
   email: '',
   nip: '',
   ijazah: '',
-  level: '',
+  positionName: '',
   period_work: '',
   gender: '',
   age: '',

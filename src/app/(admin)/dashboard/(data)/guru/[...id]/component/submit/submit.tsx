@@ -24,7 +24,7 @@ const Submit = ({ id }: { id: string }) => {
       email: '',
       nip: '',
       ijazah: '',
-      level: '',
+      positionName: '',
       period_work: '',
       gender: '',
       age: '',

@@ -1,23 +1,30 @@
 'use client';
 import Select from 'react-select';
 import useDataStudent from '../../../store/store.student';
+import { useEffect, useState } from 'react';
+import { getClass } from '@/services/api';
 
 const DropdownClass = () => {
   const [data, setData] = useDataStudent();
+  const [classes, setClasses] = useState([]);
 
-  const classOption = [
-    { value: 'MTs VII', label: 'MTs VII' },
-    { value: 'MTs VIII', label: 'MTs VIII' },
-    { value: 'MTs IX', label: 'MTs IX' },
-    { value: 'MA X', label: 'MA X' },
-    { value: 'MA XI', label: 'MA XI' },
-    { value: 'MA XII', label: 'MA XII' },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getClass();
+      setClasses(res?.data);
+    };
+    fetchData();
+  }, []);
+
+  const classOption = classes.map((obj: any) => ({
+    value: obj.id,
+    label: obj.className,
+  }));
 
   const handleClass = (option: any) => {
     setData({
       ...data,
-      kelas: option.label,
+      className: option.label,
     });
   };
 
@@ -25,7 +32,7 @@ const DropdownClass = () => {
     <Select
       closeMenuOnSelect={true}
       options={classOption}
-      value={classOption.find((option) => option.label === data?.kelas) || ''}
+      value={classOption.find((option) => option.label === data?.className) || ''}
       isClearable={true}
       onChange={handleClass}
       placeholder="MTs VII"

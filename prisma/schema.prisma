@@ -94,13 +94,21 @@ model Teacher {
     email String?
     nip String?
     ijazah String?
-    level String?
+    positionName String?
+    position Position? @relation(fields: [positionName],references: [positionName])
     period_work String?
     gender String?
     age String?
     status String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model Position {
+     id  String  @id @default(auto()) @map("_id") @db.ObjectId
+     positionName String @unique
+     teachers Teacher[]
+     teacherIDs String[] @db.ObjectId
 }
 
 
@@ -117,7 +125,16 @@ model Student {
     guardian_email String?
     status_payment String?
     address String?
-    kelas String?
+    className String?
+    class Class? @relation(fields: [className],references: [className])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+
+model Class {
+     id  String  @id @default(auto()) @map("_id") @db.ObjectId
+     className String @unique
+     Students Student[]
+     studentIDs String[] @db.ObjectId
 }

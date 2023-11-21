@@ -17,7 +17,7 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
 
 export const PUT = async (req: Request, { params }: { params: { id:string } }) => {
   const id = params.id;
-  const { name, date_of_birth, telp, email, nip, ijazah, level, period_work, gender, age, status } =
+  const { name, date_of_birth, telp, email, nip, ijazah, positionName, period_work, gender, age, status } =
     await req.json();
   try {
     const data = await prisma.teacher.update({
@@ -29,7 +29,7 @@ export const PUT = async (req: Request, { params }: { params: { id:string } }) =
         email,
         nip,
         ijazah,
-        level,
+        positionName,
         period_work,
         gender,
         age,

@@ -30,7 +30,7 @@ const Submit = ({ id }: { id: string }) => {
       guardian_email: '',
       status_payment: '',
       address: '',
-      kelas: '',
+      className: '',
     });
   };
   return (

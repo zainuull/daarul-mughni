@@ -40,7 +40,7 @@ export interface ITeacherDataModel {
   email?: string;
   nip?: string;
   ijazah?: string;
-  level?: string;
+  positionName?: string;
   period_work?: string;
   gender?: string;
   age?: string;
@@ -66,5 +66,5 @@ export interface IStudentDataModel {
   guardian_email?: string;
   status_payment?: string;
   address?: string;
-  kelas?: string;
+  className?: string;
 }

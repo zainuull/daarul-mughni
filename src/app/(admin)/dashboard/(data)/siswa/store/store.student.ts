@@ -13,7 +13,7 @@ const store = atom({
   guardian_email: '',
   status_payment: '',
   address: '',
-  kelas:''
+  className: '',
 });
 
 const useDataStudent = () => useAtom(store);
