@@ -16,15 +16,15 @@ const DropdownClass = () => {
     fetchData();
   }, []);
 
-  const classOption = classes.map((obj: any) => ({
-    value: obj.id,
-    label: obj.className,
+  const classOption = classes?.map((obj: any) => ({
+    value: obj?.id,
+    label: obj?.className,
   }));
 
   const handleClass = (option: any) => {
     setData({
       ...data,
-      className: option.label,
+      className: option?.label,
     });
   };
 
@@ -32,7 +32,7 @@ const DropdownClass = () => {
     <Select
       closeMenuOnSelect={true}
       options={classOption}
-      value={classOption.find((option) => option.label === data?.className) || ''}
+      value={classOption?.find((option) => option.label === data?.className) || ''}
       isClearable={true}
       onChange={handleClass}
       placeholder="MTs VII"

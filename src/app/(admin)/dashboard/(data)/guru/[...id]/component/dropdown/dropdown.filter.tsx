@@ -1,10 +1,10 @@
 'use client';
-import Select from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 import useDataTeacher from '../../../store/store.teacher';
 import { useEffect, useState } from 'react';
 import { getPosition } from '@/services/api';
 
-const DropdownPosition = () => {
+const DropdownFilter = () => {
   const [data, setData] = useDataTeacher();
   const [position, setPosition] = useState([]);
 
@@ -16,7 +16,7 @@ const DropdownPosition = () => {
     fetchData();
   }, []);
 
-  const positionOption = position?.map((obj: any) => ({
+  const positionOption = position?.map((obj: { positionName: string; id: string }) => ({
     value: obj?.id,
     label: obj?.positionName,
   }));
@@ -28,16 +28,27 @@ const DropdownPosition = () => {
     });
   };
 
+  // Define custom styles for the dropdown
+  const customStyles: StylesConfig = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: '#f1f5f9',
+      width: 300,
+      borderColor: 'black',
+    }),
+  };
+
   return (
     <Select
       closeMenuOnSelect={true}
       options={positionOption}
-      value={positionOption?.find((option) => option.label === data?.positionName) || ''}
+      value={positionOption.find((option) => option.label === data?.positionName) || ''}
       isClearable={true}
       onChange={handlePosition}
-      placeholder="A1 - Pembina"
+      styles={customStyles}
+      placeholder="Filter berdasarkan jabatan"
     />
   );
 };
 
-export default DropdownPosition;
+export default DropdownFilter;

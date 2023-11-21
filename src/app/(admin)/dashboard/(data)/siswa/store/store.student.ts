@@ -14,6 +14,7 @@ const store = atom({
   status_payment: '',
   address: '',
   className: '',
+  levelName:'',
 });
 
 const useDataStudent = () => useAtom(store);

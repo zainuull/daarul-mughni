@@ -6,7 +6,7 @@ export const GET = async (req: Request, { params }: { params: { catName: string 
   try {
     const categories = await prisma.category.findUnique({
       where: { catName },
-      include: { events: {} },
+      include: { events: true },
     });
     return NextResponse.json({ status_code: 200, message: 'Success to fetch', categories });
   } catch (error) {

@@ -17,14 +17,14 @@ const DropdownPosition = () => {
   }, []);
 
   const positionOption = position?.map((obj: any) => ({
-    value: obj.id,
-    label: obj.positionName,
+    value: obj?.id,
+    label: obj?.positionName,
   }));
 
   const handlePosition = (option: any) => {
     setData({
       ...data,
-      positionName: option.label,
+      positionName: option?.label,
     });
   };
 
@@ -32,7 +32,7 @@ const DropdownPosition = () => {
     <Select
       closeMenuOnSelect={true}
       options={positionOption}
-      value={positionOption.find((option) => option.label === data?.positionName) || ''}
+      value={positionOption?.find((option) => option.label === data?.positionName) || ''}
       isClearable={true}
       onChange={handlePosition}
       placeholder="A1 - Pembina"

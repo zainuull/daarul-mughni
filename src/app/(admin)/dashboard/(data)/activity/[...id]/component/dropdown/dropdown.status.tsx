@@ -12,7 +12,7 @@ const DropdownStatus = () => {
   const handleStatus = (option: any) => {
     setForm({
       ...form,
-      status: option.label,
+      status: option?.label,
     });
   };
 

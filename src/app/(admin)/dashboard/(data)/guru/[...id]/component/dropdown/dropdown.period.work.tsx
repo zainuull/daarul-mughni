@@ -16,7 +16,7 @@ const DropdownPeriodWork = () => {
   const handlePeriod = (option: any) => {
     setData({
       ...data,
-      period_work: option.label,
+      period_work: option?.label,
     });
   };
 

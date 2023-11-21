@@ -1,7 +1,8 @@
-'use client'
+'use client';
 import useDataStudent from '../../../store/store.student';
 import DropdownClass from '../dropdown/dropdown.class';
 import DropdownGender from '../dropdown/dropdown.gender';
+import DropdownLevel from '../dropdown/dropdown.level';
 
 const DataPersonal = () => {
   const [data, setData] = useDataStudent();
@@ -34,6 +35,10 @@ const DataPersonal = () => {
           placeholder="Masukkan NUPTK anda"
           required
         />
+      </div>
+      <div className="flex flex-col gap-y-2 col-span-1">
+        <h1 className="uppercase">Tingkatan</h1>
+        <DropdownLevel />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Kelas</h1>

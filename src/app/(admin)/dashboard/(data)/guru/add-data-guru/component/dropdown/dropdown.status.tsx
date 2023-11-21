@@ -13,7 +13,7 @@ const DropdownStatus = () => {
   const handleStatus = (option: any) => {
     setData({
       ...data,
-      status: option.label,
+      status: option?.label,
     });
   };
 

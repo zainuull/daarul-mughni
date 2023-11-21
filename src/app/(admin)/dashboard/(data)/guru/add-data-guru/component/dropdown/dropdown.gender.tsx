@@ -13,7 +13,7 @@ const DropdownGender = () => {
   const handleGender = (option: any) => {
     setData({
       ...data,
-      gender: option.label,
+      gender: option?.label,
     });
   };
 

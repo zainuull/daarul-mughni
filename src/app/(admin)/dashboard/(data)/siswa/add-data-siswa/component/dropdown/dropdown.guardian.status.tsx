@@ -14,7 +14,7 @@ const DropdownGuardianStatus = () => {
   const handleGuardianStatus = (option: any) => {
     setData({
       ...data,
-      guardian_status: option.label,
+      guardian_status: option?.label,
     });
   };
 

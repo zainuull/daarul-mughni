@@ -126,15 +126,26 @@ model Student {
     status_payment String?
     address String?
     className String?
-    class Class? @relation(fields: [className],references: [className])
+    class Class? @relation(fields: [className], references: [className])
+    levelName String?
+    level Level? @relation(fields: [levelName], references: [levelName])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
 
 model Class {
-     id  String  @id @default(auto()) @map("_id") @db.ObjectId
-     className String @unique
-     Students Student[]
-     studentIDs String[] @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  className  String   @unique
+  level      Level?   @relation(fields: [className], references: [levelName])
+  students   Student[]
+  studentIDs String[] @db.ObjectId
+}
+
+model Level {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  levelName String   @unique
+  class     Class[]
+  students  Student[]
+  classtIDs String[] @db.ObjectId
 }

@@ -17,14 +17,14 @@ const DropdownCategory = () => {
   }, []);
 
   const categoryOption = categories.map((obj: any) => ({
-    value: obj.id,
-    label: obj.catName,
+    value: obj?.id,
+    label: obj?.catName,
   }));
 
   const handleCategory = (option: any) => {
     setForm({
       ...form,
-      selected_category: option.label,
+      selected_category: option?.label,
     });
   };
 

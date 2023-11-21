@@ -172,6 +172,23 @@ export const getTeachersById = async (id: string): Promise<ITeacherModel> => {
   return null;
 };
 
+export const getTeacherByPosition = async (positionName: string): Promise<ITeacherModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/position/${positionName}`, {
+      next: {
+        revalidate: 0,
+      },
+    });
+    if (res.ok) {
+      const teachers = await res.json();
+      return teachers;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
 export const postTeacher = async (data: ITeacherDataModel): Promise<ITeacherModel> => {
   try {
     const res = await fetch('http://localhost:3000/api/teachers', {
@@ -235,6 +252,20 @@ export const updateTeacher = async (id: string, data: ITeacherDataModel): Promis
 };
 
 // Student
+export const getLevel = async (): Promise<any> => {
+  try {
+    const res = await fetch('http://localhost:3000/api/level');
+    if (res.ok) {
+      const level = await res.json();
+      return level;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+};
+
 export const getClass = async (): Promise<any> => {
   try {
     const res = await fetch('http://localhost:3000/api/class');
