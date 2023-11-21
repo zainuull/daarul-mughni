@@ -36,10 +36,10 @@ const DataPersonal = () => {
           required
         />
       </div>
-      <div className="flex flex-col gap-y-2 col-span-1">
+      {/* <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Tingkatan</h1>
         <DropdownLevel />
-      </div>
+      </div> */}
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Kelas</h1>
         <DropdownClass />

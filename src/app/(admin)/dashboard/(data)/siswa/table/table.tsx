@@ -7,11 +7,15 @@ import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
 import useDataStudent from '../store/store.student';
 import { useRouter } from 'next/navigation';
+import useStoreDatas from '../store/store.datas';
 
 const TableList = () => {
   const [datas, setDatas] = useState<IStudentDataModel[]>();
   const [studentForm, setStudentForm] = useDataStudent();
   const router = useRouter();
+  const [filteredData] = useStoreDatas();
+
+  const result = filteredData?.students ?? datas;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,35 +66,34 @@ const TableList = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {datas &&
-          datas?.map((data) => (
-            <TableRow key={data.id}>
-              <TableCell>{data.name}</TableCell>
-              <TableCell>{data.className}</TableCell>
-              <TableCell>{data.nisn}</TableCell>
-              <TableCell>
-                {data?.status_payment === 'Lunas' ? (
-                  <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
-                    Lunas
-                  </button>
-                ) : (
-                  <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
-                    Tertunda
-                  </button>
-                )}
-              </TableCell>
-              <TableCell className="py-4">
-                <div className="flex gap-x-4 items-center">
-                  <button onClick={() => handleUpdate(data)}>
-                    <PiPencilLineLight />
-                  </button>
-                  <button onClick={() => handleDelete(data?.id)}>
-                    <FaTrash className="text-red-400" />
-                  </button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
+        {result?.map((data: any) => (
+          <TableRow key={data.id}>
+            <TableCell>{data.name}</TableCell>
+            <TableCell>{data.className}</TableCell>
+            <TableCell>{data.nisn}</TableCell>
+            <TableCell>
+              {data?.status_payment === 'Lunas' ? (
+                <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
+                  Lunas
+                </button>
+              ) : (
+                <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
+                  Tertunda
+                </button>
+              )}
+            </TableCell>
+            <TableCell className="py-4">
+              <div className="flex gap-x-4 items-center">
+                <button onClick={() => handleUpdate(data)}>
+                  <PiPencilLineLight />
+                </button>
+                <button onClick={() => handleDelete(data?.id)}>
+                  <FaTrash className="text-red-400" />
+                </button>
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );

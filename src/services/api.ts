@@ -315,6 +315,23 @@ export const getStudentById = async (id: string): Promise<IStudentModel> => {
   return null;
 };
 
+export const getStudentByClass = async (className: string): Promise<IStudentModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/class/${className}`, {
+      next: {
+        revalidate: 0,
+      },
+    });
+    if (res.ok) {
+      const students = await res.json();
+      return students;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
 export const postStudent = async (data: ITeacherDataModel): Promise<IStudentModel> => {
   try {
     const res = await fetch('http://localhost:3000/api/students', {
