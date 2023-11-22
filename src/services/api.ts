@@ -9,7 +9,7 @@ import {
 
 export const getCategories = async (): Promise<ICategory> => {
   try {
-    const res = await fetch(`${process.env.NEXT_BASE_URL}/api/categories`);
+    const res = await fetch(`http://localhost:3000/api/categories`);
 
     if (res.ok) {
       const categories = await res.json();
@@ -63,7 +63,6 @@ export const getEventsById = async (id: string): Promise<any> => {
         revalidate: 0,
       },
     });
-
     if (res.ok) {
       const events = await res.json();
       return events;
@@ -72,6 +71,23 @@ export const getEventsById = async (id: string): Promise<any> => {
     console.log(error);
   }
 
+  return null;
+};
+
+export const getEventsByCategories = async (category: string): Promise<any> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/categories/${category}`, {
+      next: {
+        revalidate: 0,
+      },
+    });
+    if (res.ok) {
+      const events = await res.json();
+      return events;
+    }
+  } catch (error) {
+    console.log(error);
+  }
   return null;
 };
 

@@ -1,10 +1,11 @@
-import { ICategory } from '@/model/event.model';
+'use client';
+import Select, { StylesConfig } from 'react-select';
 import { useEffect, useState } from 'react';
-import Select from 'react-select';
 import useDataEvents from '../../../store/store.events';
+import { ICategory } from '@/model/event.model';
 import { getCategories } from '@/services/api';
 
-const DropdownCategory = () => {
+const DropdownFilter = () => {
   const [data, setData] = useDataEvents();
   const [categories, setCategories] = useState([]);
 
@@ -28,6 +29,16 @@ const DropdownCategory = () => {
     });
   };
 
+  // Define custom styles for the dropdown
+  const customStyles: StylesConfig = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: '#f1f5f9',
+      width: 300,
+      borderColor: 'black',
+    }),
+  };
+
   return (
     <Select
       closeMenuOnSelect={true}
@@ -35,9 +46,10 @@ const DropdownCategory = () => {
       value={categoryOption.find((option) => option.label === data?.selected_category) || ''}
       isClearable={true}
       onChange={handleCategory}
-      placeholder="Pilih Kategori"
+      styles={customStyles}
+      placeholder="Filter berdasarkan Kategori"
     />
   );
 };
 
-export default DropdownCategory;
+export default DropdownFilter;

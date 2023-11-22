@@ -7,13 +7,16 @@ import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
 import useForm from '../../../store/store.status';
+import useStoreDatas from '../store/store.datas';
 
 const TableList = () => {
   const [datas, setDatas] = useState<IEventDataModel[]>();
   const router = useRouter();
   const [form, setForm] = useForm();
-  console.log(datas);
-  
+  const [dataFiltered] = useStoreDatas();
+
+  const result = dataFiltered.events ?? datas;
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getEvents();
@@ -65,7 +68,13 @@ const TableList = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {datas &&
+        {result?.length === 0 ? (
+          <div className="min-h-[300px] px-12">
+            <div className=" mt-40">
+              <h1 className="text-6xl font-bold">Data not found</h1>
+            </div>
+          </div>
+        ) : (
           datas?.map((data: IEventDataModel) => (
             <TableRow key={data.id}>
               <TableCell>{data.title}</TableCell>
@@ -95,7 +104,8 @@ const TableList = () => {
                 </div>
               </TableCell>
             </TableRow>
-          ))}
+          ))
+        )}
       </TableBody>
     </Table>
   );
