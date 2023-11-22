@@ -1,4 +1,3 @@
-import { ICategory } from '@/model/event.model';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import useDataEvents from '../../../store/store.events';

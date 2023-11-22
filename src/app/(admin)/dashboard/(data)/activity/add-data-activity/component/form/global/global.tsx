@@ -1,7 +1,7 @@
 'use client';
 import useForm from '@/app/(admin)/dashboard/store/store.status';
-import DropdownCategory from '../dropdown/dropdown.category';
-import DropdownStatus from '../dropdown/dropdown.status';
+import DropdownCategory from '../../dropdown/dropdown.category';
+import DropdownStatus from '../../dropdown/dropdown.status';
 
 const DataGlobal = () => {
   const [form, setForm] = useForm();

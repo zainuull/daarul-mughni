@@ -1,30 +1,24 @@
 'use client';
 import Select, { StylesConfig } from 'react-select';
-import { useEffect, useState } from 'react';
 import useDataStudent from '../../../store/store.student';
-import { getClass } from '@/services/api';
+import useStoreDatas from '../../../store/store.datas';
 
-const DropdownFilter = () => {
+const DropdownFilterClass = () => {
   const [data, setData] = useDataStudent();
-  const [className, setClassName] = useState([]);
+  const [datas] = useStoreDatas();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getClass();
-      setClassName(res?.data);
-    };
-    fetchData();
-  }, []);
-
-  const classNameOption = className?.map((obj: { className: string; id: string }) => ({
-    value: obj?.id,
-    label: obj?.className,
-  }));
+  // Check if datas is an array before using map
+  const Option = Array.isArray(datas)
+    ? datas.map((obj: { className: string; id: string }) => ({
+        value: obj?.id,
+        label: obj?.className,
+      }))
+    : [];
 
   const handlePosition = (option: any) => {
     setData({
       ...data,
-      className: option?.label,
+      filter_by_class: option?.label,
     });
   };
 
@@ -33,7 +27,7 @@ const DropdownFilter = () => {
     control: (provided) => ({
       ...provided,
       backgroundColor: '#f1f5f9',
-      width: 300,
+      width: 150,
       borderColor: 'black',
     }),
   };
@@ -41,14 +35,15 @@ const DropdownFilter = () => {
   return (
     <Select
       closeMenuOnSelect={true}
-      options={classNameOption}
-      value={classNameOption.find((option) => option.label === data?.className) || ''}
+      options={Option}
+      value={Option.find((option) => option.label === data?.filter_by_class) || ''}
       isClearable={true}
       onChange={handlePosition}
       styles={customStyles}
-      placeholder="Filter berdasarkan kelas"
+      placeholder="Filter kelas"
+      isDisabled={data?.filter_by_level ? false : true}
     />
   );
 };
 
-export default DropdownFilter;
+export default DropdownFilterClass;

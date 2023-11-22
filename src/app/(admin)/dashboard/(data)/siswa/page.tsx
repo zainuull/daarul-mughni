@@ -2,23 +2,33 @@
 import { BsSearch } from 'react-icons/bs';
 import TableList from './table/table';
 import Link from 'next/link';
-import DropdownFilter from './add-data-siswa/component/dropdown/dropdown.filter';
+import DropdownFilterClass from './add-data-siswa/component/dropdown/dropdown.filter';
 import useStoreDatas from './store/store.datas';
 import { useEffect } from 'react';
-import { getStudentByClass } from '@/services/api';
+import { getClassByLevel, getStudentByClass } from '@/services/api';
 import useDataStudent from './store/store.student';
+import DropdownFilterLevel from './add-data-siswa/component/dropdown/dropdown.filter.level';
+import useStoreResultStudent from './store/store.datas.result.student';
 
 const DataGuru = () => {
   const [studentForm] = useDataStudent();
-  const [,setDatas] = useStoreDatas();
+  const [, setDatas] = useStoreDatas();
+  const [, setResult] = useStoreResultStudent();
 
   useEffect(() => {
+    if (studentForm?.filter_by_level) {
+      const fetchData = async () => {
+        const res = await getStudentByClass(studentForm?.filter_by_class);
+        setResult(res?.data);
+      };
+      fetchData();
+    }
     const fetchData = async () => {
-      const res = await getStudentByClass(studentForm?.className);
-      setDatas(res?.data);
+      const res = await getClassByLevel(studentForm?.filter_by_level);
+      setDatas(res?.data?.class);
     };
     fetchData();
-  }, [studentForm?.className]);
+  }, [studentForm]);
 
   return (
     <div className="w-full">
@@ -33,11 +43,12 @@ const DataGuru = () => {
           </Link>
         </div>
         <div className="w-full flex items-center gap-x-6">
-          <div className="w-4/5 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
+          <div className="w-full flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
             <BsSearch />
-            <input className="w-full outline-none" placeholder="Cari Data Guru" />
+            <input className="w-full outline-none" placeholder="Cari Data Siswa" />
           </div>
-          <DropdownFilter />
+          <DropdownFilterLevel />
+          <DropdownFilterClass />
         </div>
         <TableList />
       </div>

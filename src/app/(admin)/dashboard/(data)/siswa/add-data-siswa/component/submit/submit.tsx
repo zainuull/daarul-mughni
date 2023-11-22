@@ -8,7 +8,6 @@ const Submit = () => {
   const [error, setError] = useState('');
   const [formStudent, setFormStudent] = useDataStudent();
   const router = useRouter();
-  console.log('formStudent', formStudent);
 
   const handleSubmit = async () => {
     if (!formStudent.name && !formStudent.guardian_name) {

@@ -24,7 +24,7 @@ const DropdownFilter = () => {
   const handlePosition = (option: any) => {
     setData({
       ...data,
-      positionName: option?.label,
+      filter_by: option?.label,
     });
   };
 
@@ -42,7 +42,7 @@ const DropdownFilter = () => {
     <Select
       closeMenuOnSelect={true}
       options={positionOption}
-      value={positionOption.find((option) => option.label === data?.positionName) || ''}
+      value={positionOption.find((option) => option.label === data?.filter_by) || ''}
       isClearable={true}
       onChange={handlePosition}
       styles={customStyles}

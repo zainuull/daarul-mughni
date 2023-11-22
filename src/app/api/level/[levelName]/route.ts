@@ -7,8 +7,7 @@ export const GET = async (req: Request, { params }: { params: { levelName: strin
     const data = await prisma.level.findUnique({
       where: { levelName },
       include: {
-        class: true,
-        students: true,
+        class: { include: { students: true } },
       },
     });
     if (!data) {

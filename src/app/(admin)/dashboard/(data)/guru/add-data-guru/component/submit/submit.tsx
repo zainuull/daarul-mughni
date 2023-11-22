@@ -8,7 +8,6 @@ const Submit = () => {
   const [error, setError] = useState('');
   const [formTeacher, setFormTeacher] = useDataTeacher();
   const router = useRouter();
-  console.log(formTeacher);
 
   const handleSubmit = async () => {
     if (!formTeacher.name && !formTeacher.email) {

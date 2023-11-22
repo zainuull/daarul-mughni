@@ -68,4 +68,5 @@ export interface IStudentDataModel {
   status_payment?: string;
   address?: string;
   className?: string;
+  levelName?: string;
 }

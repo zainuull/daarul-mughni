@@ -13,7 +13,7 @@ const DropdownStatusPayment = () => {
   const handleStatusPayment = (option: any) => {
     setData({
       ...data,
-      status_payment: option.label,
+      status_payment: option?.label,
     });
   };
 

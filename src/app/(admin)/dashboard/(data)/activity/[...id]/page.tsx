@@ -1,5 +1,5 @@
-import DataGlobal from '../[...id]/component/global/golbal';
-import DataPersonal from '../[...id]/component/personal/personal';
+import DataGlobal from './component/form/global/golbal';
+import DataPersonal from './component/form/personal/personal';
 import Submit from '../[...id]/component/submit/submit';
 
 const UpdateDataActivity = ({ params }: { params: { id: string } }) => {
@@ -18,7 +18,7 @@ const UpdateDataActivity = ({ params }: { params: { id: string } }) => {
           <DataGlobal id={id} />
         </div>
         <div className="w-full h-20 mt-8 bg-white px-12 shadow-lg flex justify-center">
-          <Submit id={id}/>
+          <Submit id={id} />
         </div>
       </div>
     </div>

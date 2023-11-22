@@ -14,7 +14,7 @@ const DropdownJazah = () => {
   const handleIjazah = (option: any) => {
     setData({
       ...data,
-      ijazah: option.label,
+      ijazah: option?.label,
     });
   };
 

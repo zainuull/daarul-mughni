@@ -1,25 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
-import useDataTeacher from '../../../store/store.teacher';
-import DropdownJazah from '../dropdown/dropdown.ijazah';
-import DropdownPosition from '../dropdown/dropdown.position';
-import DropdownPeriodWork from '../dropdown/dropdown.period.work';
-import DropdownStatus from '../dropdown/dropdown.status';
-import { getTeachersById } from '@/services/api';
+import useDataTeacher from '../../../../store/store.teacher';
+import DropdownJazah from '../../dropdown/dropdown.ijazah';
+import DropdownPosition from '../../dropdown/dropdown.position';
+import DropdownPeriodWork from '../../dropdown/dropdown.period.work';
+import DropdownStatus from '../../dropdown/dropdown.status';
 
-
-const DataGlobal = ({ id }: { id: string }) => {
+const DataGlobal = () => {
   const [data, setData] = useDataTeacher();
-  const [defaultData, setDefaultData] = useState<any>();
-  
-  useEffect(() => {
-    const fetchDataById = async () => {
-      const res = await getTeachersById(id);
-      setDefaultData(res?.data);
-    };
-    fetchDataById();
-  }, []);
-
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({
       ...data,
@@ -33,7 +20,6 @@ const DataGlobal = ({ id }: { id: string }) => {
         <h1 className="uppercase">NIP</h1>
         <input
           onChange={handleChange}
-          defaultValue={defaultData?.nip}
           id="nip"
           type="text"
           className=" outline-none border border-black rounded-md h-10 px-4"

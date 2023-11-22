@@ -13,18 +13,12 @@ const DataGuru = () => {
   const [, setDatas] = useStoreDatas();
 
   useEffect(() => {
-    if (teacherForm?.positionName) {
-      const fetchDataByPosition = async () => {
-        if (teacherForm?.positionName) {
-          const res = await getTeacherByPosition(teacherForm?.positionName);
-          setDatas(res?.data);
-        }
-      };
-      fetchDataByPosition();
-    } else {
-      setDatas({});
-    }
-  }, [teacherForm?.positionName]);
+    const fetchDataByPosition = async () => {
+      const res = await getTeacherByPosition(teacherForm?.filter_by);
+      setDatas(res?.data);
+    };
+    fetchDataByPosition();
+  }, [teacherForm?.filter_by]);
 
   return (
     <div className="w-full">

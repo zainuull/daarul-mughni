@@ -2,7 +2,6 @@
 import Select, { StylesConfig } from 'react-select';
 import { useEffect, useState } from 'react';
 import useDataEvents from '../../../store/store.events';
-import { ICategory } from '@/model/event.model';
 import { getCategories } from '@/services/api';
 
 const DropdownFilter = () => {
@@ -25,7 +24,7 @@ const DropdownFilter = () => {
   const handleCategory = (option: any) => {
     setData({
       ...data,
-      selected_category: option?.label,
+      filter_by: option?.label,
     });
   };
 
@@ -43,7 +42,7 @@ const DropdownFilter = () => {
     <Select
       closeMenuOnSelect={true}
       options={categoryOption}
-      value={categoryOption.find((option) => option.label === data?.selected_category) || ''}
+      value={categoryOption.find((option) => option.label === data?.filter_by) || ''}
       isClearable={true}
       onChange={handleCategory}
       styles={customStyles}

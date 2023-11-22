@@ -1,5 +1,5 @@
-import DataGlobal from './component/global/global';
-import DataPersonal from './component/personal/personal';
+import DataGlobal from './component/form/global/global';
+import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
 
 const AddDataGuru = ({ params }: { params: { id: string } }) => {
@@ -17,7 +17,7 @@ const AddDataGuru = ({ params }: { params: { id: string } }) => {
           <DataGlobal id={id} />
         </div>
         <div className="w-full h-20 mt-8 bg-white px-12 shadow-lg flex justify-center">
-          <Submit id={id}/>
+          <Submit id={id} />
         </div>
       </div>
     </div>

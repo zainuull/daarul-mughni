@@ -1,10 +1,10 @@
 'use client';
 import useForm from '@/app/(admin)/dashboard/store/store.status';
-import { ICategory, IEventDataModel } from '@/model/event.model';
+import { IEventDataModel } from '@/model/event.model';
 import { getEventsById } from '@/services/api';
 import { useEffect, useState } from 'react';
-import DropdownCategory from '../dropdown/dropdown.category';
-import DropdownStatus from '../dropdown/dropdown.status';
+import DropdownCategory from '../../dropdown/dropdown.category';
+import DropdownStatus from '../../dropdown/dropdown.status';
 
 const DataGlobal = ({ id }: { id: string }) => {
   const [form, setForm] = useForm();

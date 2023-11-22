@@ -13,6 +13,7 @@ const store = atom({
   gender: '',
   age: '',
   status: '',
+  filter_by: '',
 });
 
 const useDataTeacher = () => useAtom(store);

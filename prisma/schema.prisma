@@ -128,7 +128,7 @@ model Student {
     className String?
     class Class? @relation(fields: [className], references: [className])
     levelName String?
-    // level Level? @relation(fields: [levelName], references: [levelName])
+    level Level? @relation(fields: [levelName], references: [levelName])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -137,15 +137,16 @@ model Student {
 model Class {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   className  String   @unique
-  // level      Level?   @relation(fields: [className], references: [levelName])
+  levelName  String?
+  level      Level?   @relation(fields: [levelName], references: [levelName])
   students   Student[]
   studentIDs String[] @db.ObjectId
 }
 
-// model Level {
-//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-//   levelName String   @unique
-//   class     Class[]
-//   students  Student[]
-//   classtIDs String[] @db.ObjectId
-// }
+model Level {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  levelName String   @unique
+  class     Class[]
+  students  Student[]
+  classtIDs String[] @db.ObjectId
+}

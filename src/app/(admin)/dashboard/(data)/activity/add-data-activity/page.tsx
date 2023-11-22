@@ -1,5 +1,5 @@
-import DataGlobal from './component/global/global';
-import DataPersonal from './component/personal/personal';
+import DataGlobal from './component/form/global/global';
+import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
 
 const AddDataActivity = () => {

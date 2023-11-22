@@ -296,6 +296,21 @@ export const getClass = async (): Promise<any> => {
   return null;
 };
 
+export const getClassByLevel = async (levelName: string): Promise<any> => {
+  try {
+    if (levelName) {
+      const res = await fetch(`http://localhost:3000/api/level/${levelName}`);
+      if (res.ok) {
+        const classes = await res.json();
+        return classes;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
 export const getStudent = async (): Promise<IStudentModel> => {
   try {
     const res = await fetch('http://localhost:3000/api/students', {
@@ -331,16 +346,18 @@ export const getStudentById = async (id: string): Promise<IStudentModel> => {
   return null;
 };
 
-export const getStudentByClass = async (className: string): Promise<IStudentModel> => {
+export const getStudentByClass = async (className: string): Promise<any> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/class/${className}`, {
-      next: {
-        revalidate: 0,
-      },
-    });
-    if (res.ok) {
-      const students = await res.json();
-      return students;
+    if (className) {
+      const res = await fetch(`http://localhost:3000/api/class/${className}`, {
+        next: {
+          revalidate: 0,
+        },
+      });
+      if (res.ok) {
+        const students = await res.json();
+        return students;
+      }
     }
   } catch (error) {
     console.log(error);

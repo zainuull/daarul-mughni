@@ -13,18 +13,12 @@ const DataActivity = () => {
   const [, setDatas] = useStoreDatas();
 
   useEffect(() => {
-    if (eventForm?.selected_category) {
-      const fetchDataByPosition = async () => {
-        if (eventForm?.selected_category) {
-          const res = await getEventsByCategories(eventForm?.selected_category);
-          setDatas(res?.data);
-        }
-      };
-      fetchDataByPosition();
-    } else {
-      setDatas({});
-    }
-  }, [eventForm?.selected_category]);
+    const fetchDataByPosition = async () => {
+      const res = await getEventsByCategories(eventForm?.filter_by);
+      setDatas(res?.data);
+    };
+    fetchDataByPosition();
+  }, [eventForm?.filter_by]);
 
   return (
     <div className="w-full">
@@ -41,7 +35,7 @@ const DataActivity = () => {
         <div className="w-full flex items-center gap-x-6">
           <div className="w-4/5 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
             <BsSearch />
-            <input className="w-full outline-none" placeholder="Cari Data Guru" />
+            <input className="w-full outline-none" placeholder="Cari Data Kegiatan" />
           </div>
           <DropdownFilter />
         </div>

@@ -8,6 +8,7 @@ import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
 import useDataTeacher from '../store/store.teacher';
 import useStoreDatas from '../store/store.datas';
+import Pagination from './pagination';
 
 const TableList = () => {
   const [datas, setDatas] = useState<ITeacherDataModel[]>();
@@ -53,55 +54,60 @@ const TableList = () => {
   };
 
   return (
-    <Table className="mt-5">
-      <TableHead>
-        <TableRow>
-          <TableHeaderCell>Nama Guru</TableHeaderCell>
-          <TableHeaderCell>Jabatan</TableHeaderCell>
-          <TableHeaderCell>NIP</TableHeaderCell>
-          <TableHeaderCell>Status</TableHeaderCell>
-          <TableHeaderCell>Edit</TableHeaderCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {result?.length === 0 ? (
-          <div className="min-h-[300px] px-12">
-            <div className=" mt-40">
-              <h1 className="text-6xl font-bold">Data not found</h1>
+    <div>
+      <Table className="mt-5">
+        <TableHead>
+          <TableRow>
+            <TableHeaderCell>Nama Guru</TableHeaderCell>
+            <TableHeaderCell>Jabatan</TableHeaderCell>
+            <TableHeaderCell>NIP</TableHeaderCell>
+            <TableHeaderCell>Status</TableHeaderCell>
+            <TableHeaderCell>Edit</TableHeaderCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {result?.length === 0 ? (
+            <div className="min-h-[300px] px-12">
+              <div className=" mt-40">
+                <h1 className="text-6xl font-bold">Data not found</h1>
+              </div>
             </div>
-          </div>
-        ) : (
-          result?.map((data: any) => (
-            <TableRow key={data.id}>
-              <TableCell>{data.name}</TableCell>
-              <TableCell>{data.positionName}</TableCell>
-              <TableCell>{data.nip}</TableCell>
-              <TableCell>
-                {data?.status == 'Aktif' ? (
-                  <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
-                    Aktif
-                  </button>
-                ) : (
-                  <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
-                    Pending
-                  </button>
-                )}
-              </TableCell>
-              <TableCell className="py-4">
-                <div className="flex gap-x-4 items-center">
-                  <button onClick={() => handleUpdate(data)}>
-                    <PiPencilLineLight />
-                  </button>
-                  <button onClick={() => handleDelete(data?.id)}>
-                    <FaTrash className="text-red-400" />
-                  </button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))
-        )}
-      </TableBody>
-    </Table>
+          ) : (
+            result?.map((data: any) => (
+              <TableRow key={data.id}>
+                <TableCell>{data.name}</TableCell>
+                <TableCell>{data.positionName}</TableCell>
+                <TableCell>{data.nip}</TableCell>
+                <TableCell>
+                  {data?.status == 'Aktif' ? (
+                    <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
+                      Aktif
+                    </button>
+                  ) : (
+                    <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
+                      Pending
+                    </button>
+                  )}
+                </TableCell>
+                <TableCell className="py-4">
+                  <div className="flex gap-x-4 items-center">
+                    <button onClick={() => handleUpdate(data)}>
+                      <PiPencilLineLight />
+                    </button>
+                    <button onClick={() => handleDelete(data?.id)}>
+                      <FaTrash className="text-red-400" />
+                    </button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+      <nav className="my-6 px-4 absolute right-0 bottom-16">
+        <Pagination />
+      </nav>
+    </div>
   );
 };
 

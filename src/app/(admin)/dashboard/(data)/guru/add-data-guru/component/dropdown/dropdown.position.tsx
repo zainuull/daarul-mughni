@@ -35,7 +35,7 @@ const DropdownPosition = () => {
       value={positionOption?.find((option) => option.label === data?.positionName) || ''}
       isClearable={true}
       onChange={handlePosition}
-      placeholder="A1 - Pembina"
+      placeholder="Pimpinan"
     />
   );
 };
