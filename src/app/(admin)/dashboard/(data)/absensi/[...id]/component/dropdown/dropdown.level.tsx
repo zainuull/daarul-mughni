@@ -2,29 +2,29 @@
 import Select from 'react-select';
 import useDataAbsensi from '../../../store/store.absensi';
 import { useEffect, useState } from 'react';
-import { getLessonsByLevelName } from '@/services/api';
+import { getClass, getLevel } from '@/services/api';
 
-const DropdownLesson = () => {
+const DropdownLevel = () => {
   const [data, setData] = useDataAbsensi();
-  const [lesson, setLesson] = useState([]);
+  const [level, setLevel] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getLessonsByLevelName(data?.levelName);
-      setLesson(res?.data?.lesson);
+      const res = await getLevel();
+      setLevel(res?.data);
     };
     fetchData();
-  }, [data?.levelName]);
+  }, []);
 
-  const nOption = lesson?.map((obj: any) => ({
+  const nOption = level?.map((obj: any) => ({
     value: obj?.id,
-    label: obj?.name,
+    label: obj?.levelName,
   }));
 
   const handle = (option: any) => {
     setData({
       ...data,
-      lesson: option?.label,
+      levelName: option?.label,
     });
   };
 
@@ -32,12 +32,12 @@ const DropdownLesson = () => {
     <Select
       closeMenuOnSelect={true}
       options={nOption}
-      value={nOption?.find((option) => option.label === data?.lesson) || ''}
+      value={nOption?.find((option) => option.label === data?.levelName) || ''}
       isClearable={true}
       onChange={handle}
-      placeholder="Pilih pelajaran"
+      placeholder="Pilih tingkatan"
     />
   );
 };
 
-export default DropdownLesson;
+export default DropdownLevel;

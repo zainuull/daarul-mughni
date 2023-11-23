@@ -5,20 +5,20 @@ import DropdownGender from '../../dropdown/dropdown.gender';
 import { getTeachersById } from '@/services/api';
 
 const DataPersonal = ({ id }: { id: string }) => {
-  const [data, setData] = useDataTeacher();
-  const [defaultData, setDefaultData] = useState<any>();
+  const [formTeacher, setFormTeacher] = useDataTeacher();
+  const [data, setData] = useState<any>();
 
   useEffect(() => {
     const fetchDataById = async () => {
       const res = await getTeachersById(id);
-      setDefaultData(res?.data);
+      setData(res?.data);
     };
     fetchDataById();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-    setData({
-      ...data,
+    setFormTeacher({
+      ...formTeacher,
       [e.target.id]: e.target.value,
     });
   };
@@ -29,7 +29,7 @@ const DataPersonal = ({ id }: { id: string }) => {
         <h1 className="uppercase">Nama</h1>
         <input
           onChange={handleChange}
-          defaultValue={defaultData?.name}
+          defaultValue={data?.name}
           id="name"
           type="text"
           className=" outline-none border border-black rounded-md h-10 px-4"
@@ -41,7 +41,7 @@ const DataPersonal = ({ id }: { id: string }) => {
         <h1 className="uppercase">Tanggal Lahir</h1>
         <input
           onChange={handleChange}
-          defaultValue={defaultData?.date_of_birth}
+          defaultValue={data?.date_of_birth}
           id="date_of_birth"
           type="date"
           className=" outline-none border border-black rounded-md h-10 px-4"
@@ -53,7 +53,7 @@ const DataPersonal = ({ id }: { id: string }) => {
         <h1 className="uppercase">No Telp</h1>
         <input
           onChange={handleChange}
-          defaultValue={defaultData?.telp}
+          defaultValue={data?.telp}
           id="telp"
           type="tel"
           className=" outline-none border border-black rounded-md h-10 px-4"
@@ -65,7 +65,7 @@ const DataPersonal = ({ id }: { id: string }) => {
         <h1 className="uppercase">Email</h1>
         <input
           onChange={handleChange}
-          defaultValue={defaultData?.email}
+          defaultValue={data?.email}
           id="email"
           type="mail"
           className=" outline-none border border-black rounded-md h-10 px-4"
@@ -77,7 +77,7 @@ const DataPersonal = ({ id }: { id: string }) => {
         <h1 className="uppercase">Umur</h1>
         <input
           onChange={handleChange}
-          defaultValue={defaultData?.age}
+          defaultValue={data?.age}
           id="age"
           type="number"
           className=" outline-none border border-black rounded-md h-10 px-4"

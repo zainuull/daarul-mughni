@@ -2,29 +2,30 @@
 import Select from 'react-select';
 import useDataAbsensi from '../../../store/store.absensi';
 import { useEffect, useState } from 'react';
-import { getLessonsByLevelName } from '@/services/api';
+import { getTeachers } from '@/services/api';
 
-const DropdownLesson = () => {
+const DropdownTeacher = () => {
   const [data, setData] = useDataAbsensi();
-  const [lesson, setLesson] = useState([]);
+  const [teacher, setTeacher] = useState([]);
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getLessonsByLevelName(data?.levelName);
-      setLesson(res?.data?.lesson);
+      const res = await getTeachers();
+      setTeacher(res?.data);
     };
     fetchData();
-  }, [data?.levelName]);
+  }, []);
 
-  const nOption = lesson?.map((obj: any) => ({
+  const nOption = teacher?.map((obj: any) => ({
     value: obj?.id,
-    label: obj?.name,
+    label: `Ustdz ${obj?.name}`,
   }));
 
   const handle = (option: any) => {
     setData({
       ...data,
-      lesson: option?.label,
+      teacher: option?.label,
     });
   };
 
@@ -32,12 +33,12 @@ const DropdownLesson = () => {
     <Select
       closeMenuOnSelect={true}
       options={nOption}
-      value={nOption?.find((option) => option.label === data?.lesson) || ''}
+      value={nOption?.find((option) => option.label === data?.teacher) || ''}
       isClearable={true}
       onChange={handle}
-      placeholder="Pilih pelajaran"
+      placeholder="Pengajar"
     />
   );
 };
 
-export default DropdownLesson;
+export default DropdownTeacher;

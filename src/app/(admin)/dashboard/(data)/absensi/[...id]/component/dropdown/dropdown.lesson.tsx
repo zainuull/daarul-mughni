@@ -7,6 +7,7 @@ import { getLessonsByLevelName } from '@/services/api';
 const DropdownLesson = () => {
   const [data, setData] = useDataAbsensi();
   const [lesson, setLesson] = useState([]);
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +17,7 @@ const DropdownLesson = () => {
     fetchData();
   }, [data?.levelName]);
 
-  const nOption = lesson?.map((obj: any) => ({
+  const Option = lesson?.map((obj: any) => ({
     value: obj?.id,
     label: obj?.name,
   }));
@@ -31,8 +32,8 @@ const DropdownLesson = () => {
   return (
     <Select
       closeMenuOnSelect={true}
-      options={nOption}
-      value={nOption?.find((option) => option.label === data?.lesson) || ''}
+      options={Option}
+      value={Option?.find((option) => option.label === data?.lesson) || ''}
       isClearable={true}
       onChange={handle}
       placeholder="Pilih pelajaran"

@@ -1,4 +1,6 @@
 import {
+  IAbsensiDataModel,
+  IAbsensiModel,
   ICategory,
   IEventDataModel,
   IStudentDataModel,
@@ -32,6 +34,22 @@ export const getLessons = async (): Promise<any> => {
   } catch (error) {
     console.log(error);
   }
+  return null;
+};
+
+export const getLessonsByLevelName = async (levelName: string): Promise<any> => {
+  try {
+    if (levelName) {
+      const res = await fetch(`http://localhost:3000/api/level/${levelName}`);
+      if (res.ok) {
+        const lessons = await res.json();
+        return lessons;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
   return null;
 };
 
@@ -337,6 +355,22 @@ export const getClassByLevel = async (levelName: string): Promise<any> => {
   return null;
 };
 
+export const getCodeClassByClassName = async (className: string): Promise<any> => {
+  try {
+    if (className) {
+      const res = await fetch(`http://localhost:3000/api/class/${className}`);
+      if (res.ok) {
+        const codeClass = await res.json();
+        return codeClass;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+};
+
 export const getStudent = async (): Promise<IStudentModel> => {
   try {
     const res = await fetch('http://localhost:3000/api/students', {
@@ -451,5 +485,85 @@ export const updateStudent = async (
   } catch (error) {
     console.log(error);
   }
+  return null;
+};
+
+export const getAbsensi = async (): Promise<IAbsensiModel> => {
+  try {
+    const data = await fetch('http://localhost:3000/api/absensi');
+    if (data.ok) {
+      const absensi = await data.json();
+      return absensi;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+export const getAbsensiById = async (id: string): Promise<IAbsensiModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/absensi/${id}`);
+    if (res.ok) {
+      const absensi = await res.json();
+      return absensi;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+export const postAbsensi = async (data: IAbsensiDataModel): Promise<IAbsensiModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/absensi`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      const absensi = await res.json();
+      return absensi;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+};
+
+export const deleteAbsensi = async (id: string): Promise<IAbsensiModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/absensi/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+export const updateAbsensi = async (id: string, data: IAbsensiDataModel): Promise<IAbsensiModel> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/absensi/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      const absensi = await res.json();
+      return absensi;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
   return null;
 };

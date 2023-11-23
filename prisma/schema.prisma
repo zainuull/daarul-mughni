@@ -169,3 +169,14 @@ model Level {
 }
 
 
+model Absensi {
+   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+   levelName String
+   className String
+   code_class String
+   teacher String
+   lesson String
+   start_time String
+   end_time  String
+}
+

@@ -1,13 +1,13 @@
 'use client';
-import { postAbsensi } from '@/services/api';
+import { postAbsensi, updateAbsensi } from '@/services/api';
 import useDataAbsensi from '../../../store/store.absensi';
 import { useRouter } from 'next/navigation';
-const Submit = () => {
+const Submit = ({ id }: { id: string }) => {
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
   const router = useRouter();
 
   const handleSubmit = async () => {
-    await postAbsensi(formAbsensi);
+    await updateAbsensi(id, formAbsensi);
     router.push('/dashboard/absensi');
     setFormAbsensi({
       ...formAbsensi,
