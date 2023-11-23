@@ -1,6 +1,6 @@
 'use client';
 import useForm from '@/app/(admin)/dashboard/store/store.status';
-import { IEventDataModel } from '@/model/event.model';
+import { IEventDataModel } from '@/model/model';
 import { getEventsById } from '@/services/api';
 import { useEffect, useState } from 'react';
 import DropdownCategory from '../../dropdown/dropdown.category';

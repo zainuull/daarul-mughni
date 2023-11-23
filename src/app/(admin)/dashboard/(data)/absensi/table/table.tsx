@@ -13,15 +13,19 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import Pagination from './pagination';
 import { useEffect, useState } from 'react';
 import { deleteAbsensi, getAbsensi } from '@/services/api';
-import { IAbsensiDataModel } from '@/model/event.model';
+import { IAbsensiDataModel } from '@/model/model';
 import useDataAbsensi from '../store/store.absensi';
 import { useRouter } from 'next/navigation';
+import useStoreResultAbsensi from '../store/store.datas.result.absensi';
 
 const TableList = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<IAbsensiDataModel[]>();
   const [status, setStatus] = useState(false);
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
   const router = useRouter();
+  const [filteredData] = useStoreResultAbsensi();
+
+  const result = filteredData?.absensi ?? data;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,45 +76,53 @@ const TableList = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data?.map((data) => (
-            <TableRow key={data.id}>
-              <TableCell>{data.code_class}</TableCell>
-              <TableCell>{data.className}</TableCell>
-              <TableCell>{data.teacher}</TableCell>
-              <TableCell className="flex datas-center gap-x-2">
-                <Text>
-                  {data.start_time} - {data?.end_time}
-                </Text>
-              </TableCell>
-              <TableCell>{data.lesson}</TableCell>
-              <TableCell>
-                {status ? (
-                  <button
-                    onClick={() => handleStart(data?.id)}
-                    className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
-                    Mulai
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleStart(data?.id)}
-                    className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
-                    Belum Mulai
-                  </button>
-                )}
-              </TableCell>
-              <TableCell className="py-4">
-                <div className="flex gap-x-4 items-center">
-                  <button onClick={() => handleUpdate(data)}>
-                    <PiPencilLineLight />
-                  </button>
+          {result?.length === 0 ? (
+            <div className="min-h-[300px] px-12">
+              <div className=" mt-40">
+                <h1 className="text-6xl font-bold">Data not found</h1>
+              </div>
+            </div>
+          ) : (
+            result?.map((data: IAbsensiDataModel) => (
+              <TableRow key={data.id}>
+                <TableCell>{data.code_class}</TableCell>
+                <TableCell>{data.className}</TableCell>
+                <TableCell>{data.teacher}</TableCell>
+                <TableCell className="flex datas-center gap-x-2">
+                  <Text>
+                    {data.start_time} - {data?.end_time}
+                  </Text>
+                </TableCell>
+                <TableCell>{data.lesson}</TableCell>
+                <TableCell>
+                  {status ? (
+                    <button
+                      onClick={() => handleStart(data?.id)}
+                      className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
+                      Mulai
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleStart(data?.id)}
+                      className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
+                      Belum Mulai
+                    </button>
+                  )}
+                </TableCell>
+                <TableCell className="py-4">
+                  <div className="flex gap-x-4 items-center">
+                    <button onClick={() => handleUpdate(data)}>
+                      <PiPencilLineLight />
+                    </button>
 
-                  <button onClick={() => handleDelete(data?.id)}>
-                    <FaTrash className="text-red-400" />
-                  </button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
+                    <button onClick={() => handleDelete(data?.id)}>
+                      <FaTrash className="text-red-400" />
+                    </button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
       <nav className="my-6 px-4 absolute right-0 bottom-8">

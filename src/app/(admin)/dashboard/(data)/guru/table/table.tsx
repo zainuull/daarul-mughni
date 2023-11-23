@@ -1,5 +1,5 @@
 'use client';
-import { ITeacherDataModel } from '@/model/event.model';
+import { ITeacherDataModel } from '@/model/model';
 import { deleteTeacher, getTeachers } from '@/services/api';
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '@tremor/react';
 import { useRouter } from 'next/navigation';

@@ -17,7 +17,7 @@ const DropdownLesson = () => {
     fetchData();
   }, [data?.levelName]);
 
-  const Option = lesson?.map((obj: any) => ({
+  const Option = lesson?.map((obj: {id:string,name:string}) => ({
     value: obj?.id,
     label: obj?.name,
   }));

@@ -1,6 +1,6 @@
 'use client';
 import useForm from '@/app/(admin)/dashboard/store/store.status';
-import { IEventDataModel } from '@/model/event.model';
+import { IEventDataModel } from '@/model/model';
 import { getEventsById } from '@/services/api';
 import { useEffect, useState } from 'react';
 
@@ -22,7 +22,6 @@ const DataPersonal = ({ id }: { id: string }) => {
       [e.target.id]: e.target.value,
     });
   };
-
 
   return (
     <form className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">

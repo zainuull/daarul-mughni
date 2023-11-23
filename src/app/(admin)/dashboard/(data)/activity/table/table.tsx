@@ -1,12 +1,11 @@
 'use client';
-import { IEventDataModel } from '@/model/event.model';
+import { IEventDataModel } from '@/model/model';
 import { deleteEvent, getEvents } from '@/services/api';
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '@tremor/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
-import useForm from '../../../store/store.status';
 import useStoreDatas from '../store/store.datas';
 import Pagination from './pagination';
 import useDataEvents from '../store/store.events';

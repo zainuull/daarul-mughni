@@ -137,10 +137,11 @@ model Student {
 model Class {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   className  String   @unique
-  code_class CodeClass[]
+  code_classes CodeClass[]
   levelName  String?
   level      Level?   @relation(fields: [levelName], references: [levelName])
   students   Student[]
+  absensi Absensi[]
   studentIDs String[] @db.ObjectId
 }
 
@@ -149,6 +150,7 @@ model CodeClass {
    name String
    className String?
    class Class? @relation(fields: [className], references: [className])
+   absensi      Absensi?   @relation(fields: [name], references: [code_class])
 }
 
 model Lesson {
@@ -171,9 +173,11 @@ model Level {
 
 model Absensi {
    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-   levelName String
-   className String
-   code_class String
+   levelName String 
+   className String 
+   class      Class?   @relation(fields: [className], references: [className])
+   code_class String @unique
+   code_classes CodeClass[]
    teacher String
    lesson String
    start_time String

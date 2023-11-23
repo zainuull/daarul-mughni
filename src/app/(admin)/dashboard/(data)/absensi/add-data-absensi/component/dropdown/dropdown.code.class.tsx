@@ -17,7 +17,7 @@ const DropdownCodeClass = () => {
   }, [data?.className]);
 
   const Option = Array.isArray(codeClass)
-    ? codeClass.map((obj: any) => ({
+    ? codeClass.map((obj: { id: string; name: string }) => ({
         value: obj?.id,
         label: obj?.name,
       }))

@@ -7,7 +7,6 @@ import DropdownLesson from '../../dropdown/dropdown.lesson';
 import DropdownLevel from '../../dropdown/dropdown.level';
 import DropdownTeacher from '../../dropdown/dropdown.teacher';
 import { getAbsensiById } from '@/services/api';
-import { IAbsensiDataModel } from '@/model/event.model';
 
 const DataPersonal = ({ id }: { id: string }) => {
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
@@ -27,7 +26,6 @@ const DataPersonal = ({ id }: { id: string }) => {
       [e.target.id]: e.target.value,
     });
   };
-
 
   return (
     <div className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">

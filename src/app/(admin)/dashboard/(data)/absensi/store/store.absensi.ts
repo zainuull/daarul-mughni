@@ -9,6 +9,8 @@ const store = atom({
   lesson: '',
   start_time: '',
   end_time: '',
+  filter_by_level: '',
+  filter_by_class: '',
 });
 
 const useDataAbsensi = () => useAtom(store);

@@ -1,5 +1,5 @@
 'use client';
-import { IEventDataModel } from '@/model/event.model';
+import { IEventDataModel } from '@/model/model';
 import { getEventsById } from '@/services/api';
 import { useEffect, useState } from 'react';
 import { BsChevronDoubleDown } from 'react-icons/bs';

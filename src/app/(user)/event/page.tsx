@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Menu from './components/menu';
 import CardEvent from './components/card.event';
 import Link from 'next/link';
-import { IEventDataModel } from '@/model/event.model';
+import { IEventDataModel } from '@/model/model';
 import { getEvents } from '@/services/api';
 
 export default function EventPage() {

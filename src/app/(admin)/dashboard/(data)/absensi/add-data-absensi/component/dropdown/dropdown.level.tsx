@@ -16,7 +16,7 @@ const DropdownLevel = () => {
     fetchData();
   }, []);
 
-  const nOption = level?.map((obj: any) => ({
+  const nOption = level?.map((obj: { id: string; levelName: string }) => ({
     value: obj?.id,
     label: obj?.levelName,
   }));

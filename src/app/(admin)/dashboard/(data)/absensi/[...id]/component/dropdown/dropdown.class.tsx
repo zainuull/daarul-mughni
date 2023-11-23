@@ -18,7 +18,7 @@ const DropdownClass = () => {
   }, [data?.levelName]);
 
   const Option = Array.isArray(classes)
-    ? classes.map((obj: any) => ({
+    ? classes.map((obj: { id: string; className: string }) => ({
         value: obj?.id,
         label: obj?.className,
       }))

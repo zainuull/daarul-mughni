@@ -1,5 +1,5 @@
 'use client';
-import { IStudentDataModel } from '@/model/event.model';
+import { IStudentDataModel } from '@/model/model';
 import { deleteStudent, getStudent } from '@/services/api';
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '@tremor/react';
 import { useEffect, useState } from 'react';
@@ -76,7 +76,7 @@ const TableList = () => {
               </div>
             </div>
           ) : (
-            result?.map((data: any) => (
+            result?.map((data: IStudentDataModel) => (
               <TableRow key={data.id}>
                 <TableCell>{data.name}</TableCell>
                 <TableCell>{data.className}</TableCell>
