@@ -22,6 +22,19 @@ export const getCategories = async (): Promise<ICategory> => {
   return null;
 };
 
+export const getLessons = async (): Promise<any> => {
+  try {
+    const res = await fetch('http://localhost:3000/api/lesson');
+    if (res.ok) {
+      const lessons = await res.json();
+      return lessons;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
 export const getEventsOnServer = async (): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_BASE_URL}/api/events`);
@@ -293,6 +306,19 @@ export const getClass = async (): Promise<any> => {
     console.log(error);
   }
 
+  return null;
+};
+
+export const getCodeClass = async (): Promise<any> => {
+  try {
+    const res = await fetch('http://localhost:3000/api/code_class');
+    if (res.ok) {
+      const classes = await res.json();
+      return classes;
+    }
+  } catch (error) {
+    console.log(error);
+  }
   return null;
 };
 

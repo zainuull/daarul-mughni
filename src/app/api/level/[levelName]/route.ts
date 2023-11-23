@@ -8,6 +8,7 @@ export const GET = async (req: Request, { params }: { params: { levelName: strin
       where: { levelName },
       include: {
         class: { include: { students: true } },
+        lesson: true,
       },
     });
     if (!data) {

@@ -137,16 +137,35 @@ model Student {
 model Class {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   className  String   @unique
+  code_class CodeClass[]
   levelName  String?
   level      Level?   @relation(fields: [levelName], references: [levelName])
   students   Student[]
   studentIDs String[] @db.ObjectId
 }
 
+model CodeClass {
+   id         String   @id @default(auto()) @map("_id") @db.ObjectId
+   name String
+   className String?
+   class Class? @relation(fields: [className], references: [className])
+}
+
+model Lesson {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  levelName  String?
+  level      Level?   @relation(fields: [levelName], references: [levelName])
+}
+
+
 model Level {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   levelName String   @unique
   class     Class[]
   students  Student[]
+  lesson Lesson[]
   classtIDs String[] @db.ObjectId
 }
+
+

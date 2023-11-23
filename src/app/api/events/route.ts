@@ -55,6 +55,9 @@ export const GET = async () => {
         createdAt: 'desc',
       },
     });
+    if(!events) {
+      return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
+    }
     return NextResponse.json({ status_code: 200, message: 'Success to fetch', events });
   } catch (error) {
     console.log(error);
