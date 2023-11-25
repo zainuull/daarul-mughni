@@ -9,12 +9,14 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import useStoreDatas from '../store/store.datas';
 import Pagination from './pagination';
 import useDataEvents from '../store/store.events';
+import { NotifyService } from '@/services/notify/notifyService';
 
 const TableList = () => {
   const [datas, setDatas] = useState<IEventDataModel[]>();
   const router = useRouter();
   const [eventForm, setEventForm] = useDataEvents();
   const [dataFiltered] = useStoreDatas();
+  const notifyService = new NotifyService();
 
   const result = dataFiltered?.events ?? datas;
 
@@ -27,13 +29,13 @@ const TableList = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
-    try {
-      await deleteEvent(id);
-      const fetchData = await getEvents();
-      setDatas(fetchData?.data);
-    } catch (error) {
-      console.log(error);
-    }
+    notifyService.confirmationDelete().then(async (res) => {
+      if (res) {
+        await deleteEvent(id);
+        const fetchData = await getEvents();
+        setDatas(fetchData?.events);
+      }
+    });
   };
 
   const handleUpdate = (data: IEventDataModel) => {

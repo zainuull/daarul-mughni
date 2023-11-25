@@ -1,10 +1,10 @@
 'use client';
-import useForm from '@/app/(admin)/dashboard/store/store.status';
 import DropdownCategory from '../../dropdown/dropdown.category';
 import DropdownStatus from '../../dropdown/dropdown.status';
+import useDataEvents from '../../../../store/store.events';
 
 const DataGlobal = () => {
-  const [form, setForm] = useForm();
+  const [form, setForm] = useDataEvents();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setForm({

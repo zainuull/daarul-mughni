@@ -2,12 +2,11 @@ import { ITeacherDataModel, ITeacherModel } from '@/model/model';
 
 export const getTeachers = async (): Promise<ITeacherModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/teachers`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/teachers`, {
       next: {
         revalidate: 0,
       },
     });
-
     if (res.ok) {
       const teachers = await res.json();
       return teachers;
@@ -21,7 +20,7 @@ export const getTeachers = async (): Promise<ITeacherModel> => {
 
 export const getTeachersById = async (id: string): Promise<ITeacherModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/teachers/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/teachers/${id}`, {
       next: {
         revalidate: 0,
       },
@@ -39,7 +38,7 @@ export const getTeachersById = async (id: string): Promise<ITeacherModel> => {
 
 export const getTeacherByPosition = async (positionName: string): Promise<ITeacherModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/position/${positionName}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/position/${positionName}`, {
       next: {
         revalidate: 0,
       },
@@ -56,7 +55,7 @@ export const getTeacherByPosition = async (positionName: string): Promise<ITeach
 
 export const postTeacher = async (data: ITeacherDataModel): Promise<ITeacherModel> => {
   try {
-    const res = await fetch('http://localhost:3000/api/teachers', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/teachers`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -77,7 +76,7 @@ export const postTeacher = async (data: ITeacherDataModel): Promise<ITeacherMode
 
 export const deleteTeacher = async (id: string): Promise<ITeacherDataModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/teachers/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/teachers/${id}`, {
       next: {
         revalidate: 0,
       },
@@ -98,7 +97,7 @@ export const deleteTeacher = async (id: string): Promise<ITeacherDataModel> => {
 
 export const updateTeacher = async (id: string, data: ITeacherDataModel): Promise<any> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/teachers/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/teachers/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',

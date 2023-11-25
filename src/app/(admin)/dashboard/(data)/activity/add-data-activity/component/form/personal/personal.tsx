@@ -1,9 +1,9 @@
 'use client';
-import useForm from '@/app/(admin)/dashboard/store/store.status';
+import useDataEvents from '../../../../store/store.events';
 
 
 const DataPersonal = () => {
-  const [form, setForm] = useForm();
+  const [form, setForm] = useDataEvents();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({

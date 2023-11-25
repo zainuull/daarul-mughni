@@ -20,6 +20,8 @@ const disbaledNavigation = [
   '/dashboard/absensi',
   '/dashboard/absensi/add-data-absensi',
   '/dashboard/help',
+  '/dashboard/tugas',
+  '/dashboard/tugas/input-data',
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

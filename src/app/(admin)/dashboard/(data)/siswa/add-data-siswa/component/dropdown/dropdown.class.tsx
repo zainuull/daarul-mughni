@@ -2,28 +2,31 @@
 import Select from 'react-select';
 import useDataStudent from '../../../store/store.student';
 import { useEffect, useState } from 'react';
-import { getClass } from '@/services/api';
+import { getClass, getClassByLevel } from '@/services/api';
 
 const DropdownClass = () => {
-  const [data, setData] = useDataStudent();
+  const [studentForm, setStudentForm] = useDataStudent();
   const [classes, setClasses] = useState([]);
-
+  
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getClass();
-      setClasses(res?.data);
+      const res = await getClassByLevel(studentForm?.levelName);
+      setClasses(res?.data?.class);
     };
     fetchData();
-  }, []);
+  }, [studentForm?.levelName]);
 
-  const classOption = classes?.map((obj: any) => ({
-    value: obj?.id,
-    label: obj?.className,
-  }));
+  // Check if datas is an array before using map
+  const Option = Array.isArray(classes)
+    ? classes.map((obj: { className: string; id: string }) => ({
+        value: obj?.id,
+        label: obj?.className,
+      }))
+    : [];
 
   const handleClass = (option: any) => {
-    setData({
-      ...data,
+    setStudentForm({
+      ...studentForm,
       className: option?.label,
     });
   };
@@ -31,10 +34,11 @@ const DropdownClass = () => {
   return (
     <Select
       closeMenuOnSelect={true}
-      options={classOption}
-      value={classOption?.find((option) => option.label === data?.className) || ''}
+      options={Option}
+      value={Option?.find((option) => option.label === studentForm?.className) || ''}
       isClearable={true}
       onChange={handleClass}
+      isDisabled={studentForm?.levelName ? false : true}
       placeholder="MTs VII"
     />
   );

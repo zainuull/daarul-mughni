@@ -3,7 +3,7 @@ import { BsSearch } from 'react-icons/bs';
 import TableList from './table/table';
 import Link from 'next/link';
 import DropdownFilterLevel from './add-data-absensi/component/dropdown/dropdown.filter.level';
-import DropdownFilterClass from './add-data-absensi/component/dropdown/dropdown.filter';
+import DropdownFilterClass from './add-data-absensi/component/dropdown/dropdown.filter.class';
 import useStoreDatas from './store/store.datas';
 import useStoreResultAbsensi from './store/store.datas.result.absensi';
 import useDataAbsensi from './store/store.absensi';
@@ -12,23 +12,15 @@ import { getAbsensiByClass, getClassByLevel } from '@/services/api';
 
 const DataAbsensi = () => {
   const [absensiForm] = useDataAbsensi();
-  const [, setDatas] = useStoreDatas();
   const [, setResult] = useStoreResultAbsensi();
 
   useEffect(() => {
-    if (absensiForm?.filter_by_level) {
-      const fetchData = async () => {
-        const res = await getAbsensiByClass(absensiForm?.filter_by_class);
-        setResult(res?.data);
-      };
-      fetchData();
-    }
     const fetchData = async () => {
-      const res = await getClassByLevel(absensiForm?.filter_by_level);
-      setDatas(res?.data?.class);
+      const res = await getAbsensiByClass(absensiForm?.filter_by_class);
+      setResult(res?.data);
     };
     fetchData();
-  }, [absensiForm]);
+  }, [absensiForm?.filter_by_class]);
 
   return (
     <div className="w-full">

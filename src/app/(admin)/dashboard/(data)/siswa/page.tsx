@@ -2,7 +2,7 @@
 import { BsSearch } from 'react-icons/bs';
 import TableList from './table/table';
 import Link from 'next/link';
-import DropdownFilterClass from './add-data-siswa/component/dropdown/dropdown.filter';
+import DropdownFilterClass from './add-data-siswa/component/dropdown/dropdown.filter.class';
 import useStoreDatas from './store/store.datas';
 import { useEffect } from 'react';
 import { getClassByLevel, getStudentByClass } from '@/services/api';
@@ -12,7 +12,6 @@ import useStoreResultStudent from './store/store.datas.result.student';
 
 const DataGuru = () => {
   const [studentForm] = useDataStudent();
-  const [, setDatas] = useStoreDatas();
   const [, setResult] = useStoreResultStudent();
 
   useEffect(() => {
@@ -23,12 +22,7 @@ const DataGuru = () => {
       };
       fetchData();
     }
-    const fetchData = async () => {
-      const res = await getClassByLevel(studentForm?.filter_by_level);
-      setDatas(res?.data?.class);
-    };
-    fetchData();
-  }, [studentForm]);
+  }, [studentForm?.filter_by_class]);
 
   return (
     <div className="w-full">

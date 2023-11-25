@@ -17,6 +17,7 @@ import { IAbsensiDataModel } from '@/model/model';
 import useDataAbsensi from '../store/store.absensi';
 import { useRouter } from 'next/navigation';
 import useStoreResultAbsensi from '../store/store.datas.result.absensi';
+import { NotifyService } from '@/services/notify/notifyService';
 
 const TableList = () => {
   const [data, setData] = useState<IAbsensiDataModel[]>();
@@ -24,6 +25,7 @@ const TableList = () => {
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
   const router = useRouter();
   const [filteredData] = useStoreResultAbsensi();
+  const notifyService = new NotifyService();
 
   const result = filteredData?.absensi ?? data;
 
@@ -42,9 +44,13 @@ const TableList = () => {
   };
 
   const handleDelete = async (id: string) => {
-    await deleteAbsensi(id);
-    const res = await getAbsensi();
-    setData(res?.data);
+    notifyService.confirmationDelete().then(async (res) => {
+      if (res) {
+        await deleteAbsensi(id);
+        const res = await getAbsensi();
+        setData(res?.data);
+      }
+    });
   };
 
   const handleUpdate = async (data: IAbsensiDataModel) => {

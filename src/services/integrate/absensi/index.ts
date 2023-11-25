@@ -2,7 +2,7 @@ import { IAbsensiDataModel, IAbsensiModel } from '@/model/model';
 
 export const getAbsensi = async (): Promise<IAbsensiModel> => {
   try {
-    const data = await fetch('http://localhost:3000/api/absensi');
+    const data = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/absensi`);
     if (data.ok) {
       const absensi = await data.json();
       return absensi;
@@ -15,7 +15,7 @@ export const getAbsensi = async (): Promise<IAbsensiModel> => {
 
 export const getAbsensiById = async (id: string): Promise<IAbsensiModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/absensi/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/absensi/${id}`);
     if (res.ok) {
       const absensi = await res.json();
       return absensi;
@@ -28,7 +28,7 @@ export const getAbsensiById = async (id: string): Promise<IAbsensiModel> => {
 
 export const getAbsensiByClass = async (className: string): Promise<IAbsensiModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/class/${className}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/class/${className}`);
 
     if (res.ok) {
       const absensi = await res.json();
@@ -42,7 +42,7 @@ export const getAbsensiByClass = async (className: string): Promise<IAbsensiMode
 
 export const postAbsensi = async (data: IAbsensiDataModel): Promise<IAbsensiModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/absensi`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/absensi`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -62,7 +62,7 @@ export const postAbsensi = async (data: IAbsensiDataModel): Promise<IAbsensiMode
 
 export const deleteAbsensi = async (id: string): Promise<IAbsensiModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/absensi/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/absensi/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-type': 'application/json',
@@ -79,7 +79,7 @@ export const updateAbsensi = async (
   data: IAbsensiDataModel
 ): Promise<IAbsensiModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/absensi/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/absensi/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',

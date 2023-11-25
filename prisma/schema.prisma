@@ -184,3 +184,33 @@ model Absensi {
    end_time  String
 }
 
+model Product {
+      id        String   @id @default(auto()) @map("_id") @db.ObjectId
+      name_product String
+      price_product Int
+      data      StrukInput?   @relation(fields: [name_product], references: [name_product])
+}
+
+model StrukInput {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    name_product String @unique
+    product Product[]
+    total_buy Int
+    total_price_product Int
+}
+
+
+model StrukOutput {
+      id        String   @id @default(auto()) @map("_id") @db.ObjectId
+      name_company String
+      address_copany String
+      npwp String
+      time_transaction DateTime
+      code_transaction String
+      kasir String
+      pos_kasir String
+      price_sell Int
+      total Int
+}
+
+

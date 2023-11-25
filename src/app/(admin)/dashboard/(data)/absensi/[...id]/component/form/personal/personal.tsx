@@ -28,52 +28,56 @@ const DataPersonal = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">
-      <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Tingkatan</h1>
-        <DropdownLevel />
-      </div>
-      <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Kelas</h1>
-        <DropdownClass />
-      </div>
-      <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Kode Kelas</h1>
-        <DropdownCodeClass />
-      </div>
-      <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Pengajar</h1>
-        <DropdownTeacher />
-      </div>
-      <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Nama Pelajaran</h1>
-        <DropdownLesson />
-      </div>
-      <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Jam Mulai</h1>
-        <input
-          id="start_time"
-          onChange={handleChange}
-          defaultValue={data?.start_time}
-          type="time"
-          className=" outline-none border border-black rounded-md h-10 px-4"
-          placeholder="Masukkan nama pelajaran"
-          required
-        />
-      </div>
-      <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Jam Selesai</h1>
-        <input
-          id="end_time"
-          onChange={handleChange}
-          defaultValue={data?.end_time}
-          type="time"
-          className=" outline-none border border-black rounded-md h-10 px-4"
-          placeholder="Masukkan nama pelajaran"
-          required
-        />
-      </div>
-    </div>
+    <>
+      {data && (
+        <div className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Tingkatan</h1>
+            <DropdownLevel />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Kelas</h1>
+            <DropdownClass />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Kode Kelas</h1>
+            <DropdownCodeClass />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Pengajar</h1>
+            <DropdownTeacher />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Nama Pelajaran</h1>
+            <DropdownLesson />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Jam Mulai</h1>
+            <input
+              id="start_time"
+              onChange={handleChange}
+              defaultValue={data?.start_time}
+              type="time"
+              className=" outline-none border border-black rounded-md h-10 px-4"
+              placeholder="Masukkan nama pelajaran"
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Jam Selesai</h1>
+            <input
+              id="end_time"
+              onChange={handleChange}
+              defaultValue={data?.end_time}
+              type="time"
+              className=" outline-none border border-black rounded-md h-10 px-4"
+              placeholder="Masukkan nama pelajaran"
+              required
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

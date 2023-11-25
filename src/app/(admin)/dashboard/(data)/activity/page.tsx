@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 import useDataEvents from './store/store.events';
 import useStoreDatas from './store/store.datas';
-import { getEventsByCategories, getEventsById } from '@/services/api';
+import { getEventsByCategories } from '@/services/api';
 import DropdownFilter from './add-data-activity/component/dropdown/dropdown.filter';
 
 const DataActivity = () => {

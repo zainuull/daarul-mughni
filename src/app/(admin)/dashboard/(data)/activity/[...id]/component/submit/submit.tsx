@@ -2,40 +2,43 @@
 import useForm from '@/app/(admin)/dashboard/store/store.status';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import useDataEvents from '../../../store/store.events';
+import { NotifyService } from '@/services/notify/notifyService';
+import { putEvent } from '@/services/api';
 
 const Submit = ({ id }: { id: string }) => {
   const [error, setError] = useState('');
-  const [form] = useForm();
+  const [form] = useDataEvents();
   const router = useRouter();
-  console.log(form);
+  const notifyService = new NotifyService();
 
   const handleSubmit = async () => {
     if (!form?.title || !form?.description) {
       setError('Title and description must be fill');
+      notifyService.emptyInputField();
       return;
     }
-
-    try {
-      const res = await fetch(`http://localhost:3000/api/events/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(form || ''),
-      });
-
-      if (res.ok) {
+    notifyService.confirmationUpdate().then(async (res) => {
+      if (res) {
+        await putEvent(id, form);
+        notifyService.successUpdate();
         router.push('/dashboard/activity');
       }
-    } catch (error) {
-      console.log(error);
-    }
+    });
+  };
+
+  const handleReset = async () => {
+    notifyService.confirmationReset().then((res) => {
+      if (res) {
+        window.location.reload();
+      }
+    });
   };
 
   return (
     <div className="w-full flex justify-end items-center gap-x-6">
       {error && <p className="text-red-600">{error}</p>}
-      <button className="w-1/3 font-medium py-2 bg-gray-200 rounded-md hover:shadow-md transition-all">
+      <button onClick={handleReset} className="w-1/3 font-medium py-2 bg-gray-200 rounded-md hover:shadow-md transition-all">
         Reset
       </button>
       <button

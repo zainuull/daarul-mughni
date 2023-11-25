@@ -9,12 +9,14 @@ import useDataStudent from '../store/store.student';
 import { useRouter } from 'next/navigation';
 import useStoreResultStudent from '../store/store.datas.result.student';
 import Pagination from './pagination';
+import { NotifyService } from '@/services/notify/notifyService';
 
 const TableList = () => {
   const [datas, setDatas] = useState<IStudentDataModel[]>();
   const [studentForm, setStudentForm] = useDataStudent();
   const router = useRouter();
   const [filteredData] = useStoreResultStudent();
+  const notifyService = new NotifyService();
 
   const result = filteredData?.students ?? datas;
 
@@ -27,13 +29,13 @@ const TableList = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
-    try {
-      await deleteStudent(id);
-      const fetchData = await getStudent();
-      setDatas(fetchData?.data);
-    } catch (error) {
-      console.log(error);
-    }
+    notifyService.confirmationDelete().then(async (res) => {
+      if (res) {
+        await deleteStudent(id);
+        const fetchData = await getStudent();
+        setDatas(fetchData?.data);
+      }
+    });
   };
 
   const handleUpdate = async (data: IStudentDataModel) => {

@@ -2,7 +2,7 @@ import { IStudentDataModel, IStudentModel, ITeacherDataModel } from '@/model/mod
 
 export const getStudent = async (): Promise<IStudentModel> => {
   try {
-    const res = await fetch('http://localhost:3000/api/students', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/students`, {
       next: {
         revalidate: 0,
       },
@@ -19,7 +19,7 @@ export const getStudent = async (): Promise<IStudentModel> => {
 
 export const getStudentById = async (id: string): Promise<IStudentModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/students/${id}`, {
       next: {
         revalidate: 0,
       },

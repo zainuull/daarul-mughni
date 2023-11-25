@@ -1,6 +1,6 @@
 export const getPosition = async (): Promise<any> => {
   try {
-    const res = await fetch('http://localhost:3000/api/position');
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/position`);
     if (res.ok) {
       const positions = await res.json();
       return positions;

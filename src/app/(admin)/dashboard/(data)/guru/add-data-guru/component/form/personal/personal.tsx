@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import useDataTeacher from '../../../../store/store.teacher';
 import DropdownGender from '../../dropdown/dropdown.gender';
 
@@ -10,12 +10,14 @@ const DataPersonal = () => {
       [e.target.id]: e.target.value,
     });
   };
+
   return (
     <div className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Nama</h1>
         <input
           onChange={handleChange}
+
           id="name"
           type="text"
           className=" outline-none border border-black rounded-md h-10 px-4"

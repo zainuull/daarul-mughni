@@ -9,6 +9,7 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import useDataTeacher from '../store/store.teacher';
 import useStoreDatas from '../store/store.datas';
 import Pagination from './pagination';
+import { NotifyService } from '@/services/notify/notifyService';
 
 const TableList = () => {
   const [datas, setDatas] = useState<ITeacherDataModel[]>();
@@ -16,6 +17,7 @@ const TableList = () => {
   const [teacherForm, setTeacherForm] = useDataTeacher();
   const [dataFiltered] = useStoreDatas();
   const result = dataFiltered.teachers ?? datas;
+  const notifyService = new NotifyService();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,13 +28,13 @@ const TableList = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
-    try {
-      await deleteTeacher(id);
-      const fetchData = await getTeachers();
-      setDatas(fetchData?.data);
-    } catch (err) {
-      console.log(err);
-    }
+    notifyService.confirmationDelete().then(async (res) => {
+      if (res) {
+        await deleteTeacher(id);
+        const fetchData = await getTeachers();
+        setDatas(fetchData?.data);
+      }
+    });
   };
 
   const handleUpdate = (data: ITeacherDataModel) => {

@@ -11,10 +11,11 @@ const DropdownCodeClass = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await getCodeClassByClassName(data?.className);
-      setCodeClass(res?.data?.code_class);
+      setCodeClass(res?.data?.code_classes);
     };
     fetchData();
   }, [data?.className]);
+
 
   const Option = Array.isArray(codeClass)
     ? codeClass.map((obj: { id: string; name: string }) => ({

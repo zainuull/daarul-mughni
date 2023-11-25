@@ -1,8 +1,8 @@
-import { IClassModel } from "@/model/class";
+import { IClassModel } from '@/model/class';
 
 export const getClass = async (): Promise<IClassModel> => {
   try {
-    const res = await fetch('http://localhost:3000/api/class');
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/class`);
     if (res.ok) {
       const classes = await res.json();
       return classes;
@@ -14,11 +14,12 @@ export const getClass = async (): Promise<IClassModel> => {
   return null;
 };
 
-
 export const getClassByLevel = async (levelName: string): Promise<any> => {
+  console.log(levelName);
+
   try {
     if (levelName) {
-      const res = await fetch(`http://localhost:3000/api/level/${levelName}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/level/${levelName}`);
       if (res.ok) {
         const classes = await res.json();
         return classes;
