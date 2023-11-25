@@ -4,11 +4,10 @@ import TableList from './table/table';
 import Link from 'next/link';
 import DropdownFilterLevel from './add-data-absensi/component/dropdown/dropdown.filter.level';
 import DropdownFilterClass from './add-data-absensi/component/dropdown/dropdown.filter.class';
-import useStoreDatas from './store/store.datas';
 import useStoreResultAbsensi from './store/store.datas.result.absensi';
 import useDataAbsensi from './store/store.absensi';
 import { useEffect } from 'react';
-import { getAbsensiByClass, getClassByLevel } from '@/services/api';
+import { getAbsensiByClass } from '@/services/api';
 
 const DataAbsensi = () => {
   const [absensiForm] = useDataAbsensi();

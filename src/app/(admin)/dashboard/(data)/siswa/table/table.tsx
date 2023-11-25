@@ -58,6 +58,10 @@ const TableList = () => {
     });
   };
 
+  const handleDetail = (id: string) => {
+    router.push(`/dashboard/siswa/detail/${id}`);
+  };
+
   return (
     <div>
       <Table className="mt-5">
@@ -80,7 +84,7 @@ const TableList = () => {
           ) : (
             result?.map((data: IStudentDataModel) => (
               <TableRow key={data.id}>
-                <TableCell>{data.name}</TableCell>
+                <TableCell onClick={() => handleDetail(data?.id)} className='hover:font-bold transition-all cursor-pointer'>{data.name}</TableCell>
                 <TableCell>{data.className}</TableCell>
                 <TableCell>{data.nisn}</TableCell>
                 <TableCell>

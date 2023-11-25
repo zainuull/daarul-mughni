@@ -7,32 +7,26 @@ import Footer from '@/components/footer/footer';
 import { usePathname } from 'next/navigation';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['100','200','300','400', '500', '600'] });
-const disbaledNavigation = [
-  '/login',
-  '/register',
+
+const disabledDashboardPaths = [
   '/dashboard',
-  '/dashboard/guru',
-  '/dashboard/guru/add-data-guru',
-  '/dashboard/siswa',
-  '/dashboard/siswa/add-data-siswa',
-  '/dashboard/activity',
-  '/dashboard/activity/add-data-activity',
-  '/dashboard/absensi',
-  '/dashboard/absensi/add-data-absensi',
-  '/dashboard/help',
-  '/dashboard/tugas',
-  '/dashboard/tugas/input-data',
 ];
+
+function isNavigationEnabled(pathname: string): boolean {
+  return !disabledDashboardPaths.some((disabledPath) => pathname.startsWith(disabledPath));
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const navigationEnabled = isNavigationEnabled(pathname);
+
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {!disbaledNavigation.includes(pathname) && <Navbar />}
+        {navigationEnabled && <Navbar />}
         {children}
+        {navigationEnabled && <Footer />}
       </body>
-      {/* {!disbaledNavigation.includes(pathname) && <Footer />} */}
     </html>
   );
 }

@@ -3,7 +3,6 @@ import Submit from './component/submit/submit';
 
 const UpdateDataAbsensi = ({ params }: { params: { id: string } }) => {
   const id = params.id[1];
-  console.log(id);
 
   return (
     <div className="w-full min-h-screen p-6">

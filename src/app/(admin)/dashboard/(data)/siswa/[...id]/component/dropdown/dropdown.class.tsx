@@ -7,7 +7,6 @@ import { getClass } from '@/services/api';
 const DropdownClass = () => {
   const [data, setData] = useDataStudent();
   const [classes, setClasses] = useState([]);
-  console.log(data?.className);
 
   useEffect(() => {
     const fetchData = async () => {

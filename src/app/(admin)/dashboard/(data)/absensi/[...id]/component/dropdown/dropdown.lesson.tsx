@@ -7,7 +7,6 @@ import { getLessonsByLevelName } from '@/services/api';
 const DropdownLesson = () => {
   const [data, setData] = useDataAbsensi();
   const [lesson, setLesson] = useState([]);
-  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {

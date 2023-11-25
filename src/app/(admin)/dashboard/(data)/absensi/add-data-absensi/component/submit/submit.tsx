@@ -9,7 +9,6 @@ const Submit = () => {
   const router = useRouter();
   const [error, setError] = useState('');
   const notifyService = new NotifyService();
-  console.log(formAbsensi);
 
   const handleSubmit = async () => {
     if (!formAbsensi?.code_class || !formAbsensi?.lesson) {

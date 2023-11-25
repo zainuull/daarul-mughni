@@ -10,13 +10,21 @@ const Submit = () => {
   const [formTeacher, setFormTeacher] = useDataTeacher();
   const router = useRouter();
   const notifyService = new NotifyService();
+  let obj = { name: '' };
 
   const handleSubmit = async () => {
     if (!formTeacher.name || !formTeacher.email) {
       setError('Nama dan email harus di isi');
       notifyService.emptyInputField();
       return;
+    } else if (formTeacher.gender === 'Laki-Laki') {
+      obj.name = `Ustadz. ${formTeacher?.name}`;
+      formTeacher.name = obj.name;
+    } else {
+      obj.name = `Ustadzah. ${formTeacher?.name}`;
+      formTeacher.name = obj.name;
     }
+
     notifyService.confirmationCreate().then(async (res) => {
       if (res) {
         notifyService.successCreate();

@@ -1,5 +1,5 @@
 'use client';
-import { postAbsensi, updateAbsensi } from '@/services/api';
+import {updateAbsensi } from '@/services/api';
 import useDataAbsensi from '../../../store/store.absensi';
 import { useRouter } from 'next/navigation';
 import { NotifyService } from '@/services/notify/notifyService';

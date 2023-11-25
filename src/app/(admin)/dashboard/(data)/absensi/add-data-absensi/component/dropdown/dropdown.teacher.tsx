@@ -18,7 +18,7 @@ const DropdownTeacher = () => {
 
   const nOption = teacher?.map((obj: { id: string; name: string }) => ({
     value: obj?.id,
-    label: `Ustdz ${obj?.name}`,
+    label: `${obj?.name}`,
   }));
 
   const handle = (option: any) => {

@@ -7,7 +7,6 @@ import { getTeachers } from '@/services/api';
 const DropdownTeacher = () => {
   const [data, setData] = useDataAbsensi();
   const [teacher, setTeacher] = useState([]);
-  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {

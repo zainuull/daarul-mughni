@@ -2,7 +2,7 @@
 import Select from 'react-select';
 import useDataStudent from '../../../store/store.student';
 import { useEffect, useState } from 'react';
-import { getClass, getClassByLevel } from '@/services/api';
+import {  getClassByLevel } from '@/services/api';
 
 const DropdownClass = () => {
   const [studentForm, setStudentForm] = useDataStudent();
