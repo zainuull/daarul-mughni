@@ -6,9 +6,11 @@ import { TbUserSquareRounded } from 'react-icons/tb';
 import { BsCalendarCheck, BsQuestionCircle, BsGlobe2 } from 'react-icons/bs';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import useStatus from '../../store/store.status';
 
-const Menu = ({ menu }: { menu: boolean }) => {
+const Menu = () => {
   const pathname = usePathname();
+  const [menu] = useStatus();
 
   return (
     <div
@@ -33,10 +35,9 @@ const Menu = ({ menu }: { menu: boolean }) => {
             <BiChevronRight size={20} />
           </Link>
           <Link
-            href={'/dashboard/guru'}
+            href={{ pathname: '/dashboard/guru' }}
             className={`${
-              pathname == '/dashboard/guru' ||
-              pathname == '/dashboard/guru/add-data-guru' 
+              pathname.match(/^\/dashboard\/guru/)
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>
@@ -47,9 +48,9 @@ const Menu = ({ menu }: { menu: boolean }) => {
             <BiChevronRight size={20} />
           </Link>
           <Link
-            href={'/dashboard/siswa'}
+            href={{ pathname: '/dashboard/siswa' }}
             className={`${
-              pathname == '/dashboard/siswa' || pathname == '/dashboard/siswa/add-data-siswa'
+              pathname.match(/^\/dashboard\/siswa/)
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>
@@ -60,10 +61,9 @@ const Menu = ({ menu }: { menu: boolean }) => {
             <BiChevronRight size={20} />
           </Link>
           <Link
-            href={'/dashboard/activity'}
+            href={{ pathname: '/dashboard/activity' }}
             className={`${
-              pathname == '/dashboard/activity' ||
-              pathname == '/dashboard/activity/add-data-activity'
+              pathname.match(/^\/dashboard\/activity/)
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>
@@ -74,9 +74,9 @@ const Menu = ({ menu }: { menu: boolean }) => {
             <BiChevronRight size={20} />
           </Link>
           <Link
-            href={'/dashboard/absensi'}
+            href={{ pathname: '/dashboard/absensi' }}
             className={`${
-              pathname == '/dashboard/absensi' || pathname == '/dashboard/absensi/add-data-absensi'
+              pathname.match(/^\/dashboard\/absensi/)
                 ? 'bg-primary transition-all duration-300'
                 : 'cursor-pointer'
             } w-full flex items-center justify-between p-3 rounded-lg`}>

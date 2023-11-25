@@ -10,6 +10,7 @@ import useDataTeacher from '../store/store.teacher';
 import useStoreDatas from '../store/store.datas';
 import Pagination from './pagination';
 import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
 
 const TableList = () => {
   const [datas, setDatas] = useState<ITeacherDataModel[]>();
@@ -24,7 +25,11 @@ const TableList = () => {
       const res = await getTeachers();
       setDatas(res?.data);
     };
-    fetchData();
+    if (!datas) {
+      notifyService.showLoading();
+      fetchData();
+    }
+    Swal.close();
   }, []);
 
   const handleDelete = async (id: string) => {

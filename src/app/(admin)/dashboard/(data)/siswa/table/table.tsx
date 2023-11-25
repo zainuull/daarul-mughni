@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import useStoreResultStudent from '../store/store.datas.result.student';
 import Pagination from './pagination';
 import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
 
 const TableList = () => {
   const [datas, setDatas] = useState<IStudentDataModel[]>();
@@ -25,7 +26,11 @@ const TableList = () => {
       const res = await getStudent();
       setDatas(res?.data);
     };
-    fetchData();
+    if (!datas) {
+      notifyService.showLoading();
+      fetchData();
+    }
+    Swal.close();
   }, []);
 
   const handleDelete = async (id: string) => {
@@ -84,7 +89,11 @@ const TableList = () => {
           ) : (
             result?.map((data: IStudentDataModel) => (
               <TableRow key={data.id}>
-                <TableCell onClick={() => handleDetail(data?.id)} className='hover:font-bold transition-all cursor-pointer'>{data.name}</TableCell>
+                <TableCell
+                  onClick={() => handleDetail(data?.id)}
+                  className="hover:font-bold transition-all cursor-pointer">
+                  {data.name}
+                </TableCell>
                 <TableCell>{data.className}</TableCell>
                 <TableCell>{data.nisn}</TableCell>
                 <TableCell>

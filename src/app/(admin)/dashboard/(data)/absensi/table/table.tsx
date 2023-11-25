@@ -18,6 +18,7 @@ import useDataAbsensi from '../store/store.absensi';
 import { useRouter } from 'next/navigation';
 import useStoreResultAbsensi from '../store/store.datas.result.absensi';
 import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
 
 const TableList = () => {
   const [data, setData] = useState<IAbsensiDataModel[]>();
@@ -34,7 +35,11 @@ const TableList = () => {
       const res = await getAbsensi();
       setData(res?.data);
     };
-    fetchData();
+    if (!data) {
+      notifyService.showLoading();
+      fetchData();
+    }
+    Swal.close();
   }, []);
 
   const handleStart = (id: string) => {

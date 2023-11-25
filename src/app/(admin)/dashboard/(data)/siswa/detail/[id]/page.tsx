@@ -11,7 +11,6 @@ const DetailStudent = async ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const res = await getStudentById(id);
   const data: any = res?.data || [];
-  console.log(data);
 
   return (
     <div className="w-full">
