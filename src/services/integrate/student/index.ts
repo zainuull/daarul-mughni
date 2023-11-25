@@ -38,7 +38,7 @@ export const getStudentById = async (id: string): Promise<IStudentModel> => {
 export const getStudentByClass = async (className: string): Promise<any> => {
   try {
     if (className) {
-      const res = await fetch(`http://localhost:3000/api/class/${className}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/class/${className}`, {
         next: {
           revalidate: 0,
         },
@@ -56,7 +56,7 @@ export const getStudentByClass = async (className: string): Promise<any> => {
 
 export const postStudent = async (data: ITeacherDataModel): Promise<IStudentModel> => {
   try {
-    const res = await fetch('http://localhost:3000/api/students', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/students`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -75,7 +75,7 @@ export const postStudent = async (data: ITeacherDataModel): Promise<IStudentMode
 
 export const deleteStudent = async (id: string): Promise<IStudentDataModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/students/${id}`, {
       next: {
         revalidate: 0,
       },
@@ -100,7 +100,7 @@ export const updateStudent = async (
   data: IStudentDataModel
 ): Promise<IStudentModel> => {
   try {
-    const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/students/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
