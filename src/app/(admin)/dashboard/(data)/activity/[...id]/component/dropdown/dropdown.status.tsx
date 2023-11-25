@@ -1,8 +1,8 @@
-import useForm from '@/app/(admin)/dashboard/store/store.status';
 import Select from 'react-select';
+import useDataEvents from '../../../store/store.events';
 
 const DropdownStatus = () => {
-  const [form, setForm] = useForm();
+  const [form, setForm] = useDataEvents();
 
   const statusOption = [
     { value: 'Pending', label: 'Pending' },

@@ -11,6 +11,7 @@ const store = atom({
   end_time: '',
   filter_by_level: '',
   filter_by_class: '',
+  status: '',
 });
 
 const useDataAbsensi = () => useAtom(store);
