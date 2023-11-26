@@ -3,6 +3,7 @@ import { NotifyService } from '@/services/notify/notifyService';
 import DataGlobal from './component/form/global/golbal';
 import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
+import Header from '@/app/(admin)/dashboard/components/header/header';
 
 export const UpdateDataSiswa = ({ params }: { params: { id: string } }) => {
   const id = params.id;
