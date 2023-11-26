@@ -8,14 +8,11 @@ import { getStudentByClass } from '@/services/api';
 import useDataStudent from './store/store.student';
 import DropdownFilterLevel from './add-data-siswa/component/dropdown/dropdown.filter.level';
 import useStoreResultStudent from './store/store.datas.result.student';
-import { BiChevronLeft } from 'react-icons/bi';
-import useStatus from '../../store/store.status';
+import Header from '../../components/header/header';
 
 const DataGuru = () => {
   const [studentForm] = useDataStudent();
   const [, setResult] = useStoreResultStudent();
-  const [menu, setMenu] = useStatus();
-
   useEffect(() => {
     if (studentForm?.filter_by_level) {
       const fetchData = async () => {
@@ -26,18 +23,10 @@ const DataGuru = () => {
     }
   }, [studentForm?.filter_by_class]);
 
-    const handleMenu = () => {
-      setMenu(!menu);
-    };
-
-
   return (
     <div className="w-full">
       <div className="p-10 w-full h-full flex flex-col gap-y-4 ">
-        <div onClick={handleMenu} className="flex items-center gap-x-2 cursor-pointer">
-          <BiChevronLeft size={30} />
-          <h1 className="text-2xl uppercase font-medium">Data Siswa</h1>
-        </div>
+        <Header title="Data Siswa" />
         <div className="w-full flex items-center justify-between mt-2">
           <h2 className="font-light uppercase">Data Siswa</h2>
           <Link

@@ -1,3 +1,5 @@
+'use client';
+import Header from '../../../components/header/header';
 import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
 
@@ -5,9 +7,7 @@ const AddDataAbsensi = () => {
   return (
     <div className="w-full min-h-screen p-6">
       <div className="w-full h-full flex flex-col">
-        <div className="p-4">
-          <h1 className="text-2xl uppercase font-medium">Tambah Data Absensi</h1>
-        </div>
+        <Header title="Tambah Data Absensi" />
         <div className="w-full p-4 bg-white rounded-lg shadow-lg">
           <DataPersonal />
         </div>

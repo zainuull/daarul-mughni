@@ -30,7 +30,7 @@ const Menu = () => {
             } w-full flex items-center justify-between p-3 rounded-lg`}>
             <div className="flex items-center gap-x-6">
               <HiOutlineKey size={30} />
-              {menu ? null : <h1 className="">Dashboard</h1>}
+              {menu ? null : <h1 className="">Beranda</h1>}
             </div>
             <BiChevronRight size={20} />
           </Link>

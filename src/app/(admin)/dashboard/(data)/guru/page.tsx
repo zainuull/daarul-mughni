@@ -7,13 +7,11 @@ import useDataTeacher from './store/store.teacher';
 import { getTeacherByPosition } from '@/services/api';
 import { useEffect } from 'react';
 import useStoreDatas from './store/store.datas';
-import { BiChevronLeft } from 'react-icons/bi';
-import useStatus from '../../store/store.status';
+import Header from '../../components/header/header';
 
 const DataGuru = () => {
   const [teacherForm] = useDataTeacher();
   const [, setDatas] = useStoreDatas();
-  const [menu, setMenu] = useStatus();
 
   useEffect(() => {
     const fetchDataByPosition = async () => {
@@ -23,17 +21,11 @@ const DataGuru = () => {
     fetchDataByPosition();
   }, [teacherForm?.filter_by]);
 
-  const handleMenu = () => {
-    setMenu(!menu);
-  };
 
   return (
     <div className="w-full">
       <div className="p-10 w-full h-full flex flex-col gap-y-4 ">
-        <div onClick={handleMenu} className="flex items-center gap-x-2 cursor-pointer">
-          <BiChevronLeft size={30} />
-          <h1 className="text-2xl uppercase font-medium">Data Guru</h1>
-        </div>
+        <Header title="Data Guru" />
         <div className="w-full flex items-center justify-between mt-2">
           <h2 className="font-light uppercase">Data Guru / Pengajar</h2>
           <Link

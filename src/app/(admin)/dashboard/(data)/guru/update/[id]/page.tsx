@@ -1,4 +1,5 @@
 'use client'
+import Header from '@/app/(admin)/dashboard/components/header/header';
 import DataGlobal from './component/form/global/global';
 import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
@@ -12,9 +13,7 @@ const UpdateDataGuru = ({ params }: { params: { id: string } }) => {
   return (
     <div className="w-full min-h-screen p-6">
       <div className="w-full h-full flex flex-col">
-        <div className="p-4">
-          <h1 className="text-2xl uppercase font-medium">Update Data Guru</h1>
-        </div>
+        <Header title="Update Data Guru" />
         <div className="w-full p-4 bg-white rounded-lg shadow-lg">
           <DataPersonal id={id} />
         </div>

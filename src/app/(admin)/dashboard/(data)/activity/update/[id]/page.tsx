@@ -3,6 +3,7 @@ import { NotifyService } from '@/services/notify/notifyService';
 import DataGlobal from './component/form/global/golbal';
 import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
+import Header from '@/app/(admin)/dashboard/components/header/header';
 
 const UpdateDataActivity = ({ params }: { params: { id: string } }) => {
   const id = params?.id;
@@ -12,9 +13,7 @@ const UpdateDataActivity = ({ params }: { params: { id: string } }) => {
   return (
     <div className="w-full min-h-screen p-6">
       <div className="w-full h-full flex flex-col">
-        <div className="p-4">
-          <h1 className="text-2xl uppercase font-medium">Update Data Kegiatan</h1>
-        </div>
+        <Header title="Update Data Kegiatan" />
         <div className="w-full p-4 bg-white rounded-lg shadow-lg">
           <DataPersonal id={id} />
         </div>

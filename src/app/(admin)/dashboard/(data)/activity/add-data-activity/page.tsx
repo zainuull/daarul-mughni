@@ -1,3 +1,5 @@
+'use client'
+import Header from '../../../components/header/header';
 import DataGlobal from './component/form/global/global';
 import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
@@ -6,9 +8,7 @@ const AddDataActivity = () => {
   return (
     <div className="w-full min-h-screen p-6">
       <div className="w-full h-full flex flex-col">
-        <div className="p-4">
-          <h1 className="text-2xl uppercase font-medium">Tambah Data Kegiatan</h1>
-        </div>
+        <Header title="Tambah Data Kegiatan" />
         <div className="w-full p-4 bg-white rounded-lg shadow-lg">
           <DataPersonal />
         </div>

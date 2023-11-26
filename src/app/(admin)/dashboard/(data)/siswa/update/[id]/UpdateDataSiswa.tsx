@@ -3,9 +3,8 @@ import { NotifyService } from '@/services/notify/notifyService';
 import DataGlobal from './component/form/global/golbal';
 import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
-import Header from '@/app/(admin)/dashboard/components/header/header';
 
-const UpdateDataSiswa = ({ params }: { params: { id: string } }) => {
+export const UpdateDataSiswa = ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const notifyService = new NotifyService();
   notifyService.showLoading();
@@ -13,7 +12,7 @@ const UpdateDataSiswa = ({ params }: { params: { id: string } }) => {
   return (
     <div className="w-full min-h-screen p-6">
       <div className="w-full h-full flex flex-col">
-        <Header title="Update Data Siswa" />
+        <Header title="Tambah Data Siswa" />
         <div className="w-full p-4 bg-white rounded-lg shadow-lg">
           <DataPersonal id={id} />
         </div>
@@ -27,5 +26,3 @@ const UpdateDataSiswa = ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
-
-export default UpdateDataSiswa;
