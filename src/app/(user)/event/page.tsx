@@ -7,6 +7,7 @@ import CardEvent from './components/card.event';
 import Link from 'next/link';
 import { IEventDataModel } from '@/model/model';
 import { getEvents } from '@/services/api';
+import MySlider from '../test/page';
 
 export default function EventPage() {
   const [menu, setMenu] = useState(false);
@@ -51,22 +52,9 @@ export default function EventPage() {
           height={400}
           className="h-screen object-cover lg:w-full"
         />
-        <div className="absolute w-full h-3/4 grid grid-cols-4 gap-2 lg:grid-cols-12 lg:min-h-screen lg:px-6">
-          {event &&
-            event?.map((data: IEventDataModel, index: number) => (
-              <>
-                <Link
-                  id={data?.id}
-                  href={`${windowWidth >= 650 ? `event/${data?.id}` : ''}`}
-                  onClick={() => handleMenu(data?.id)}
-                  className="flex col-span-1 lg:flex items-center justify-center lg:col-span-2">
-                  <CardEvent id={data?.id} handleMenu={handleMenu} image={data?.imageUrl} />
-                </Link>
-                {id == data?.id && windowWidth <= 650 ? (
-                  <Menu id={data?.id} menu={menu} setMenu={setMenu} index={index} />
-                ) : null}
-              </>
-            ))}
+
+        <div className="absolute w-full h-screen translate-y-32">
+          <MySlider />
         </div>
       </div>
     </div>

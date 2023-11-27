@@ -5,6 +5,9 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
   const id = params.id;
   try {
     const events = await prisma.events.findUnique({ where: { id } });
+    if (!id) {
+      return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
+    }
     return NextResponse.json({ status_code: 200, message: 'Success to fetch', events });
   } catch (error) {
     console.log(error);

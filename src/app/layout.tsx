@@ -10,6 +10,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['100','200','300','400', 
 
 const disabledDashboardPaths = [
   '/dashboard',
+  '/test'
 ];
 
 function isNavigationEnabled(pathname: string): boolean {
