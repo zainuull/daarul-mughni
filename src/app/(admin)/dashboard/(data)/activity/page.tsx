@@ -2,16 +2,17 @@
 import { BsSearch } from 'react-icons/bs';
 import TableList from './table/table';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useDataEvents from './store/store.events';
 import useStoreDatas from './store/store.datas';
-import { getEventsByCategories } from '@/services/api';
+import { getEvents, getEventsByCategories } from '@/services/api';
 import DropdownFilter from './add-data-activity/component/dropdown/dropdown.filter';
 import Header from '../../components/header/header';
 
 const DataActivity = () => {
   const [eventForm] = useDataEvents();
-  const [, setDatas] = useStoreDatas();
+  const [datas, setDatas] = useStoreDatas();
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     const fetchDataByPosition = async () => {
@@ -20,6 +21,25 @@ const DataActivity = () => {
     };
     fetchDataByPosition();
   }, [eventForm?.filter_by]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getEvents();
+      setDatas(res?.events);
+    };
+    fetchData();
+  }, []);
+
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  // console.log(datas);
+
+  // Ensure that datas is an array before attempting to filter
+  const filteredDatas = Array.isArray(datas)
+    ? datas.filter((data) => data?.title?.toLowerCase().includes(searchInput.toLowerCase()))
+    : [];
 
   return (
     <div className="w-full">
@@ -36,11 +56,16 @@ const DataActivity = () => {
         <div className="w-full flex items-center gap-x-6">
           <div className="w-4/5 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
             <BsSearch />
-            <input className="w-full outline-none" placeholder="Cari Data Kegiatan" />
+            <input
+              className="w-full outline-none"
+              placeholder="Cari Data Kegiatan"
+              value={searchInput}
+              onChange={handleSearch}
+            />
           </div>
           <DropdownFilter />
         </div>
-        <TableList />
+        <TableList resultSearchData={filteredDatas} />
       </div>
     </div>
   );

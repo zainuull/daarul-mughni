@@ -4,6 +4,7 @@ import { getEventsById } from '@/services/api';
 import { useEffect, useState } from 'react';
 import useDataEvents from '../../../../../store/store.events';
 import Swal from 'sweetalert2';
+import DropdownTeacher from '../../dropdown/dropdown.teacher';
 
 const DataPersonal = ({ id }: { id: string }) => {
   const [form, setForm] = useDataEvents();
@@ -67,15 +68,7 @@ const DataPersonal = ({ id }: { id: string }) => {
           </div>
           <div className="flex flex-col gap-y-2 col-span-1">
             <h1 className="uppercase">Penanggung Jawab</h1>
-            <input
-              onChange={handleChange}
-              defaultValue={defaultData?.person_responsible}
-              id="person_responsible"
-              type="text"
-              className=" outline-none border border-black rounded-md h-10 px-4"
-              placeholder="Ustdz / Ustdzh"
-              required
-            />
+            <DropdownTeacher />
           </div>
           <div className="flex flex-col gap-y-2 col-span-2">
             <h1 className="uppercase">Deskripsi Kegiatan</h1>

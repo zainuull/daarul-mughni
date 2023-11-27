@@ -116,5 +116,5 @@ export const putEvent = async (id: string, data: IEventDataModel): Promise<any> 
     console.log(error);
   }
 
-  return null
+  return null;
 };

@@ -12,14 +12,14 @@ import Pagination from './pagination';
 import { NotifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
 
-const TableList = () => {
+const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [datas, setDatas] = useState<IStudentDataModel[]>();
   const [studentForm, setStudentForm] = useDataStudent();
   const router = useRouter();
-  const [filteredData] = useStoreResultStudent();
+  const [dataFiltered] = useStoreResultStudent();
   const notifyService = new NotifyService();
 
-  const result = filteredData?.students ?? datas;
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.students || datas;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +83,7 @@ const TableList = () => {
           {result?.length === 0 ? (
             <div className="min-h-[300px] px-12">
               <div className=" mt-40">
-                <h1 className="text-6xl font-bold">Data not found</h1>
+                <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>
               </div>
             </div>
           ) : (

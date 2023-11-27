@@ -18,6 +18,15 @@ var settings = {
   initialSlide: 0,
   responsive: [
     {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
+        dots: true,
+      },
+    },
+    {
       breakpoint: 1024,
       settings: {
         slidesToShow: 3,
@@ -27,18 +36,12 @@ var settings = {
       },
     },
     {
-      breakpoint: 600,
+      breakpoint: 340,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        initialSlide: 2,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        infinite: false,
+        dots: false,
       },
     },
   ],
@@ -86,7 +89,7 @@ const Carousel = () => {
                 id={data?.id}
                 href={`${windowWidth >= 650 ? `event/${data?.id}` : ''}`}
                 onClick={() => handleMenu(data?.id, index + 1)}>
-                <Image src={data?.imageUrl} alt={data?.title} width={300} height={10} />
+                <Image src={data?.imageUrl} alt={data?.title} width={300} height={10} className='sm:w-[100px] md:w-[200px] lg:w-[300px]'/>
               </Link>
             </>
           ))}

@@ -2,7 +2,7 @@ import Select from 'react-select';
 import useDataEvents from '../../../../store/store.events';
 
 const DropdownStatus = () => {
-  const [form, setForm] = useDataEvents();
+  const [data, setData] = useDataEvents();
 
   const statusOption = [
     { value: 'Pending', label: 'Pending' },
@@ -10,8 +10,8 @@ const DropdownStatus = () => {
   ];
 
   const handleStatus = (option: any) => {
-    setForm({
-      ...form,
+    setData({
+      ...data,
       status: option?.label,
     });
   };
@@ -20,7 +20,7 @@ const DropdownStatus = () => {
     <Select
       closeMenuOnSelect={true}
       options={statusOption}
-      value={statusOption.find((option) => option.label === form?.status) || ''}
+      value={statusOption.find((option) => option.label === data?.status) || ''}
       isClearable={true}
       onChange={handleStatus}
       placeholder="Pilih Status"

@@ -18,19 +18,15 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [teacherForm, setTeacherForm] = useDataTeacher();
   const [dataFiltered] = useStoreDatas();
   const notifyService = new NotifyService();
-  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.teachers || datas || [];
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.teachers || datas;
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        notifyService.showLoading();
-        const res = await getTeachers();
-        setDatas(res?.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+      const res = await getTeachers();
+      setDatas(res?.data);
     };
     if (!datas) {
+      notifyService.showLoading();
       fetchData();
     }
     Swal.close();
@@ -77,14 +73,14 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {result.length === 0 ? (
+          {result?.length === 0 ? (
             <div className="min-h-[300px] px-12">
               <div className=" mt-40">
-                <h1 className="text-6xl font-bold">Data not found</h1>
+                <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>
               </div>
             </div>
           ) : (
-            result.map((data: any) => (
+            result?.map((data: any) => (
               <TableRow key={data.id}>
                 <TableCell>{data.name}</TableCell>
                 <TableCell>{data.positionName}</TableCell>

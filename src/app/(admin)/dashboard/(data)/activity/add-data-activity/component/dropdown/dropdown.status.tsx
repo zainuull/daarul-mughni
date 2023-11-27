@@ -1,8 +1,8 @@
 import Select from 'react-select';
-import useDataAbsensi from '../../../../absensi/store/store.absensi';
+import useDataEvents from '../../../store/store.events';
 
 const DropdownStatus = () => {
-  const [form, setForm] = useDataAbsensi();
+  const [form, setForm] = useDataEvents();
 
   const statusOption = [
     { value: 'Pending', label: 'Pending' },

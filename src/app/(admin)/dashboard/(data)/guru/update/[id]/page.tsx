@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Header from '@/app/(admin)/dashboard/components/header/header';
 import DataGlobal from './component/form/global/global';
 import DataPersonal from './component/form/personal/personal';
@@ -8,7 +8,9 @@ import { NotifyService } from '@/services/notify/notifyService';
 const UpdateDataGuru = ({ params }: { params: { id: string } }) => {
   const id = params?.id;
   const notifyService = new NotifyService();
-  notifyService.showLoading();
+  if (!id) {
+    notifyService.showLoading();
+  }
 
   return (
     <div className="w-full min-h-screen p-6">

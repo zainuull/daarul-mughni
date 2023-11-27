@@ -93,15 +93,6 @@ const Navbar = () => {
             }`}>
             Dashboard
           </Link>
-          <Link
-            href="/test"
-            className={`${
-              pathanme === '/dashboard'
-                ? 'bg-white text-gray-800 px-4 py-2 rounded-md font-semibold transition-all'
-                : 'hover:text-gray-600 transition-all'
-            }`}>
-            Test
-          </Link>
         </div>
         <div onClick={handleNav} className="md:hidden cursor-pointer">
           <AiOutlineMenu size={25} />

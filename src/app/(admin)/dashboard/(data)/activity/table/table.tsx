@@ -12,14 +12,14 @@ import useDataEvents from '../store/store.events';
 import { NotifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
 
-const TableList = () => {
+const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [datas, setDatas] = useState<IEventDataModel[]>();
   const router = useRouter();
   const [eventForm, setEventForm] = useDataEvents();
   const [dataFiltered] = useStoreDatas();
   const notifyService = new NotifyService();
-
-  const result = dataFiltered?.events ?? datas;
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.events || datas;
+  console.log(datas);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,11 +80,11 @@ const TableList = () => {
           {result?.length === 0 ? (
             <div className="min-h-[300px] px-12">
               <div className=" mt-40">
-                <h1 className="text-6xl font-bold">Data not found</h1>
+                <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>
               </div>
             </div>
           ) : (
-            datas?.map((data: IEventDataModel) => (
+            result?.map((data: IEventDataModel) => (
               <TableRow key={data.id}>
                 <TableCell>{data.title}</TableCell>
                 <TableCell>Bag. {data.section}</TableCell>

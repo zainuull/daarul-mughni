@@ -20,15 +20,15 @@ import useStoreResultAbsensi from '../store/store.datas.result.absensi';
 import { NotifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
 
-const TableList = () => {
+const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [data, setData] = useState<IAbsensiDataModel[]>();
   const [status, setStatus] = useState(false);
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
   const router = useRouter();
-  const [filteredData] = useStoreResultAbsensi();
+  const [dataFiltered] = useStoreResultAbsensi();
   const notifyService = new NotifyService();
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.absensi || data;
 
-  const result = filteredData?.absensi ?? data;
 
   useEffect(() => {
     const fetchData = async () => {

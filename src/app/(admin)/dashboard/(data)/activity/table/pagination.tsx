@@ -8,7 +8,7 @@ const Pagination = () => {
 
   const lastPage = dataStore?.totalPage || 0;
   const totalPage = dataStore?.totalPage || 0;
-  const pageNumbers = [1,2,3,4];
+  const pageNumbers = [1, 2, 3, 4];
 
   const pageRange = currentPage > totalPage - 1 ? 4 : currentPage > totalPage - 2 ? 3 : 2;
   const maxPagesToShow = currentPage < 3 ? 4 : 2;
@@ -66,9 +66,7 @@ const Pagination = () => {
             onClick={() => changeCurrentPage(n)}
             key={n}
             className={`px-3 py-1 rounded-full text-sm ${
-              n === currentPage
-                ? 'bg-gray-400 text-white'
-                : 'text-gray-600 hover:text-black'
+              n === currentPage ? 'bg-gray-400 text-white' : 'text-gray-600 hover:text-black'
             }`}>
             {n}
           </div>

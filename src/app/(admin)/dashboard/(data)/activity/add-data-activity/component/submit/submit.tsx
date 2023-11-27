@@ -10,6 +10,7 @@ const Submit = () => {
   const [form, setForm] = useDataEvents();
   const router = useRouter();
   const notifyService = new NotifyService();
+  
 
   const handleSubmit = async () => {
     if (!form?.title || !form?.description) {
