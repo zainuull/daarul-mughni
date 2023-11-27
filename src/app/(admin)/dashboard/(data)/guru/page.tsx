@@ -4,14 +4,15 @@ import TableList from './table/table';
 import Link from 'next/link';
 import DropdownFilter from './add-data-guru/component/dropdown/dropdown.filter';
 import useDataTeacher from './store/store.teacher';
-import { getTeacherByPosition } from '@/services/api';
-import { useEffect } from 'react';
+import { getTeacherByPosition, getTeachers } from '@/services/api';
+import { useEffect, useState } from 'react';
 import useStoreDatas from './store/store.datas';
 import Header from '../../components/header/header';
 
 const DataGuru = () => {
   const [teacherForm] = useDataTeacher();
-  const [, setDatas] = useStoreDatas();
+  const [datas, setDatas] = useStoreDatas();
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     const fetchDataByPosition = async () => {
@@ -21,6 +22,22 @@ const DataGuru = () => {
     fetchDataByPosition();
   }, [teacherForm?.filter_by]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getTeachers();
+      setDatas(res?.data);
+    };
+    fetchData();
+  }, []);
+
+  const handleSearch = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  // Ensure that datas is an array before attempting to filter
+  const filteredDatas = Array.isArray(datas)
+    ? datas.filter((data) => data?.name?.toLowerCase().includes(searchInput.toLowerCase()))
+    : [];
 
   return (
     <div className="w-full">
@@ -37,11 +54,16 @@ const DataGuru = () => {
         <div className="w-full flex items-center gap-x-6">
           <div className="w-4/5 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
             <BsSearch />
-            <input className="w-full outline-none" placeholder="Cari Data Guru" />
+            <input
+              className="w-full outline-none"
+              placeholder="Cari Data Guru"
+              value={searchInput}
+              onChange={handleSearch}
+            />
           </div>
           <DropdownFilter />
         </div>
-        <TableList />
+        <TableList resultSearchData={filteredDatas} />
       </div>
     </div>
   );

@@ -12,21 +12,25 @@ import Pagination from './pagination';
 import { NotifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
 
-const TableList = () => {
+const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [datas, setDatas] = useState<ITeacherDataModel[]>();
   const router = useRouter();
   const [teacherForm, setTeacherForm] = useDataTeacher();
   const [dataFiltered] = useStoreDatas();
-  const result = dataFiltered.teachers ?? datas;
   const notifyService = new NotifyService();
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.teachers || datas || [];
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getTeachers();
-      setDatas(res?.data);
+      try {
+        notifyService.showLoading();
+        const res = await getTeachers();
+        setDatas(res?.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
     if (!datas) {
-      notifyService.showLoading();
       fetchData();
     }
     Swal.close();
@@ -61,7 +65,7 @@ const TableList = () => {
   };
 
   return (
-    <div>
+    <>
       <Table className="mt-5">
         <TableHead>
           <TableRow>
@@ -73,14 +77,14 @@ const TableList = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {result?.length === 0 ? (
+          {result.length === 0 ? (
             <div className="min-h-[300px] px-12">
               <div className=" mt-40">
                 <h1 className="text-6xl font-bold">Data not found</h1>
               </div>
             </div>
           ) : (
-            result?.map((data: any) => (
+            result.map((data: any) => (
               <TableRow key={data.id}>
                 <TableCell>{data.name}</TableCell>
                 <TableCell>{data.positionName}</TableCell>
@@ -114,7 +118,7 @@ const TableList = () => {
       <nav className="my-6 px-4 absolute right-0 bottom-16">
         <Pagination />
       </nav>
-    </div>
+    </>
   );
 };
 

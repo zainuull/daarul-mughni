@@ -18,8 +18,11 @@ const DataGlobal = ({ id }: { id: string }) => {
       setDefaultData(res?.data);
     };
     fetchDataById();
-    Swal.close();
   }, []);
+
+  if (defaultData) {
+    Swal.close();
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({

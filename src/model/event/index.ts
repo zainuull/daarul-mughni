@@ -1,3 +1,7 @@
+import { IQueryModel } from "../IQueryModel";
+
+export interface IEventQuery extends IQueryModel {}
+
 export interface IEventModel {
   totalData?: number;
   totalPage?: number;
