@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { getEvents } from '@/services/api';
 import Link from 'next/link';
 import { IEventDataModel } from '@/model/event';
-import Menu from '../event/components/menu';
+import Menu from './menu';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
 var settings = {
   dots: true,
@@ -44,7 +44,7 @@ var settings = {
   ],
 };
 
-const MyCarousel = () => {
+const Carousel = () => {
   const [menu, setMenu] = useStatus();
   const [event, setEvent] = useState<any>();
   const [id, setId] = useState('');
@@ -96,4 +96,4 @@ const MyCarousel = () => {
   );
 };
 
-export default MyCarousel;
+export default Carousel;
