@@ -20,18 +20,11 @@ const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
-        const user = {
-          id: '1',
-          name: 'Zainul',
-          email: 'admin@gmail.com',
-          role: 'administrator',
-        };
-        if (email == 'admin@gmail.com' && password == '123456') {
-          console.log('kucing 1', user);
-
+        const user = await prisma.user.findFirst({ where: { email } });
+        const confirmPassword = await bcrypt.compare(password, user?.hashedPassword || '');
+        if (confirmPassword) {
+          console.log('kucing 1', user?.role);
           return user;
-        } else {
-          return null;
         }
       },
     }),
@@ -43,7 +36,7 @@ const authOptions: NextAuthOptions = {
         token.email = user?.email;
         token.role = user?.role;
       }
-      console.log('kucing 2', token);
+      console.log('kucing 2', token?.role);
       return token;
     },
     async session({ session, token }: any) {
@@ -51,7 +44,10 @@ const authOptions: NextAuthOptions = {
         session.user.name = token.name;
       } else if ('email' in token) {
         session.user.email = token.email;
-      } else if ('role' in token) {
+      } else if ('image' in token) {
+        session.user.image = token.image;
+      }
+      if ('role' in token) {
         session.user.role = token.role;
       }
       console.log('kucing 3', session);

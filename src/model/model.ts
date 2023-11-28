@@ -5,6 +5,7 @@ export * from "./event/index"
 export * from "./level/index"
 export * from "./student/index"
 export * from "./teacher/index"
+export * from "./user/index"
 
 
 

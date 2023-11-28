@@ -5,11 +5,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from '../../../public/assets/logoDM.jpeg';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { IUser } from '@/model/user';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [shadow, setShadow] = useState(false);
   const pathanme = usePathname();
+  const { data } = useSession();
+  const user: IUser = data?.user;
 
   // Handle navigation
   const handleNav = () => {
@@ -84,15 +88,17 @@ const Navbar = () => {
             }`}>
             Kontak
           </Link>
-          <Link
-            href="/dashboard/guru"
-            className={`${
-              pathanme === '/dashboard'
-                ? 'bg-white text-gray-800 px-4 py-2 rounded-md font-semibold transition-all'
-                : 'hover:text-gray-600 transition-all'
-            }`}>
-            Dashboard
-          </Link>
+          {user && (
+            <Link
+              href="/dashboard/guru"
+              className={`${
+                pathanme === '/dashboard'
+                  ? 'bg-white text-gray-800 px-4 py-2 rounded-md font-semibold transition-all'
+                  : 'hover:text-gray-600 transition-all'
+              }`}>
+              Dashboard
+            </Link>
+          )}
         </div>
         <div onClick={handleNav} className="md:hidden cursor-pointer">
           <AiOutlineMenu size={25} />

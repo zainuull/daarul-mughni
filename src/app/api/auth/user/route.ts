@@ -16,7 +16,7 @@ export const GET = async () => {
 };
 
 export const POST = async (req: Request) => {
-  const { name, email, password, image } = await req.json();
+  const { name, email, password, image, role } = await req.json();
 
   if (!name && !email) {
     return NextResponse.json({ status_code: 500, message: 'name and email are required' });
@@ -30,6 +30,7 @@ export const POST = async (req: Request) => {
         email,
         hashedPassword,
         image,
+        role,
       },
     });
     console.log('success create user', newUser);

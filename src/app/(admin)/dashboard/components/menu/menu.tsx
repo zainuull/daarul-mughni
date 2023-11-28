@@ -7,10 +7,14 @@ import { BsCalendarCheck, BsQuestionCircle, BsGlobe2 } from 'react-icons/bs';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import useStatus from '../../store/store.status';
+import { useSession } from 'next-auth/react';
+import { IUser } from '@/model/user';
 
 const Menu = () => {
   const pathname = usePathname();
   const [menu] = useStatus();
+  const { data } = useSession();
+  const user: IUser = data?.user;
 
   return (
     <div
@@ -34,45 +38,49 @@ const Menu = () => {
             </div>
             <BiChevronRight size={20} />
           </Link>
-          <Link
-            href={{ pathname: '/dashboard/guru' }}
-            className={`${
-              pathname.match(/^\/dashboard\/guru/)
-                ? 'bg-primary transition-all duration-300'
-                : 'cursor-pointer'
-            } w-full flex items-center justify-between p-3 rounded-lg`}>
-            <div className="flex items-center gap-x-6">
-              <BiCubeAlt size={30} />
-              {menu ? null : <h1 className="">Data Guru</h1>}
-            </div>
-            <BiChevronRight size={20} />
-          </Link>
-          <Link
-            href={{ pathname: '/dashboard/siswa' }}
-            className={`${
-              pathname.match(/^\/dashboard\/siswa/)
-                ? 'bg-primary transition-all duration-300'
-                : 'cursor-pointer'
-            } w-full flex items-center justify-between p-3 rounded-lg`}>
-            <div className="flex items-center gap-x-6">
-              <TbUserSquareRounded size={30} />
-              {menu ? null : <h1 className="">Data Siswa</h1>}
-            </div>
-            <BiChevronRight size={20} />
-          </Link>
-          <Link
-            href={{ pathname: '/dashboard/activity' }}
-            className={`${
-              pathname.match(/^\/dashboard\/activity/)
-                ? 'bg-primary transition-all duration-300'
-                : 'cursor-pointer'
-            } w-full flex items-center justify-between p-3 rounded-lg`}>
-            <div className="flex items-center gap-x-6">
-              <BiCalendarEvent size={30} />
-              {menu ? null : <h1 className="">Laporan Kegiatan</h1>}
-            </div>
-            <BiChevronRight size={20} />
-          </Link>
+          {user?.role === 'administrator' && (
+            <>
+              <Link
+                href={{ pathname: '/dashboard/guru' }}
+                className={`${
+                  pathname.match(/^\/dashboard\/guru/)
+                    ? 'bg-primary transition-all duration-300'
+                    : 'cursor-pointer'
+                } w-full flex items-center justify-between p-3 rounded-lg`}>
+                <div className="flex items-center gap-x-6">
+                  <BiCubeAlt size={30} />
+                  {menu ? null : <h1 className="">Data Guru</h1>}
+                </div>
+                <BiChevronRight size={20} />
+              </Link>
+              <Link
+                href={{ pathname: '/dashboard/siswa' }}
+                className={`${
+                  pathname.match(/^\/dashboard\/siswa/)
+                    ? 'bg-primary transition-all duration-300'
+                    : 'cursor-pointer'
+                } w-full flex items-center justify-between p-3 rounded-lg`}>
+                <div className="flex items-center gap-x-6">
+                  <TbUserSquareRounded size={30} />
+                  {menu ? null : <h1 className="">Data Siswa</h1>}
+                </div>
+                <BiChevronRight size={20} />
+              </Link>
+              <Link
+                href={{ pathname: '/dashboard/activity' }}
+                className={`${
+                  pathname.match(/^\/dashboard\/activity/)
+                    ? 'bg-primary transition-all duration-300'
+                    : 'cursor-pointer'
+                } w-full flex items-center justify-between p-3 rounded-lg`}>
+                <div className="flex items-center gap-x-6">
+                  <BiCalendarEvent size={30} />
+                  {menu ? null : <h1 className="">Laporan Kegiatan</h1>}
+                </div>
+                <BiChevronRight size={20} />
+              </Link>
+            </>
+          )}
           <Link
             href={{ pathname: '/dashboard/absensi' }}
             className={`${

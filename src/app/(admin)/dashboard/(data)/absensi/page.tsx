@@ -10,11 +10,15 @@ import { useEffect, useState } from 'react';
 import { getAbsensi, getAbsensiByClass } from '@/services/api';
 import Header from '../../components/header/header';
 import useStoreDatas from './store/store.datas';
+import { useSession } from 'next-auth/react';
+import { IUser } from '@/model/user';
 
 const DataAbsensi = () => {
   const [absensiForm] = useDataAbsensi();
   const [datas, setDatas] = useStoreDatas();
   const [searchInput, setSearchInput] = useState('');
+  const { data } = useSession();
+  const user: IUser = data?.user;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,11 +51,13 @@ const DataAbsensi = () => {
         <Header title="Absensi" />
         <div className="w-full flex items-center justify-between mt-2">
           <h2 className="font-light uppercase">Sesi Absensi</h2>
-          <Link
-            href={'/dashboard/absensi/add-data-absensi'}
-            className="px-6 py-2 bg-primary rounded-lg text-slate-700">
-            Tambah Data Absensi
-          </Link>
+          {user?.role === 'administrator' && (
+            <Link
+              href={'/dashboard/absensi/add-data-absensi'}
+              className="px-6 py-2 bg-primary rounded-lg text-slate-700">
+              Tambah Data Absensi
+            </Link>
+          )}
         </div>
         <div className="w-full flex items-center gap-x-6">
           <div className="w-full flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
