@@ -7,31 +7,30 @@ import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
 import useDataStudent from '../store/store.student';
 import { useRouter } from 'next/navigation';
-import useStoreResultStudent from '../store/store.datas.result.student';
 import Pagination from './pagination';
 import { NotifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
+import useStoreDatas from '../store/store.datas';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [datas, setDatas] = useState<IStudentDataModel[]>();
   const [studentForm, setStudentForm] = useDataStudent();
   const router = useRouter();
-  const [dataFiltered] = useStoreResultStudent();
+  const [dataFiltered] = useStoreDatas();
   const notifyService = new NotifyService();
-
-  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.students || datas;
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.students || datas;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getStudent();
-      setDatas(res?.data);
-    };
-    if (!datas) {
-      notifyService.showLoading();
-      fetchData();
-    }
-    Swal.close();
+    notifyService.showLoading();
+    fetchData();
   }, []);
+
+  const fetchData = () => {
+    getStudent().then((res) => {
+      setDatas(res?.data);
+      Swal.close();
+    });
+  };
 
   const handleDelete = async (id: string) => {
     notifyService.confirmationDelete().then(async (res) => {
@@ -68,64 +67,62 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   };
 
   return (
-    <div>
-      <Table className="mt-5">
-        <TableHead>
-          <TableRow>
-            <TableHeaderCell>Nama Siswa</TableHeaderCell>
-            <TableHeaderCell>Kelas</TableHeaderCell>
-            <TableHeaderCell>NISN</TableHeaderCell>
-            <TableHeaderCell>Status Pembayaran</TableHeaderCell>
-            <TableHeaderCell>Edit</TableHeaderCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {result?.length === 0 ? (
-            <div className="min-h-[300px] px-12">
-              <div className=" mt-40">
-                <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>
-              </div>
+    <Table className="mt-5 min-h-[400px] relative pb-14">
+      <TableHead>
+        <TableRow>
+          <TableHeaderCell>Nama Siswa</TableHeaderCell>
+          <TableHeaderCell>Kelas</TableHeaderCell>
+          <TableHeaderCell>NISN</TableHeaderCell>
+          <TableHeaderCell>Status Pembayaran</TableHeaderCell>
+          <TableHeaderCell>Edit</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {result?.length === 0 ? (
+          <div className="min-h-[300px] px-12">
+            <div className=" mt-40">
+              <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>
             </div>
-          ) : (
-            result?.map((data: IStudentDataModel) => (
-              <TableRow key={data.id}>
-                <TableCell
-                  onClick={() => handleDetail(data?.id)}
-                  className="hover:font-bold transition-all cursor-pointer">
-                  {data.name}
-                </TableCell>
-                <TableCell>{data.className}</TableCell>
-                <TableCell>{data.nisn}</TableCell>
-                <TableCell>
-                  {data?.status_payment === 'Lunas' ? (
-                    <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
-                      Lunas
-                    </button>
-                  ) : (
-                    <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
-                      Tertunda
-                    </button>
-                  )}
-                </TableCell>
-                <TableCell className="py-4">
-                  <div className="flex gap-x-4 items-center">
-                    <button onClick={() => handleUpdate(data)}>
-                      <PiPencilLineLight />
-                    </button>
-                    <button onClick={() => handleDelete(data?.id)}>
-                      <FaTrash className="text-red-400" />
-                    </button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))
-          )}
-        </TableBody>
-      </Table>
-      <nav className="my-6 px-4 absolute right-0 bottom-16">
+          </div>
+        ) : (
+          result?.map((data: IStudentDataModel) => (
+            <TableRow key={data.id}>
+              <TableCell
+                onClick={() => handleDetail(data?.id)}
+                className="hover:font-bold transition-all cursor-pointer">
+                {data.name}
+              </TableCell>
+              <TableCell>{data.className}</TableCell>
+              <TableCell>{data.nisn}</TableCell>
+              <TableCell>
+                {data?.status_payment === 'Lunas' ? (
+                  <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
+                    Lunas
+                  </button>
+                ) : (
+                  <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
+                    Tertunda
+                  </button>
+                )}
+              </TableCell>
+              <TableCell className="py-4">
+                <div className="flex gap-x-4 items-center">
+                  <button onClick={() => handleUpdate(data)}>
+                    <PiPencilLineLight />
+                  </button>
+                  <button onClick={() => handleDelete(data?.id)}>
+                    <FaTrash className="text-red-400" />
+                  </button>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))
+        )}
+      </TableBody>
+      <nav className="absolute right-0 bottom-0">
         <Pagination />
       </nav>
-    </div>
+    </Table>
   );
 };
 

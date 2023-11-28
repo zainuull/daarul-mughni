@@ -19,19 +19,18 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [dataFiltered] = useStoreDatas();
   const notifyService = new NotifyService();
   const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.events || datas;
-  console.log(datas);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getEvents();
-      setDatas(res?.events);
-    };
-    if (!datas) {
-      notifyService.showLoading();
-      fetchData();
-    }
-    Swal.close();
+    notifyService.showLoading();
+    fetchData();
   }, []);
+
+  const fetchData = () => {
+    getEvents().then((res) => {
+      setDatas(res?.events);
+      Swal.close();
+    });
+  };
 
   const handleDelete = async (id: string) => {
     notifyService.confirmationDelete().then(async (res) => {
@@ -63,8 +62,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   };
 
   return (
-    <div>
-      <Table className="mt-5">
+      <Table className="mt-5 min-h-[500px] relative pb-14">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Nama Kegiatan</TableHeaderCell>
@@ -116,11 +114,10 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
             ))
           )}
         </TableBody>
+        <nav className="absolute right-0 bottom-0">
+          <Pagination />
+        </nav>
       </Table>
-      <nav className="my-6 px-4 absolute right-0 bottom-16">
-        <Pagination />
-      </nav>
-    </div>
   );
 };
 

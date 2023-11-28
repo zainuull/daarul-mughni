@@ -21,16 +21,16 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.teachers || datas;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getTeachers();
-      setDatas(res?.data);
-    };
-    if (!datas) {
-      notifyService.showLoading();
-      fetchData();
-    }
-    Swal.close();
+    notifyService.showLoading();
+    fetchData();
   }, []);
+
+  const fetchData = () => {
+    getTeachers().then((res) => {
+      setDatas(res?.data);
+      Swal.close();
+    });
+  };
 
   const handleDelete = async (id: string) => {
     notifyService.confirmationDelete().then(async (res) => {
@@ -61,60 +61,58 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   };
 
   return (
-    <>
-      <Table className="mt-5">
-        <TableHead>
-          <TableRow>
-            <TableHeaderCell>Nama Guru</TableHeaderCell>
-            <TableHeaderCell>Jabatan</TableHeaderCell>
-            <TableHeaderCell>NIP</TableHeaderCell>
-            <TableHeaderCell>Status</TableHeaderCell>
-            <TableHeaderCell>Edit</TableHeaderCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {result?.length === 0 ? (
-            <div className="min-h-[300px] px-12">
-              <div className=" mt-40">
-                <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>
-              </div>
+    <Table className="mt-5 min-h-[400px] relative pb-14">
+      <TableHead>
+        <TableRow>
+          <TableHeaderCell>Nama Guru</TableHeaderCell>
+          <TableHeaderCell>Jabatan</TableHeaderCell>
+          <TableHeaderCell>NIP</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+          <TableHeaderCell>Edit</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {result?.length === 0 ? (
+          <div className="min-h-[300px] px-12">
+            <div className=" mt-40">
+              <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>
             </div>
-          ) : (
-            result?.map((data: any) => (
-              <TableRow key={data.id}>
-                <TableCell>{data.name}</TableCell>
-                <TableCell>{data.positionName}</TableCell>
-                <TableCell>{data.nip}</TableCell>
-                <TableCell>
-                  {data?.status == 'Aktif' ? (
-                    <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
-                      Aktif
-                    </button>
-                  ) : (
-                    <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
-                      Pending
-                    </button>
-                  )}
-                </TableCell>
-                <TableCell className="py-4">
-                  <div className="flex gap-x-4 items-center">
-                    <button onClick={() => handleUpdate(data)}>
-                      <PiPencilLineLight />
-                    </button>
-                    <button onClick={() => handleDelete(data?.id)}>
-                      <FaTrash className="text-red-400" />
-                    </button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))
-          )}
-        </TableBody>
-      </Table>
-      <nav className="my-6 px-4 absolute right-0 bottom-16">
+          </div>
+        ) : (
+          result?.map((data: any) => (
+            <TableRow key={data.id}>
+              <TableCell>{data.name}</TableCell>
+              <TableCell>{data.positionName}</TableCell>
+              <TableCell>{data.nip}</TableCell>
+              <TableCell>
+                {data?.status == 'Aktif' ? (
+                  <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
+                    Aktif
+                  </button>
+                ) : (
+                  <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
+                    Pending
+                  </button>
+                )}
+              </TableCell>
+              <TableCell className="py-4">
+                <div className="flex gap-x-4 items-center">
+                  <button onClick={() => handleUpdate(data)}>
+                    <PiPencilLineLight />
+                  </button>
+                  <button onClick={() => handleDelete(data?.id)}>
+                    <FaTrash className="text-red-400" />
+                  </button>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))
+        )}
+      </TableBody>
+      <nav className="absolute right-0 bottom-0">
         <Pagination />
       </nav>
-    </>
+    </Table>
   );
 };
 

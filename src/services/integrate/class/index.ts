@@ -15,8 +15,6 @@ export const getClass = async (): Promise<IClassModel> => {
 };
 
 export const getClassByLevel = async (levelName: string): Promise<any> => {
-  console.log(levelName);
-
   try {
     if (levelName) {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/level/${levelName}`);

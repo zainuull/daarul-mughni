@@ -8,33 +8,40 @@ import useStoreDatas from './store/store.datas';
 import { getEvents, getEventsByCategories } from '@/services/api';
 import DropdownFilter from './add-data-activity/component/dropdown/dropdown.filter';
 import Header from '../../components/header/header';
+import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
 
 const DataActivity = () => {
   const [eventForm] = useDataEvents();
   const [datas, setDatas] = useStoreDatas();
   const [searchInput, setSearchInput] = useState('');
+  const notifyService = new NotifyService();
 
   useEffect(() => {
-    const fetchDataByPosition = async () => {
-      const res = await getEventsByCategories(eventForm?.filter_by);
-      setDatas(res?.data);
-    };
-    fetchDataByPosition();
+    notifyService.showLoading();
+    if (eventForm?.filter_by) {
+      fetchDataByPosition();
+    }
+    fetchData();
   }, [eventForm?.filter_by]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getEvents();
+  const fetchDataByPosition = () => {
+    getEventsByCategories(eventForm?.filter_by).then((res) => {
+      setDatas(res?.data);
+      Swal.close();
+    });
+  };
+
+  const fetchData = async () => {
+    getEvents().then((res) => {
       setDatas(res?.events);
-    };
-    fetchData();
-  }, []);
+      Swal.close();
+    });
+  };
 
   const handleSearch = (e) => {
     setSearchInput(e.target.value);
   };
-
-  // console.log(datas);
 
   // Ensure that datas is an array before attempting to filter
   const filteredDatas = Array.isArray(datas)

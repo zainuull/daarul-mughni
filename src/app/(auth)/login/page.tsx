@@ -3,11 +3,13 @@ import Image from 'next/image';
 import logo from '../../../../public/assets/logoDM.jpeg';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
-import { push } from 'firebase/database';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const LoginPage = () => {
   const router = useRouter();
+  const [error, setError] = useState('');
+
   const handleLogin = async (e: any) => {
     e?.preventDefault();
     try {
@@ -17,10 +19,12 @@ const LoginPage = () => {
         password: e.target.password.value,
         callbackUrl: '/dashboard',
       });
+
       if (!res.error) {
         router.push('/dashboard');
       } else {
         console.log(res.error);
+        setError('Email atau password salah');
       }
     } catch (error) {
       console.log(error);
@@ -64,6 +68,7 @@ const LoginPage = () => {
                 Register
               </Link>
             </p>
+            {error && <p className="text-red-500 font-medium">{error}</p>}
           </form>
         </div>
       </div>

@@ -2,6 +2,6 @@ import { atom, useAtom } from 'jotai';
 const value: any = {};
 const store = atom(value);
 
-const useStoreResultStudent = () => useAtom(store);
+const useStoreDatasResult = () => useAtom(store);
 
-export default useStoreResultStudent;
+export default useStoreDatasResult;

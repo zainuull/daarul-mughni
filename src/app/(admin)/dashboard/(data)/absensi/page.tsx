@@ -4,7 +4,6 @@ import TableList from './table/table';
 import Link from 'next/link';
 import DropdownFilterLevel from './add-data-absensi/component/dropdown/dropdown.filter.level';
 import DropdownFilterClass from './add-data-absensi/component/dropdown/dropdown.filter.class';
-import useStoreResultAbsensi from './store/store.datas.result.absensi';
 import useDataAbsensi from './store/store.absensi';
 import { useEffect, useState } from 'react';
 import { getAbsensi, getAbsensiByClass } from '@/services/api';
@@ -12,6 +11,8 @@ import Header from '../../components/header/header';
 import useStoreDatas from './store/store.datas';
 import { useSession } from 'next-auth/react';
 import { IUser } from '@/model/user';
+import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
 
 const DataAbsensi = () => {
   const [absensiForm] = useDataAbsensi();
@@ -19,22 +20,29 @@ const DataAbsensi = () => {
   const [searchInput, setSearchInput] = useState('');
   const { data } = useSession();
   const user: IUser = data?.user;
+  const notifyServices = new NotifyService();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getAbsensiByClass(absensiForm?.filter_by_class);
-      setDatas(res?.data);
-    };
+    notifyServices.showLoading();
+    if (absensiForm?.filter_by_class) {
+      fetchDataByClass();
+    }
     fetchData();
   }, [absensiForm?.filter_by_class]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getAbsensi();
+  const fetchDataByClass = () => {
+    getAbsensiByClass(absensiForm?.filter_by_class).then((res) => {
       setDatas(res?.data);
-    };
-    fetchData();
-  }, []);
+      Swal.close();
+    });
+  };
+
+  const fetchData = () => {
+    getAbsensi().then((res) => {
+      setDatas(res?.data);
+      Swal.close();
+    });
+  };
 
   const handleSearch = (e) => {
     setSearchInput(e.target.value);

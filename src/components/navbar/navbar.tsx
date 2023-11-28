@@ -14,6 +14,7 @@ const Navbar = () => {
   const pathanme = usePathname();
   const { data } = useSession();
   const user: IUser = data?.user;
+  console.log(user);
 
   // Handle navigation
   const handleNav = () => {

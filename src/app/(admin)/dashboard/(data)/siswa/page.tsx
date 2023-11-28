@@ -7,33 +7,38 @@ import { useEffect, useState } from 'react';
 import { getStudent, getStudentByClass } from '@/services/api';
 import useDataStudent from './store/store.student';
 import DropdownFilterLevel from './add-data-siswa/component/dropdown/dropdown.filter.level';
-import useStoreResultStudent from './store/store.datas.result.student';
 import Header from '../../components/header/header';
 import useStoreDatas from './store/store.datas';
+import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
 
 const DataGuru = () => {
   const [studentForm] = useDataStudent();
-  const [, setResult] = useStoreResultStudent();
   const [datas, setDatas] = useStoreDatas();
   const [searchInput, setSearchInput] = useState('');
+  const notifyService = new NotifyService();
 
   useEffect(() => {
+    notifyService.showLoading();
     if (studentForm?.filter_by_level) {
-      const fetchData = async () => {
-        const res = await getStudentByClass(studentForm?.filter_by_class);
-        setResult(res?.data);
-      };
-      fetchData();
+      fetchDataByLevel();
     }
+    fetchData();
   }, [studentForm?.filter_by_class]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getStudent();
+  const fetchDataByLevel = () => {
+    getStudentByClass(studentForm?.filter_by_class).then((res) => {
       setDatas(res?.data);
-    };
-    fetchData();
-  }, []);
+      Swal.close();
+    });
+  };
+
+  const fetchData = () => {
+    getStudent().then((res) => {
+      setDatas(res?.data);
+      Swal.close();
+    });
+  };
 
   const handleSearch = (e) => {
     setSearchInput(e.target.value);

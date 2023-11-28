@@ -8,27 +8,36 @@ import { getTeacherByPosition, getTeachers } from '@/services/api';
 import { useEffect, useState } from 'react';
 import useStoreDatas from './store/store.datas';
 import Header from '../../components/header/header';
+import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
 
 const DataGuru = () => {
   const [teacherForm] = useDataTeacher();
   const [datas, setDatas] = useStoreDatas();
   const [searchInput, setSearchInput] = useState('');
+  const notifyService = new NotifyService();
 
   useEffect(() => {
-    const fetchDataByPosition = async () => {
-      const res = await getTeacherByPosition(teacherForm?.filter_by);
-      setDatas(res?.data);
-    };
-    fetchDataByPosition();
+    notifyService.showLoading();
+    if (teacherForm?.filter_by) {
+      fetchDataByPosition();
+    }
+    fetchData();
   }, [teacherForm?.filter_by]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getTeachers();
+  const fetchDataByPosition = async () => {
+    getTeacherByPosition(teacherForm?.filter_by).then((res) => {
       setDatas(res?.data);
-    };
-    fetchData();
-  }, []);
+      Swal.close();
+    });
+  };
+
+  const fetchData = () => {
+    getTeachers().then((res) => {
+      setDatas(res?.data);
+      Swal.close();
+    });
+  };
 
   const handleSearch = (e) => {
     setSearchInput(e.target.value);
