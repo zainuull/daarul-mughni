@@ -5,13 +5,11 @@ import './globals.css';
 import Navbar from '@/components/navbar/navbar';
 import Footer from '@/components/footer/footer';
 import { usePathname } from 'next/navigation';
+import { SessionProvider } from 'next-auth/react';
 
-const poppins = Poppins({ subsets: ['latin'], weight: ['100','200','300','400', '500', '600'] });
+const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600'] });
 
-const disabledDashboardPaths = [
-  '/dashboard',
-  '/test'
-];
+const disabledDashboardPaths = ['/dashboard', '/test'];
 
 function isNavigationEnabled(pathname: string): boolean {
   return !disabledDashboardPaths.some((disabledPath) => pathname.startsWith(disabledPath));
@@ -24,9 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {navigationEnabled && <Navbar />}
-        {children}
-        {navigationEnabled && <Footer />}
+        <SessionProvider>
+          {navigationEnabled && <Navbar />}
+          {children}
+          {navigationEnabled && <Footer />}
+        </SessionProvider>
       </body>
     </html>
   );
