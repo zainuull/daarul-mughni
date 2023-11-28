@@ -2,17 +2,29 @@
 import Image from 'next/image';
 import logo from '../../../../public/assets/logoDM.jpeg';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { push } from 'firebase/database';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
-  const handleLogin = (e: any) => {
+  const router = useRouter();
+  const handleLogin = async (e: any) => {
     e?.preventDefault();
-    fetch('/api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({
+    try {
+      const res = await signIn('credentials', {
+        redirect: false,
         email: e.target.email.value,
         password: e.target.password.value,
-      }),
-    });
+        callbackUrl: '/dashboard',
+      });
+      if (!res.error) {
+        router.push('/dashboard');
+      } else {
+        console.log(res.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

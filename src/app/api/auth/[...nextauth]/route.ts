@@ -54,6 +54,10 @@ const authOptions: NextAuthOptions = {
       return session;
     },
   },
+  pages: {
+    signIn: '/login',
+    signOut: '/register',
+  },
 };
 
 const handler = NextAuth(authOptions);

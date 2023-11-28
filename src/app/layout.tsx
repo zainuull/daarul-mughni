@@ -9,7 +9,7 @@ import { SessionProvider } from 'next-auth/react';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600'] });
 
-const disabledDashboardPaths = ['/dashboard', '/test'];
+const disabledDashboardPaths = ['/dashboard', '/login', '/register'];
 
 function isNavigationEnabled(pathname: string): boolean {
   return !disabledDashboardPaths.some((disabledPath) => pathname.startsWith(disabledPath));
