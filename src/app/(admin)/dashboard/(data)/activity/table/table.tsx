@@ -9,14 +9,16 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import useStoreDatas from '../store/store.datas';
 import Pagination from './pagination';
 import useDataEvents from '../store/store.events';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
+import ToastNotify from '@/services/notify/toast';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const router = useRouter();
   const [eventForm, setEventForm] = useDataEvents();
   const [dataFiltered, setDatas] = useStoreDatas();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService();
   const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.events;
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     notifyService.confirmationDelete().then((res) => {
       if (res) {
         deleteEvent(id).then(() => {
+          toastService.successDelete();
           fetchData();
         });
       }
@@ -115,6 +118,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
       <nav className="absolute right-0 bottom-0">
         <Pagination />
       </nav>
+      <ToastNotify />
     </Table>
   );
 };

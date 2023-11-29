@@ -3,13 +3,14 @@ import { useState } from 'react';
 import useDataStudent from '../../../../store/store.student';
 import { useRouter } from 'next/navigation';
 import { updateStudent } from '@/services/api';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 
 const Submit = ({ id }: { id: string }) => {
   const [error, setError] = useState('');
   const [datas, setDatas] = useDataStudent();
   const router = useRouter();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService();
 
   const handleSubmit = async () => {
     if (!datas.name || !datas.guardian_name) {
@@ -20,7 +21,7 @@ const Submit = ({ id }: { id: string }) => {
     notifyService.confirmationUpdate().then(async (res) => {
       if (res) {
         await updateStudent(id, datas);
-        notifyService.successUpdate();
+        toastService.successUpdate();
         router.push('/dashboard/siswa');
         setDatas({
           ...datas,

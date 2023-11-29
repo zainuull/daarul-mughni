@@ -3,13 +3,14 @@ import { postTeacher } from '@/services/api';
 import useDataTeacher from '../../../store/store.teacher';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 
 const Submit = () => {
   const [error, setError] = useState('');
   const [formTeacher, setFormTeacher] = useDataTeacher();
   const router = useRouter();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService()
   let obj = { name: '' };
 
   const handleSubmit = async () => {
@@ -27,7 +28,7 @@ const Submit = () => {
 
     notifyService.confirmationCreate().then(async (res) => {
       if (res) {
-        notifyService.successCreate();
+        toastService.successCreate();
         await postTeacher(formTeacher);
         router.push('/dashboard/guru');
         setFormTeacher({

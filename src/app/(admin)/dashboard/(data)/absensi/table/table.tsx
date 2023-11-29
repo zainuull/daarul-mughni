@@ -16,9 +16,10 @@ import { deleteAbsensi, getAbsensi } from '@/services/api';
 import { IAbsensiDataModel } from '@/model/model';
 import useDataAbsensi from '../store/store.absensi';
 import { useRouter } from 'next/navigation';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStoreDatas from '../store/store.datas';
+import ToastNotify from '@/services/notify/toast';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [status, setStatus] = useState(false);
@@ -26,6 +27,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const router = useRouter();
   const [dataFiltered, setDatas] = useStoreDatas();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService();
   const result = resultSearchData.length > 0 ? resultSearchData : dataFiltered?.absensi;
 
   useEffect(() => {
@@ -43,6 +45,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     notifyService.confirmationDelete().then((res) => {
       if (res) {
         deleteAbsensi(id).then(() => {
+          toastService.successDelete();
           fetchData();
         });
       }
@@ -134,6 +137,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
       <nav className="absolute right-0 bottom-0">
         <Pagination />
       </nav>
+      <ToastNotify />
     </Table>
   );
 };

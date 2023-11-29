@@ -3,13 +3,14 @@ import { updateTeacher } from '@/services/api';
 import useDataTeacher from '../../../../store/store.teacher';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 
 const Submit = ({ id }: { id: string }) => {
   const [error, setError] = useState('');
   const [formTeacher, setFormTeacher] = useDataTeacher();
   const router = useRouter();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService()
 
   const handleSubmit = async () => {
     if (!formTeacher.name || !formTeacher.email) {
@@ -19,7 +20,7 @@ const Submit = ({ id }: { id: string }) => {
     }
     notifyService.confirmationUpdate().then(async (res) => {
       if (res) {
-        notifyService.successUpdate();
+        toastService.successUpdate();
         await updateTeacher(id, formTeacher);
         router.push('/dashboard/guru');
         setFormTeacher({

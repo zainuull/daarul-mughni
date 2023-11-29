@@ -3,13 +3,14 @@ import { useState } from 'react';
 import useDataStudent from '../../../store/store.student';
 import { useRouter } from 'next/navigation';
 import { postStudent } from '@/services/api';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 
 const Submit = () => {
   const [error, setError] = useState('');
   const [formStudent, setFormStudent] = useDataStudent();
   const router = useRouter();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService();
 
   const handleSubmit = async () => {
     if (!formStudent.name || !formStudent.guardian_name) {
@@ -20,7 +21,7 @@ const Submit = () => {
     notifyService.confirmationCreate().then(async (res) => {
       if (res) {
         await postStudent(formStudent);
-        notifyService.successCreate();
+        toastService.successCreate();
         router.push('/dashboard/siswa');
         setFormStudent({
           ...formStudent,

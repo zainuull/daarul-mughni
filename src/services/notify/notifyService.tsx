@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 export class NotifyService {
   emptyQrcField() {
@@ -127,6 +128,47 @@ export class NotifyService {
     Swal.fire({
       title: 'Login Sukses',
       icon: 'success',
+    });
+  };
+}
+
+export class ToastifyService {
+  successUpdate = () => {
+    toast.success('Data berhasil di perbarui', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  };
+
+  successCreate = () => {
+    toast.success('Data berhasil di buat', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  };
+
+  successDelete = () => {
+    toast.success('Data berhasil di hapus', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
     });
   };
 }

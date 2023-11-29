@@ -6,6 +6,7 @@ import Navbar from '@/components/navbar/navbar';
 import Footer from '@/components/footer/footer';
 import { usePathname } from 'next/navigation';
 import { SessionProvider } from 'next-auth/react';
+import 'react-toastify/dist/ReactToastify.css';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600'] });
 

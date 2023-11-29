@@ -2,13 +2,14 @@
 import {updateAbsensi } from '@/services/api';
 import useDataAbsensi from '../../../../store/store.absensi';
 import { useRouter } from 'next/navigation';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 import { useState } from 'react';
 const Submit = ({ id }: { id: string }) => {
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
   const router = useRouter();
   const [error, setError] = useState('');
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService()
 
   const handleSubmit = async () => {
     if (!formAbsensi?.code_class || !formAbsensi?.lesson) {
@@ -19,7 +20,7 @@ const Submit = ({ id }: { id: string }) => {
     notifyService.confirmationUpdate().then(async (res) => {
       if (res) {
         await updateAbsensi(id, formAbsensi);
-        notifyService.successUpdate()
+        toastService.successUpdate();
         router.push('/dashboard/absensi');
         setFormAbsensi({
           ...formAbsensi,

@@ -1,9 +1,8 @@
 'use client';
-import useForm from '@/app/(admin)/dashboard/store/store.status';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import useDataEvents from '../../../../store/store.events';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 import { putEvent } from '@/services/api';
 
 const Submit = ({ id }: { id: string }) => {
@@ -11,6 +10,7 @@ const Submit = ({ id }: { id: string }) => {
   const [form] = useDataEvents();
   const router = useRouter();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService()
 
   const handleSubmit = async () => {
     if (!form?.title || !form?.description) {
@@ -21,7 +21,7 @@ const Submit = ({ id }: { id: string }) => {
     notifyService.confirmationUpdate().then(async (res) => {
       if (res) {
         await putEvent(id, form);
-        notifyService.successUpdate();
+        toastService.successUpdate();
         router.push('/dashboard/activity');
       }
     });

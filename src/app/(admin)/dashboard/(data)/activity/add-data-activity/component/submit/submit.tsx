@@ -3,13 +3,14 @@ import { postEvent } from '@/services/api';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import useDataEvents from '../../../store/store.events';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 
 const Submit = () => {
   const [error, setError] = useState('');
   const [form, setForm] = useDataEvents();
   const router = useRouter();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService()
   
 
   const handleSubmit = async () => {
@@ -21,7 +22,7 @@ const Submit = () => {
     notifyService.confirmationCreate().then(async (res) => {
       if (res) {
         await postEvent(form);
-        notifyService.successCreate();
+        toastService.successCreate();
         router.push('/dashboard/activity');
         setForm({
           ...form,

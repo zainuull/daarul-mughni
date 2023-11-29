@@ -8,15 +8,17 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import useDataStudent from '../store/store.student';
 import { useRouter } from 'next/navigation';
 import Pagination from './pagination';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStoreDatas from '../store/store.datas';
+import ToastNotify from '@/services/notify/toast';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [studentForm, setStudentForm] = useDataStudent();
   const router = useRouter();
   const [dataFiltered, setDatas] = useStoreDatas();
   const notifyService = new NotifyService();
+  const toastService = new ToastifyService();
   const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.students;
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     notifyService.confirmationDelete().then((res) => {
       if (res) {
         deleteStudent(id).then(() => {
+          toastService.successDelete();
           fetchData();
         });
       }
@@ -120,6 +123,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
       <nav className="absolute right-0 bottom-0">
         <Pagination />
       </nav>
+      <ToastNotify />
     </Table>
   );
 };
