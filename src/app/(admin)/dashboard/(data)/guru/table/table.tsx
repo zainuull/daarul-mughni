@@ -13,16 +13,14 @@ import { NotifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
-  const [datas, setDatas] = useState<ITeacherDataModel[]>();
   const router = useRouter();
   const [teacherForm, setTeacherForm] = useDataTeacher();
-  const [dataFiltered, setStore] = useStoreDatas();
+  const [dataFiltered, setDatas] = useStoreDatas();
   const notifyService = new NotifyService();
-  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.teachers || datas;
-  
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.teachers ;
+
   useEffect(() => {
     notifyService.showLoading();
-    fetchData();
   }, []);
 
   const fetchData = () => {

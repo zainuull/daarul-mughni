@@ -20,8 +20,11 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
 
 export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
   const id = params.id;
+
   try {
     const data = await prisma.absensi.delete({ where: { id } });
+    console.log(data);
+
     if (!data) {
       return NextResponse.json({ status_code: 404, message: `Data can't be deleted`, data: [] });
     }

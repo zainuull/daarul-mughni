@@ -21,23 +21,31 @@ import Swal from 'sweetalert2';
 import useStoreDatas from '../store/store.datas';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
-  const [data, setData] = useState<IAbsensiDataModel[]>();
   const [status, setStatus] = useState(false);
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
   const router = useRouter();
-  const [dataFiltered] = useStoreDatas();
+  const [dataFiltered, setDatas] = useStoreDatas();
   const notifyService = new NotifyService();
-  const result = resultSearchData.length > 0 ? resultSearchData : dataFiltered?.absensi ?? data;
+  const result = resultSearchData.length > 0 ? resultSearchData : dataFiltered?.absensi;
 
   useEffect(() => {
     notifyService.showLoading();
-    fetchData();
   }, []);
 
   const fetchData = () => {
     getAbsensi().then((res) => {
-      setData(res?.data);
+      setDatas(res?.data);
       Swal.close();
+    });
+  };
+
+  const handleDelete = (id: string) => {
+    notifyService.confirmationDelete().then((res) => {
+      if (res) {
+        deleteAbsensi(id).then(() => {
+          fetchData();
+        });
+      }
     });
   };
 
@@ -45,16 +53,6 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     if (id) {
       setStatus(!status);
     }
-  };
-
-  const handleDelete = async (id: string) => {
-    notifyService.confirmationDelete().then(async (res) => {
-      if (res) {
-        await deleteAbsensi(id);
-        const res = await getAbsensi();
-        setData(res?.data);
-      }
-    });
   };
 
   const handleUpdate = async (data: IAbsensiDataModel) => {

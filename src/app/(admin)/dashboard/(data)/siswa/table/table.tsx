@@ -13,16 +13,14 @@ import Swal from 'sweetalert2';
 import useStoreDatas from '../store/store.datas';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
-  const [datas, setDatas] = useState<IStudentDataModel[]>();
   const [studentForm, setStudentForm] = useDataStudent();
   const router = useRouter();
-  const [dataFiltered] = useStoreDatas();
+  const [dataFiltered, setDatas] = useStoreDatas();
   const notifyService = new NotifyService();
-  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.students || datas;
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.students;
 
   useEffect(() => {
     notifyService.showLoading();
-    fetchData();
   }, []);
 
   const fetchData = () => {
@@ -32,12 +30,12 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     });
   };
 
-  const handleDelete = async (id: string) => {
-    notifyService.confirmationDelete().then(async (res) => {
+  const handleDelete = (id: string) => {
+    notifyService.confirmationDelete().then((res) => {
       if (res) {
-        await deleteStudent(id);
-        const fetchData = await getStudent();
-        setDatas(fetchData?.data);
+        deleteStudent(id).then(() => {
+          fetchData();
+        });
       }
     });
   };

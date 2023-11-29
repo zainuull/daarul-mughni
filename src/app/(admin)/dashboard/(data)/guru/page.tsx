@@ -46,7 +46,7 @@ const DataGuru = () => {
   };
 
   // Ensure that datas is an array before attempting to filter
-  const filteredDatas = Array.isArray(datas)
+  const searchDatas = Array.isArray(datas)
     ? datas.filter((data) => data?.name?.toLowerCase().includes(searchInput.toLowerCase()))
     : [];
 
@@ -77,7 +77,7 @@ const DataGuru = () => {
           </div>
           <DropdownFilter />
         </div>
-        <TableList resultSearchData={filteredDatas} />
+        <TableList resultSearchData={searchDatas} />
       </div>
     </div>
   );
