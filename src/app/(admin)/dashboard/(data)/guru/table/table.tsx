@@ -16,10 +16,10 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [datas, setDatas] = useState<ITeacherDataModel[]>();
   const router = useRouter();
   const [teacherForm, setTeacherForm] = useDataTeacher();
-  const [dataFiltered] = useStoreDatas();
+  const [dataFiltered, setStore] = useStoreDatas();
   const notifyService = new NotifyService();
   const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered.teachers || datas;
-
+  
   useEffect(() => {
     notifyService.showLoading();
     fetchData();
@@ -32,12 +32,12 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     });
   };
 
-  const handleDelete = async (id: string) => {
-    notifyService.confirmationDelete().then(async (res) => {
+  const handleDelete = (id: string) => {
+    notifyService.confirmationDelete().then((res) => {
       if (res) {
-        await deleteTeacher(id);
-        const fetchData = await getTeachers();
-        setDatas(fetchData?.data);
+        deleteTeacher(id).then(() => {
+          fetchData();
+        });
       }
     });
   };
@@ -79,7 +79,8 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
             </div>
           </div>
         ) : (
-          result?.map((data: any) => (
+          result &&
+          result?.map((data: ITeacherDataModel) => (
             <TableRow key={data.id}>
               <TableCell>{data.name}</TableCell>
               <TableCell>{data.positionName}</TableCell>

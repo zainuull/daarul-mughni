@@ -10,12 +10,14 @@ import useStoreDatas from './store/store.datas';
 import Header from '../../components/header/header';
 import { NotifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
+import useStatus from '../../store/store.status';
 
 const DataGuru = () => {
   const [teacherForm] = useDataTeacher();
   const [datas, setDatas] = useStoreDatas();
   const [searchInput, setSearchInput] = useState('');
   const notifyService = new NotifyService();
+  const [menu] = useStatus();
 
   useEffect(() => {
     notifyService.showLoading();
@@ -49,8 +51,11 @@ const DataGuru = () => {
     : [];
 
   return (
-    <div className="w-full">
-      <div className="p-10 w-full h-full flex flex-col gap-y-4 ">
+    <div className="w-full flex justify-end">
+      <div
+        className={`p-10 ${
+          menu ? 'w-[1100px]' : 'w-3/4'
+        } h-full flex flex-col gap-y-4 transition-all duration-700`}>
         <Header title="Data Guru" />
         <div className="w-full flex items-center justify-between mt-2">
           <h2 className="font-light uppercase">Data Guru / Pengajar</h2>

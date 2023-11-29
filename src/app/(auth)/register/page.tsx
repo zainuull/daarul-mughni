@@ -4,12 +4,12 @@ import Link from 'next/link';
 
 const RegisterPage = () => {
   return (
-    <div className="w-full h-screen relative ">
-      <div className="w-full h-full flex flex-col justify-center items-center px-4">
-        <div className="shadow-xl w-full min-h-4/5 rounded-lg flex flex-col gap-y-2 items-center p-10 lg:w-2/5">
+    <div className="w-full h-screen relative">
+      <div className="w-full h-full flex flex-col justify-center items-center px-4 bg-gray-100">
+        <div className="shadow-xl w-full min-h-4/5 rounded-lg flex flex-col gap-y-2 items-center p-10 lg:w-2/5 bg-white">
           <h1 className="text-xl font-medium">Buat Akun</h1>
           <p className="text-xs text-center lg:text-sm">
-            Ruang Admin Pondok Pesantreen Daarul Mughni Al - Maaliki
+            Ruang Admin Pondok Pesantreen <br/>Daarul Mughni Al - Maaliki
           </p>
           <Image src={logo} alt="logo" className="w-[80px] my-2 rounded-md" />
           <form className="w-full flex flex-col gap-y-6">

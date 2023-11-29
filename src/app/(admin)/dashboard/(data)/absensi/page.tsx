@@ -13,6 +13,7 @@ import { useSession } from 'next-auth/react';
 import { IUser } from '@/model/user';
 import { NotifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
+import useStatus from '../../store/store.status';
 
 const DataAbsensi = () => {
   const [absensiForm] = useDataAbsensi();
@@ -21,6 +22,7 @@ const DataAbsensi = () => {
   const { data } = useSession();
   const user: IUser = data?.user;
   const notifyServices = new NotifyService();
+  const [menu] = useStatus();
 
   useEffect(() => {
     notifyServices.showLoading();
@@ -54,8 +56,11 @@ const DataAbsensi = () => {
     : [];
 
   return (
-    <div className="w-full">
-      <div className="p-10 w-full h-full flex flex-col gap-y-4 ">
+    <div className="w-full flex justify-end">
+      <div
+        className={`p-10 ${
+          menu ? 'w-[1100px]' : 'w-3/4'
+        } h-full flex flex-col gap-y-4 transition-all duration-700`}>
         <Header title="Absensi" />
         <div className="w-full flex items-center justify-between mt-2">
           <h2 className="font-light uppercase">Sesi Absensi</h2>

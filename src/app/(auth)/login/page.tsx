@@ -5,13 +5,17 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { NotifyService } from '@/services/notify/notifyService';
 
 const LoginPage = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const notifyService = new NotifyService();
 
   const handleLogin = async (e: any) => {
     e?.preventDefault();
+    setIsLoading(true);
     try {
       const res = await signIn('credentials', {
         redirect: false,
@@ -21,6 +25,8 @@ const LoginPage = () => {
       });
 
       if (!res.error) {
+        setIsLoading(false);
+        notifyService.successLogin();
         router.push('/dashboard');
       } else {
         console.log(res.error);
@@ -33,11 +39,11 @@ const LoginPage = () => {
 
   return (
     <div className="w-full h-screen relative ">
-      <div className="w-full h-full flex flex-col justify-center items-center px-4">
-        <div className="shadow-xl w-full h-4/5 rounded-lg flex flex-col gap-y-2 items-center p-10 lg:w-2/5">
+      <div className="w-full h-full flex flex-col justify-center items-center px-4 bg-gray-100">
+        <div className="shadow-xl w-full h-4/5 rounded-lg flex flex-col gap-y-2 items-center p-10 lg:w-2/5 bg-white">
           <h1 className="text-xl font-medium">Selamat Datang</h1>
           <p className="text-xs text-center lg:text-sm">
-            Ruang Admin Pondok Pesantreen Daarul Mughni Al - Maaliki
+            Ruang Admin Pondok Pesantren <br/>Daarul Mughni Al - Maaliki
           </p>
           <Image src={logo} alt="logo" className="w-[80px] my-2 rounded-md" />
           <form onSubmit={(e) => handleLogin(e)} className="w-full flex flex-col gap-y-6">
@@ -60,14 +66,8 @@ const LoginPage = () => {
               />
             </div>
             <button className="w-full h-10 rounded-lg bg-amber-500 text-white mt-4 hover:bg-amber-600 transition-all font-semibold">
-              Login
+              {isLoading ? 'Loading...' : 'Login'}
             </button>
-            <p className="text-xs mt-2">
-              Dont have any account ?
-              <Link href={'/register'} className="font-semibold">
-                Register
-              </Link>
-            </p>
             {error && <p className="text-red-500 font-medium">{error}</p>}
           </form>
         </div>

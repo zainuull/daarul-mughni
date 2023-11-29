@@ -91,6 +91,22 @@ export class NotifyService {
     });
   };
 
+  confirmationLogout = () => {
+    return new Promise((resolve) => {
+      Swal.fire({
+        title: 'Apakah Anda Yakin Ingin Keluar ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#fbbf24',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `<span id="btn-confirm">Saya Yakin !</span>`,
+        cancelButtonText: `<span id="btn-cancel">Batalkan</span>`,
+      }).then((result) => {
+        resolve(result.isConfirmed);
+      });
+    });
+  };
+
   successCreate = () => {
     Swal.fire({
       title: 'Sukses',
@@ -103,6 +119,13 @@ export class NotifyService {
     Swal.fire({
       title: 'Sukses',
       text: 'Data Anda Berhasil Terupdate',
+      icon: 'success',
+    });
+  };
+
+  successLogin = () => {
+    Swal.fire({
+      title: 'Login Sukses',
       icon: 'success',
     });
   };

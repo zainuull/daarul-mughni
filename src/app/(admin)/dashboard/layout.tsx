@@ -1,32 +1,26 @@
-'use client';
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Menu from './components/menu/menu';
 import NavbarDashboard from './components/navbar/navbar';
-import { useRouter } from 'next/navigation';
 
-const LayoutPage = ({ children }: { children: React.ReactNode }) => {
-  const { status } = useSession();
+const LayoutPage = async ({ children }: { children: React.ReactNode }) => {
+  const session = await getServerSession(authOptions);
 
-  const router = useRouter();
-
-  if (status == 'unauthenticated') {
-    router.push('/login');
+  if (!session) {
+    redirect('/login');
   }
 
   return (
-    <>
-      {status === 'authenticated' && (
-        <div className="w-full min-h-screen">
-          <div className="w-full h-full flex relative">
-            <Menu />
-            <div className="w-full flex flex-col">
-              <NavbarDashboard />
-              <div className="w-full h-full">{children}</div>
-            </div>
-          </div>
+    <div className="w-full min-h-screen">
+      <div className="w-full h-full flex relative">
+        <Menu />
+        <div className="w-full flex flex-col">
+          <NavbarDashboard />
+          <div className="w-full h-full">{children}</div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
