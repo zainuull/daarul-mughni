@@ -72,6 +72,10 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     });
   };
 
+  const handleDetail = (id: string) => {
+    router.push(`/dashboard/absensi/detail/${id}`);
+  };
+
   return (
     <Table className="mt-5 min-h-[400px] relative pb-14">
       <TableHead>
@@ -95,7 +99,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
         ) : (
           result?.map((data: IAbsensiDataModel) => (
             <TableRow key={data.id}>
-              <TableCell>{data.code_class}</TableCell>
+              <TableCell onClick={() => handleDetail(data?.id) }className="hover:font-bold transition-all cursor-pointer">{data.code_class}</TableCell>
               <TableCell>{data.className}</TableCell>
               <TableCell>{data.teacher}</TableCell>
               <TableCell className="flex datas-center gap-x-2">

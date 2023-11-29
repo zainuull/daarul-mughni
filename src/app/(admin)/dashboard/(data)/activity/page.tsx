@@ -52,7 +52,7 @@ const DataActivity = () => {
 
   return (
     <div className="w-full flex justify-end">
-      <div className={`p-10 ${menu ? 'w-[1100px]' : 'w-3/4'} h-full flex flex-col gap-y-4 transition-all duration-700`}>
+      <div className={`p-10 ${menu ? 'w-[1300px]' : 'w-3/4'} h-full flex flex-col gap-y-4 transition-all duration-700`}>
         <Header title="Laporan Kegiatan" />
         <div className="w-full flex items-center justify-between mt-2">
           <h2 className="font-light uppercase">Daftar Kegiatan</h2>

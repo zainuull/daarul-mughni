@@ -1,32 +1,58 @@
+'use client';
 import { getStudentById } from '@/services/api';
 import Image from 'next/image';
-import foto from '../../../../../../../../public/assets/logoDM.jpeg';
-import { MdOutlineDriveFileRenameOutline } from 'react-icons/md';
+import { MdOutlineDriveFileRenameOutline, MdOutlinePhone, MdOutlinePayment } from 'react-icons/md';
 import { LuKeySquare } from 'react-icons/lu';
 import { CiCalendarDate } from 'react-icons/ci';
 import { BsGenderMale } from 'react-icons/bs';
 import { HiOutlineMapPin } from 'react-icons/hi2';
+import { FcBusinessman } from 'react-icons/fc';
+import { FaRegCalendarCheck, FaEnvelopeOpenText } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
+import useStatus from '@/app/(admin)/dashboard/store/store.status';
+import Header from '@/app/(admin)/dashboard/components/header/header';
+// import useStatus from '@/app/(admin)/dashboard/store/store.status';
 
-const DetailStudent = async ({ params }: { params: { id: string } }) => {
+const DetailStudent = ({ params }: { params: { id: string } }) => {
   const id = params.id;
-  const res = await getStudentById(id);
-  const data: any = res?.data || [];
+  const [data, setData]: any = useState();
+  const notifyService = new NotifyService();
+  const [menu] = useStatus();
+
+  useEffect(() => {
+    notifyService.showLoading();
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    getStudentById(id).then((res) => {
+      setData(res?.data);
+      Swal.close();
+    });
+  };
+
+  // const [menu] = useStatus();
 
   return (
-    <div className="w-full">
-      <div className="p-10 w-full h-full flex flex-col gap-y-4 ">
-        <h1 className="text-2xl uppercase font-medium">Detail Data Siswa</h1>
-        <div className="w-full min-h-[600px] border-2 border-black rounded-lg p-4 flex justify-between gap-x-6">
-          <div className="w-1/2 min-h-full flex flex-col gap-y-2 p-2 rounded-lg">
-            <div className="w-full h-1/2 p-2 flex justify-center">
-              <Image src={''} alt={data?.name} width={250} height={300} className="bg-cover bg-blue-600 p-2 rounded-lg" />
+    <div className="w-full flex justify-end">
+      <div
+        className={`p-10 ${
+          menu ? 'w-[1300px]' : 'w-3/4'
+        } h-full flex flex-col gap-y-4 transition-all duration-700`}>
+        <Header title="Detail Data Siswa" />
+        <div className="w-full min-h-[600px] border-2 border-black rounded-lg p-4 flex flex-col gap-y-6 bg-slate-50">
+          <div className="w-full h-1/2 flex items-center  gap-x-4">
+            <div className="w-1/2 h-1/2 flex flex-col gap-y-2 rounded-lg">
+              <div className="w-full h-1/2 p-4 flex justify-center items-center bg-blue-400 rounded-lg">
+                {/* <Image src={''} alt={data?.name} width={250} height={300} className="bg-cover " /> */}
+                <FcBusinessman size={200} />
+              </div>
             </div>
-            <div className="w-full h-1/2 bg-gray-300 p-2"></div>
-          </div>
-          <div className="w-3/4 min-h-full flex flex-col gap-y-2 bg-gray-200 p-2 font-semibold rounded-lg">
-            <div className="w-full h-1/2 p-2 flex flex-col gap-y-2">
-              <div className="w-full flex items-center gap-x-2">
-                <div className="w-1/2 p-4 flex flex-col gap-y-2">
+            <div className="w-1/2 h-1/2 flex flex-col gap-y-2 shadow-lg rounded-lg bg-white p-4">
+              <div className="w-full flex gap-x-2">
+                <div className="w-1/2 flex flex-col gap-y-4">
                   <div className="flex items-center gap-x-2">
                     <MdOutlineDriveFileRenameOutline size={20} />
                     <h1>Nama</h1>
@@ -47,17 +73,47 @@ const DetailStudent = async ({ params }: { params: { id: string } }) => {
                     <HiOutlineMapPin size={20} />
                     <h1>Alamat</h1>
                   </div>
+                  <div className="flex items-center gap-x-2">
+                    <MdOutlinePhone size={20} />
+                    <h1>No Hp (Wali)</h1>
+                  </div>
                 </div>
-                <div className="w-1/2 p-4 flex flex-col gap-y-2">
+                <div className="w-1/2 flex flex-col gap-y-4">
                   <h1> : {data?.name}</h1>
                   <h1> : {data?.nisn}</h1>
                   <h1> : {data?.date_of_birth}</h1>
                   <h1> : {data?.gender}</h1>
                   <h1> : {data?.address || '-'}</h1>
+                  <h1> : {data?.guardian_telp || '-'}</h1>
                 </div>
               </div>
             </div>
-            <div className="w-full h-1/2 bg-gray-300 p-2"></div>
+          </div>
+          <div className="w-full h-1/2 flex items-center  gap-x-4">
+            <div className="w-1/2 h-20 flex items-center justify-center gap-x-6 shadow-lg bg-white">
+              <FaRegCalendarCheck size={35} />
+              <button className="px-6 py-2 bg-blue-400 rounded-lg hover:bg-blue-500 transition-all duration-300">
+                Cek Kehadiran
+              </button>
+            </div>
+            <div className="w-1/2 h-20 flex items-center justify-center gap-x-6 shadow-lg bg-white">
+              <MdOutlinePayment size={35} />
+              <button className="px-6 py-2 bg-green-400 rounded-lg hover:bg-green-500 transition-all duration-300">
+                Mutasi Pembayaran
+              </button>
+            </div>
+          </div>
+          <div className="w-full h-44 flex flex-col gap-x-4 shadow-lg p-4 px-8 bg-white">
+            <div className="flex items-center gap-x-2">
+              <FaEnvelopeOpenText />
+              <h1>Catatan : </h1>
+            </div>
+            <div>
+              <textarea
+                className="w-full h-32 p-2 bg-transparent outline-none"
+                placeholder="Catatan siswa"
+              />
+            </div>
           </div>
         </div>
       </div>

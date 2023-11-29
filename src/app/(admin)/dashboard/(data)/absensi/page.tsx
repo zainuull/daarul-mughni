@@ -59,7 +59,7 @@ const DataAbsensi = () => {
     <div className="w-full flex justify-end">
       <div
         className={`p-10 ${
-          menu ? 'w-[1100px]' : 'w-3/4'
+          menu ? 'w-[1300px]' : 'w-3/4'
         } h-full flex flex-col gap-y-4 transition-all duration-700`}>
         <Header title="Absensi" />
         <div className="w-full flex items-center justify-between mt-2">
