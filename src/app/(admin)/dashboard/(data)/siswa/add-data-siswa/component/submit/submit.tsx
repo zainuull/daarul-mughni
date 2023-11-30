@@ -34,10 +34,11 @@ const Submit = () => {
           guardian_name: '',
           guardian_status: '',
           guardian_telp: '',
-          guardian_email: '',
           status_payment: '',
           address: '',
           className: '',
+          classTypeName: '',
+          levelName: '',
         });
       }
     });

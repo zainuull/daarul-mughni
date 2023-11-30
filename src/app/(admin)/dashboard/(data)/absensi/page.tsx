@@ -51,8 +51,8 @@ const DataAbsensi = () => {
   };
 
   // Ensure that datas is an array before attempting to filter
-  const filteredDatas = Array.isArray(datas)
-    ? datas.filter((data) => data?.code_class?.toLowerCase().includes(searchInput.toLowerCase()))
+  const resultSearchData = Array.isArray(datas)
+    ? datas.filter((data) => data?.classTypeName?.toLowerCase().includes(searchInput.toLowerCase()))
     : [];
 
   return (
@@ -85,7 +85,7 @@ const DataAbsensi = () => {
           <DropdownFilterLevel />
           <DropdownFilterClass />
         </div>
-        <TableList resultSearchData={filteredDatas} />
+        <TableList resultSearchData={resultSearchData} />
       </div>
     </div>
   );

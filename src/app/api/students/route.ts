@@ -15,6 +15,7 @@ export const POST = async (req: Request) => {
     status_payment,
     address,
     className,
+    classTypeName,
     levelName,
   } = await req.json();
   if (!name && !guardian_telp) {
@@ -36,6 +37,7 @@ export const POST = async (req: Request) => {
         status_payment,
         address,
         className,
+        classTypeName,
         levelName,
       },
     });

@@ -47,9 +47,10 @@ const DataGuru = () => {
   };
 
   // Ensure that datas is an array before attempting to filter
-  const filteredDatas = Array.isArray(datas)
+  const resultSearchData = Array.isArray(datas)
     ? datas.filter((data) => data?.name?.toLowerCase().includes(searchInput.toLowerCase()))
     : [];
+
 
   return (
     <div className="w-full flex justify-end">
@@ -79,7 +80,7 @@ const DataGuru = () => {
           <DropdownFilterLevel />
           <DropdownFilterClass />
         </div>
-        <TableList resultSearchData={filteredDatas} />
+        <TableList resultSearchData={resultSearchData} />
       </div>
     </div>
   );

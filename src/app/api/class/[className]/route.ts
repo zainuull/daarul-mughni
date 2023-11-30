@@ -6,7 +6,7 @@ export const GET = async (req: Request, { params }: { params: { className: strin
   try {
     const data = await prisma.class.findUnique({
       where: { className },
-      include: { students: true, code_classes: true, absensi: true },
+      include: { students: true, classType: true, absensi: true },
     });
     if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });

@@ -2,7 +2,7 @@
 import Select from 'react-select';
 import useDataAbsensi from '../../../../store/store.absensi';
 import { useEffect, useState } from 'react';
-import { getCodeClassByClassName } from '@/services/api';
+import { getClassTypeByClassName } from '@/services/api';
 
 const DropdownCodeClass = () => {
   const [data, setData] = useDataAbsensi();
@@ -10,12 +10,11 @@ const DropdownCodeClass = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getCodeClassByClassName(data?.className);
+      const res = await getClassTypeByClassName(data?.className);
       setCodeClass(res?.data?.code_classes);
     };
     fetchData();
   }, [data?.className]);
-
 
   const Option = Array.isArray(codeClass)
     ? codeClass.map((obj: { id: string; name: string }) => ({
@@ -27,7 +26,7 @@ const DropdownCodeClass = () => {
   const handle = (option: any) => {
     setData({
       ...data,
-      code_class: option?.label,
+      classTypeName: option?.label,
     });
   };
 
@@ -35,7 +34,7 @@ const DropdownCodeClass = () => {
     <Select
       closeMenuOnSelect={true}
       options={Option}
-      value={Option?.find((option) => option.label === data?.code_class) || ''}
+      value={Option?.find((option) => option.label === data?.classTypeName) || ''}
       isClearable={true}
       onChange={handle}
       placeholder="Pilih kode kelas"

@@ -125,10 +125,12 @@ model Student {
     guardian_email String?
     status_payment String?
     address String?
-    className String?
-    class Class? @relation(fields: [className], references: [className])
     levelName String?
     level Level? @relation(fields: [levelName], references: [levelName])
+    className String?
+    class Class? @relation(fields: [className], references: [className])
+    classTypeName String?
+    classType ClassType? @relation(fields: [classTypeName], references: [classTypeName])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -137,7 +139,7 @@ model Student {
 model Class {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   className  String   @unique
-  code_classes CodeClass[]
+  classType ClassType[]
   levelName  String?
   level      Level?   @relation(fields: [levelName], references: [levelName])
   students   Student[]
@@ -145,12 +147,13 @@ model Class {
   studentIDs String[] @db.ObjectId
 }
 
-model CodeClass {
+model ClassType {
    id         String   @id @default(auto()) @map("_id") @db.ObjectId
-   name String
+   classTypeName String @unique
    className String?
    class Class? @relation(fields: [className], references: [className])
-   absensi      Absensi?   @relation(fields: [name], references: [code_class])
+   students Student[]
+   absensi  Absensi[]
 }
 
 model Lesson {
@@ -176,8 +179,8 @@ model Absensi {
    levelName String 
    className String 
    class      Class?   @relation(fields: [className], references: [className])
-   code_class String @unique
-   code_classes CodeClass[]
+   classTypeName String?
+   classType ClassType?   @relation(fields: [classTypeName], references: [classTypeName])
    teacher String
    lesson String
    start_time String

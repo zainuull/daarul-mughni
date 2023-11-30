@@ -9,10 +9,10 @@ const Submit = () => {
   const router = useRouter();
   const [error, setError] = useState('');
   const notifyService = new NotifyService();
-  const toastService = new ToastifyService()
+  const toastService = new ToastifyService();
 
   const handleSubmit = async () => {
-    if (!formAbsensi?.code_class || !formAbsensi?.lesson) {
+    if (!formAbsensi?.classTypeName || !formAbsensi?.lesson) {
       setError('Kode kelas dan pelajaran wajib di isi');
       notifyService.emptyInputField();
       return;
@@ -25,7 +25,7 @@ const Submit = () => {
         setFormAbsensi({
           ...formAbsensi,
           levelName: '',
-          code_class: '',
+          classTypeName: '',
           className: '',
           teacher: '',
           lesson: '',

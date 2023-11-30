@@ -1,6 +1,6 @@
-export const getCodeClass = async (): Promise<any> => {
+export const getClassType = async (): Promise<any> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/code_class`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/class-type`);
     if (res.ok) {
       const classes = await res.json();
       return classes;
@@ -11,13 +11,13 @@ export const getCodeClass = async (): Promise<any> => {
   return null;
 };
 
-export const getCodeClassByClassName = async (className: string): Promise<any> => {
+export const getClassTypeByClassName = async (className: string): Promise<any> => {
   try {
     if (className) {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/class/${className}`);
       if (res.ok) {
-        const codeClass = await res.json();
-        return codeClass;
+        const classType = await res.json();
+        return classType;
       }
     }
   } catch (error) {

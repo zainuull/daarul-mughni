@@ -3,7 +3,7 @@ import { atom, useAtom } from 'jotai';
 const store = atom({
   id: '',
   levelName: '',
-  code_class: '',
+  classTypeName: '',
   className: '',
   teacher: '',
   lesson: '',

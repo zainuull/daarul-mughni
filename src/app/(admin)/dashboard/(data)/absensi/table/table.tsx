@@ -28,7 +28,8 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [dataFiltered, setDatas] = useStoreDatas();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-  const result = resultSearchData.length > 0 ? resultSearchData : dataFiltered?.absensi;
+  const result =
+    resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.absensi;
 
   useEffect(() => {
     notifyService.showLoading();
@@ -63,7 +64,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     setFormAbsensi({
       ...formAbsensi,
       levelName: data?.levelName,
-      code_class: data?.code_class,
+      classTypeName: data?.classTypeName,
       className: data?.className,
       teacher: data?.teacher,
       lesson: data?.lesson,
@@ -97,9 +98,14 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
             </div>
           </div>
         ) : (
+          result &&
           result?.map((data: IAbsensiDataModel) => (
             <TableRow key={data.id}>
-              <TableCell onClick={() => handleDetail(data?.id) }className="hover:font-bold transition-all cursor-pointer">{data.code_class}</TableCell>
+              <TableCell
+                onClick={() => handleDetail(data?.id)}
+                className="hover:font-bold transition-all cursor-pointer">
+                {data.classTypeName}
+              </TableCell>
               <TableCell>{data.className}</TableCell>
               <TableCell>{data.teacher}</TableCell>
               <TableCell className="flex datas-center gap-x-2">

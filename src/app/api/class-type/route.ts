@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export const GET = async () => {
   try {
-    const data = await prisma.codeClass.findMany();
+    const data = await prisma.classType.findMany();
     if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
     }

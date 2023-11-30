@@ -15,7 +15,7 @@ export const GET = async () => {
 };
 
 export const POST = async (req: Request) => {
-  const { levelName, className, code_class, teacher, lesson, start_time, end_time } =
+  const { levelName, className, classTypeName, teacher, lesson, start_time, end_time } =
     await req.json();
 
   try {
@@ -23,7 +23,7 @@ export const POST = async (req: Request) => {
       data: {
         levelName,
         className,
-        code_class,
+        classTypeName,
         teacher,
         lesson,
         start_time,

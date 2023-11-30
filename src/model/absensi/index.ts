@@ -7,10 +7,11 @@ export interface IAbsensiModel {
 export interface IAbsensiDataModel {
   id?: string;
   levelName?: string;
-  code_class?: string;
+  classTypeName?: string;
   className?: string;
   teacher?: string;
   lesson?: string;
   start_time?: string;
   end_time?: string;
+  absensi: any[];
 }

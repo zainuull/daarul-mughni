@@ -1,6 +1,7 @@
 'use client';
 import useDataStudent from '../../../../store/store.student';
 import DropdownClass from '../../dropdown/dropdown.class';
+import DropdownClassType from '../../dropdown/dropdown.class type';
 import DropdownGender from '../../dropdown/dropdown.gender';
 import DropdownLevel from '../../dropdown/dropdown.level';
 
@@ -43,6 +44,10 @@ const DataPersonal = () => {
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Kelas</h1>
         <DropdownClass />
+      </div>
+      <div className="flex flex-col gap-y-2 col-span-1">
+        <h1 className="uppercase">Kode Kelas</h1>
+        <DropdownClassType />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Jenis Kelamin</h1>

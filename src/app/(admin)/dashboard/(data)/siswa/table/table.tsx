@@ -20,6 +20,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
   const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.students;
+  console.log(resultSearchData);
 
   useEffect(() => {
     notifyService.showLoading();
@@ -55,7 +56,6 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
       guardian_name: data?.guardian_name,
       guardian_status: data?.guardian_status,
       guardian_telp: data?.guardian_telp,
-      guardian_email: data?.guardian_email,
       status_payment: data?.status_payment,
       address: data?.address,
       className: data?.className,
@@ -93,7 +93,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
                 className="hover:font-bold transition-all cursor-pointer">
                 {data.name}
               </TableCell>
-              <TableCell>{data.className}</TableCell>
+              <TableCell>{data.classTypeName}</TableCell>
               <TableCell>{data.nisn}</TableCell>
               <TableCell>
                 {data?.status_payment === 'Lunas' ? (
