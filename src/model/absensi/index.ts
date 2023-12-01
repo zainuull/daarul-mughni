@@ -13,5 +13,4 @@ export interface IAbsensiDataModel {
   lesson?: string;
   start_time?: string;
   end_time?: string;
-  absensi: any[];
 }
