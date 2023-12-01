@@ -89,6 +89,15 @@ const Navbar = () => {
             }`}>
             Kontak
           </Link>
+          {/* <Link
+            href="/test"
+            className={`${
+              pathanme === '/contact'
+                ? 'bg-white text-gray-800 px-4 py-2 rounded-md font-semibold transition-all'
+                : 'hover:text-gray-600 transition-all'
+            }`}>
+            Test
+          </Link> */}
           {user && (
             <Link
               href="/dashboard/guru"

@@ -11,10 +11,10 @@ export const getClassType = async (): Promise<any> => {
   return null;
 };
 
-export const getClassTypeByClassName = async (className: string): Promise<any> => {
+export const getClassTypeByClassName = async (string: string): Promise<any> => {
   try {
-    if (className) {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/class/${className}`);
+    if (string) {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/class/${string}`);
       if (res.ok) {
         const classType = await res.json();
         return classType;

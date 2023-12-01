@@ -7,6 +7,7 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
   try {
     const data = await prisma.absensi.findUnique({
       where: { id },
+      include: { classType: {include : {students : true}} },
     });
     if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
@@ -36,7 +37,7 @@ export const DELETE = async (req: Request, { params }: { params: { id: string } 
 };
 
 export const PUT = async (req: Request, { params }: { params: { id: string } }) => {
-  const { levelName, className, code_class, teacher, lesson, start_time, end_time } =
+  const { levelName, className, classTypeName, teacher, lesson, start_time, end_time } =
     await req.json();
   const id = params.id;
   try {
@@ -45,7 +46,7 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
       data: {
         levelName,
         className,
-        code_class,
+        classTypeName,
         teacher,
         lesson,
         start_time,

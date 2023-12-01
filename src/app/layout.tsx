@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600'] });
 
-const disabledDashboardPaths = ['/dashboard', '/login', '/register'];
+const disabledDashboardPaths = ['/dashboard', '/login', '/register', '/test'];
 
 function isNavigationEnabled(pathname: string): boolean {
   return !disabledDashboardPaths.some((disabledPath) => pathname.startsWith(disabledPath));
