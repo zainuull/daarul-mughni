@@ -52,7 +52,7 @@ const DataGlobal = ({ id }: { id: string }) => {
             <DropdownJazah />
           </div>
           <div className="flex flex-col gap-y-2 col-span-1">
-            <h1 className="uppercase">Level Pangkat / Golongan</h1>
+            <h1 className="uppercase">Jabatan</h1>
             <DropdownPosition />
           </div>
           <div className="flex flex-col gap-y-2 col-span-1">
@@ -60,7 +60,7 @@ const DataGlobal = ({ id }: { id: string }) => {
             <DropdownPeriodWork />
           </div>
           <div className="flex flex-col gap-y-2 col-span-1">
-            <h1 className="uppercase">Status)</h1>
+            <h1 className="uppercase">Status</h1>
             <DropdownStatus />
           </div>
         </div>

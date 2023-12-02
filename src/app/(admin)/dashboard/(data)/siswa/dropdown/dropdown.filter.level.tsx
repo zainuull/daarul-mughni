@@ -1,10 +1,10 @@
 'use client';
-import Select from 'react-select';
-import useDataStudent from '../../../store/store.student';
+import Select, { StylesConfig } from 'react-select';
 import { useEffect, useState } from 'react';
+import useDataStudent from '../store/store.student';
 import { getLevel } from '@/services/api';
 
-const DropdownLevel = () => {
+export const DropdownFilterLevel = () => {
   const [data, setData] = useDataStudent();
   const [level, setLevel] = useState([]);
 
@@ -24,20 +24,29 @@ const DropdownLevel = () => {
   const handleLevel = (option: any) => {
     setData({
       ...data,
-      levelName: option?.label,
+      filter_by_level: option?.label,
     });
+  };
+
+  // Define custom styles for the dropdown
+  const customStyles: StylesConfig = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: '#f1f5f9',
+      width: 185,
+      borderColor: 'black',
+    }),
   };
 
   return (
     <Select
       closeMenuOnSelect={true}
       options={levelOption}
-      value={levelOption.find((option) => option.label === data?.levelName) || ''}
+      value={levelOption.find((option) => option.label === data?.filter_by_level) || ''}
       isClearable={true}
       onChange={handleLevel}
-      placeholder="MTs"
+      styles={customStyles}
+      placeholder="Filter tingkatan"
     />
   );
 };
-
-export default DropdownLevel;

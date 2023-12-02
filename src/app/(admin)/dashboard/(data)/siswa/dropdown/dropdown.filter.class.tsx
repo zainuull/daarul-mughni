@@ -1,10 +1,10 @@
 'use client';
 import Select, { StylesConfig } from 'react-select';
-import useDataStudent from '../../../store/store.student';
+import useDataStudent from '../store/store.student';
 import { useEffect, useState } from 'react';
 import { getClassByLevel } from '@/services/api';
 
-const DropdownFilterClass = () => {
+export const DropdownFilterClass = () => {
   const [studentForm, setStudentForm] = useDataStudent();
   const [classes, setClasses] = useState([]);
 
@@ -54,5 +54,3 @@ const DropdownFilterClass = () => {
     />
   );
 };
-
-export default DropdownFilterClass;

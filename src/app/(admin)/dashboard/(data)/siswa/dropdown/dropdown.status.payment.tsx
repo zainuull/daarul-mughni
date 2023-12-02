@@ -1,8 +1,8 @@
 'use client';
 import Select from 'react-select';
-import useDataStudent from '../../../../store/store.student';
+import useDataStudent from '../store/store.student';
 
-const DropdownStatusPayment = () => {
+export const DropdownStatusPayment = () => {
   const [data, setData] = useDataStudent();
 
   const statusPaymentOption = [
@@ -28,5 +28,3 @@ const DropdownStatusPayment = () => {
     />
   );
 };
-
-export default DropdownStatusPayment;

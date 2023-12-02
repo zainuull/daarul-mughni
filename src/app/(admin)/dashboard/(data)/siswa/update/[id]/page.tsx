@@ -1,5 +1,4 @@
 'use client';
-import { NotifyService } from '@/services/notify/notifyService';
 import DataGlobal from './component/form/global/golbal';
 import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
@@ -8,12 +7,8 @@ import useStatus from '@/app/(admin)/dashboard/store/store.status';
 
 const UpdateDataSiswa = ({ params }: { params: { id: string } }) => {
   const id = params.id;
-  const notifyService = new NotifyService();
   const [menu] = useStatus();
 
-  if (!id) {
-    notifyService.showLoading();
-  }
 
   return (
     <div className="w-full flex justify-end min-h-screen p-6">

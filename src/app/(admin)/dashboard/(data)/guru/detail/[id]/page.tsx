@@ -1,5 +1,5 @@
 'use client';
-import { getStudentById } from '@/services/api';
+import {  getTeachersById } from '@/services/api';
 import Image from 'next/image';
 import { MdOutlineDriveFileRenameOutline, MdOutlinePhone, MdOutlinePayment } from 'react-icons/md';
 import { LuKeySquare } from 'react-icons/lu';
@@ -27,13 +27,12 @@ const DetailStudent = ({ params }: { params: { id: string } }) => {
   }, []);
 
   const fetchData = () => {
-    getStudentById(id).then((res) => {
+    getTeachersById(id).then((res) => {
       setData(res?.data);
       Swal.close();
     });
   };
 
-  console.log(data);
 
   return (
     <div className="w-full flex justify-end">
@@ -41,7 +40,7 @@ const DetailStudent = ({ params }: { params: { id: string } }) => {
         className={`p-10 ${
           menu ? 'w-[1300px]' : 'w-3/4'
         } h-full flex flex-col gap-y-4 transition-all duration-700`}>
-        <Header title="Detail Data Siswa" />
+        <Header title="Detail Data Guru" />
         <div className="w-full min-h-[600px] border-2 border-black rounded-lg p-4 flex flex-col gap-y-6 bg-slate-50">
           <div className="w-full h-1/2 flex items-center  gap-x-4">
             <div className="w-1/2 h-1/2 flex flex-col gap-y-2 rounded-lg">
@@ -59,7 +58,7 @@ const DetailStudent = ({ params }: { params: { id: string } }) => {
                   </div>
                   <div className="flex items-center gap-x-2">
                     <LuKeySquare size={20} />
-                    <h1>NISN</h1>
+                    <h1>NIP</h1>
                   </div>
                   <div className="flex items-center gap-x-2">
                     <CiCalendarDate size={20} />
@@ -71,20 +70,20 @@ const DetailStudent = ({ params }: { params: { id: string } }) => {
                   </div>
                   <div className="flex items-center gap-x-2">
                     <HiOutlineMapPin size={20} />
-                    <h1>Alamat</h1>
+                    <h1>Jabatan</h1>
                   </div>
                   <div className="flex items-center gap-x-2">
                     <MdOutlinePhone size={20} />
-                    <h1>No Hp (Wali)</h1>
+                    <h1>No Hp</h1>
                   </div>
                 </div>
                 <div className="w-1/2 flex flex-col gap-y-4">
                   <h1> : {data?.name}</h1>
-                  <h1> : {data?.nisn}</h1>
+                  <h1> : {data?.nip}</h1>
                   <h1> : {data?.date_of_birth}</h1>
                   <h1> : {data?.gender}</h1>
-                  <h1> : {data?.address || '-'}</h1>
-                  <h1> : {data?.guardian_telp || '-'}</h1>
+                  <h1> : {data?.positionName || '-'}</h1>
+                  <h1> : {data?.telp || '-'}</h1>
                 </div>
               </div>
             </div>

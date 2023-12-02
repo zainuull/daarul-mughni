@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Series Least Squares in JavaScript</title>
+</head>
+<body>
+
+<script>
+  // Fungsi untuk menghitung regresi linier dengan metode least squares
+  function calculateLeastSquares(data) {
+    const n = data.length;
+    const sumX = data.reduce((acc, entry) => acc + entry.tahun, 0);
+    const sumY = data.reduce((acc, entry) => acc + entry.harga, 0);
+    const sumXY = data.reduce((acc, entry) => acc + entry.tahun * entry.harga, 0);
+    const sumXSquare = data.reduce((acc, entry) => acc + entry.tahun ** 2, 0);
+    const b = (n * sumXY - sumX * sumY) / (n * sumXSquare - sumX ** 2);
+    const a = (sumY - b * sumX) / n;
+    return { a, b };
+  }
+
+  // Contoh data seri waktu
+  const data = [
+    { tahun: 2011, harga: 5 },
+    { tahun: 2012, harga: 13 },
+    { tahun: 2013, harga: 732 },
+    { tahun: 2014, harga: 321 },
+    { tahun: 2015, harga: 431 },
+    { tahun: 2016, harga: 966 },
+    { tahun: 2017, harga: 13880 },
+    { tahun: 2018, harga: 3693 },
+    { tahun: 2019, harga: 7168 },
+    { tahun: 2020, harga: 28993 },
+    { tahun: 2021, harga: 46214 },
+    { tahun: 2022, harga: 16528 }
+  ];
+
+  // Menghitung regresi linier
+  const { a, b } = calculateLeastSquares(data);
+
+  // Menampilkan hasil
+  console.log(`Intercept (a): ${a}`);
+  console.log(`Slope (b): ${b}`);
+
+  // Membuat prediksi untuk tahun selanjutnya
+  const tahunSelanjutnya = 2023;
+  const prediksi2023 = a + b * tahunSelanjutnya;
+  console.log(`Prediksi Harga untuk Tahun ${tahunSelanjutnya}: ${prediksi2023}`);
+
+  // Membuat prediksi untuk tahun 2024 dan 2025
+  const tahun2024 = 2024;
+  const prediksi2024 = a + b * tahun2024;
+  console.log(`Prediksi Harga untuk Tahun ${tahun2024}: ${prediksi2024}`);
+
+  const tahun2025 = 2025;
+  const prediksi2025 = a + b * tahun2025;
+  console.log(`Prediksi Harga untuk Tahun ${tahun2025}: ${prediksi2025}`);
+</script>
+
+</body>
+</html>

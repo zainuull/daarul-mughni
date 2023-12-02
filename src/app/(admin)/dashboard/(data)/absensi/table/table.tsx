@@ -13,23 +13,25 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import Pagination from './pagination';
 import { useEffect, useState } from 'react';
 import { deleteAbsensi, getAbsensi } from '@/services/api';
-import { IAbsensiDataModel } from '@/model/model';
+import { IAbsensiDataModel, IUser } from '@/model/model';
 import useDataAbsensi from '../store/store.absensi';
 import { useRouter } from 'next/navigation';
 import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStoreDatas from '../store/store.datas';
 import ToastNotify from '@/services/notify/toast';
+import { useSession } from 'next-auth/react';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
+  const { data } = useSession();
   const [status, setStatus] = useState(false);
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
   const router = useRouter();
   const [dataFiltered, setDatas] = useStoreDatas();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-  const result =
-    resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.absensi;
+  const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.absensi;
+  const user: IUser = data?.user;
 
   useEffect(() => {
     notifyService.showLoading();
@@ -87,7 +89,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
           <TableHeaderCell>Jam Mulai - Selesai</TableHeaderCell>
           <TableHeaderCell>Nama Pelajaran</TableHeaderCell>
           <TableHeaderCell>Status</TableHeaderCell>
-          <TableHeaderCell>Edit</TableHeaderCell>
+          {user?.role === 'administrator' && <TableHeaderCell>Edit</TableHeaderCell>}
         </TableRow>
       </TableHead>
       <TableBody>
@@ -129,17 +131,19 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
                   </button>
                 )}
               </TableCell>
-              <TableCell className="py-4">
-                <div className="flex gap-x-4 items-center">
-                  <button onClick={() => handleUpdate(data)}>
-                    <PiPencilLineLight />
-                  </button>
+              {user?.role === 'administrator' && (
+                <TableCell className="py-4">
+                  <div className="flex gap-x-4 items-center">
+                    <button onClick={() => handleUpdate(data)}>
+                      <PiPencilLineLight />
+                    </button>
 
-                  <button onClick={() => handleDelete(data?.id)}>
-                    <FaTrash className="text-red-400" />
-                  </button>
-                </div>
-              </TableCell>
+                    <button onClick={() => handleDelete(data?.id)}>
+                      <FaTrash className="text-red-400" />
+                    </button>
+                  </div>
+                </TableCell>
+              )}
             </TableRow>
           ))
         )}

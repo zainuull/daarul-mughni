@@ -1,8 +1,8 @@
 'use client';
 import Select from 'react-select';
-import useDataStudent from '../../../store/store.student';
+import useDataStudent from '../store/store.student';
 
-const DropdownGender = () => {
+export const DropdownGender = () => {
   const [data, setData] = useDataStudent();
 
   const genderOption = [
@@ -28,5 +28,3 @@ const DropdownGender = () => {
     />
   );
 };
-
-export default DropdownGender;

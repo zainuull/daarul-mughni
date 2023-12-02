@@ -61,6 +61,11 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     });
   };
 
+
+  const handleDetail = (id: string) => {
+    router.push(`/dashboard/guru/detail/${id}`);
+  };
+
   return (
     <Table className="mt-5 min-h-[400px] relative pb-14">
       <TableHead>
@@ -83,7 +88,11 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
           result &&
           result?.map((data: ITeacherDataModel) => (
             <TableRow key={data.id}>
-              <TableCell>{data.name}</TableCell>
+              <TableCell
+                onClick={() => handleDetail(data?.id)}
+                className="hover:font-bold transition-all cursor-pointer">
+                {data.name}
+              </TableCell>
               <TableCell>{data.positionName}</TableCell>
               <TableCell>{data.nip}</TableCell>
               <TableCell>

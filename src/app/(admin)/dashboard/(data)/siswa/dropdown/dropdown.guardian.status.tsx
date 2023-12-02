@@ -1,8 +1,8 @@
 'use client';
 import Select from 'react-select';
-import useDataStudent from '../../../store/store.student';
+import useDataStudent from '../store/store.student';
 
-const DropdownGuardianStatus = () => {
+export const DropdownGuardianStatus = () => {
   const [data, setData] = useDataStudent();
 
   const guardianStatusOption = [
@@ -29,5 +29,3 @@ const DropdownGuardianStatus = () => {
     />
   );
 };
-
-export default DropdownGuardianStatus;

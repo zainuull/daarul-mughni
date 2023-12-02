@@ -1,20 +1,27 @@
 'use client';
 import Select from 'react-select';
-import useDataStudent from '../../../store/store.student';
+import useDataStudent from '../store/store.student';
 import { useEffect, useState } from 'react';
 import { getClassTypeByClassName } from '@/services/api';
+import { NotifyService } from '@/services/notify/notifyService';
+import Swal from 'sweetalert2';
 
-const DropdownClassType = () => {
+export const DropdownClassType = () => {
   const [studentForm, setStudentForm] = useDataStudent();
   const [classType, setClassType] = useState([]);
+  const notifyService = new NotifyService();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getClassTypeByClassName(studentForm?.className);
-      setClassType(res?.data?.classType);
-    };
+    notifyService.showLoading();
     fetchData();
   }, [studentForm?.className]);
+
+  const fetchData = () => {
+    getClassTypeByClassName(studentForm?.className).then((res) => {
+      setClassType(res?.data?.classType);
+      Swal.close();
+    });
+  };
 
   // Check if datas is an array before using map
   const Option = Array.isArray(classType)
@@ -43,5 +50,3 @@ const DropdownClassType = () => {
     />
   );
 };
-
-export default DropdownClassType;

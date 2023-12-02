@@ -1,23 +1,31 @@
 'use client';
 import { useEffect, useState } from 'react';
 import useDataStudent from '../../../../../store/store.student';
-import DropdownGuardianStatus from '../../dropdown/dropdown.guardian.status';
-import DropdownJazah from '../../dropdown/dropdown.ijazah';
-import DropdownStatusPayment from '../../dropdown/dropdown.status.payment';
+import {
+  DropdownGuardianStatus,
+  DropdownJazah,
+  DropdownStatusPayment,
+} from '../../../../../dropdown/index';
 import { getStudentById } from '@/services/api';
 import Swal from 'sweetalert2';
+import { NotifyService } from '@/services/notify/notifyService';
 
 const DataGlobal = ({ id }: { id: string }) => {
   const [data, setData] = useDataStudent();
   const [defaultData, setDefaultData] = useState<any>();
+  const notifyService = new NotifyService();
+
   useEffect(() => {
-    const fetchDataById = async () => {
-      const res = await getStudentById(id);
-      setDefaultData(res?.data);
-    };
+    notifyService.showLoading();
     fetchDataById();
-    Swal.close()
   }, []);
+
+  const fetchDataById = () => {
+    getStudentById(id).then((res) => {
+      setDefaultData(res?.data);
+      Swal.close();
+    });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setData({

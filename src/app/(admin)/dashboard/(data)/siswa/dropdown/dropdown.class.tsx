@@ -1,13 +1,13 @@
 'use client';
 import Select from 'react-select';
-import useDataStudent from '../../../store/store.student';
+import useDataStudent from '../store/store.student';
 import { useEffect, useState } from 'react';
-import {  getClassByLevel } from '@/services/api';
+import { getClassByLevel } from '@/services/api';
 
-const DropdownClass = () => {
+export const DropdownClass = () => {
   const [studentForm, setStudentForm] = useDataStudent();
   const [classes, setClasses] = useState([]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await getClassByLevel(studentForm?.levelName);
@@ -43,5 +43,3 @@ const DropdownClass = () => {
     />
   );
 };
-
-export default DropdownClass;

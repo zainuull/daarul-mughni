@@ -20,7 +20,6 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
   const result = resultSearchData?.length > 0 ? resultSearchData : dataFiltered?.students;
-  console.log(resultSearchData);
 
   useEffect(() => {
     notifyService.showLoading();
@@ -60,6 +59,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
       address: data?.address,
       className: data?.className,
       levelName: data?.levelName,
+      classTypeName: data?.classTypeName,
     });
   };
 

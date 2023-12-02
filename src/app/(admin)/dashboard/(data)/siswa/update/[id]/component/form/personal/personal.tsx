@@ -1,24 +1,32 @@
 'use client';
 import { useEffect, useState } from 'react';
 import useDataStudent from '../../../../../store/store.student';
-import DropdownClass from '../../dropdown/dropdown.class';
-import DropdownGender from '../../dropdown/dropdown.gender';
+import {
+  DropdownClass,
+  DropdownGender,
+  DropdownLevel,
+  DropdownClassType,
+} from '../../../../../dropdown/index';
 import { getStudentById } from '@/services/api';
-import DropdownLevel from '../../dropdown/dropdown.level';
 import Swal from 'sweetalert2';
+import { NotifyService } from '@/services/notify/notifyService';
 
 const DataPersonal = ({ id }: { id: string }) => {
   const [data, setData] = useDataStudent();
   const [defaultData, setDefaultData] = useState<any>();
+  const notifyService = new NotifyService();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getStudentById(id);
-      setDefaultData(res?.data);
-    };
+    notifyService.showLoading();
     fetchData();
-    Swal.close();
   }, []);
+
+  const fetchData = () => {
+    getStudentById(id).then((res) => {
+      setDefaultData(res?.data);
+      Swal.close();
+    });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({
@@ -61,6 +69,10 @@ const DataPersonal = ({ id }: { id: string }) => {
           <div className="flex flex-col gap-y-2 col-span-1">
             <h1 className="uppercase">Kelas</h1>
             <DropdownClass />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Kode Kelas</h1>
+            <DropdownClassType />
           </div>
           <div className="flex flex-col gap-y-2 col-span-1">
             <h1 className="uppercase">Jenis Kelamin</h1>

@@ -1,9 +1,11 @@
 'use client';
 import useDataStudent from '../../../../store/store.student';
-import DropdownClass from '../../dropdown/dropdown.class';
-import DropdownClassType from '../../dropdown/dropdown.class type';
-import DropdownGender from '../../dropdown/dropdown.gender';
-import DropdownLevel from '../../dropdown/dropdown.level';
+import {
+  DropdownClass,
+  DropdownClassType,
+  DropdownGender,
+  DropdownLevel,
+} from '../../../../dropdown/index';
 
 const DataPersonal = () => {
   const [data, setData] = useDataStudent();

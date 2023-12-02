@@ -1,8 +1,10 @@
 'use client';
 import useDataStudent from '../../../../store/store.student';
-import DropdownGuardianStatus from '../../dropdown/dropdown.guardian.status';
-import DropdownJazah from '../../dropdown/dropdown.ijazah';
-import DropdownStatusPayment from '../../dropdown/dropdown.status.payment';
+import {
+  DropdownGuardianStatus,
+  DropdownJazah,
+  DropdownStatusPayment,
+} from '../../../../dropdown/index';
 
 const DataGlobal = () => {
   const [data, setData] = useDataStudent();

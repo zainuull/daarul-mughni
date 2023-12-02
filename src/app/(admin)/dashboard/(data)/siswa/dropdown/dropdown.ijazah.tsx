@@ -1,8 +1,8 @@
 'use client';
 import Select from 'react-select';
-import useDataStudent from '../../../../store/store.student';
+import useDataStudent from '../store/store.student';
 
-const DropdownJazah = () => {
+export const DropdownJazah = () => {
   const [data, setData] = useDataStudent();
 
   const ijazahOption = [
@@ -29,5 +29,3 @@ const DropdownJazah = () => {
     />
   );
 };
-
-export default DropdownJazah;
