@@ -8,7 +8,7 @@ import useStoreDatas from './store/store.datas';
 import { getEvents, getEventsByCategories } from '@/services/api';
 import DropdownFilter from './add-data-activity/component/dropdown/dropdown.filter';
 import Header from '../../components/header/header';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStatus from '../../store/store.status';
 
@@ -52,7 +52,10 @@ const DataActivity = () => {
 
   return (
     <div className="w-full flex justify-end">
-      <div className={`p-10 ${menu ? 'w-[1300px]' : 'w-3/4'} h-full flex flex-col gap-y-4 transition-all duration-700`}>
+      <div
+        className={`p-10 ${
+          menu ? 'w-[1300px]' : 'w-3/4'
+        } h-full flex flex-col gap-y-4 transition-all duration-700`}>
         <Header title="Laporan Kegiatan" />
         <div className="w-full flex items-center justify-between mt-2">
           <h2 className="font-light uppercase">Daftar Kegiatan</h2>

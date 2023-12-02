@@ -3,7 +3,7 @@ import Select from 'react-select';
 import useDataStudent from '../store/store.student';
 import { useEffect, useState } from 'react';
 import { getClassTypeByClassName } from '@/services/api';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
 
 export const DropdownClassType = () => {

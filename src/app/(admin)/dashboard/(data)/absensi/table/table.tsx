@@ -16,10 +16,10 @@ import { deleteAbsensi, getAbsensi } from '@/services/api';
 import { IAbsensiDataModel, IUser } from '@/model/model';
 import useDataAbsensi from '../store/store.absensi';
 import { useRouter } from 'next/navigation';
-import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStoreDatas from '../store/store.datas';
-import ToastNotify from '@/services/notify/toast';
+import ToastNotify from '@/core/services/notify/toast';
 import { useSession } from 'next-auth/react';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {

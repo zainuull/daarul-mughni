@@ -8,7 +8,7 @@ import { getStudent, getStudentByClass } from '@/services/api';
 import useDataStudent from './store/store.student';
 import Header from '../../components/header/header';
 import useStoreDatas from './store/store.datas';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStatus from '../../store/store.status';
 import { useRouter } from 'next/navigation';

@@ -9,9 +9,9 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import useStoreDatas from '../store/store.datas';
 import Pagination from './pagination';
 import useDataEvents from '../store/store.events';
-import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
-import ToastNotify from '@/services/notify/toast';
+import ToastNotify from '@/core/services/notify/toast';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const router = useRouter();

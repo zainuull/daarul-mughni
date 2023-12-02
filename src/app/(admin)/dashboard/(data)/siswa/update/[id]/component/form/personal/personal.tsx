@@ -9,7 +9,7 @@ import {
 } from '../../../../../dropdown/index';
 import { getStudentById } from '@/services/api';
 import Swal from 'sweetalert2';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 
 const DataPersonal = ({ id }: { id: string }) => {
   const [data, setData] = useDataStudent();

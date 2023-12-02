@@ -2,7 +2,7 @@
 import { postAbsensi } from '@/services/api';
 import useDataAbsensi from '../../../store/store.absensi';
 import { useRouter } from 'next/navigation';
-import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 import { useState } from 'react';
 const Submit = () => {
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();

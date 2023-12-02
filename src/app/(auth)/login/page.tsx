@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -43,7 +43,8 @@ const LoginPage = () => {
         <div className="shadow-xl w-full h-4/5 rounded-lg flex flex-col gap-y-2 items-center p-10 lg:w-2/5 bg-white">
           <h1 className="text-xl font-medium">Selamat Datang</h1>
           <p className="text-xs text-center lg:text-sm">
-            Ruang Admin Pondok Pesantren <br/>Daarul Mughni Al - Maaliki
+            Ruang Admin Pondok Pesantren <br />
+            Daarul Mughni Al - Maaliki
           </p>
           <Image src={logo} alt="logo" className="w-[80px] my-2 rounded-md" />
           <form onSubmit={(e) => handleLogin(e)} className="w-full flex flex-col gap-y-6">

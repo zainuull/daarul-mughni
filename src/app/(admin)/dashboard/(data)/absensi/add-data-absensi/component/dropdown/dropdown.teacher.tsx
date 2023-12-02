@@ -2,16 +2,18 @@
 import Select from 'react-select';
 import useDataAbsensi from '../../../store/store.absensi';
 import { useEffect, useState } from 'react';
-import { getClass, getTeachers } from '@/services/api';
+import useViewModel from '../../../../..//(data)/guru/(presentation)/vm/view-model';
+import useStoreDatasTeacher from '../../../../guru/(presentation)/store/store.datas';
 
 const DropdownTeacher = () => {
   const [data, setData] = useDataAbsensi();
-  const [teacher, setTeacher] = useState([]);
+  const { getTeachers } = useViewModel();
+  const [dataStore] = useStoreDatasTeacher();
+  const teacher = dataStore?.data;
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getTeachers();
-      setTeacher(res?.data);
+      await getTeachers();
     };
     fetchData();
   }, []);

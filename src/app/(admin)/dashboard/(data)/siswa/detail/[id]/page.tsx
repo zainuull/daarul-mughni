@@ -9,7 +9,7 @@ import { HiOutlineMapPin } from 'react-icons/hi2';
 import { FcBusinessman } from 'react-icons/fc';
 import { FaRegCalendarCheck, FaEnvelopeOpenText } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
 import Header from '@/app/(admin)/dashboard/components/header/header';

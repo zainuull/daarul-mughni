@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import useDataEvents from '../../../../store/store.events';
-import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 import { putEvent } from '@/services/api';
 
 const Submit = ({ id }: { id: string }) => {
@@ -10,7 +10,7 @@ const Submit = ({ id }: { id: string }) => {
   const [form] = useDataEvents();
   const router = useRouter();
   const notifyService = new NotifyService();
-  const toastService = new ToastifyService()
+  const toastService = new ToastifyService();
 
   const handleSubmit = async () => {
     if (!form?.title || !form?.description) {
@@ -38,7 +38,9 @@ const Submit = ({ id }: { id: string }) => {
   return (
     <div className="w-full flex justify-end items-center gap-x-6">
       {error && <p className="text-red-600">{error}</p>}
-      <button onClick={handleReset} className="w-1/3 font-medium py-2 bg-gray-200 rounded-md hover:shadow-md transition-all">
+      <button
+        onClick={handleReset}
+        className="w-1/3 font-medium py-2 bg-gray-200 rounded-md hover:shadow-md transition-all">
         Reset
       </button>
       <button

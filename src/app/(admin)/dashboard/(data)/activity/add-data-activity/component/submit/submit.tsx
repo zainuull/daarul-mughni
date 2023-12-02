@@ -3,15 +3,14 @@ import { postEvent } from '@/services/api';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import useDataEvents from '../../../store/store.events';
-import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 
 const Submit = () => {
   const [error, setError] = useState('');
   const [form, setForm] = useDataEvents();
   const router = useRouter();
   const notifyService = new NotifyService();
-  const toastService = new ToastifyService()
-  
+  const toastService = new ToastifyService();
 
   const handleSubmit = async () => {
     if (!form?.title || !form?.description) {

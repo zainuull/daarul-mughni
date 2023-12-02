@@ -8,10 +8,10 @@ import { PiPencilLineLight } from 'react-icons/pi';
 import useDataStudent from '../store/store.student';
 import { useRouter } from 'next/navigation';
 import Pagination from './pagination';
-import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStoreDatas from '../store/store.datas';
-import ToastNotify from '@/services/notify/toast';
+import ToastNotify from '@/core/services/notify/toast';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [studentForm, setStudentForm] = useDataStudent();

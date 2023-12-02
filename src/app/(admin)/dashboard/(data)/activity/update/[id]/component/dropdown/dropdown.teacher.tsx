@@ -1,17 +1,19 @@
 'use client';
 import Select from 'react-select';
-import { useEffect, useState } from 'react';
-import { getTeachers } from '@/services/api';
+import { useEffect } from 'react';
+import useViewModel from '../../../..//../guru/(presentation)/vm/view-model';
 import useDataEvents from '../../../../store/store.events';
+import useStoreDatasTeacher from '../../../../../guru/(presentation)/store/store.datas';
 
 const DropdownTeacher = () => {
+  const { getTeachers } = useViewModel();
   const [data, setData] = useDataEvents();
-  const [teacher, setTeacher] = useState([]);
+  const [dataStore] = useStoreDatasTeacher();
+  const teacher = dataStore?.data;
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getTeachers();
-      setTeacher(res?.data);
+      await getTeachers();
     };
     fetchData();
   }, []);

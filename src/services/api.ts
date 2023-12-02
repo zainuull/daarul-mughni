@@ -7,4 +7,3 @@ export * from './integrate/lesson/index';
 export * from './integrate/level/index';
 export * from './integrate/position/index';
 export * from './integrate/student/index';
-export * from './integrate/teacher/index';

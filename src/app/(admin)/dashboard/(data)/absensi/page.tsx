@@ -11,7 +11,7 @@ import Header from '../../components/header/header';
 import useStoreDatas from './store/store.datas';
 import { useSession } from 'next-auth/react';
 import { IUser } from '@/model/user';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStatus from '../../store/store.status';
 

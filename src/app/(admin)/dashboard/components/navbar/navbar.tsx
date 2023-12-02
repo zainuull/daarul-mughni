@@ -1,7 +1,7 @@
 'use client';
 import { signOut, useSession } from 'next-auth/react';
 import useStatus from '../../store/store.status';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 
 const NavbarDashboard = () => {
   const { data, status } = useSession();

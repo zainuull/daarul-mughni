@@ -1,5 +1,5 @@
 'use client';
-import { NotifyService } from '@/services/notify/notifyService';
+import { NotifyService } from '@/core/services/notify/notifyService';
 import DataPersonal from './component/form/personal/personal';
 import Submit from './component/submit/submit';
 import Header from '@/app/(admin)/dashboard/components/header/header';
@@ -16,7 +16,10 @@ const UpdateDataAbsensi = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="w-full flex justify-end min-h-screen p-6">
-      <div className={`${menu ? "w-[1200px]" : "w-3/4"} h-full flex flex-col transition-all duration-700`}>
+      <div
+        className={`${
+          menu ? 'w-[1200px]' : 'w-3/4'
+        } h-full flex flex-col transition-all duration-700`}>
         <Header title="Update Data Absensi" />
         <div className="w-full p-4 bg-white rounded-lg shadow-lg">
           <DataPersonal id={id} />

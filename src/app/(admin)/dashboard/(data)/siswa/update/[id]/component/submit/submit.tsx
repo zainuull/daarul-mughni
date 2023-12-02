@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useDataStudent from '../../../../store/store.student';
 import { useRouter } from 'next/navigation';
 import { updateStudent } from '@/services/api';
-import { NotifyService, ToastifyService } from '@/services/notify/notifyService';
+import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 
 const Submit = ({ id }: { id: string }) => {
   const [error, setError] = useState('');
