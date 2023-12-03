@@ -10,13 +10,13 @@ import {
 } from '@tremor/react';
 import Header from '@/app/(admin)/dashboard/components/header/header';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
-import { IStudentDataModel } from '@/model/student';
 import { getAbsensiById } from '@/services/api';
 import { BsSearch } from 'react-icons/bs';
 import { NotifyService } from '@/core/services/notify/notifyService';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import ToastNotify from '@/core/services/notify/toast';
+import { IStudentDataModel } from '../../../student/domain/model/IModel';
 
 const DetailAbsensi = ({ params }: { params: { id: string } }) => {
   const id = params?.id;

@@ -1,9 +1,9 @@
 'use client';
 import Select from 'react-select';
 import { useEffect } from 'react';
-import useViewModel from '../../../..//guru/(presentation)/vm/view-model';
+import useViewModel from '../../../../teacher/(presentation)/vm/view-model';
 import useDataEvents from '../../../store/store.events';
-import useStoreDatasTeacher from '../../../../guru/(presentation)/store/store.datas';
+import useStoreDatasTeacher from '../../../../teacher/(presentation)/store/store.datas';
 
 const DropdownTeacher = () => {
   const { getTeachers } = useViewModel();

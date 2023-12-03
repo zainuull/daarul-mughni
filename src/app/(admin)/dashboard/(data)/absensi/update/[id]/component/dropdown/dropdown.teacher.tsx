@@ -2,8 +2,8 @@
 import Select from 'react-select';
 import useDataAbsensi from '../../../../store/store.absensi';
 import { useEffect, useState } from 'react';
-import useViewModel from '../../../../..//../(data)/guru/(presentation)/vm/view-model';
-import useStoreDatasTeacher from '../../../../../guru/(presentation)/store/store.datas';
+import useViewModel from '../../../../../teacher/(presentation)/vm/view-model';
+import useStoreDatasTeacher from '../../../../../teacher/(presentation)/store/store.datas';
 
 const DropdownTeacher = () => {
   const [data, setData] = useDataAbsensi();

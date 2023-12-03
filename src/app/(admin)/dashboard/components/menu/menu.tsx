@@ -40,9 +40,9 @@ const Menu = () => {
           {user?.role === 'administrator' && (
             <>
               <Link
-                href={{ pathname: '/dashboard/guru' }}
+                href={{ pathname: '/dashboard/teacher' }}
                 className={`${
-                  pathname.match(/^\/dashboard\/guru/)
+                  pathname.match(/^\/dashboard\/teacher/)
                     ? 'bg-primary transition-all duration-300'
                     : 'cursor-pointer'
                 } w-full flex items-center justify-between p-3 rounded-lg`}>
@@ -53,9 +53,9 @@ const Menu = () => {
                 <BiChevronRight size={20} />
               </Link>
               <Link
-                href={{ pathname: '/dashboard/siswa' }}
+                href={{ pathname: '/dashboard/student' }}
                 className={`${
-                  pathname.match(/^\/dashboard\/siswa/)
+                  pathname.match(/^\/dashboard\/student/)
                     ? 'bg-primary transition-all duration-300'
                     : 'cursor-pointer'
                 } w-full flex items-center justify-between p-3 rounded-lg`}>

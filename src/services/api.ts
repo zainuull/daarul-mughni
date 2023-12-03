@@ -6,4 +6,3 @@ export * from './integrate/event/index';
 export * from './integrate/lesson/index';
 export * from './integrate/level/index';
 export * from './integrate/position/index';
-export * from './integrate/student/index';
