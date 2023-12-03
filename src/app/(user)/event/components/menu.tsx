@@ -1,9 +1,12 @@
 'use client';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
-import { IEventDataModel } from '@/model/model';
-import { getEventsById } from '@/services/api';
+import { IEventDataModel } from '@/app/(admin)/dashboard/(data)/activity/domain/model/IModel';
+import useViewModel from '@/app/(admin)/dashboard/(data)/activity/(presentation)/vm/view.model';
 import { useEffect, useState } from 'react';
 import { BsChevronDoubleDown } from 'react-icons/bs';
+import { NotifyService } from '@/core/services/notify/notifyService';
+import useStoreDatas from '@/app/(admin)/dashboard/(data)/activity/(presentation)/store/store.datas';
+import { HandleError } from '@/core/services/handleError/handleError';
 interface IMenu {
   id?: string;
   menu?: boolean;
@@ -12,17 +15,27 @@ interface IMenu {
 }
 
 const Menu = (props: IMenu) => {
+  const { getEventsById } = useViewModel();
+  const [dataStore] = useStoreDatas();
   const { id, count } = props;
-  const [detailMenu, setDetailMenu] = useState<IEventDataModel>();
   const [menu, setMenu] = useStatus();
+  const notifyService = new NotifyService();
+  const detailMenu: any = dataStore?.data;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getEventsById(id);
-      setDetailMenu(data?.events);
-    };
+    notifyService.showLoading();
     fetchData();
-  }, [id]);
+  }, []);
+
+  const fetchData = () => {
+    getEventsById(id)
+      .then(() => {
+        notifyService.closeSwal();
+      })
+      .catch((err) => {
+        HandleError(err);
+      });
+  };
 
   return (
     <div

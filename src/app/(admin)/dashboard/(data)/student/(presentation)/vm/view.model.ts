@@ -1,11 +1,14 @@
 import StudentAPIDataSourceImol from '../../data/api/student.data.source';
 import { IStudentDataModel, IStudentQuery } from '../../domain/model/IModel';
-import { CreateStudentUseCase } from '../../domain/useCase/create-student.useCase';
-import { DeleteStudentUseCase } from '../../domain/useCase/delete-student.useCase';
-import { GetStudentByClassUseCase } from '../../domain/useCase/get-student-by-class.useCase';
-import { GetStudentByIdUseCase } from '../../domain/useCase/get-student-byid.useCase';
-import { GetStudentsUseCase } from '../../domain/useCase/get-student.useCase';
-import { UpdateStudentUseCase } from '../../domain/useCase/update-student.useCase';
+import {
+  CreateStudentUseCase,
+  DeleteStudentUseCase,
+  GetStudentByClassUseCase,
+  GetStudentByIdUseCase,
+  GetStudentsUseCase,
+  UpdateStudentUseCase,
+} from '../../domain/useCase/index';
+import {  } from '../../domain/useCase/delete-student.useCase';
 import useStoreDatas from '../store/store.datas';
 import useResultFilter from '../store/store.result.filter';
 

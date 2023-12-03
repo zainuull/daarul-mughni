@@ -1,6 +1,11 @@
+'use client';
 import Image from 'next/image';
 import banner from '../../../../../public/assets/banner.png';
-import { getEventsById } from '@/services/api';
+import useViewModel from '../../../(admin)/dashboard/(data)/activity/(presentation)/vm/view.model';
+import useStoreDatas from '@/app/(admin)/dashboard/(data)/activity/(presentation)/store/store.datas';
+import { useEffect } from 'react';
+import { HandleError } from '@/core/services/handleError/handleError';
+import { NotifyService } from '@/core/services/notify/notifyService';
 
 interface DetailEventPageProps {
   params: {
@@ -9,10 +14,26 @@ interface DetailEventPageProps {
 }
 
 const DetailEventPage = async (props: DetailEventPageProps) => {
+  const { getEventsById } = useViewModel();
+  const [dataStore] = useStoreDatas();
   const { params } = props;
-  const events = await getEventsById(params?.id);
-  const event = events?.events || [];
-  console.log(event);
+  const event: any = dataStore?.data;
+  const notifyService = new NotifyService();
+
+  useEffect(() => {
+    notifyService.showLoading();
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    getEventsById(params?.id)
+      .then(() => {
+        notifyService.closeSwal();
+      })
+      .catch((err) => {
+        HandleError(err);
+      });
+  };
 
   return (
     <div className="w-full min-h-screen mb-10 lg:mb-0">

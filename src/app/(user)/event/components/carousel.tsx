@@ -4,11 +4,14 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
-import { getEvents } from '@/services/api';
+import useViewModel from '@/app/(admin)/dashboard/(data)/activity/(presentation)/vm/view.model';
 import Link from 'next/link';
-import { IEventDataModel } from '@/model/event';
+import { IEventDataModel } from '../../../(admin)/dashboard/(data)/activity/domain/model/IModel';
 import Menu from './menu';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
+import useStoreDatas from '@/app/(admin)/dashboard/(data)/activity/(presentation)/store/store.datas';
+import { HandleError } from '@/core/services/handleError/handleError';
+import { NotifyService } from '@/core/services/notify/notifyService';
 var settings = {
   dots: true,
   infinite: false,
@@ -48,19 +51,18 @@ var settings = {
 };
 
 const Carousel = () => {
+  const { getEvents } = useViewModel();
+  const [dataStore] = useStoreDatas();
   const [menu, setMenu] = useStatus();
-  const [event, setEvent] = useState<any>();
   const [id, setId] = useState('');
   const [windowWidth, setWindowWidth] = useState(0);
   const [count, setCount] = useState(0);
+  const notifyService = new NotifyService();
+  const event = dataStore?.data;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const events = await getEvents();
-      setEvent(events?.events);
-    };
+    notifyService.showLoading();
     fetchData();
-
     function handleResize() {
       setWindowWidth(window.innerWidth);
     }
@@ -72,6 +74,16 @@ const Carousel = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  const fetchData = () => {
+    getEvents()
+      .then(() => {
+        notifyService.closeSwal();
+      })
+      .catch((err) => {
+        HandleError(err);
+      });
+  };
 
   const handleMenu = (id: string, index: number) => {
     setMenu(!menu);
@@ -89,7 +101,13 @@ const Carousel = () => {
                 id={data?.id}
                 href={`${windowWidth >= 650 ? `event/${data?.id}` : ''}`}
                 onClick={() => handleMenu(data?.id, index + 1)}>
-                <Image src={data?.imageUrl} alt={data?.title} width={300} height={10} className='sm:w-[100px] md:w-[200px] lg:w-[300px]'/>
+                <Image
+                  src={data?.imageUrl}
+                  alt={data?.title}
+                  width={300}
+                  height={10}
+                  className="sm:w-[100px] md:w-[200px] lg:w-[300px]"
+                />
               </Link>
             </>
           ))}

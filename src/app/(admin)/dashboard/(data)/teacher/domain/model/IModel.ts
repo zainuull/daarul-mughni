@@ -1,5 +1,5 @@
 import { IModel } from '@/core/interface/IModel';
-import { IQueryModel } from '@/model/IQueryModel';
+import { IQueryModel } from '@/core/interface/IQueryModel';
 
 export interface ITeacherQuery extends IQueryModel {}
 

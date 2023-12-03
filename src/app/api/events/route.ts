@@ -40,7 +40,7 @@ export const POST = async (req: Request) => {
         status,
       },
     });
-    console.log('Success to created',newEvent);
+    console.log('Success to created', newEvent);
     return NextResponse.json({ status_code: 200, message: 'Success to created', newEvent });
   } catch (error) {
     console.log(error);
@@ -50,15 +50,15 @@ export const POST = async (req: Request) => {
 
 export const GET = async () => {
   try {
-    const events = await prisma.events.findMany({
+    const data = await prisma.events.findMany({
       orderBy: {
         createdAt: 'desc',
       },
     });
-    if(!events) {
+    if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
     }
-    return NextResponse.json({ status_code: 200, message: 'Success to fetch', events });
+    return NextResponse.json({ status_code: 200, message: 'Success to fetch', data });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status_code: 500, message: 'Some error occurred' });

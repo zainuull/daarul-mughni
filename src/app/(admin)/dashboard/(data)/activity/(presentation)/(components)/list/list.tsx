@@ -1,25 +1,26 @@
 'use client';
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '@tremor/react';
-import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
-import useDataStudent from '../../store/store.student';
-import { useRouter } from 'next/navigation';
-import Pagination from './pagination';
-import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 import useStoreDatas from '../../store/store.datas';
+import Pagination from './pagination';
+import useDataEvents from '../../store/store.events';
+import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
+import Swal from 'sweetalert2';
 import ToastNotify from '@/core/services/notify/toast';
+import { IEventDataModel } from '../../../domain/model/IModel';
 import useViewModel from '../../vm/view.model';
 import { HandleError } from '@/core/services/handleError/handleError';
 import useResultFilter from '../../store/store.result.filter';
-import { IStudentDataModel } from '../../../domain/model/IModel';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
-  const { getStudents, deleteStudent } = useViewModel();
+  const { getEvents, deleteEvent } = useViewModel();
+  const router = useRouter();
+  const [eventForm, setEventForm] = useDataEvents();
   const [dataStore] = useStoreDatas();
   const [resultFilter] = useResultFilter();
-  const [studentForm, setStudentForm] = useDataStudent();
-  const router = useRouter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
   const result = resultSearchData?.length ? resultSearchData : dataStore?.data;
@@ -30,7 +31,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   }, []);
 
   const fetchData = () => {
-    getStudents()
+    getEvents()
       .then(() => {
         notifyService.closeSwal();
       })
@@ -42,48 +43,47 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const handleDelete = (id: string) => {
     notifyService.confirmationDelete().then((res) => {
       if (res) {
-        deleteStudent(id).then(() => {
-          toastService.successDelete();
-          fetchData();
-        }).catch((err) => {
-          HandleError(err)
-        })
+        deleteEvent(id)
+          .then(() => {
+            toastService.successDelete();
+            fetchData();
+          })
+          .catch((err) => {
+            HandleError(err);
+          });
       }
     });
   };
 
-  const handleUpdate = async (data: IStudentDataModel) => {
-    router.push(`/dashboard/student/update/${data?.id}`);
-    setStudentForm({
-      ...studentForm,
-      name: data?.name,
-      date_of_birth: data?.date_of_birth,
-      ijazah: data?.ijazah,
-      gender: data?.gender,
-      nisn: data?.nisn,
-      guardian_name: data?.guardian_name,
-      guardian_status: data?.guardian_status,
-      guardian_telp: data?.guardian_telp,
-      status_payment: data?.status_payment,
-      address: data?.address,
-      className: data?.className,
-      levelName: data?.levelName,
-      classTypeName: data?.classTypeName,
+  const handleUpdate = (data: IEventDataModel) => {
+    router.push(`/dashboard/activity/update/${data?.id}`);
+    setEventForm({
+      ...eventForm,
+      title: data?.title,
+      description: data?.description,
+      person_responsible: data?.person_responsible,
+      telp_person_responsible: data?.telp_person_responsible,
+      place_event: data?.place_event,
+      date_event: data?.date_event,
+      section: data?.section,
+      imageUrl: data?.imageUrl,
+      publicId: String(data?.publicId),
+      selected_category: data?.catName,
+      total_cost: data?.total_cost,
+      status: data?.status,
     });
   };
 
-  const handleDetail = (id: string) => {
-    router.push(`/dashboard/student/detail/${id}`);
-  };
-
   return (
-    <Table className="mt-5 min-h-[400px] relative pb-14">
+    <Table className="mt-5 min-h-[500px] relative pb-14">
       <TableHead>
         <TableRow>
-          <TableHeaderCell>Nama Siswa</TableHeaderCell>
-          <TableHeaderCell>Kelas</TableHeaderCell>
-          <TableHeaderCell>NISN</TableHeaderCell>
-          <TableHeaderCell>Status Pembayaran</TableHeaderCell>
+          <TableHeaderCell>Nama Kegiatan</TableHeaderCell>
+          <TableHeaderCell>Bagian</TableHeaderCell>
+          <TableHeaderCell>Penanggung Jawab</TableHeaderCell>
+          <TableHeaderCell>Tanggal Kegiatan</TableHeaderCell>
+          <TableHeaderCell>Tempat Acara</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
           <TableHeaderCell>Edit</TableHeaderCell>
         </TableRow>
       </TableHead>
@@ -95,23 +95,21 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
             </div>
           </div>
         ) : (
-          result?.map((data: IStudentDataModel) => (
+          result?.map((data: IEventDataModel) => (
             <TableRow key={data.id}>
-              <TableCell
-                onClick={() => handleDetail(data?.id)}
-                className="hover:font-bold transition-all cursor-pointer">
-                {data.name}
-              </TableCell>
-              <TableCell>{data.classTypeName}</TableCell>
-              <TableCell>{data.nisn}</TableCell>
+              <TableCell>{data.title}</TableCell>
+              <TableCell>Bag. {data.section}</TableCell>
+              <TableCell>{data.person_responsible}</TableCell>
+              <TableCell>{data.date_event}</TableCell>
+              <TableCell>{data.place_event}</TableCell>
               <TableCell>
-                {data?.status_payment === 'Lunas' ? (
+                {data?.status === 'Selesai' ? (
                   <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
-                    Lunas
+                    Selesai
                   </button>
                 ) : (
                   <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
-                    Tertunda
+                    Pending
                   </button>
                 )}
               </TableCell>
