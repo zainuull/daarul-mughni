@@ -4,11 +4,11 @@ import { NextResponse } from 'next/server';
 export const GET = async (req: Request, { params }: { params: { id: string } }) => {
   const id = params.id;
   try {
-    const events = await prisma.events.findUnique({ where: { id } });
+    const data = await prisma.events.findUnique({ where: { id } });
     if (!id) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
     }
-    return NextResponse.json({ status_code: 200, message: 'Success to fetch', events });
+    return NextResponse.json({ status_code: 200, message: 'Success to fetch', data });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status_code: 500, message: 'Some error occurred' });

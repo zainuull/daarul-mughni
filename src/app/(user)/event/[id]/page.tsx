@@ -13,7 +13,7 @@ interface DetailEventPageProps {
   };
 }
 
-const DetailEventPage = async (props: DetailEventPageProps) => {
+const DetailEventPage = (props: DetailEventPageProps) => {
   const { getEventsById } = useViewModel();
   const [dataStore] = useStoreDatas();
   const { params } = props;

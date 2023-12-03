@@ -12,6 +12,7 @@ import useStatus from '@/app/(admin)/dashboard/store/store.status';
 import useStoreDatas from '@/app/(admin)/dashboard/(data)/activity/(presentation)/store/store.datas';
 import { HandleError } from '@/core/services/handleError/handleError';
 import { NotifyService } from '@/core/services/notify/notifyService';
+
 var settings = {
   dots: true,
   infinite: false,
@@ -58,7 +59,7 @@ const Carousel = () => {
   const [windowWidth, setWindowWidth] = useState(0);
   const [count, setCount] = useState(0);
   const notifyService = new NotifyService();
-  const event = dataStore?.data;
+  const event = dataStore?.data || [];
 
   useEffect(() => {
     notifyService.showLoading();
@@ -94,7 +95,7 @@ const Carousel = () => {
   return (
     <div className="flex flex-col">
       <Slider {...settings}>
-        {event &&
+        {Array.isArray(event) &&
           event?.map((data: IEventDataModel, index: number) => (
             <>
               <Link

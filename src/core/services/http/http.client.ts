@@ -1,11 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import environment from '../../../environments/config';
-import { GetUserService } from '../get-user.services';
 
-const user = new GetUserService().getUser();
 
 const headerss = {
-  Authorization: `Bearer ${user.accessToken}`,
+  Authorization: `Bearer`,
   'Content-Type': 'application/json',
   Accept: 'application/json',
 };
