@@ -14,7 +14,6 @@ const Navbar = () => {
   const pathanme = usePathname();
   const { data } = useSession();
   const user: IUser = data?.user;
-  console.log(user);
 
   // Handle navigation
   const handleNav = () => {
@@ -89,15 +88,6 @@ const Navbar = () => {
             }`}>
             Kontak
           </Link>
-          {/* <Link
-            href="/test"
-            className={`${
-              pathanme === '/contact'
-                ? 'bg-white text-gray-800 px-4 py-2 rounded-md font-semibold transition-all'
-                : 'hover:text-gray-600 transition-all'
-            }`}>
-            Test
-          </Link> */}
           {user && (
             <Link
               href="/dashboard/guru"
@@ -159,16 +149,17 @@ const Navbar = () => {
                 }`}>
                 Kontak
               </Link>
-              <Link
-                onClick={() => setNav(false)}
-                href={'/dashboard/guru'}
-                className={`${
-                  pathanme == '/dashboard/guru'
-                    ? 'bg-white w-full text-center rounded-md py-2 font-semibold transition-all duration-500'
-                    : ''
-                }`}>
-                Dashboard
-              </Link>
+              {user && (
+                <Link
+                  href="/dashboard/guru"
+                  className={`${
+                    pathanme === '/dashboard'
+                      ? 'bg-white text-gray-800 px-4 py-2 rounded-md font-semibold transition-all'
+                      : 'hover:text-gray-600 transition-all'
+                  }`}>
+                  Dashboard
+                </Link>
+              )}
             </div>
             <AiOutlineClose
               onClick={() => setNav(!nav)}
