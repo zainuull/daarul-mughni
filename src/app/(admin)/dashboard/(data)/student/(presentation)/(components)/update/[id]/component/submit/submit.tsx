@@ -7,7 +7,7 @@ import useViewModel from '../../../../../vm/view.model';
 import { HandleError } from '@/core/services/handleError/handleError';
 
 const Submit = ({ id }: { id: string }) => {
-  const { updateStudent, getStudents } = useViewModel();
+  const { updateStudent } = useViewModel();
   const [error, setError] = useState('');
   const [datas] = useDataStudent();
   const router = useRouter();
@@ -26,7 +26,6 @@ const Submit = ({ id }: { id: string }) => {
           .then(() => {
             toastService.successUpdate();
             router.back()
-            getStudents();
           })
           .catch((err) => {
             HandleError(err);

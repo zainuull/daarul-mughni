@@ -42,12 +42,14 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const handleDelete = (id: string) => {
     notifyService.confirmationDelete().then((res) => {
       if (res) {
-        deleteStudent(id).then(() => {
-          toastService.successDelete();
-          fetchData();
-        }).catch((err) => {
-          HandleError(err)
-        })
+        deleteStudent(id)
+          .then(() => {
+            toastService.successDelete();
+            fetchData();
+          })
+          .catch((err) => {
+            HandleError(err);
+          });
       }
     });
   };

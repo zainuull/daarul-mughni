@@ -37,9 +37,9 @@ export const DELETE = async (req: Request, { params }: { params: { id: string } 
 };
 
 export const PUT = async (req: Request, { params }: { params: { id: string } }) => {
+  const id = params.id;
   const { levelName, className, classTypeName, teacher, lesson, start_time, end_time } =
     await req.json();
-  const id = params.id;
   try {
     const data = await prisma.absensi.update({
       where: { id },

@@ -7,7 +7,7 @@ import useViewModel from '../../../../vm/view.model';
 import { HandleError } from '@/core/services/handleError/handleError';
 
 const Submit = () => {
-  const { createAbsensi } = useViewModel();
+  const { createAbsensi, getAbsensi } = useViewModel();
   const [formAbsensi] = useDataAbsensi();
   const router = useRouter();
   const [error, setError] = useState('');
@@ -25,11 +25,12 @@ const Submit = () => {
         createAbsensi(formAbsensi)
           .then(() => {
             toastService.successCreate();
+            getAbsensi();
             router.back();
           })
           .catch((err) => {
             HandleError(err);
-          })
+          });
       }
     });
   };

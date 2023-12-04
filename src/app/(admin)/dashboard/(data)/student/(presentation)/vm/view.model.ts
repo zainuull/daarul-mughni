@@ -8,7 +8,7 @@ import {
   GetStudentsUseCase,
   UpdateStudentUseCase,
 } from '../../domain/useCase/index';
-import {  } from '../../domain/useCase/delete-student.useCase';
+import {} from '../../domain/useCase/delete-student.useCase';
 import useStoreDatas from '../store/store.datas';
 import useResultFilter from '../store/store.result.filter';
 

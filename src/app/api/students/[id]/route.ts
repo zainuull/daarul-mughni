@@ -29,8 +29,9 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
     guardian_email,
     status_payment,
     address,
+    levelName,
     className,
-    levelName
+    classTypeName,
   } = await req.json();
   try {
     const data = await prisma.student.update({
@@ -47,8 +48,9 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
         guardian_email,
         status_payment,
         address,
-        className,
         levelName,
+        className,
+        classTypeName,
       },
     });
     if (!data) {

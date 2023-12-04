@@ -34,15 +34,12 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [resutFilter] = useResultFilter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-console.log('resultSearchData:', resultSearchData);
-console.log('dataStore?.data:', dataStore?.data);
-console.log('resutFilter?.data?.absensi:', resutFilter?.data?.absensi);
+  console.log('resultSearchData:', resultSearchData);
+  console.log('dataStore?.data:', dataStore?.data);
 
-const result = resultSearchData?.length
-  ? resultSearchData
-  : dataStore?.data || resutFilter?.data?.absensi;
+  const result = resultSearchData?.length ? resultSearchData : dataStore?.data;
 
-console.log('result:', result);
+  console.log('result:', result);
 
   const user: IUser = data?.user;
 

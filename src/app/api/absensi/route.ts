@@ -30,8 +30,6 @@ export const POST = async (req: Request) => {
         end_time,
       },
     });
-    console.log(data);
-
     if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
     }
