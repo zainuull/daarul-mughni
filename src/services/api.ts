@@ -1,4 +1,3 @@
-export * from './integrate/absensi/index';
 export * from './integrate/categories/index';
 export * from './integrate/class/index';
 export * from './integrate/class-type/index';

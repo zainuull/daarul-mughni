@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import EventAPIDataSourceImpl from '../../data/api/event.data.source';
 import { IEventDataModel, IEventModel, IEventQuery } from '../../domain/model/IModel';
 import {

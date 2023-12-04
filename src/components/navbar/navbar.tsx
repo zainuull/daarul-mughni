@@ -90,7 +90,7 @@ const Navbar = () => {
           </Link>
           {user && (
             <Link
-              href="/dashboard/guru"
+              href="/dashboard"
               className={`${
                 pathanme === '/dashboard'
                   ? 'bg-white text-gray-800 px-4 py-2 rounded-md font-semibold transition-all'

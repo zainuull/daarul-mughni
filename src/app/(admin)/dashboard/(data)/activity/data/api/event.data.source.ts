@@ -28,7 +28,7 @@ export default class EventAPIDataSourceImpl implements EventRepostiry {
     return res.data;
   }
 
-  async updateEvent(id: string, data: any) {
+  async updateEvent(id: string, data: IEventDataModel) {
     const res = await Http.put(`/api/events/${id}`, data);
     return res.data;
   }
