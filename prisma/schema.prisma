@@ -100,6 +100,7 @@ model Teacher {
     gender String?
     age String?
     status String?
+    imageUrl String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -131,6 +132,7 @@ model Student {
     class Class? @relation(fields: [className], references: [className])
     classTypeName String?
     classType ClassType? @relation(fields: [classTypeName], references: [classTypeName])
+    image String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }

@@ -6,5 +6,6 @@ export interface StudentRepository {
   getStudentByClass(className: string): Promise<IStudentModel>;
   createStudent(data: IStudentDataModel): Promise<IStudentModel>;
   deleteStudent(id: string): Promise<IStudentModel>;
+  deleteImage(publicId: string): Promise<any>;
   updateStudent(id: string, data: IStudentDataModel): Promise<IStudentModel>;
 }

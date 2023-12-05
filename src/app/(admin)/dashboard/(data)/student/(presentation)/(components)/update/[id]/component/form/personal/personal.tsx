@@ -5,6 +5,7 @@ import {
   DropdownGender,
   DropdownLevel,
   DropdownClassType,
+  UploadImage
 } from '../../../../../dropdown/index';
 
 const DataPersonal = () => {
@@ -59,6 +60,10 @@ const DataPersonal = () => {
           <div className="flex flex-col gap-y-2 col-span-1">
             <h1 className="uppercase">Jenis Kelamin</h1>
             <DropdownGender />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-2">
+            <h1 className="uppercase">Upload Foto</h1>
+            <UploadImage />
           </div>
         </div>
       )}

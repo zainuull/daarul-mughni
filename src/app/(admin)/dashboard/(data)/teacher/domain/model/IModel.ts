@@ -22,5 +22,5 @@ export interface ITeacherDataModel {
   gender?: string;
   age?: string;
   status?: string;
+  imageUrl?: string;
 }
-

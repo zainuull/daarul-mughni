@@ -17,6 +17,7 @@ export const POST = async (req: Request) => {
     className,
     classTypeName,
     levelName,
+    image
   } = await req.json();
   if (!name && !guardian_telp) {
     return NextResponse.json({ status_code: 500, message: 'name and telp are required' });
@@ -39,6 +40,7 @@ export const POST = async (req: Request) => {
         className,
         classTypeName,
         levelName,
+        image,
       },
     });
     console.log('Success to created', newStudent);

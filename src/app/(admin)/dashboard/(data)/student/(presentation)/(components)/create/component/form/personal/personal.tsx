@@ -5,16 +5,19 @@ import {
   DropdownClassType,
   DropdownGender,
   DropdownLevel,
+  UploadImage,
 } from '../../../../dropdown/index';
 
 const DataPersonal = () => {
   const [data, setData] = useDataStudent();
+
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setData({
       ...data,
       [e.target.id]: e.target.value,
     });
   };
+
   return (
     <div className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">
       <div className="flex flex-col gap-y-2 col-span-1">
@@ -54,6 +57,10 @@ const DataPersonal = () => {
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Jenis Kelamin</h1>
         <DropdownGender />
+      </div>
+      <div className="flex flex-col gap-y-2 col-span-2">
+        <h1 className="uppercase">Upload Foto</h1>
+        <UploadImage />
       </div>
     </div>
   );

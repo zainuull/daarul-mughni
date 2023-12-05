@@ -20,6 +20,7 @@ const DetailStudent = ({ params }: { params: { id: string } }) => {
   const notifyService = new NotifyService();
   const [menu] = useStatus();
   const data: any = detailTeacher?.data;
+  console.log(data);
 
   useEffect(() => {
     notifyService.showLoading();
@@ -42,9 +43,18 @@ const DetailStudent = ({ params }: { params: { id: string } }) => {
         <div className="w-full min-h-[600px] border-2 border-black rounded-lg p-4 flex flex-col gap-y-6 bg-slate-50">
           <div className="w-full h-1/2 flex items-center  gap-x-4">
             <div className="w-1/2 h-1/2 flex flex-col gap-y-2 rounded-lg">
-              <div className="w-full h-1/2 p-4 flex justify-center items-center bg-blue-400 rounded-lg">
-                {/* <Image src={''} alt={data?.name} width={250} height={300} className="bg-cover " /> */}
-                <FcBusinessman size={200} />
+              <div className="w-full h-1/2 p-4 flex justify-center items-centerrounded-lg">
+                {data?.imageUrl ? (
+                  <Image
+                    src={data?.imageUrl}
+                    alt={data?.name}
+                    width={250}
+                    height={300}
+                    className="w-full h-[250px] object-cover"
+                  />
+                ) : (
+                  <FcBusinessman size={200} />
+                )}
               </div>
             </div>
             <div className="w-1/2 h-1/2 flex flex-col gap-y-2 shadow-lg rounded-lg bg-white p-4">

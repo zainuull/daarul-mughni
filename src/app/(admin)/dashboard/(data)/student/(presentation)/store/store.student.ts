@@ -18,6 +18,8 @@ const store = atom({
   levelName: '',
   filter_by_level: '',
   filter_by_class: '',
+  public_id: '',
+  image: '',
 });
 
 const useDataStudent = () => useAtom(store);

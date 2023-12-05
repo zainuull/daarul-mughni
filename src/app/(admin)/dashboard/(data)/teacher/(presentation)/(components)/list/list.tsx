@@ -66,6 +66,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
       gender: data?.gender,
       age: data?.age,
       status: data?.status,
+      imageUrl: data?.imageUrl,
     });
   };
 

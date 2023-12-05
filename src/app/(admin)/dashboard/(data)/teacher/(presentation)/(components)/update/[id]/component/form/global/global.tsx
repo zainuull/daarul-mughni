@@ -1,6 +1,12 @@
 'use client';
 import useDataTeacher from '../../../../../../store/store.teacher';
-import { DropdownJazah,DropdownPosition,DropdownPeriodWork,DropdownStatus } from '../../../../../dropdown/index';
+import {
+  DropdownJazah,
+  DropdownPosition,
+  DropdownPeriodWork,
+  DropdownStatus,
+  UploadImage,
+} from '../../../../../dropdown/index';
 const DataGlobal = () => {
   const [formTeacher, setFormTeacher] = useDataTeacher();
 
@@ -42,6 +48,10 @@ const DataGlobal = () => {
           <div className="flex flex-col gap-y-2 col-span-1">
             <h1 className="uppercase">Status</h1>
             <DropdownStatus />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-2">
+            <h1 className="uppercase">Upload Foto</h1>
+            <UploadImage />
           </div>
         </div>
       )}

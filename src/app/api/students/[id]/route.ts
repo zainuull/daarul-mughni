@@ -32,6 +32,7 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
     levelName,
     className,
     classTypeName,
+    image
   } = await req.json();
   try {
     const data = await prisma.student.update({
@@ -51,6 +52,7 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
         levelName,
         className,
         classTypeName,
+        image,
       },
     });
     if (!data) {

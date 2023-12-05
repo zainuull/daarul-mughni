@@ -71,6 +71,8 @@ const Navigation = () => {
       levelName: '',
       filter_by_level: '',
       filter_by_class: '',
+      public_id: '',
+      image: '',
     });
   };
   return (

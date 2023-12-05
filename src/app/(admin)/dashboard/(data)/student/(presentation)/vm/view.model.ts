@@ -12,6 +12,7 @@ import {} from '../../domain/useCase/delete-student.useCase';
 import useStoreDatas from '../store/store.datas';
 import useResultFilter from '../store/store.result.filter';
 import { useState } from 'react';
+import { DeleteImageUseCase } from '../../domain/useCase/delete-image.useCase';
 
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
@@ -25,6 +26,7 @@ export default function ViewModel() {
   const getStudentByClassUseCase = new GetStudentByClassUseCase(studentDataSourceImpl);
   const createStudentUseCase = new CreateStudentUseCase(studentDataSourceImpl);
   const deleteStudentUseCase = new DeleteStudentUseCase(studentDataSourceImpl);
+  const deleteImageUseCase = new DeleteImageUseCase(studentDataSourceImpl);
   const updateStudentUseCase = new UpdateStudentUseCase(studentDataSourceImpl);
 
   async function getStudents(query?: IStudentQuery) {
@@ -47,6 +49,10 @@ export default function ViewModel() {
     await deleteStudentUseCase.invoke(id);
   }
 
+  async function deleteImage(publicId: string) {
+    await deleteImageUseCase.invoke(publicId);
+  }
+
   async function updateStudent(id: string, data: IStudentDataModel) {
     await updateStudentUseCase.invoke(id, data);
   }
@@ -59,5 +65,6 @@ export default function ViewModel() {
     deleteStudent,
     updateStudent,
     detailStudent,
+    deleteImage,
   };
 }

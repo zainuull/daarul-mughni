@@ -2,7 +2,6 @@ import { Http } from '@/core/services/http/http.client';
 import { StudentRepository } from '../../domain/repository/student.repository';
 import { IStudentDataModel, IStudentQuery } from '../../domain/model/IModel';
 
-
 export default class StudentAPIDataSourceImol implements StudentRepository {
   async getStudents(query?: IStudentQuery) {
     const res = await Http.get('/api/students', query);
@@ -26,6 +25,11 @@ export default class StudentAPIDataSourceImol implements StudentRepository {
 
   async deleteStudent(id: string) {
     const res = await Http.delete(`/api/students/${id}`);
+    return res.data;
+  }
+
+  async deleteImage(publicId: string) {
+    const res = await Http.post(`/api/delete-image`, publicId);
     return res.data;
   }
 

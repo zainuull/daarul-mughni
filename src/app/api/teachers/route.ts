@@ -2,7 +2,7 @@ import prisma from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 
 export const POST = async (req: Request) => {
-  const { name, date_of_birth, telp, email, nip, ijazah, positionName, period_work, gender, age,status } =
+  const { name, date_of_birth, telp, email, nip, ijazah, positionName, period_work, gender, age,status ,imageUrl} =
     await req.json();
 
   if (!name && !email) {
@@ -23,6 +23,7 @@ export const POST = async (req: Request) => {
         gender,
         age,
         status,
+        imageUrl,
       },
     });
     console.log('Success to created', newTeacher);

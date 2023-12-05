@@ -13,7 +13,8 @@ const store = atom({
   selected_category: '',
   total_cost: '',
   status: '',
-  filter_by:''
+  filter_by:'',
+  public_id:'',
 });
 
 const useDataEvents = () => useAtom(store);

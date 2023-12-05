@@ -14,7 +14,6 @@ import { HandleError } from '@/core/services/handleError/handleError';
 import useResultFilter from '../../store/store.result.filter';
 import { IStudentDataModel } from '../../../domain/model/IModel';
 
-
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const { getStudents, deleteStudent } = useViewModel();
   const [dataStore] = useStoreDatas();
@@ -23,8 +22,10 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const router = useRouter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-  const result = resultSearchData?.length ? resultSearchData : dataStore?.data || resultFilter?.data?.students;
-  
+  const result = resultSearchData?.length
+    ? resultSearchData
+    : dataStore?.data || resultFilter?.data?.students;
+
   useEffect(() => {
     notifyService.showLoading();
     fetchData();
@@ -72,6 +73,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
       className: data?.className,
       levelName: data?.levelName,
       classTypeName: data?.classTypeName,
+      image: data?.image,
     });
   };
 

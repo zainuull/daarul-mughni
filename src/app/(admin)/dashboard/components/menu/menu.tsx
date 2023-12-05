@@ -19,7 +19,7 @@ const Menu = () => {
     <div
       className={`${
         menu ? 'w-[150px] transition-all duration-700 absolute left-0 z-10 bg-white' : 'w-[330px] bg-white transition-all duration-700 absolute left-0 z-10'
-      } min-h-[1000px] p-4 shadow-lg shadow-gray-300`}>
+      } min-h-full p-4 shadow-lg shadow-gray-300`}>
       <div className="w-full h-full flex flex-col gap-y-2 mt-4">
         <div className="w-full flex items-center justify-center gap-x-4">
           <RxDashboard size={30} />

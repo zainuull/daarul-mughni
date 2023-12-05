@@ -62,6 +62,8 @@ const Navigation = () => {
       age: '',
       status: '',
       filter_by: '',
+      public_id: '',
+      imageUrl: '',
     });
   };
 

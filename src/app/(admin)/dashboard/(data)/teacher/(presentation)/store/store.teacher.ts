@@ -14,6 +14,8 @@ interface TeacherData {
   age: string;
   status: string;
   filter_by: string;
+  public_id: string;
+  imageUrl: string;
 }
 
 const store = atom<TeacherData>({
@@ -29,7 +31,9 @@ const store = atom<TeacherData>({
   gender: '',
   age: '',
   status: '',
-  filter_by: '', 
+  filter_by: '',
+  public_id: '',
+  imageUrl: '',
 });
 
 const useDataTeacher = () => useAtom(store);

@@ -1,5 +1,5 @@
 'use client';
-import {DropdownCategory,DropdownStatus} from '../../../../dropdown/index';
+import { DropdownCategory, DropdownStatus, UploadImage } from '../../../../dropdown/index';
 import useDataEvents from '../../../../../store/store.events';
 
 const DataGlobal = () => {
@@ -14,15 +14,9 @@ const DataGlobal = () => {
 
   return (
     <div className="w-full min-h-20 pb-10 grid grid-cols-2 gap-10">
-      <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Image</h1>
-        <input
-          onChange={handleChange}
-          id="imageUrl"
-          type="text"
-          className=" outline-none border border-black rounded-md h-10 px-4"
-          placeholder="Link gambar"
-        />
+      <div className="flex flex-col gap-y-2 col-span-2">
+        <h1 className="uppercase">Upload Foto</h1>
+        <UploadImage />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Bagian</h1>
