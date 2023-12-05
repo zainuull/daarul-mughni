@@ -16,7 +16,6 @@ export const DropdownFilterLevel = () => {
   const fetchData = () => {
     getLevel().then((res) => {
       setLevel(res?.data);
-      Swal.close();
     });
   };
 

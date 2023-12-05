@@ -14,8 +14,8 @@ export default class TeacherAPIDataSourceImpl implements TeacherRepository {
   }
 
   async getTeacherByPosition(positionName: string) {
-    const res: any = await Http.get(`/api/position/${positionName}`);
-    return res.data?.data?.teachers;
+    const res = await Http.get(`/api/position/${positionName}`);
+    return res.data;
   }
 
   async createTeacher(data: any) {

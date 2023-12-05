@@ -13,12 +13,11 @@ import useStoreDatas from '../../../store/store.datas';
 import { IStudentDataModel } from '@/app/(admin)/dashboard/(data)/student/domain/model/IModel';
 
 const DetailAbsensi = ({ params }: { params: { id: string } }) => {
-  const { getAbsensiById } = useViewModel();
+  const { getAbsensiById, detailAbsensi } = useViewModel();
   const id = params?.id;
   const notifyService = new NotifyService();
   const [menu] = useStatus();
-  const [dataStore] = useStoreDatas();
-  const students = dataStore?.students;
+  const students = detailAbsensi?.students;
 
   useEffect(() => {
     notifyService.showLoading();

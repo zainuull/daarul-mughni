@@ -7,22 +7,19 @@ import { BsGenderMale } from 'react-icons/bs';
 import { HiOutlineMapPin } from 'react-icons/hi2';
 import { FcBusinessman } from 'react-icons/fc';
 import { FaRegCalendarCheck, FaEnvelopeOpenText } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { NotifyService } from '@/core/services/notify/notifyService';
 import Swal from 'sweetalert2';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
 import Header from '@/app/(admin)/dashboard/components/header/header';
 import useViewModel from '../../../vm/view.model';
-import useStoreDatas from '../../../store/store.datas';
-// import useStatus from '@/app/(admin)/dashboard/store/store.status';
 
 const DetailStudent = ({ params }: { params: { id: string } }) => {
   const id = params.id;
-  const { getStudentById } = useViewModel();
-  const [dataStore] = useStoreDatas();
+  const { getStudentById, detailStudent } = useViewModel();
   const notifyService = new NotifyService();
   const [menu] = useStatus();
-  const data :any= dataStore?.data;
+  const data: any = detailStudent?.data;
 
   useEffect(() => {
     notifyService.showLoading();

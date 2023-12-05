@@ -1,7 +1,8 @@
 import { atom, useAtom } from 'jotai';
+
 const value: any = {};
 const store = atom(value);
 
-const useStoreDatasResult = () => useAtom(store);
+const useResultFilter = () => useAtom(store);
 
-export default useStoreDatasResult;
+export default useResultFilter;

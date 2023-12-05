@@ -14,8 +14,8 @@ export default class EventAPIDataSourceImpl implements EventRepostiry {
   }
 
   async getEventByCategories(category: string) {
-    const res: any = await Http.get(`/api/categories/${category}`);
-    return res.data?.data?.events;
+    const res = await Http.get(`/api/categories/${category}`);
+    return res.data;
   }
 
   async createEvent(data: IEventDataModel) {

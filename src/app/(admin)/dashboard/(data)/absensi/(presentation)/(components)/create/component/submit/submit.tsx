@@ -25,7 +25,6 @@ const Submit = () => {
         createAbsensi(formAbsensi)
           .then(() => {
             toastService.successCreate();
-            getAbsensi();
             router.back();
           })
           .catch((err) => {

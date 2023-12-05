@@ -22,8 +22,8 @@ const Navigation = () => {
   const router = useRouter();
 
   useEffect(() => {
-    notifyService.showLoading();
     if (eventForm?.filter_by) {
+      notifyService.showLoading();
       fetchDataByPosition();
     }
   }, [eventForm?.filter_by]);

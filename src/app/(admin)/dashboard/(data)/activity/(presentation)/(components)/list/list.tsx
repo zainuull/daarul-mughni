@@ -1,14 +1,13 @@
 'use client';
 import { Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from '@tremor/react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { PiPencilLineLight } from 'react-icons/pi';
 import useStoreDatas from '../../store/store.datas';
 import Pagination from './pagination';
 import useDataEvents from '../../store/store.events';
 import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
-import Swal from 'sweetalert2';
 import ToastNotify from '@/core/services/notify/toast';
 import { IEventDataModel } from '../../../domain/model/IModel';
 import useViewModel from '../../vm/view.model';
@@ -23,8 +22,8 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [resultFilter] = useResultFilter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-  const result = resultSearchData?.length ? resultSearchData : dataStore?.data;
-
+  const result = resultSearchData?.length ? resultSearchData : dataStore?.data || resultFilter?.data?.events;
+  
   useEffect(() => {
     notifyService.showLoading();
     fetchData();
@@ -88,7 +87,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {result?.length === 0 ? (
+        {resultFilter?.data?.events?.length === 0 ? (
           <div className="min-h-[300px] px-12">
             <div className=" mt-40">
               <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>

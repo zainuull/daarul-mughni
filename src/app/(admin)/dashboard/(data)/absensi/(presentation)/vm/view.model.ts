@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AbsensiAPIDataSourceImpl from '../../data/api/absensi.data.source';
 import { IAbsensiDataModel, IAbsensiQuery } from '../../domain/model/IModel';
 import {
@@ -14,6 +15,7 @@ import useResultFilter from '../store/store.result.filter';
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
   const [, setResultFilter] = useResultFilter();
+  const [detailAbsensi, setDetailAbsensi] = useState<IAbsensiDataModel>();
 
   const absensiDataSourceImpl = new AbsensiAPIDataSourceImpl();
 
@@ -29,7 +31,7 @@ export default function ViewModel() {
   }
 
   async function getAbsensiById(id: string) {
-    setDatas(await getAbsensiByIdUseCase.invoke(id));
+    setDetailAbsensi(await getAbsensiByIdUseCase.invoke(id));
   }
 
   async function getAbsensiByClass(className: string) {
@@ -37,15 +39,15 @@ export default function ViewModel() {
   }
 
   async function createAbsensi(data: IAbsensiDataModel) {
-    setDatas(await createAbsensiUseCase.invoke(data));
+    await createAbsensiUseCase.invoke(data);
   }
 
   async function deleteAbsensi(id: string) {
-    setDatas(await deleteAbsensiUseCase.invoke(id));
+    await deleteAbsensiUseCase.invoke(id);
   }
 
   async function updateAbsensi(id: string, data: IAbsensiDataModel) {
-    setDatas(await updateAbsensiUseCase.invoke(id, data));
+    await updateAbsensiUseCase.invoke(id, data);
   }
 
   return {
@@ -55,5 +57,6 @@ export default function ViewModel() {
     createAbsensi,
     deleteAbsensi,
     updateAbsensi,
+    detailAbsensi,
   };
 }

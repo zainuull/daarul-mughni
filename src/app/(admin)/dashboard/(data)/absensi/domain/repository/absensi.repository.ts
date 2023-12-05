@@ -2,7 +2,7 @@ import { IAbsensiDataModel, IAbsensiModel, IAbsensiQuery } from "../model/IModel
 
 export interface AbsensiRepository {
     getAbsensi(query?:IAbsensiQuery) : Promise<IAbsensiModel>
-    getAbsensiById(id: string) : Promise<IAbsensiModel>
+    getAbsensiById(id: string) : Promise<IAbsensiDataModel>
     getAbsensiByClass(className: string) : Promise<IAbsensiModel>
     createAbsensi(data: IAbsensiDataModel) : Promise<IAbsensiModel>
     updateAbsensi(id: string, data: IAbsensiDataModel) : Promise<IAbsensiModel>

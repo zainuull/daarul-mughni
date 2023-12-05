@@ -13,7 +13,6 @@ import useStatus from '@/app/(admin)/dashboard/store/store.status';
 import useViewModel from '../../vm/view.model';
 import { HandleError } from '@/core/services/handleError/handleError';
 import { useRouter } from 'next/navigation';
-import useResultFilter from '../../store/store.result.filter';
 
 const Navigation = () => {
   const { getAbsensiByClass } = useViewModel();
@@ -27,8 +26,8 @@ const Navigation = () => {
   const router = useRouter();
 
   useEffect(() => {
-    notifyServices.showLoading();
     if (absensiForm?.filter_by_class) {
+      notifyServices.showLoading();
       fetchDataByClass();
     }
   }, [absensiForm?.filter_by_class]);

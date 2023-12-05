@@ -24,8 +24,7 @@ const Submit = ({ id }: { id: string }) => {
         updateAbsensi(id, formAbsensi)
           .then(() => {
             toastService.successUpdate();
-            getAbsensi()
-            router.push('/dashboard/absensi');
+            router.back();
           })
           .catch((err) => {
             HandleError(err);

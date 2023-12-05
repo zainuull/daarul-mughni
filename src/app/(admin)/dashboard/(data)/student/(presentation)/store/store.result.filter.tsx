@@ -1,8 +1,7 @@
-
 import { atom, useAtom } from 'jotai';
-import { IStudentModel } from '../../domain/model/IModel';
 
-const value: IStudentModel = {};
+
+const value: any = {};
 const store = atom(value);
 
 const useResultFilter = () => useAtom(store);

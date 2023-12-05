@@ -1,7 +1,7 @@
-import { IModel } from "@/core/interface/IModel";
-import { IQueryModel } from "@/core/interface/IQueryModel";
+import { IModel } from '@/core/interface/IModel';
+import { IQueryModel } from '@/core/interface/IQueryModel';
 
-export interface IStudentQuery extends IQueryModel{}
+export interface IStudentQuery extends IQueryModel {}
 
 export interface IStudentModel extends IModel {
   totalData?: number;

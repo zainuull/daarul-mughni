@@ -15,8 +15,8 @@ export default class StudentAPIDataSourceImol implements StudentRepository {
   }
 
   async getStudentByClass(className: string) {
-    const res: any = await Http.get(`/api/class/${className}`);
-    return res?.data?.data?.students;
+    const res = await Http.get(`/api/class/${className}`);
+    return res.data;
   }
 
   async createStudent(data: IStudentDataModel) {

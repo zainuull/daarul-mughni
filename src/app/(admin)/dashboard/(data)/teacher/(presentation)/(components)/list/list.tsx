@@ -12,16 +12,19 @@ import ToastNotify from '@/core/services/notify/toast';
 import useViewModel from '../../vm/view-model';
 import { HandleError } from '@/core/services/handleError/handleError';
 import { ITeacherDataModel } from '../../../domain/model/IModel';
+import useResultFilter from '../../store/store.result.filter';
 
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
-  const { getTeachers, deleteTeacher, resultFilter } = useViewModel();
+  const { getTeachers, deleteTeacher } = useViewModel();
   const router = useRouter();
   const [teacherForm, setTeacherForm] = useDataTeacher();
   const [dataStore] = useStoreDatas();
+  const [resultFilter] = useResultFilter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-  const data = resultSearchData?.length ? resultSearchData : dataStore?.data || resultFilter;
-
+  const result = resultSearchData?.length
+    ? resultSearchData
+    : dataStore?.data || resultFilter?.data?.teachers;
 
   //can get data every window refreshing
   useEffect(() => {
@@ -82,8 +85,14 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {data &&
-          data?.map((data: ITeacherDataModel) => (
+        {resultFilter?.data?.teachers?.length === 0 ? (
+          <div className="min-h-[300px] px-12">
+            <div className=" mt-40">
+              <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>
+            </div>
+          </div>
+        ) : (
+          result?.map((data: ITeacherDataModel) => (
             <TableRow key={data.id}>
               <TableCell
                 onClick={() => handleDetail(data?.id)}
@@ -114,7 +123,8 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
                 </div>
               </TableCell>
             </TableRow>
-          ))}
+          ))
+        )}
       </TableBody>
       <nav className="absolute right-0 bottom-0">
         <Pagination />

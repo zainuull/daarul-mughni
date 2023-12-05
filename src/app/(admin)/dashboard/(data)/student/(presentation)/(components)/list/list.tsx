@@ -22,8 +22,8 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const router = useRouter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-  const result = resultSearchData?.length ? resultSearchData : dataStore?.data;
-
+  const result = resultSearchData?.length ? resultSearchData : dataStore?.data || resultFilter?.data?.students;
+  
   useEffect(() => {
     notifyService.showLoading();
     fetchData();
@@ -90,7 +90,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {result?.length === 0 ? (
+        {resultFilter?.data?.students?.length === 0 ? (
           <div className="min-h-[300px] px-12">
             <div className=" mt-40">
               <h1 className="text-6xl font-bold">Data tidak ditemukan</h1>

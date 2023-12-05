@@ -13,15 +13,13 @@ import Swal from 'sweetalert2';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
 import Header from '@/app/(admin)/dashboard/components/header/header';
 import useViewModel from '../../../vm/view-model';
-import useStoreDatas from '../../../store/store.datas';
 
 const DetailStudent = ({ params }: { params: { id: string } }) => {
   const id = params.id;
-  const { getTeachersById } = useViewModel();
-  const [dataStore] = useStoreDatas();
+  const { getTeachersById, detailTeacher } = useViewModel();
   const notifyService = new NotifyService();
   const [menu] = useStatus();
-  const data: any = dataStore?.data;
+  const data: any = detailTeacher?.data;
 
   useEffect(() => {
     notifyService.showLoading();

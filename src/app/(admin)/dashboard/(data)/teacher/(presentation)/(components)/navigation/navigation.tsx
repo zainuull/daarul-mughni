@@ -1,20 +1,18 @@
 'use client';
 import { BsSearch } from 'react-icons/bs';
 import TableList from '../list/list';
-import Link from 'next/link';
 import { DropdownFilter } from '../dropdown/dropdown.filter';
 import useDataTeacher from '../../store/store.teacher';
 import { useEffect, useState } from 'react';
 import useStoreDatas from '../../store/store.datas';
 import Header from '../../../../../components/header/header';
 import { NotifyService } from '@/core/services/notify/notifyService';
-import Swal from 'sweetalert2';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
 import useViewModel from '../../vm/view-model';
 import { useRouter } from 'next/navigation';
 
 const Navigation = () => {
-  const { getTeacherByPosition, resultFilter } = useViewModel();
+  const { getTeacherByPosition } = useViewModel();
   const [teacherForm, setTeacherForm] = useDataTeacher();
   const [dataStore] = useStoreDatas();
   const [searchInput, setSearchInput] = useState('');
@@ -24,6 +22,7 @@ const Navigation = () => {
 
   useEffect(() => {
     if (teacherForm?.filter_by) {
+      notifyService.showLoading();
       fetchDataByPosition();
     }
   }, [teacherForm?.filter_by]);

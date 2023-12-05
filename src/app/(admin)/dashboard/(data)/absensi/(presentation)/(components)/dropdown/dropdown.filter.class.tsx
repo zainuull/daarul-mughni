@@ -16,7 +16,6 @@ export const DropdownFilterClass = () => {
   const fetchData = () => {
     getClassByLevel(formAbsensi?.filter_by_level).then((res) => {
       setClasses(res?.data?.class);
-      Swal.close();
     });
   };
 
@@ -31,7 +30,7 @@ export const DropdownFilterClass = () => {
   const handlePosition = (option: any) => {
     setFormAbsensi({
       ...formAbsensi,
-      filter_by_class: option?.label,
+      filter_by_class: option?.label || '',
     });
   };
 

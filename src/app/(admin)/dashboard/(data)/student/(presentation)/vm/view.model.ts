@@ -1,5 +1,5 @@
 import StudentAPIDataSourceImol from '../../data/api/student.data.source';
-import { IStudentDataModel, IStudentQuery } from '../../domain/model/IModel';
+import { IStudentDataModel, IStudentModel, IStudentQuery } from '../../domain/model/IModel';
 import {
   CreateStudentUseCase,
   DeleteStudentUseCase,
@@ -11,10 +11,12 @@ import {
 import {} from '../../domain/useCase/delete-student.useCase';
 import useStoreDatas from '../store/store.datas';
 import useResultFilter from '../store/store.result.filter';
+import { useState } from 'react';
 
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
   const [, setResultFilter] = useResultFilter();
+  const [detailStudent, setDetailStudent] = useState<IStudentModel>();
 
   const studentDataSourceImpl = new StudentAPIDataSourceImol();
 
@@ -30,7 +32,7 @@ export default function ViewModel() {
   }
 
   async function getStudentById(id: string) {
-    setDatas(await getStudentByIdUseCase.invoke(id));
+    setDetailStudent(await getStudentByIdUseCase.invoke(id));
   }
 
   async function getStudentByClass(className: string) {
@@ -56,5 +58,6 @@ export default function ViewModel() {
     createStudent,
     deleteStudent,
     updateStudent,
+    detailStudent,
   };
 }

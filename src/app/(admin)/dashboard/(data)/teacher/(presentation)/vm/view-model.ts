@@ -10,10 +10,12 @@ import {
 } from '../../domain/useCase';
 import useStoreDatas from '../store/store.datas';
 import { useState } from 'react';
+import useResultFilter from '../store/store.result.filter';
 
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
-  const [resultFilter, setResultFilter] = useState<ITeacherModel[]>();
+  const [, setFilter] = useResultFilter();
+  const [detailTeacher, setDetailTeacher] = useState<ITeacherModel>();
 
   const teacherDataSourceImpl = new TeacherAPIDataSourceImpl();
 
@@ -29,11 +31,11 @@ export default function ViewModel() {
   }
 
   async function getTeachersById(id: string) {
-    setDatas(await getTeachersByIdUseCase.invoke(id));
+    setDetailTeacher(await getTeachersByIdUseCase.invoke(id));
   }
 
   async function getTeacherByPosition(positionName: string) {
-    setResultFilter(await getTeacherByPositionUseCase.invoke(positionName));
+    setFilter(await getTeacherByPositionUseCase.invoke(positionName));
   }
 
   async function createTeacher(data: ITeacherDataModel) {
@@ -55,6 +57,6 @@ export default function ViewModel() {
     createTeacher,
     deleteTeacher,
     updateTeacher,
-    resultFilter,
+    detailTeacher,
   };
 }

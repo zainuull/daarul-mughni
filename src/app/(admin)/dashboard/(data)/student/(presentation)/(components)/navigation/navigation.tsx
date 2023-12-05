@@ -22,8 +22,8 @@ const Navigation = () => {
   const router = useRouter();
 
   useEffect(() => {
-    notifyService.showLoading();
     if (studentForm?.filter_by_level) {
+      notifyService.showLoading();
       fetchDataByLevel();
     }
   }, [studentForm?.filter_by_class]);
