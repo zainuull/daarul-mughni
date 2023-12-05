@@ -14,6 +14,7 @@ import { HandleError } from '@/core/services/handleError/handleError';
 import useResultFilter from '../../store/store.result.filter';
 import { IStudentDataModel } from '../../../domain/model/IModel';
 
+
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const { getStudents, deleteStudent } = useViewModel();
   const [dataStore] = useStoreDatas();

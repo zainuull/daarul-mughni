@@ -1,6 +1,5 @@
 'use client';
 import { BsSearch } from 'react-icons/bs';
-import TableList from '../list/list';
 import { DropdownFilter } from '../dropdown/dropdown.filter';
 import useDataTeacher from '../../store/store.teacher';
 import { useEffect, useState } from 'react';
@@ -10,6 +9,8 @@ import { NotifyService } from '@/core/services/notify/notifyService';
 import useStatus from '@/app/(admin)/dashboard/store/store.status';
 import useViewModel from '../../vm/view-model';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+const TableList = dynamic(() => import('../list/list'));
 
 const Navigation = () => {
   const { getTeacherByPosition } = useViewModel();

@@ -1,6 +1,5 @@
 'use client';
 import { BsSearch } from 'react-icons/bs';
-import TableList from '../list/list';
 import React, { useEffect, useState } from 'react';
 import useDataEvents from '../../store/store.events';
 import useStoreDatas from '../../store/store.datas';
@@ -11,6 +10,8 @@ import useStatus from '../../../../../store/store.status';
 import { useRouter } from 'next/navigation';
 import useViewModel from '../../vm/view.model';
 import { HandleError } from '@/core/services/handleError/handleError';
+import dynamic from 'next/dynamic';
+const TableList = dynamic(() => import('../list/list'));
 
 const Navigation = () => {
   const { getEventByCategories } = useViewModel();

@@ -1,6 +1,6 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { BsSearch } from 'react-icons/bs';
-import TableList from '../list/list';
 import { DropdownFilterLevel, DropdownFilterClass } from '../dropdown/index';
 import useDataAbsensi from '../../store/store.absensi';
 import { useEffect, useState } from 'react';
@@ -13,6 +13,7 @@ import useStatus from '@/app/(admin)/dashboard/store/store.status';
 import useViewModel from '../../vm/view.model';
 import { HandleError } from '@/core/services/handleError/handleError';
 import { useRouter } from 'next/navigation';
+const TableList = dynamic(() => import('../list/list'));
 
 const Navigation = () => {
   const { getAbsensiByClass } = useViewModel();
