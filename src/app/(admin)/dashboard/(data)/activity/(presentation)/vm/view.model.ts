@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import EventAPIDataSourceImpl from '../../data/api/event.data.source';
 import { IEventDataModel, IEventModel, IEventQuery } from '../../domain/model/IModel';
 import {
@@ -14,6 +15,7 @@ import useResultFilter from '../store/store.result.filter';
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
   const [, setResultFilter] = useResultFilter();
+  const [detailEvent, setDetailEvent] = useState<IEventDataModel>();
 
   const eventDataSourceImpl = new EventAPIDataSourceImpl();
 
@@ -29,7 +31,8 @@ export default function ViewModel() {
   }
 
   async function getEventsById(id: string) {
-    setDatas(await getEventsByIdUseCase.invoke(id));
+    const res: any = await getEventsByIdUseCase.invoke(id);
+    setDetailEvent(res?.data);
   }
 
   async function getEventByCategories(category: string) {
@@ -55,5 +58,6 @@ export default function ViewModel() {
     createEvent,
     deleteEvent,
     updateEvent,
+    detailEvent,
   };
 }
