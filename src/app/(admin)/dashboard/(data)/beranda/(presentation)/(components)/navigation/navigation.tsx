@@ -32,7 +32,7 @@ const Navigation = () => {
           <div className="flex flex-col col-span-3 px-12 gap-2 mt-4 bg-white rounded-lg shadow-xl p-4 py-8">
             <h1 className="font-semibold uppercase">Jadwal Mengajar Hari Ini</h1>
             {absensi && absensi.map((data: IAbsensiDataModel) => (
-              <div className="bg-green-500 hover:bg-green-600 transition-all cursor-pointer rounded-lg h-14 flex justify-between items-center p-2 px-4">
+              <div key={data?.id} className="bg-green-500 hover:bg-green-600 transition-all cursor-pointer rounded-lg h-14 flex justify-between items-center p-2 px-4">
                 <div className="flex flex-col leading-5">
                   <h1 className="font-semibold uppercase">{data?.lesson}</h1>
                   <h2>{data?.className}</h2>

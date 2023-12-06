@@ -17,14 +17,11 @@ const About = ({ email }) => {
   const [detailUser] = useStoreDatas();
   const notifyService = new NotifyService();
   const data: any = detailUser?.data;
-  const absensi = data?.absensi;
 
   useEffect(() => {
     notifyService.showLoading();
     fetchData(email);
   }, [email]);
-
-  console.log(absensi);
 
   const fetchData = async (email: string) => {
     await getUserByEmail(email)
