@@ -54,6 +54,7 @@ model User {
   status String?
   imageUrl String?
   role          String?
+  absensi Absensi[]
   accounts      Account[]
   sessions      Session[]
 }
@@ -194,7 +195,8 @@ model Absensi {
    class      Class?   @relation(fields: [className], references: [className])
    classTypeName String?
    classType ClassType?   @relation(fields: [classTypeName], references: [classTypeName])
-   teacher String
+   teacher String?
+   Teacher User? @relation(fields: [teacher],references: [email])
    lesson String
    start_time String
    end_time  String
