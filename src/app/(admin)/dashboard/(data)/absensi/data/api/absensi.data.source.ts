@@ -10,7 +10,7 @@ export default class AbsensiAPIDataSourceImpl implements AbsensiRepository {
 
   async getAbsensiById(id: string) {
     const res: any = await Http.get(`/api/absensi/${id}`);
-    return res.data?.data?.classType;
+    return res.data?.data;
   }
 
   async getAbsensiByClass(className: string) {

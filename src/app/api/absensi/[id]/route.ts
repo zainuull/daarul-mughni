@@ -7,7 +7,9 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
   try {
     const data = await prisma.absensi.findUnique({
       where: { id },
-      include: { classType: {include : {students : true}} },
+      include: { 
+        classType: {include : {students : true}} ,
+      },
     });
     if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });

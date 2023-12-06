@@ -15,7 +15,7 @@ import useResultFilter from '../store/store.result.filter';
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
   const [, setResultFilter] = useResultFilter();
-  const [detailAbsensi, setDetailAbsensi] = useState<IAbsensiDataModel>();
+  const [detailAbsensi, setDetailAbsensi] = useState<any>();
 
   const absensiDataSourceImpl = new AbsensiAPIDataSourceImpl();
 
