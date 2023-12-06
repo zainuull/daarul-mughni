@@ -39,10 +39,20 @@ model Session {
 
 model User {
   id  String  @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
+  name String
+  date_of_birth String?
+  telp String?
   email         String?   @unique
+  nip String?
+  ijazah String?
+  positionName String?
+  position Position? @relation(fields: [positionName],references: [positionName])
   hashedPassword String?
-  image         String?
+  period_work String?
+  gender String?
+  age String?
+  status String?
+  imageUrl String?
   role          String?
   accounts      Account[]
   sessions      Session[]
@@ -109,6 +119,7 @@ model Position {
      id  String  @id @default(auto()) @map("_id") @db.ObjectId
      positionName String @unique
      teachers Teacher[]
+     user User[]
      teacherIDs String[] @db.ObjectId
 }
 

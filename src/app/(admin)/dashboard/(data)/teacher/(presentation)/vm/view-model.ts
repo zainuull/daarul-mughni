@@ -11,6 +11,7 @@ import {
 import useStoreDatas from '../store/store.datas';
 import { useState } from 'react';
 import useResultFilter from '../store/store.result.filter';
+import { CreateUserUseCase } from '../../domain/useCase/create-user.useCase';
 
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
@@ -23,6 +24,7 @@ export default function ViewModel() {
   const getTeachersByIdUseCase = new GetTeacherByIdUseCase(teacherDataSourceImpl);
   const getTeacherByPositionUseCase = new GetTeacherByPositionUseCase(teacherDataSourceImpl);
   const createTeacherUseCase = new CreateTeacherUseCase(teacherDataSourceImpl);
+  const createUserUseCase = new CreateUserUseCase(teacherDataSourceImpl);
   const deleteTeacherUseCase = new DeleteTeacherUseCase(teacherDataSourceImpl);
   const updateTeacherUseCase = new UpdateTeacherUseCase(teacherDataSourceImpl);
 
@@ -42,6 +44,10 @@ export default function ViewModel() {
     await createTeacherUseCase.invoke(data);
   }
 
+  async function createUser(data: any) {
+    await createUserUseCase.invoke(data);
+  }
+
   async function deleteTeacher(id: string) {
     await deleteTeacherUseCase.invoke(id);
   }
@@ -58,5 +64,6 @@ export default function ViewModel() {
     deleteTeacher,
     updateTeacher,
     detailTeacher,
+    createUser,
   };
 }

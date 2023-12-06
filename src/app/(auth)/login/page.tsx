@@ -31,6 +31,7 @@ const LoginPage = () => {
       } else {
         console.log(res.error);
         setError('Email atau password salah');
+         setIsLoading(false);
       }
     } catch (error) {
       console.log(error);

@@ -21,6 +21,8 @@ export const authOptions: NextAuthOptions = {
           password: string;
         };
         const user = await prisma.user.findFirst({ where: { email } });
+        console.log('user 1', user);
+
         const confirmPassword = await bcrypt.compare(password, user?.hashedPassword || '');
         if (confirmPassword) {
           return user;
@@ -35,6 +37,7 @@ export const authOptions: NextAuthOptions = {
         token.email = user?.email;
         token.role = user?.role;
       }
+      console.log('user 2', token);
       return token;
     },
     async session({ session, token }: any) {
@@ -48,6 +51,7 @@ export const authOptions: NextAuthOptions = {
       if ('role' in token) {
         session.user.role = token.role;
       }
+      console.log('user 3', session);
       return session;
     },
   },

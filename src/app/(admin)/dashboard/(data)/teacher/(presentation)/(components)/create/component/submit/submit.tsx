@@ -7,7 +7,7 @@ import useViewModel from '../../../../vm/view-model';
 import { HandleError } from '@/core/services/handleError/handleError';
 
 const Submit = () => {
-  const { createTeacher } = useViewModel();
+  const { createTeacher, createUser } = useViewModel();
   const [error, setError] = useState('');
   const [formTeacher] = useDataTeacher();
   const router = useRouter();
@@ -33,7 +33,15 @@ const Submit = () => {
         createTeacher(formTeacher)
           .then(() => {
             toastService.successCreate();
-            router.back()
+            router.back();
+          })
+          .catch((err) => {
+            HandleError(err);
+          });
+        createUser(formTeacher)
+          .then(() => {
+            toastService.successCreate();
+            router.back();
           })
           .catch((err) => {
             HandleError(err);

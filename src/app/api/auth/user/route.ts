@@ -16,20 +16,43 @@ export const GET = async () => {
 };
 
 export const POST = async (req: Request) => {
-  const { name, email, password, image, role } = await req.json();
+  const {
+    name,
+    date_of_birth,
+    telp,
+    email,
+    nip,
+    ijazah,
+    positionName,
+    period_work,
+    gender,
+    age,
+    status,
+    imageUrl,
+    role,
+  } = await req.json();
 
-  if (!name && !email) {
-    return NextResponse.json({ status_code: 500, message: 'name and email are required' });
+  if (!email) {
+    return NextResponse.json({ status_code: 500, message: 'email are required' });
   }
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(nip, 10);
 
   try {
     const newUser = await prisma.user.create({
       data: {
         name,
+        date_of_birth,
+        telp,
         email,
+        nip,
+        ijazah,
+        positionName,
         hashedPassword,
-        image,
+        period_work,
+        gender,
+        age,
+        status,
+        imageUrl,
         role,
       },
     });
