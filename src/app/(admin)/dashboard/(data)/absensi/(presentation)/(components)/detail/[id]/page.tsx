@@ -38,13 +38,13 @@ const DetailAbsensi = ({ params }: { params: { id: string } }) => {
     <div className="w-full flex justify-end">
       <div
         className={`p-10 ${
-          menu ? 'w-[1300px]' : 'w-3/4'
+          menu ? 'w-[88vw]' : 'w-[75vw]'
         } h-full flex flex-col gap-y-4 transition-all duration-700`}>
         <div className="w-full flex items-center justify-between ">
           <Header title="Detail Data Absensi" />
           <div className="w-1/3 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
             <BsSearch />
-            <input className="w-full outline-none" placeholder="Cari Siswa" />
+            <input className="w-[70vw] outline-none" placeholder="Cari Siswa" />
           </div>
         </div>
         <Table className="mt-5 min-h-[400px] relative pb-14">

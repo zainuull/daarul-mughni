@@ -13,11 +13,15 @@ const LayoutPage = async ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="w-full min-h-screen">
-      <div className="w-full h-full flex relative">
-        <Menu />
-        <div className="w-full flex flex-col">
-          <NavbarDashboard />
-          <div className="w-full h-full">{children}</div>
+      <div className="w-full h-full grid grid-cols-12">
+        <div className="col-span-2 h-screen relative">
+          <Menu />
+        </div>
+        <div className="col-span-10 h-screen">
+          <div className="flex flex-col">
+            {/* <NavbarDashboard /> */}
+            {children}
+          </div>
         </div>
       </div>
     </div>

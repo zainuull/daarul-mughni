@@ -70,26 +70,28 @@ const Navigation = () => {
   return (
     <div
       className={`p-10 ${
-        menu ? 'w-[1300px]' : 'w-3/4'
+        menu ? 'w-[88vw]' : 'w-[75vw]'
       } h-full flex flex-col gap-y-4 transition-all duration-700`}>
       <Header title="Data Guru" />
       <div className="w-full flex items-center justify-between mt-2">
         <h2 className="font-light uppercase">Data Guru / Pengajar</h2>
-        <button onClick={handleAdd} className="px-6 py-2 bg-primary rounded-lg text-slate-700">
+        <button onClick={handleAdd} className="px-2 py-2 bg-primary rounded-lg text-slate-700 lg:px-6">
           Tambah Data Guru
         </button>
       </div>
-      <div className="w-full flex items-center gap-x-6">
-        <div className="w-4/5 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
+      <div className="w-full grid grid-cols-12 gap-x-6 sm:gap-x-4">
+        <div className="col-span-8 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
           <BsSearch />
           <input
-            className="w-full outline-none"
+            className="w-[70vw] outline-none"
             placeholder="Cari Data Guru"
             value={searchInput}
             onChange={handleSearch}
           />
         </div>
-        <DropdownFilter />
+        <div className='col-span-4'>
+          <DropdownFilter />
+        </div>
       </div>
       <TableList resultSearchData={searchData} />
     </div>

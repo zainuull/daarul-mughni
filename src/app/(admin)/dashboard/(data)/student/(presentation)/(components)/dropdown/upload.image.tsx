@@ -75,7 +75,7 @@ export const UploadImage = () => {
       {data?.image && (
         <button
           onClick={handleDeleteImage}
-          className="bg-red-600 text-white px-6 py-2 rounded-lg w-1/4 hover:bg-red-700 transition-all mx-2">
+          className="bg-red-600 text-white py-2 text-sm rounded-lg w-[150px] hover:bg-red-700 transition-all mx-2">
           Delete Image
         </button>
       )}

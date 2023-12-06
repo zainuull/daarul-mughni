@@ -33,7 +33,6 @@ export const DropdownFilter = () => {
     control: (provided) => ({
       ...provided,
       backgroundColor: '#f1f5f9',
-      width: 300,
       borderColor: 'black',
     }),
   };
@@ -46,7 +45,7 @@ export const DropdownFilter = () => {
       isClearable={true}
       onChange={handleCategory}
       styles={customStyles}
-      placeholder="Filter berdasarkan Kategori"
+      placeholder="Kategori"
     />
   );
 };

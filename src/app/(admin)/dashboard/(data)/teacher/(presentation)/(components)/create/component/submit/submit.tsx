@@ -9,7 +9,7 @@ import { HandleError } from '@/core/services/handleError/handleError';
 const Submit = () => {
   const { createTeacher } = useViewModel();
   const [error, setError] = useState('');
-  const [formTeacher, setFormTeacher] = useDataTeacher();
+  const [formTeacher] = useDataTeacher();
   const router = useRouter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();

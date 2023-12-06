@@ -1,10 +1,10 @@
 'use client';
-import Header from './components/header/header';
+import Beranda from './(data)/beranda/page';
 
 const DashboardPage = () => {
   return (
-    <div className='p-10'>
-      <Header title="Dashboard" />
+    <div className=''>
+     <Beranda/>
     </div>
   );
 };

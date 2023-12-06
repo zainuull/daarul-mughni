@@ -33,7 +33,6 @@ export const DropdownFilterLevel = () => {
     control: (provided) => ({
       ...provided,
       backgroundColor: '#f1f5f9',
-      width: 185,
       borderColor: 'black',
     }),
   };
@@ -46,7 +45,7 @@ export const DropdownFilterLevel = () => {
       isClearable={true}
       onChange={handleLevel}
       styles={customStyles}
-      placeholder="Filter tingkatan"
+      placeholder="Tingkatan"
     />
   );
 };

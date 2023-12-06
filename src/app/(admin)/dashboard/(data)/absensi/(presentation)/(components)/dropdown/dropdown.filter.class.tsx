@@ -39,7 +39,6 @@ export const DropdownFilterClass = () => {
     control: (provided) => ({
       ...provided,
       backgroundColor: '#f1f5f9',
-      width: 150,
       borderColor: 'black',
     }),
   };
@@ -52,7 +51,7 @@ export const DropdownFilterClass = () => {
       isClearable={true}
       onChange={handlePosition}
       styles={customStyles}
-      placeholder="Filter kelas"
+      placeholder="Kelas"
       isDisabled={formAbsensi?.filter_by_level ? false : true}
     />
   );

@@ -36,7 +36,6 @@ export const DropdownFilterClass = () => {
     control: (provided) => ({
       ...provided,
       backgroundColor: '#f1f5f9',
-      width: 185,
       borderColor: 'black',
     }),
   };
@@ -50,7 +49,7 @@ export const DropdownFilterClass = () => {
       onChange={handleClass}
       isDisabled={studentForm?.filter_by_level ? false : true}
       styles={customStyles}
-      placeholder="MTs VII"
+      placeholder="Kelas"
     />
   );
 };

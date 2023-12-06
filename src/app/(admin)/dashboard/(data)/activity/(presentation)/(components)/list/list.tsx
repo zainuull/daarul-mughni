@@ -22,8 +22,10 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const [resultFilter] = useResultFilter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-  const result = resultSearchData?.length ? resultSearchData : dataStore?.data || resultFilter?.data?.events;
-  
+  const result = resultSearchData?.length
+    ? resultSearchData
+    : dataStore?.data || resultFilter?.data?.events;
+
   useEffect(() => {
     notifyService.showLoading();
     fetchData();
@@ -74,7 +76,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   };
 
   return (
-    <Table className="mt-5 min-h-[500px] relative pb-14">
+    <Table className="mt-5 h-screen relative pb-14">
       <TableHead>
         <TableRow>
           <TableHeaderCell>Nama Kegiatan</TableHeaderCell>
@@ -126,10 +128,11 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
           ))
         )}
       </TableBody>
-      <nav className="absolute right-0 bottom-0">
-        <Pagination />
-      </nav>
       <ToastNotify />
+      {/* Naivgation */}
+      {/* <nav className="absolute right-0 bottom-0">
+        <Pagination />
+      </nav> */}
     </Table>
   );
 };

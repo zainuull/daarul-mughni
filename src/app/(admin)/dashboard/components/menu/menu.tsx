@@ -18,22 +18,22 @@ const Menu = () => {
   return (
     <div
       className={`${
-        menu ? 'w-[150px] transition-all duration-700 absolute left-0 z-10 bg-white' : 'w-[330px] bg-white transition-all duration-700 absolute left-0 z-10'
-      } min-h-full p-4 shadow-lg shadow-gray-300`}>
+        menu ? 'w-[12vw]' : 'w-[25vw]'
+      } h-screen p-4 shadow-lg shadow-gray-300 bg-white  transition-all duration-700`}>
       <div className="w-full h-full flex flex-col gap-y-2 mt-4">
-        <div className="w-full flex items-center justify-center gap-x-4">
+        <div className="w-full flex items-center justify-center sm:gap-x-4 gap-x-4">
           <RxDashboard size={30} />
-          {menu ? null : <h1 className="text-2xl font-medium">Dashboard</h1>}
+          {menu ? null : <h1 className="text-base lg:text-2xl font-medium">Dashboard</h1>}
         </div>
-        <div className="flex flex-col gap-y-10 mt-20 w-full px-6">
+        <div className="flex flex-col gap-y-10 mt-20 w-full px-6 sm:px-2">
           <Link
             href={'/dashboard'}
             className={`${
-              pathname == '/dashboard' ? 'bg-primary transition-all duration-300' : 'cursor-pointer'
-            } w-full flex items-center justify-between p-3 rounded-lg`}>
-            <div className="flex items-center gap-x-6">
+              pathname == '/dashboard' ? 'bg-primary transition-all duration-300 p-2' : 'cursor-pointer'
+            } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+            <div className="flex items-center gap-x-3 lg:gap-x-6">
               <HiOutlineKey size={30} />
-              {menu ? null : <h1 className="">Beranda</h1>}
+              {menu ? null : <h1 className="sm:text-xs lg:text-base">Beranda</h1>}
             </div>
             <BiChevronRight size={20} />
           </Link>
@@ -43,12 +43,12 @@ const Menu = () => {
                 href={{ pathname: '/dashboard/teacher' }}
                 className={`${
                   pathname.match(/^\/dashboard\/teacher/)
-                    ? 'bg-primary transition-all duration-300'
+                    ? 'bg-primary transition-all duration-300 p-2'
                     : 'cursor-pointer'
-                } w-full flex items-center justify-between p-3 rounded-lg`}>
-                <div className="flex items-center gap-x-6">
+                } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+                <div className="flex items-center gap-x-3 lg:gap-x-6">
                   <BiCubeAlt size={30} />
-                  {menu ? null : <h1 className="">Data Guru</h1>}
+                  {menu ? null : <h1 className="sm:text-xs lg:text-base">Data Guru</h1>}
                 </div>
                 <BiChevronRight size={20} />
               </Link>
@@ -56,12 +56,12 @@ const Menu = () => {
                 href={{ pathname: '/dashboard/student' }}
                 className={`${
                   pathname.match(/^\/dashboard\/student/)
-                    ? 'bg-primary transition-all duration-300'
+                    ? 'bg-primary transition-all duration-300 p-2'
                     : 'cursor-pointer'
-                } w-full flex items-center justify-between p-3 rounded-lg`}>
-                <div className="flex items-center gap-x-6">
+                } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+                <div className="flex items-center gap-x-3 lg:gap-x-6">
                   <TbUserSquareRounded size={30} />
-                  {menu ? null : <h1 className="">Data Siswa</h1>}
+                  {menu ? null : <h1 className="sm:text-xs lg:text-base">Data Siswa</h1>}
                 </div>
                 <BiChevronRight size={20} />
               </Link>
@@ -69,12 +69,12 @@ const Menu = () => {
                 href={{ pathname: '/dashboard/activity' }}
                 className={`${
                   pathname.match(/^\/dashboard\/activity/)
-                    ? 'bg-primary transition-all duration-300'
+                    ? 'bg-primary transition-all duration-300 p-2'
                     : 'cursor-pointer'
-                } w-full flex items-center justify-between p-3 rounded-lg`}>
-                <div className="flex items-center gap-x-6">
+                } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+                <div className="flex items-center gap-x-3 lg:gap-x-6">
                   <BiCalendarEvent size={30} />
-                  {menu ? null : <h1 className="">Laporan Kegiatan</h1>}
+                  {menu ? null : <h1 className="sm:text-xs lg:text-base">Laporan Kegiatan</h1>}
                 </div>
                 <BiChevronRight size={20} />
               </Link>
@@ -84,12 +84,12 @@ const Menu = () => {
             href={{ pathname: '/dashboard/absensi' }}
             className={`${
               pathname.match(/^\/dashboard\/absensi/)
-                ? 'bg-primary transition-all duration-300'
+                ? 'bg-primary transition-all duration-300 p-2'
                 : 'cursor-pointer'
-            } w-full flex items-center justify-between p-3 rounded-lg`}>
-            <div className="flex items-center gap-x-6">
+            } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+            <div className="flex items-center gap-x-3 lg:gap-x-6">
               <BsCalendarCheck size={30} />
-              {menu ? null : <h1 className="">Absensi</h1>}
+              {menu ? null : <h1 className="sm:text-xs lg:text-base">Absensi</h1>}
             </div>
             <BiChevronRight size={20} />
           </Link>
@@ -97,23 +97,23 @@ const Menu = () => {
             href={'/dashboard/help'}
             className={`${
               pathname == '/dashboard/help'
-                ? 'bg-primary transition-all duration-300'
+                ? 'bg-primary transition-all duration-300 p-2'
                 : 'cursor-pointer'
-            } w-full flex items-center justify-between p-3 rounded-lg`}>
-            <div className="flex items-center gap-x-6">
+            } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+            <div className="flex items-center gap-x-3 lg:gap-x-6">
               <BsQuestionCircle size={30} />
-              {menu ? null : <h1 className="">Help</h1>}
+              {menu ? null : <h1 className="sm:text-xs lg:text-base">Help</h1>}
             </div>
             <BiChevronRight size={20} />
           </Link>
           <Link
             href={'/'}
             className={`${
-              pathname == '/' ? 'bg-primary transition-all duration-300' : 'cursor-pointer'
-            } w-full flex items-center justify-between p-3 rounded-lg`}>
-            <div className="flex items-center gap-x-6">
+              pathname == '/' ? 'bg-primary transition-all duration-300 p-2' : 'cursor-pointer'
+            } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+            <div className="flex items-center gap-x-3 lg:gap-x-6">
               <BsGlobe2 size={30} />
-              {menu ? null : <h1 className="">Website</h1>}
+              {menu ? null : <h1 className="sm:text-xs lg:text-base">Website</h1>}
             </div>
             <BiChevronRight size={20} />
           </Link>

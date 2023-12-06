@@ -104,11 +104,11 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
               <TableCell>{data.nip}</TableCell>
               <TableCell>
                 {data?.status == 'Aktif' ? (
-                  <button className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
+                  <button className="w-[80px] lg:w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
                     Aktif
                   </button>
                 ) : (
-                  <button className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
+                  <button className="w-[80px] lg:w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
                     Pending
                   </button>
                 )}
