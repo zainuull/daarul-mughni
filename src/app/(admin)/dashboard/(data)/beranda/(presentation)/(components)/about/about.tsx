@@ -11,20 +11,23 @@ import { useEffect } from 'react';
 import { NotifyService } from '@/core/services/notify/notifyService';
 import { HandleError } from '@/core/services/handleError/handleError';
 import useStoreDatas from '../../store/store.datas';
+import { useSession } from 'next-auth/react';
+import { IUser } from '@/model/user';
 
-const About = ({ email }) => {
+const About = () => {
   const { getUserByEmail } = useViewModel();
+  const { data } = useSession();
   const [detailUser] = useStoreDatas();
   const notifyService = new NotifyService();
-  const data: any = detailUser?.data;
+  const user: IUser = detailUser?.data;
 
   useEffect(() => {
     notifyService.showLoading();
-    fetchData(email);
-  }, [email]);
+    fetchData(data?.user?.email);
+  }, [data?.user?.email]);
 
-  const fetchData = async (email: string) => {
-    await getUserByEmail(email)
+  const fetchData = (email: string) => {
+    getUserByEmail(email)
       .then(() => {
         notifyService.closeSwal();
       })
@@ -37,10 +40,10 @@ const About = ({ email }) => {
     <div className="bg-white w-full rounded-lg min-h-52 py-10 flex flex-col shadow-xl px-6">
       <div className="grid grid-cols-12 gap-10">
         <div className="col-span-4 flex justify-center items-center">
-          {data?.imageUrl ? (
+          {user?.imageUrl ? (
             <Image
-              src={data?.imageUrl}
-              alt={data?.name}
+              src={user?.imageUrl}
+              alt={user?.name}
               width={250}
               height={300}
               className="w-full h-[250px] object-cover rounded-lg"
@@ -73,11 +76,11 @@ const About = ({ email }) => {
             </div>
           </div>
           <div className="w-full flex flex-col gap-y-4 text-sm lg:text-base">
-            <h1> : {data?.name}</h1>
-            <h1> : {data?.nip}</h1>
-            <h1> : {data?.email}</h1>
-            <h1> : {data?.positionName}</h1>
-            <h1> : {data?.telp}</h1>
+            <h1> : {user?.name}</h1>
+            <h1> : {user?.nip}</h1>
+            <h1> : {user?.email}</h1>
+            <h1> : {user?.positionName}</h1>
+            <h1> : {user?.telp}</h1>
           </div>
         </div>
       </div>

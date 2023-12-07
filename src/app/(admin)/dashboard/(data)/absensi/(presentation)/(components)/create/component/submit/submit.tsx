@@ -7,7 +7,7 @@ import useViewModel from '../../../../vm/view.model';
 import { HandleError } from '@/core/services/handleError/handleError';
 
 const Submit = () => {
-  const { createAbsensi, getAbsensi } = useViewModel();
+  const { createAbsensi } = useViewModel();
   const [formAbsensi] = useDataAbsensi();
   const router = useRouter();
   const [error, setError] = useState('');

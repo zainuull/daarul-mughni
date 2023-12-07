@@ -33,7 +33,7 @@ const Submit = () => {
         createTeacher(formTeacher)
           .then(() => {
             toastService.successCreate();
-            router.back();
+            router.push('/dashboard/teacher');
           })
           .catch((err) => {
             HandleError(err);
@@ -41,7 +41,7 @@ const Submit = () => {
         createUser(formTeacher)
           .then(() => {
             toastService.successCreate();
-            router.back();
+            router.push('/dashboard/teacher');
           })
           .catch((err) => {
             HandleError(err);

@@ -39,10 +39,10 @@ model Session {
 
 model User {
   id  String  @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  name String @unique
   date_of_birth String?
   telp String?
-  email         String?   @unique
+  email         String?   
   nip String?
   ijazah String?
   positionName String?
@@ -196,7 +196,7 @@ model Absensi {
    classTypeName String?
    classType ClassType?   @relation(fields: [classTypeName], references: [classTypeName])
    teacher String?
-   Teacher User? @relation(fields: [teacher],references: [email])
+   Teacher User? @relation(fields: [teacher],references: [name])
    lesson String
    start_time String
    end_time  String
