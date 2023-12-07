@@ -7,8 +7,8 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
   try {
     const data = await prisma.absensi.findUnique({
       where: { id },
-      include: { 
-        classType: {include : {students : true}} ,
+      include: {
+        classType: { include: { students: true } },
       },
     });
     if (!data) {
@@ -39,7 +39,7 @@ export const DELETE = async (req: Request, { params }: { params: { id: string } 
 
 export const PUT = async (req: Request, { params }: { params: { id: string } }) => {
   const id = params.id;
-  const { levelName, className, classTypeName, teacher, lesson, start_time, end_time } =
+  const { levelName, className, classTypeName, teacher, lesson,start_time, end_time } =
     await req.json();
   try {
     const data = await prisma.absensi.update({

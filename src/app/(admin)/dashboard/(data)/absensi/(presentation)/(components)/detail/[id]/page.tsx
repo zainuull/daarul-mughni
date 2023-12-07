@@ -42,7 +42,6 @@ const DetailAbsensi = ({ params }: { params: { id: string } }) => {
     ? students.filter((data) => data?.name?.toLowerCase().includes(searchInput.toLowerCase()))
     : [];
 
-
   return (
     <div className="w-full flex justify-end">
       <div
@@ -62,7 +61,7 @@ const DetailAbsensi = ({ params }: { params: { id: string } }) => {
             />
           </div>
         </div>
-        <TableList students={students} resultSearchData={resultSearchData}/>
+        <TableList students={students} resultSearchData={resultSearchData} />
       </div>
     </div>
   );

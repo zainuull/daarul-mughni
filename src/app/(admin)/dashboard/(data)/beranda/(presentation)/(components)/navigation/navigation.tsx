@@ -21,7 +21,7 @@ const Navigation = () => {
     <div
       className={`p-10 ${
         menu ? 'w-[88vw]' : 'w-[75vw]'
-      } h-screen overflow-y-auto flex flex-col gap-y-4 transition-all duration-700 bg-slate-100 select-none`}>
+      } h-screen overflow-y-auto flex flex-col gap-y-4 transition-all duration-700  select-none`}>
       <Header title="Beranda" />
       <div className="w-full h-full flex flex-col gap-y-6 mb-20">
         <div className="bg-white w-full rounded-lg h-32 py-6 flex items-center justify-center shadow-xl">

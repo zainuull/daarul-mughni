@@ -127,7 +127,7 @@ model Position {
 
 model Student {
     id  String  @id @default(auto()) @map("_id") @db.ObjectId
-    name String
+    name String? @unique
     date_of_birth String?
     ijazah String?
     gender String?
@@ -145,8 +145,18 @@ model Student {
     classTypeName String?
     classType ClassType? @relation(fields: [classTypeName], references: [classTypeName])
     image String?
+    recapitulation Recapitulation[]
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+
+model Recapitulation {
+     id  String  @id @default(auto()) @map("_id") @db.ObjectId
+     name String?
+     Student Student? @relation(fields: [name],references: [name])
+     present Boolean
+     presentAt DateTime @default(now())
 }
 
 
@@ -201,6 +211,9 @@ model Absensi {
    start_time String
    end_time  String
 }
+
+
+
 
 model Product {
       id        String   @id @default(auto()) @map("_id") @db.ObjectId

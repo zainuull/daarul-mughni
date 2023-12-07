@@ -1,5 +1,5 @@
 import { Http } from '@/core/services/http/http.client';
-import { IAbsensiDataModel, IAbsensiQuery } from '../../domain/model/IModel';
+import { IAbsensiDataModel, IAbsensiQuery, IRecapitulationModel } from '../../domain/model/IModel';
 import { AbsensiRepository } from '../../domain/repository/absensi.repository';
 
 export default class AbsensiAPIDataSourceImpl implements AbsensiRepository {
@@ -30,6 +30,22 @@ export default class AbsensiAPIDataSourceImpl implements AbsensiRepository {
 
   async deleteAbsensi(id: string) {
     const res = await Http.delete(`/api/absensi/${id}`);
+    return res.data;
+  }
+
+  // Recapitulation
+  async getRecapitulationById(id: string) {
+    const res: any = await Http.get(`/api/students/${id}`);
+    return res.data?.data?.recapitulation;
+  }
+
+  async createRecapitulation(data: IRecapitulationModel) {
+    const res = await Http.post('/api/recapitulation', data);
+    return res.data;
+  }
+
+  async updateRecapitulation(id: string, data: IRecapitulationModel) {
+    const res = await Http.put(`/api/recapitulation/${id}`, data);
     return res.data;
   }
 }

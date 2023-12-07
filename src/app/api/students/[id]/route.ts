@@ -4,7 +4,13 @@ import { NextResponse } from 'next/server';
 export const GET = async (req: Request, { params }: { params: { id: string } }) => {
   const id = params.id;
   try {
-    const data = await prisma.student.findUnique({ where: { id } });
+    const data = await prisma.student.findUnique({
+      where: { id },
+      include: {
+        classType: { include: { absensi: true } },
+        recapitulation: true,
+      },
+    });
     if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
     }
@@ -32,7 +38,7 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
     levelName,
     className,
     classTypeName,
-    image
+    image,
   } = await req.json();
   try {
     const data = await prisma.student.update({

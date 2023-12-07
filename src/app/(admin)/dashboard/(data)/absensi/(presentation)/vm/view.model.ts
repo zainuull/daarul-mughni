@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import AbsensiAPIDataSourceImpl from '../../data/api/absensi.data.source';
-import { IAbsensiDataModel, IAbsensiQuery } from '../../domain/model/IModel';
+import { IAbsensiDataModel, IAbsensiQuery, IRecapitulationModel } from '../../domain/model/IModel';
 import {
   CreateAbsensiUseCase,
   DeleteAbsensiUseCase,
@@ -11,11 +11,15 @@ import {
 } from '../../domain/useCase';
 import useStoreDatas from '../store/store.datas';
 import useResultFilter from '../store/store.result.filter';
+import { CreateRecapitulationUseCase } from '../../domain/useCase/create-recapitulation.useCase';
+import { GetRecapitulationByIdUseCase } from '../../domain/useCase/get-recapitulation-byid.useCase';
+import { UpdateRecapitulationUseCase } from '../../domain/useCase/update-recapitulation.useCase';
 
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
   const [, setResultFilter] = useResultFilter();
   const [detailAbsensi, setDetailAbsensi] = useState<any>();
+  const [detailRecap, setDetailRecap] = useState<any>();
 
   const absensiDataSourceImpl = new AbsensiAPIDataSourceImpl();
 
@@ -25,6 +29,10 @@ export default function ViewModel() {
   const createAbsensiUseCase = new CreateAbsensiUseCase(absensiDataSourceImpl);
   const deleteAbsensiUseCase = new DeleteAbsensiUseCase(absensiDataSourceImpl);
   const updateAbsensiUseCase = new UpdateAbsensiUseCase(absensiDataSourceImpl);
+  // Recapitulation
+  const getRecapitulationByIdUseCase = new GetRecapitulationByIdUseCase(absensiDataSourceImpl);
+  const createRecapitulationUseCase = new CreateRecapitulationUseCase(absensiDataSourceImpl);
+  const updateRecapitulationUseCase = new UpdateRecapitulationUseCase(absensiDataSourceImpl);
 
   async function getAbsensi(query?: IAbsensiQuery) {
     setDatas(await getAbsensiUseCase.invoke(query));
@@ -50,6 +58,19 @@ export default function ViewModel() {
     await updateAbsensiUseCase.invoke(id, data);
   }
 
+  // Recapitulation
+  async function getRecapitulationById(id: string) {
+    setDetailRecap(await getRecapitulationByIdUseCase.invoke(id));
+  }
+
+  async function createRecapitulation(data: IRecapitulationModel) {
+    await createRecapitulationUseCase.invoke(data);
+  }
+
+  async function updateRecapitulation(id: string, data: IRecapitulationModel) {
+    await updateRecapitulationUseCase.invoke(id, data);
+  }
+
   return {
     getAbsensi,
     getAbsensiById,
@@ -58,5 +79,9 @@ export default function ViewModel() {
     deleteAbsensi,
     updateAbsensi,
     detailAbsensi,
+    createRecapitulation,
+    getRecapitulationById,
+    detailRecap,
+    updateRecapitulation,
   };
 }
