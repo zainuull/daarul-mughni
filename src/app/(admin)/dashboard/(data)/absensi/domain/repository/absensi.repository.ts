@@ -8,7 +8,7 @@ import {
 export interface AbsensiRepository {
   getAbsensi(query?: IAbsensiQuery): Promise<IAbsensiModel>;
   getAbsensiById(id: string): Promise<IAbsensiDataModel>;
-  getStudents(): Promise<any>;
+  getStudentsByClassTypeName(classTypeName: string): Promise<any>;
   getAbsensiByClass(className: string): Promise<IAbsensiModel>;
   createAbsensi(data: IAbsensiDataModel): Promise<IAbsensiModel>;
   updateAbsensi(id: string, data: IAbsensiDataModel): Promise<IAbsensiModel>;

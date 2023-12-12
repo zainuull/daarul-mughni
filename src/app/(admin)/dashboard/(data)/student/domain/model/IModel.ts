@@ -26,4 +26,5 @@ export interface IStudentDataModel {
   classTypeName?: string;
   levelName?: string;
   image?: string;
+  recapitulation?: any;
 }

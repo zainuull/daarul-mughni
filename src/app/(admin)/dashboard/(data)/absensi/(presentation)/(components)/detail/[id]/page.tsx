@@ -11,30 +11,26 @@ import TableList from '../(components)/list/list';
 import About from '../(components)/about/about';
 
 const DetailAbsensi = ({ params }: { params: { id: string } }) => {
-  const { getAbsensiById, detailAbsensi, getStudents, students } = useViewModel();
+  const { getAbsensiById, detailAbsensi, getStudentsByClassTypeName, dataStudents } =
+    useViewModel();
   const [searchInput, setSearchInput] = useState('');
   const id = params?.id;
   const notifyService = new NotifyService();
   const [menu] = useStatus();
-  const student = students?.data;
   const lesson = detailAbsensi?.lesson;
 
   useEffect(() => {
     notifyService.showLoading();
     fetchData();
-  }, []);
+  }, [detailAbsensi?.classTypeName]);
 
   const fetchData = () => {
     getAbsensiById(id)
       .then(() => {
         Swal.close();
-      })
-      .catch((err) => {
-        HandleError(err);
-      });
-    getStudents()
-      .then(() => {
-        Swal.close();
+        getStudentsByClassTypeName(detailAbsensi?.classTypeName).catch((err) => {
+          HandleError(err);
+        });
       })
       .catch((err) => {
         HandleError(err);
@@ -46,8 +42,8 @@ const DetailAbsensi = ({ params }: { params: { id: string } }) => {
   };
 
   // Ensure that datas is an array before attempting to filter
-  const resultSearchData = Array.isArray(students)
-    ? students.filter((data) => data?.name?.toLowerCase().includes(searchInput.toLowerCase()))
+  const resultSearchData = Array.isArray(dataStudents)
+    ? dataStudents.filter((data) => data?.name?.toLowerCase().includes(searchInput.toLowerCase()))
     : [];
 
   return (
@@ -69,7 +65,7 @@ const DetailAbsensi = ({ params }: { params: { id: string } }) => {
             />
           </div>
         </div>
-        <TableList students={student} lesson={lesson} resultSearchData={resultSearchData} />
+        <TableList students={dataStudents} lesson={lesson} resultSearchData={resultSearchData} />
       </div>
     </div>
   );

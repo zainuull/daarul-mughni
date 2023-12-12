@@ -14,14 +14,13 @@ const TableList = ({ students, lesson, resultSearchData }) => {
   const notifyService = new NotifyService();
   const [isPresent, setIsPresent] = useState([]);
   const [isUpdate, setIsUpdate] = useState(true);
-
   const result = resultSearchData?.length ? resultSearchData : students;
 
   useEffect(() => {
     if (result) {
       let tempArray = [];
       result.forEach((obj) => {
-        if (!obj.recapitulation.length) {
+        if (!obj.recapitulation?.length) {
           tempArray.push(false);
         } else {
           tempArray.push(true);
@@ -36,13 +35,16 @@ const TableList = ({ students, lesson, resultSearchData }) => {
     tempArray[index] = !isPresent[index];
     setIsPresent(tempArray);
     obj = {
-      id: '',
+      id: data?.recapitulation[0]?.id,
       lesson: lesson,
       student: data?.name,
       present: true,
     };
+
     if (isUpdate) {
       createRecapitulation(obj);
+    } else {
+      updateRecapitulation(obj.id, obj);
     }
     getRecapitulationById(data?.id);
   };
@@ -54,11 +56,12 @@ const TableList = ({ students, lesson, resultSearchData }) => {
         tempArray[index] = !isPresent[index];
         setIsPresent(tempArray);
         obj = {
-          id: detailRecap[0]?.id,
+          id: data?.recapitulation[0]?.id,
           lesson: lesson,
           student: data?.name,
           present: false,
         };
+
         setIsUpdate(false);
         updateRecapitulation(obj.id, obj);
       }

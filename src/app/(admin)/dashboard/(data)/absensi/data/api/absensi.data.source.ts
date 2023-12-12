@@ -13,9 +13,10 @@ export default class AbsensiAPIDataSourceImpl implements AbsensiRepository {
     return res.data?.data;
   }
 
-  async getStudents() {
-    const res = await Http.get('/api/students');
-    return res.data;
+  async getStudentsByClassTypeName(classTypeName: string) {
+    console.log('kucing 3', classTypeName);
+    const res: any = await Http.get(`/api/class-type/${classTypeName}`);
+    return res.data?.data?.students;
   }
 
   async getAbsensiByClass(className: string) {

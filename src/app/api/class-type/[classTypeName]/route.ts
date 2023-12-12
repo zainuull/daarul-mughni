@@ -1,12 +1,12 @@
 import prisma from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 
-export const GET = async (req: Request, { params }: { params: { id: string } }) => {
-  const id = params.id;
+export const GET = async (req: Request, { params }: { params: { classTypeName: string } }) => {
+  const classTypeName = params.classTypeName;
   try {
     const data = await prisma.classType.findUnique({
-      where: { id },
-      include: { students: true, absensi: true },
+      where: { classTypeName },
+      include: { students: { include: { recapitulation: true } }, absensi: true },
     });
     if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });

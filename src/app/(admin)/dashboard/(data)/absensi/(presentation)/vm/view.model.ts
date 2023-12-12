@@ -7,7 +7,7 @@ import {
   GetAbsensiByClassUseCase,
   GetAbsensiByIdUseCase,
   GetAbsensiUseCase,
-  GetStudentsUseCase,
+  GetStudentsByClassTypeNameUseCase,
   UpdateAbsensiUseCase,
 } from '../../domain/useCase';
 import useStoreDatas from '../store/store.datas';
@@ -21,7 +21,7 @@ export default function ViewModel() {
   const [, setResultFilter] = useResultFilter();
   const [detailAbsensi, setDetailAbsensi] = useState<any>();
   const [detailRecap, setDetailRecap] = useState<IRecapitulationModel>();
-  const [students, setStudents] = useState<any>();
+  const [dataStudents, setDataStudents] = useState<any>();
 
   const absensiDataSourceImpl = new AbsensiAPIDataSourceImpl();
 
@@ -36,7 +36,9 @@ export default function ViewModel() {
   const createRecapitulationUseCase = new CreateRecapitulationUseCase(absensiDataSourceImpl);
   const updateRecapitulationUseCase = new UpdateRecapitulationUseCase(absensiDataSourceImpl);
   // Students
-  const getStudentsUseCase = new GetStudentsUseCase(absensiDataSourceImpl);
+  const getStudentsByClassTypeNameUseCase = new GetStudentsByClassTypeNameUseCase(
+    absensiDataSourceImpl
+  );
 
   async function getAbsensi(query?: IAbsensiQuery) {
     setDatas(await getAbsensiUseCase.invoke(query));
@@ -76,8 +78,10 @@ export default function ViewModel() {
   }
 
   //Students
-  async function getStudents() {
-    setStudents(await getStudentsUseCase.invoke());
+  async function getStudentsByClassTypeName(classTypeName: string) {
+    console.log("kucing 1",classTypeName);
+    
+    setDataStudents(await getStudentsByClassTypeNameUseCase.invoke(classTypeName));
   }
 
   return {
@@ -92,7 +96,7 @@ export default function ViewModel() {
     getRecapitulationById,
     detailRecap,
     updateRecapitulation,
-    getStudents,
-    students,
+    getStudentsByClassTypeName,
+    dataStudents,
   };
 }
