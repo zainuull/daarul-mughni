@@ -6,38 +6,60 @@ import React, { useEffect, useState } from 'react';
 import useViewModel from '../../../../vm/view.model';
 import { NotifyService } from '@/core/services/notify/notifyService';
 
-const TableList = ({ students, resultSearchData }) => {
+const TableList = ({ students, lesson, resultSearchData }) => {
   const { createRecapitulation, getRecapitulationById, detailRecap, updateRecapitulation } =
     useViewModel();
   const router = useRouter();
-  let obj = { id: '', name: '', present: false };
+  let obj = { id: '', lesson: '', student: '', present: false };
   const notifyService = new NotifyService();
+  const [isPresent, setIsPresent] = useState([]);
+  const [isUpdate, setIsUpdate] = useState(true);
 
   const result = resultSearchData?.length ? resultSearchData : students;
-  const [isPresent, setIsPresent] = useState<Boolean>(false);
 
-  const handlePresent = (data: IStudentDataModel) => {
-    setIsPresent(true);
+  useEffect(() => {
+    if (result) {
+      let tempArray = [];
+      result.forEach((obj) => {
+        if (!obj.recapitulation.length) {
+          tempArray.push(false);
+        } else {
+          tempArray.push(true);
+        }
+      });
+      setIsPresent(tempArray);
+    }
+  }, [result]);
+
+  const handlePresent = (data: IStudentDataModel, index: number) => {
+    const tempArray = [...isPresent];
+    tempArray[index] = !isPresent[index];
+    setIsPresent(tempArray);
     obj = {
       id: '',
-      name: data?.name,
+      lesson: lesson,
+      student: data?.name,
       present: true,
     };
-    createRecapitulation(obj);
+    if (isUpdate) {
+      createRecapitulation(obj);
+    }
     getRecapitulationById(data?.id);
   };
 
-  console.log(detailRecap);
-
-  const handleNotPresent = (data: IStudentDataModel) => {
+  const handleNotPresent = (data: IStudentDataModel, index: number) => {
     notifyService.confirmationUpdate().then((res) => {
       if (res) {
-        setIsPresent(false);
+        const tempArray = [...isPresent];
+        tempArray[index] = !isPresent[index];
+        setIsPresent(tempArray);
         obj = {
-          id: detailRecap?.id,
-          name: data?.name,
+          id: detailRecap[0]?.id,
+          lesson: lesson,
+          student: data?.name,
           present: false,
         };
+        setIsUpdate(false);
         updateRecapitulation(obj.id, obj);
       }
     });
@@ -57,7 +79,7 @@ const TableList = ({ students, resultSearchData }) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {result?.map((data: IStudentDataModel) => (
+        {result?.map((data: IStudentDataModel, index) => (
           <TableRow key={data.id}>
             <TableCell
               onClick={() => handleDetail(data?.id)}
@@ -66,15 +88,15 @@ const TableList = ({ students, resultSearchData }) => {
             </TableCell>
             <TableCell>{data.nisn}</TableCell>
             <TableCell>
-              {isPresent ? (
+              {isPresent[index] ? (
                 <button
-                  onClick={() => handleNotPresent(data)}
+                  onClick={() => handleNotPresent(data, index)}
                   className="w-[80px] lg:w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
                   Hadir
                 </button>
               ) : (
                 <button
-                  onClick={() => handlePresent(data)}
+                  onClick={() => handlePresent(data, index)}
                   className="w-[80px] lg:w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
                   Tidak Hadir
                 </button>

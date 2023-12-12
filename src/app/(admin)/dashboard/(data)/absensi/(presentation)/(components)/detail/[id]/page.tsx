@@ -11,12 +11,13 @@ import TableList from '../(components)/list/list';
 import About from '../(components)/about/about';
 
 const DetailAbsensi = ({ params }: { params: { id: string } }) => {
-  const { getAbsensiById, detailAbsensi } = useViewModel();
+  const { getAbsensiById, detailAbsensi, getStudents, students } = useViewModel();
   const [searchInput, setSearchInput] = useState('');
   const id = params?.id;
   const notifyService = new NotifyService();
   const [menu] = useStatus();
-  const students = detailAbsensi?.classType?.students;
+  const student = students?.data;
+  const lesson = detailAbsensi?.lesson;
 
   useEffect(() => {
     notifyService.showLoading();
@@ -25,6 +26,13 @@ const DetailAbsensi = ({ params }: { params: { id: string } }) => {
 
   const fetchData = () => {
     getAbsensiById(id)
+      .then(() => {
+        Swal.close();
+      })
+      .catch((err) => {
+        HandleError(err);
+      });
+    getStudents()
       .then(() => {
         Swal.close();
       })
@@ -61,7 +69,7 @@ const DetailAbsensi = ({ params }: { params: { id: string } }) => {
             />
           </div>
         </div>
-        <TableList students={students} resultSearchData={resultSearchData} />
+        <TableList students={student} lesson={lesson} resultSearchData={resultSearchData} />
       </div>
     </div>
   );

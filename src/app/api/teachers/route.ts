@@ -1,13 +1,28 @@
 import prisma from '@/lib/prismadb';
+import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 
 export const POST = async (req: Request) => {
-  const { name, date_of_birth, telp, email, nip, ijazah, positionName, period_work, gender, age,status ,imageUrl} =
-    await req.json();
+  const {
+    name,
+    date_of_birth,
+    telp,
+    email,
+    nip,
+    ijazah,
+    positionName,
+    period_work,
+    gender,
+    age,
+    status,
+    imageUrl,
+  } = await req.json();
 
   if (!name && !email) {
     return NextResponse.json({ status_code: 500, message: 'name and email are required' });
   }
+
+  const hashedPassword = await bcrypt.hash(nip, 10);
 
   try {
     const newTeacher = await prisma.teacher.create({
@@ -19,11 +34,13 @@ export const POST = async (req: Request) => {
         nip,
         ijazah,
         positionName,
+        hashedPassword,
         period_work,
         gender,
         age,
         status,
         imageUrl,
+        role: positionName,
       },
     });
     console.log('Success to created', newTeacher);

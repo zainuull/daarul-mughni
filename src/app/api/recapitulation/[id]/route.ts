@@ -21,12 +21,14 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
 
 export const PUT = async (req: Request, { params }: { params: { id: string } }) => {
   const id = params?.id;
-  const { name, present } = await req.json();
+  const { date, lesson, student, present } = await req.json();
   try {
     const data = await prisma.recapitulation.update({
       where: { id },
       data: {
-        name,
+        date,
+        lesson,
+        student,
         present,
       },
     });

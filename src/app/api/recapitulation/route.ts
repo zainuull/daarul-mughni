@@ -1,5 +1,6 @@
 import prisma from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
+import { DateTime } from 'luxon';
 
 export const GET = async () => {
   const data = await prisma.recapitulation.findMany();
@@ -10,11 +11,16 @@ export const GET = async () => {
 };
 
 export const POST = async (req: Request) => {
-  const { name, present } = await req.json();
+  const { lesson, student, present } = await req.json();
   try {
+    
+    const date = DateTime.now().setLocale('id').toLocaleString(DateTime.DATE_FULL);
+
     const data = await prisma.recapitulation.create({
       data: {
-        name,
+        date,
+        lesson,
+        student,
         present,
       },
     });

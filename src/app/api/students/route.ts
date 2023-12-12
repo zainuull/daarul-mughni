@@ -17,7 +17,7 @@ export const POST = async (req: Request) => {
     className,
     classTypeName,
     levelName,
-    image
+    image,
   } = await req.json();
   if (!name && !guardian_telp) {
     return NextResponse.json({ status_code: 500, message: 'name and telp are required' });
@@ -56,6 +56,9 @@ export const GET = async () => {
     const data = await prisma.student.findMany({
       orderBy: {
         createdAt: 'desc',
+      },
+      include: {
+        recapitulation: true,
       },
     });
     if (!data) {

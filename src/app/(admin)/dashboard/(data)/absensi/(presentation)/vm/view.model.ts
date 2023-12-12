@@ -7,6 +7,7 @@ import {
   GetAbsensiByClassUseCase,
   GetAbsensiByIdUseCase,
   GetAbsensiUseCase,
+  GetStudentsUseCase,
   UpdateAbsensiUseCase,
 } from '../../domain/useCase';
 import useStoreDatas from '../store/store.datas';
@@ -19,7 +20,8 @@ export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
   const [, setResultFilter] = useResultFilter();
   const [detailAbsensi, setDetailAbsensi] = useState<any>();
-  const [detailRecap, setDetailRecap] = useState<any>();
+  const [detailRecap, setDetailRecap] = useState<IRecapitulationModel>();
+  const [students, setStudents] = useState<any>();
 
   const absensiDataSourceImpl = new AbsensiAPIDataSourceImpl();
 
@@ -33,6 +35,8 @@ export default function ViewModel() {
   const getRecapitulationByIdUseCase = new GetRecapitulationByIdUseCase(absensiDataSourceImpl);
   const createRecapitulationUseCase = new CreateRecapitulationUseCase(absensiDataSourceImpl);
   const updateRecapitulationUseCase = new UpdateRecapitulationUseCase(absensiDataSourceImpl);
+  // Students
+  const getStudentsUseCase = new GetStudentsUseCase(absensiDataSourceImpl);
 
   async function getAbsensi(query?: IAbsensiQuery) {
     setDatas(await getAbsensiUseCase.invoke(query));
@@ -71,6 +75,11 @@ export default function ViewModel() {
     await updateRecapitulationUseCase.invoke(id, data);
   }
 
+  //Students
+  async function getStudents() {
+    setStudents(await getStudentsUseCase.invoke());
+  }
+
   return {
     getAbsensi,
     getAbsensiById,
@@ -83,5 +92,7 @@ export default function ViewModel() {
     getRecapitulationById,
     detailRecap,
     updateRecapitulation,
+    getStudents,
+    students,
   };
 }

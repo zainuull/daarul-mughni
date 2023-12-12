@@ -15,19 +15,20 @@ import { useSession } from 'next-auth/react';
 import { IUser } from '@/model/user';
 
 const About = () => {
-  const { getUserByEmail } = useViewModel();
-  const { data } = useSession();
+  const { getUserById } = useViewModel();
+  const { data }: any = useSession();
   const [detailUser] = useStoreDatas();
   const notifyService = new NotifyService();
   const user: IUser = detailUser?.data;
+  console.log(user);
 
   useEffect(() => {
     notifyService.showLoading();
-    fetchData(data?.user?.email);
-  }, [data?.user?.email]);
+    fetchData(data?.user?.id);
+  }, [data?.user?.id]);
 
-  const fetchData = (email: string) => {
-    getUserByEmail(email)
+  const fetchData = (id: string) => {
+    getUserById(id)
       .then(() => {
         notifyService.closeSwal();
       })

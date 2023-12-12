@@ -24,7 +24,7 @@ model Account {
   id_token           String?  @db.String
   session_state      String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user Teacher @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -34,30 +34,30 @@ model Session {
   sessionToken String   @unique
   userId       String @db.ObjectId
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         Teacher     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id  String  @id @default(auto()) @map("_id") @db.ObjectId
-  name String @unique
-  date_of_birth String?
-  telp String?
-  email         String?   
-  nip String?
-  ijazah String?
-  positionName String?
-  position Position? @relation(fields: [positionName],references: [positionName])
-  hashedPassword String?
-  period_work String?
-  gender String?
-  age String?
-  status String?
-  imageUrl String?
-  role          String?
-  absensi Absensi[]
-  accounts      Account[]
-  sessions      Session[]
-}
+// model User {
+//   id  String  @id @default(auto()) @map("_id") @db.ObjectId
+//   name String @unique
+//   date_of_birth String?
+//   telp String?
+//   email         String?   
+//   nip String?
+//   ijazah String?
+//   positionName String?
+//   position Position? @relation(fields: [positionName],references: [positionName])
+//   hashedPassword String?
+//   period_work String?
+//   gender String?
+//   age String?
+//   status String?
+//   imageUrl String?
+//   role          String?
+//   absensi Absensi[]
+//   accounts      Account[]
+//   sessions      Session[]
+// }
 
 model VerificationToken {
   id  String  @id @default(auto()) @map("_id") @db.ObjectId
@@ -99,7 +99,7 @@ model Category {
 
 model Teacher {
     id  String  @id @default(auto()) @map("_id") @db.ObjectId
-    name String
+    name String @unique
     date_of_birth String
     telp String
     email String?
@@ -107,20 +107,25 @@ model Teacher {
     ijazah String?
     positionName String?
     position Position? @relation(fields: [positionName],references: [positionName])
+    hashedPassword String?
     period_work String?
     gender String?
     age String?
     status String?
     imageUrl String?
+    role          String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+    absensi Absensi[]
+    accounts      Account[]
+    sessions      Session[]
 }
 
 model Position {
      id  String  @id @default(auto()) @map("_id") @db.ObjectId
      positionName String @unique
      teachers Teacher[]
-     user User[]
+    //  user User[]
      teacherIDs String[] @db.ObjectId
 }
 
@@ -149,12 +154,15 @@ model Student {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
-
+ 
 
 model Recapitulation {
      id  String  @id @default(auto()) @map("_id") @db.ObjectId
-     name String?
-     Student Student? @relation(fields: [name],references: [name])
+     date String?
+     lesson String?
+     Lesson Lesson? @relation(fields: [lesson],references: [name])
+     student String?
+     Student Student? @relation(fields: [student],references: [name])
      present Boolean
      presentAt DateTime @default(now())
 }
@@ -182,9 +190,10 @@ model ClassType {
 
 model Lesson {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  name String @unique
   levelName  String?
   level      Level?   @relation(fields: [levelName], references: [levelName])
+  recapitulation Recapitulation[]
 }
 
 
@@ -206,7 +215,7 @@ model Absensi {
    classTypeName String?
    classType ClassType?   @relation(fields: [classTypeName], references: [classTypeName])
    teacher String?
-   Teacher User? @relation(fields: [teacher],references: [name])
+   Teacher Teacher? @relation(fields: [teacher],references: [name])
    lesson String
    start_time String
    end_time  String

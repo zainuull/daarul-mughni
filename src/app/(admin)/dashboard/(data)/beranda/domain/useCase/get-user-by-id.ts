@@ -1,9 +1,9 @@
 import { BerandaRepository } from '../repository/beranda.repository';
 
-export class GetUserByEmailUseCase {
+export class GetUserByIdUseCase {
   constructor(private masterRepo: BerandaRepository) {}
 
-  async invoke(email: string) {
-    return this.masterRepo.getUserByEmail(email);
+  async invoke(id: string) {
+    return this.masterRepo.getUserById(id);
   }
 }

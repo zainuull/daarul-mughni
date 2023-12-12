@@ -1,5 +1,5 @@
 import BerandaAPIDataSourceImpl from '../../data/api/beranda.data.source';
-import { GetUserByEmailUseCase } from '../../domain/useCase/get-user-by-email';
+import { GetUserByIdUseCase } from '../../domain/useCase/get-user-by-id';
 import useStoreDatas from '../store/store.datas';
 
 export default function ViewModel() {
@@ -7,14 +7,14 @@ export default function ViewModel() {
 
   const berandaDataSourceImpl = new BerandaAPIDataSourceImpl();
 
-  const getUserByEmailUseCase = new GetUserByEmailUseCase(berandaDataSourceImpl);
+  const getUserByIdUseCase = new GetUserByIdUseCase(berandaDataSourceImpl);
 
-  async function getUserByEmail(email: string) {
+  async function getUserById(email: string) {
 
-    setDetailUser(await getUserByEmailUseCase.invoke(email));
+    setDetailUser(await getUserByIdUseCase.invoke(email));
   }
 
   return {
-    getUserByEmail,
+    getUserById,
   };
 }

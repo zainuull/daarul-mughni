@@ -38,14 +38,14 @@ const Submit = () => {
           .catch((err) => {
             HandleError(err);
           });
-        createUser(formTeacher)
-          .then(() => {
-            toastService.successCreate();
-            router.push('/dashboard/teacher');
-          })
-          .catch((err) => {
-            HandleError(err);
-          });
+        // createUser(formTeacher)
+        //   .then(() => {
+        //     toastService.successCreate();
+        //     router.push('/dashboard/teacher');
+        //   })
+        //   .catch((err) => {
+        //     HandleError(err);
+        //   });
       }
     });
   };

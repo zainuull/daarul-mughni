@@ -1,10 +1,14 @@
 import prisma from '@/lib/prismadb';
+import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 
 export const GET = async (req: Request, { params }: { params: { id: string } }) => {
   const id = params.id;
   try {
-    const data = await prisma.teacher.findUnique({ where: { id } });
+    const data = await prisma.teacher.findUnique({
+      where: { id },
+      include: { absensi: true },
+    });
     if (!data) {
       return NextResponse.json({ status_code: 404, message: 'Data not found', data: [] });
     }
@@ -15,7 +19,7 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
   }
 };
 
-export const PUT = async (req: Request, { params }: { params: { id:string } }) => {
+export const PUT = async (req: Request, { params }: { params: { id: string } }) => {
   const id = params.id;
   const {
     name,
@@ -31,6 +35,7 @@ export const PUT = async (req: Request, { params }: { params: { id:string } }) =
     status,
     imageUrl,
   } = await req.json();
+  const hashedPassword = await bcrypt.hash(nip, 10);
   try {
     const data = await prisma.teacher.update({
       where: { id },
@@ -42,11 +47,13 @@ export const PUT = async (req: Request, { params }: { params: { id:string } }) =
         nip,
         ijazah,
         positionName,
+        hashedPassword,
         period_work,
         gender,
         age,
         status,
         imageUrl,
+        role: positionName,
       },
     });
     if (!data) {

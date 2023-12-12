@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
-        const user = await prisma.user.findFirst({ where: { email } });
+        const user = await prisma.teacher.findFirst({ where: { email } });
         console.log('user 1', user);
 
         const confirmPassword = await bcrypt.compare(password, user?.hashedPassword || '');
@@ -33,20 +33,27 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, account }: any) {
       if (account?.provider == 'credentials') {
+        token.id = user?.id;
         token.name = user?.name;
         token.email = user?.email;
         token.role = user?.role;
+        token.imageUrl = user.imageUrl;
       }
       console.log('user 2', token);
       return token;
     },
     async session({ session, token }: any) {
+      if ('id' in token) {
+        session.user.id = token.id;
+      }
       if ('name' in token) {
         session.user.name = token.name;
-      } else if ('email' in token) {
+      }
+      if ('email' in token) {
         session.user.email = token.email;
-      } else if ('image' in token) {
-        session.user.image = token.image;
+      }
+      if ('imageUrl' in token) {
+        session.user.imageUrl = token.imageUrl;
       }
       if ('role' in token) {
         session.user.role = token.role;
