@@ -4,6 +4,7 @@ import { HiOutlineKey } from 'react-icons/hi';
 import { BiChevronRight, BiCubeAlt, BiCalendarEvent } from 'react-icons/bi';
 import { TbUserSquareRounded } from 'react-icons/tb';
 import { BsCalendarCheck, BsQuestionCircle, BsGlobe2 } from 'react-icons/bs';
+import { HiOutlineAcademicCap } from 'react-icons/hi2';
 import { IoExitOutline } from 'react-icons/io5';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -66,6 +67,19 @@ const Menu = () => {
                 <BiChevronRight size={20} />
               </Link>
               <Link
+                href={{ pathname: '/dashboard/role' }}
+                className={`${
+                  pathname.match(/^\/dashboard\/role/)
+                    ? 'bg-primary transition-all duration-300 p-2'
+                    : 'cursor-pointer'
+                } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+                <div className="flex items-center gap-x-3 lg:gap-x-6">
+                  <HiOutlineAcademicCap size={30} />
+                  {menu ? null : <h1 className="sm:text-xs lg:text-base">Jabatan</h1>}
+                </div>
+                <BiChevronRight size={20} />
+              </Link>
+              <Link
                 href={{ pathname: '/dashboard/student' }}
                 className={`${
                   pathname.match(/^\/dashboard\/student/)
@@ -93,6 +107,7 @@ const Menu = () => {
               </Link>
             </>
           )}
+
           <Link
             href={{ pathname: '/dashboard/absensi' }}
             className={`${

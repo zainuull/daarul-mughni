@@ -8,7 +8,6 @@ interface TeacherData {
   email: string;
   nip: string;
   ijazah: string;
-  positionName: string;
   period_work: string;
   gender: string;
   age: string;
@@ -27,7 +26,6 @@ const store = atom<TeacherData>({
   email: '',
   nip: '',
   ijazah: '',
-  positionName: '',
   period_work: '',
   gender: '',
   age: '',
@@ -35,7 +33,7 @@ const store = atom<TeacherData>({
   filter_by: '',
   public_id: '',
   imageUrl: '',
-  role: 'teacher',
+  role: '',
 });
 
 const useDataTeacher = () => useAtom(store);

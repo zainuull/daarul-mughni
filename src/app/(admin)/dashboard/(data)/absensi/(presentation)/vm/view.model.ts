@@ -79,8 +79,6 @@ export default function ViewModel() {
 
   //Students
   async function getStudentsByClassTypeName(classTypeName: string) {
-    console.log("kucing 1",classTypeName);
-    
     setDataStudents(await getStudentsByClassTypeNameUseCase.invoke(classTypeName));
   }
 

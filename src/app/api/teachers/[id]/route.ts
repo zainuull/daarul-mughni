@@ -28,12 +28,12 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
     email,
     nip,
     ijazah,
-    positionName,
     period_work,
     gender,
     age,
     status,
     imageUrl,
+    role,
   } = await req.json();
   const hashedPassword = await bcrypt.hash(nip, 10);
   try {
@@ -46,14 +46,13 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
         email,
         nip,
         ijazah,
-        positionName,
         hashedPassword,
         period_work,
         gender,
         age,
         status,
         imageUrl,
-        role: positionName,
+        role,
       },
     });
     if (!data) {

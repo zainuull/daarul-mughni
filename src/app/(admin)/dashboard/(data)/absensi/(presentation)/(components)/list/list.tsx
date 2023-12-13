@@ -27,15 +27,51 @@ import useResultFilter from '../../store/store.result.filter';
 const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
   const { getAbsensi, deleteAbsensi } = useViewModel();
   const { data } = useSession();
-  const [status, setStatus] = useState(false);
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
   const router = useRouter();
   const [dataStore] = useStoreDatas();
   const [resutFilter] = useResultFilter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
-  const result = resultSearchData.length ? resultSearchData : dataStore?.data || resutFilter?.data?.absensi;
-  
+  const result = resultSearchData.length
+    ? resultSearchData
+    : dataStore?.data || resutFilter?.data?.absensi;
+
+  const handleStatus = (selectedAbsensi: any) => {
+    const currentTime = new Date();
+
+    const startTimeParts = selectedAbsensi.start_time.split(':');
+    const endTimeParts = selectedAbsensi.end_time.split(':');
+
+    const startTime = new Date(
+      currentTime.getFullYear(),
+      currentTime.getMonth(),
+      currentTime.getDate(),
+      parseInt(startTimeParts[0], 10),
+      parseInt(startTimeParts[1], 10)
+    );
+
+    const endTime = new Date(
+      currentTime.getFullYear(),
+      currentTime.getMonth(),
+      currentTime.getDate(),
+      parseInt(endTimeParts[0], 10),
+      parseInt(endTimeParts[1], 10)
+    );
+
+    if (currentTime < startTime) {
+      return 'Belum Mulai';
+    } else if (currentTime >= startTime && currentTime <= endTime) {
+      return 'Mulai';
+    } else {
+      return 'Selesai';
+    }
+  };
+
+  const tempResult = result?.map((data) => ({
+    ...data,
+    status: handleStatus(data),
+  }));
   const user: IUser = data?.user;
 
   useEffect(() => {
@@ -68,12 +104,6 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     });
   };
 
-  const handleStart = (id: string) => {
-    if (id) {
-      setStatus(!status);
-    }
-  };
-
   const handleUpdate = async (data: IAbsensiDataModel) => {
     router.push(`/dashboard/absensi/update/${data?.id}`);
     setFormAbsensi({
@@ -88,12 +118,14 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
     });
   };
 
-  const handleDetail = (id: string) => {
-    router.push(`/dashboard/absensi/detail/${id}`);
+  const handleAbsensi = async (id: string, status: string) => {
+    if (status === 'Mulai') {
+      router.push(`/dashboard/absensi/detail/${id}`);
+    }
   };
 
   return (
-    <Table className="mt-5 min-h-[400px] relative pb-14">
+    <Table className="mt-5 min-h-[400px] relative pb-14 select-none">
       <TableHead>
         <TableRow>
           <TableHeaderCell>Kode Kelas</TableHeaderCell>
@@ -113,12 +145,16 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
             </div>
           </div>
         ) : (
-          result &&
-          result?.map((data: IAbsensiDataModel) => (
+          tempResult &&
+          tempResult?.map((data: IAbsensiDataModel) => (
             <TableRow key={data.id}>
               <TableCell
-                onClick={() => handleDetail(data?.id)}
-                className="hover:font-bold transition-all cursor-pointer">
+                onClick={() => handleAbsensi(data?.id, data.status)}
+                className={`${
+                  data.status === "Mulai"
+                    ? 'hover:font-bold transition-all cursor-pointer'
+                    : 'cursor-not-allowed'
+                }`}>
                 {data.classTypeName}
               </TableCell>
               <TableCell>{data.className}</TableCell>
@@ -130,19 +166,15 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
               </TableCell>
               <TableCell>{data.lesson}</TableCell>
               <TableCell>
-                {status ? (
-                  <button
-                    onClick={() => handleStart(data?.id)}
-                    className="w-[100px] py-1 bg-green-500 hover:bg-green-600 transition-all text-white rounded-md">
-                    Mulai
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleStart(data?.id)}
-                    className="w-[100px] py-1 bg-red-500 hover:bg-red-600 transition-all text-white rounded-md">
-                    Belum Mulai
-                  </button>
-                )}
+                <button
+                  onClick={() => handleAbsensi(data?.id, data.status)}
+                  className={`w-[100px] py-1 ${
+                    data.status === 'Mulai'
+                      ? 'bg-green-500 hover:bg-green-600'
+                      : 'bg-red-500 hover:bg-red-600 cursor-not-allowed'
+                  } transition-all text-white rounded-md`}>
+                  {data.status}
+                </button>
               </TableCell>
               {user?.role === 'administrator' && (
                 <TableCell className="py-4">
@@ -150,7 +182,6 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
                     <button onClick={() => handleUpdate(data)}>
                       <PiPencilLineLight />
                     </button>
-
                     <button onClick={() => handleDelete(data?.id)}>
                       <FaTrash className="text-red-400" />
                     </button>

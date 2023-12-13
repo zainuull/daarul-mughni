@@ -21,6 +21,7 @@ export interface IAbsensiDataModel {
   start_time?: string;
   end_time?: string;
   students?: IStudentDataModel[];
+  status?: string;
 }
 
 export interface IRecapitulationModel {

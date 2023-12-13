@@ -8,4 +8,6 @@ export interface TeacherRepository {
   createUser(data: any): Promise<any>;
   deleteTeacher(id: string): Promise<ITeacherModel>;
   updateTeacher(id: string, data: ITeacherDataModel): Promise<ITeacherModel>;
+  // Role
+  getRole(): Promise<any>;
 }

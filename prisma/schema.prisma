@@ -105,15 +105,14 @@ model Teacher {
     email String?
     nip String?
     ijazah String?
-    positionName String?
-    position Position? @relation(fields: [positionName],references: [positionName])
+    role String?
+    Role Role? @relation(fields: [role],references: [name])
     hashedPassword String?
     period_work String?
     gender String?
     age String?
     status String?
     imageUrl String?
-    role          String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     absensi Absensi[]
@@ -121,11 +120,10 @@ model Teacher {
     sessions      Session[]
 }
 
-model Position {
+model Role {
      id  String  @id @default(auto()) @map("_id") @db.ObjectId
-     positionName String @unique
+     name   String @unique
      teachers Teacher[]
-    //  user User[]
      teacherIDs String[] @db.ObjectId
 }
 
@@ -167,6 +165,11 @@ model Recapitulation {
      presentAt DateTime @default(now())
 }
 
+
+model RecapitulationAbsensi {
+    id  String  @id @default(auto()) @map("_id") @db.ObjectId
+    
+}
 
 model Class {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId

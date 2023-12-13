@@ -83,7 +83,7 @@ const Navigation = () => {
           Tambah Data Kegiatan
         </button>
       </div>
-      <div className="w-full grid grid-cols-12 gap-x-6 sm:gap-x-4">
+      <div className="ww-full grid grid-cols-12 gap-x-6 sm:gap-x-4">
         <div className="col-span-8 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
           <BsSearch />
           <input

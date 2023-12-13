@@ -1,24 +1,25 @@
 'use client';
 import Select, { StylesConfig } from 'react-select';
 import useDataTeacher from '../../store/store.teacher';
-import { useEffect, useState } from 'react';
-import { getPosition } from '@/services/api';
+import { useEffect } from 'react';
+import useViewModel from '../../vm/view-model';
+import useStoreRole from '../../store/store.role';
 
 export const DropdownFilter = () => {
+  const { getRole } = useViewModel();
   const [data, setData] = useDataTeacher();
-  const [position, setPosition] = useState([]);
+  const [role] = useStoreRole();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getPosition();
-      setPosition(res?.data);
+      await getRole();
     };
     fetchData();
   }, []);
 
-  const positionOption = position?.map((obj: { positionName: string; id: string }) => ({
+  const roleOption = role?.data?.map((obj: any) => ({
     value: obj?.id,
-    label: obj?.positionName,
+    label: obj?.name,
   }));
 
   const handlePosition = (option: any) => {
@@ -40,8 +41,8 @@ export const DropdownFilter = () => {
   return (
     <Select
       closeMenuOnSelect={true}
-      options={positionOption}
-      value={positionOption.find((option) => option.label === data?.filter_by) || ''}
+      options={roleOption}
+      value={roleOption?.find((option) => option.label === data?.filter_by) || ''}
       isClearable={true}
       onChange={handlePosition}
       styles={customStyles}

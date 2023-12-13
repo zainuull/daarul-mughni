@@ -56,7 +56,7 @@ const Navigation = () => {
       email: '',
       nip: '',
       ijazah: '',
-      positionName: '',
+      role: '',
       period_work: '',
       gender: '',
       age: '',
@@ -75,11 +75,13 @@ const Navigation = () => {
       <Header title="Data Guru" />
       <div className="w-full flex items-center justify-between mt-2">
         <h2 className="font-light uppercase">Data Guru / Pengajar</h2>
-        <button onClick={handleAdd} className="px-2 py-2 bg-primary rounded-lg text-slate-700 lg:px-6">
+        <button
+          onClick={handleAdd}
+          className="px-2 py-2 bg-primary rounded-lg text-slate-700 lg:px-6">
           Tambah Data Guru
         </button>
       </div>
-      <div className="w-full grid grid-cols-12 gap-x-6 sm:gap-x-4">
+      <div className="ww-full grid grid-cols-12 gap-x-6 sm:gap-x-4">
         <div className="col-span-8 flex items-center gap-x-2 px-3 py-2 rounded-xl border border-primary">
           <BsSearch />
           <input
@@ -89,7 +91,7 @@ const Navigation = () => {
             onChange={handleSearch}
           />
         </div>
-        <div className='col-span-4'>
+        <div className="col-span-4">
           <DropdownFilter />
         </div>
       </div>

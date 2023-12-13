@@ -14,7 +14,7 @@ export default class TeacherAPIDataSourceImpl implements TeacherRepository {
   }
 
   async getTeacherByPosition(positionName: string) {
-    const res = await Http.get(`/api/position/${positionName}`);
+    const res = await Http.get(`/api/role/${positionName}`);
     return res.data;
   }
 
@@ -37,6 +37,12 @@ export default class TeacherAPIDataSourceImpl implements TeacherRepository {
 
   async updateTeacher(id: string, data: any) {
     const res = await Http.put(`/api/teachers/${id}`, data);
+    return res.data;
+  }
+
+  // Role
+  async getRole() {
+    const res = await Http.get('/api/role');
     return res.data;
   }
 }

@@ -12,7 +12,6 @@ const Navigation = () => {
   const router = useRouter();
   const absensi = detailUser?.data?.absensi;
 
-
   const handleDetail = (id: string) => {
     router.push(`/dashboard/absensi/detail/${id}`);
   };
@@ -30,7 +29,7 @@ const Navigation = () => {
           </h1>
         </div>
 
-        <About  />
+        <About />
 
         <div className="w-full h-52 grid grid-cols-6 gap-10 mb-20">
           <div className="flex flex-col col-span-3 px-12 gap-2 mt-4 bg-white rounded-lg shadow-xl p-4 py-8">

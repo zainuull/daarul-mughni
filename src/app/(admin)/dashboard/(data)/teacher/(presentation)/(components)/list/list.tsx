@@ -61,7 +61,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
       email: data?.email,
       nip: data?.nip,
       ijazah: data?.ijazah,
-      positionName: data?.positionName,
+      role: data?.role,
       period_work: data?.period_work,
       gender: data?.gender,
       age: data?.age,
@@ -100,7 +100,7 @@ const TableList = ({ resultSearchData }: { resultSearchData: any }) => {
                 className="hover:font-bold transition-all cursor-pointer">
                 {data.name}
               </TableCell>
-              <TableCell>{data.positionName}</TableCell>
+              <TableCell>{data.role}</TableCell>
               <TableCell>{data.nip}</TableCell>
               <TableCell>
                 {data?.status == 'Aktif' ? (

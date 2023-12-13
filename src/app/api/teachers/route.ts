@@ -10,12 +10,12 @@ export const POST = async (req: Request) => {
     email,
     nip,
     ijazah,
-    positionName,
     period_work,
     gender,
     age,
     status,
     imageUrl,
+    role,
   } = await req.json();
 
   if (!name && !email) {
@@ -33,14 +33,13 @@ export const POST = async (req: Request) => {
         email,
         nip,
         ijazah,
-        positionName,
         hashedPassword,
         period_work,
         gender,
         age,
         status,
         imageUrl,
-        role: positionName,
+        role,
       },
     });
     console.log('Success to created', newTeacher);

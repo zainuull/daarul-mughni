@@ -17,7 +17,7 @@ export interface ITeacherDataModel {
   email?: string;
   nip?: string;
   ijazah?: string;
-  positionName?: string;
+  role?: string;
   period_work?: string;
   gender?: string;
   age?: string;

@@ -40,9 +40,11 @@ const TableList = ({ students, lesson, resultSearchData }) => {
       student: data?.name,
       present: true,
     };
+    console.log('obj', obj);
 
     if (isUpdate) {
       createRecapitulation(obj);
+      console.log('isPresent', isPresent);
     } else {
       updateRecapitulation(obj.id, obj);
     }
@@ -61,9 +63,11 @@ const TableList = ({ students, lesson, resultSearchData }) => {
           student: data?.name,
           present: false,
         };
+        console.log('obj', obj);
 
         setIsUpdate(false);
         updateRecapitulation(obj.id, obj);
+        console.log('isPresent', isPresent);
       }
     });
   };

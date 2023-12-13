@@ -1,42 +1,42 @@
 'use client';
 import Select from 'react-select';
 import useDataTeacher from '../../store/store.teacher';
-import { useEffect, useState } from 'react';
-import { getPosition } from '@/services/api';
+import { useEffect } from 'react';
+import useViewModel from '../../vm/view-model';
+import useStoreRole from '../../store/store.role';
 
 export const DropdownPosition = () => {
+  const { getRole } = useViewModel();
   const [data, setData] = useDataTeacher();
-  const [position, setPosition] = useState([]);
+  const [role] = useStoreRole();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getPosition();
-      setPosition(res?.data);
+      await getRole();
     };
     fetchData();
   }, []);
 
-  const positionOption = position?.map((obj: any) => ({
+  const roleOption = role?.data?.map((obj: any) => ({
     value: obj?.id,
-    label: obj?.positionName,
+    label: obj?.name,
   }));
 
   const handlePosition = (option: any) => {
     setData({
       ...data,
-      positionName: option?.label,
+      role: option?.label,
     });
   };
 
   return (
     <Select
       closeMenuOnSelect={true}
-      options={positionOption}
-      value={positionOption?.find((option) => option.label === data?.positionName) || ''}
+      options={roleOption}
+      value={roleOption?.find((option) => option.label === data?.role) || ''}
       isClearable={true}
       onChange={handlePosition}
       placeholder="Pimpinan"
     />
   );
 };
-

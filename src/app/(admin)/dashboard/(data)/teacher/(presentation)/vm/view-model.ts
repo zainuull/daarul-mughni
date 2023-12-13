@@ -12,11 +12,14 @@ import useStoreDatas from '../store/store.datas';
 import { useState } from 'react';
 import useResultFilter from '../store/store.result.filter';
 import { CreateUserUseCase } from '../../domain/useCase/create-user.useCase';
+import { GetRoleUseCase } from '../../domain/useCase/get-role.useCase';
+import useStoreRole from '../store/store.role';
 
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
   const [, setFilter] = useResultFilter();
   const [detailTeacher, setDetailTeacher] = useState<ITeacherModel>();
+  const [, setRole] = useStoreRole();
 
   const teacherDataSourceImpl = new TeacherAPIDataSourceImpl();
 
@@ -27,6 +30,8 @@ export default function ViewModel() {
   const createUserUseCase = new CreateUserUseCase(teacherDataSourceImpl);
   const deleteTeacherUseCase = new DeleteTeacherUseCase(teacherDataSourceImpl);
   const updateTeacherUseCase = new UpdateTeacherUseCase(teacherDataSourceImpl);
+  // Role
+  const getRoleUseCase = new GetRoleUseCase(teacherDataSourceImpl);
 
   async function getTeachers(query?: ITeacherQuery) {
     setDatas(await getTeacherUseCase.invoke(query));
@@ -56,6 +61,10 @@ export default function ViewModel() {
     await updateTeacherUseCase.invoke(id, data);
   }
 
+  async function getRole() {
+    setRole(await getRoleUseCase.invoke());
+  }
+
   return {
     getTeachers,
     getTeachersById,
@@ -65,5 +74,6 @@ export default function ViewModel() {
     updateTeacher,
     detailTeacher,
     createUser,
+    getRole,
   };
 }
