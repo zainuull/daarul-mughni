@@ -1,28 +1,28 @@
 'use client';
 import { useState } from 'react';
-import useDataRole from '../../../../../store/store.role';
+import useDataLevel from '../../../../../store/store.role';
 import { useRouter } from 'next/navigation';
 import { NotifyService, ToastifyService } from '@/core/services/notify/notifyService';
 import useViewModel from '../../../../../vm/view-model';
 import { HandleError } from '@/core/services/handleError/handleError';
 
 const Submit = () => {
-  const { updateRole } = useViewModel();
+  const { updateLevel } = useViewModel();
   const [error, setError] = useState('');
-  const [formRole] = useDataRole();
+  const [formLevel] = useDataLevel();
   const router = useRouter();
   const notifyService = new NotifyService();
   const toastService = new ToastifyService();
 
   const handleSubmit = () => {
-    if (!formRole.name) {
+    if (!formLevel.name) {
       setError('Nama Jabatan Wajib di isi');
       notifyService.emptyInputField();
       return;
     }
     notifyService.confirmationCreate().then((res) => {
       if (res) {
-        updateRole(formRole.id, formRole)
+        updateLevel(formLevel.id, formLevel)
           .then(() => {
             toastService.successCreate();
             router.back();

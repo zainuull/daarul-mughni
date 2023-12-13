@@ -4,7 +4,7 @@ import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs';
 import useViewModel from '../../vm/view-model';
 
 const Pagination = () => {
-  const { getRoles } = useViewModel();
+  const { getLevel } = useViewModel();
   const [dataStore] = useStoreDatas(); // temp datas
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -29,7 +29,7 @@ const Pagination = () => {
         page: currentPage - 1,
         perPage: 25,
       };
-      getRoles(obj);
+      getLevel(obj);
     }
   }
 
@@ -40,7 +40,7 @@ const Pagination = () => {
       page: id,
       perPage: 25,
     };
-    getRoles(obj);
+    getLevel(obj);
   }
 
   //to next page
@@ -51,7 +51,7 @@ const Pagination = () => {
         page: currentPage + 1,
         perPage: 25,
       };
-      getRoles(obj);
+      getLevel(obj);
     }
   }
 

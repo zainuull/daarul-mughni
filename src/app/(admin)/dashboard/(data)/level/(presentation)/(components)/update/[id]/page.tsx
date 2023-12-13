@@ -4,7 +4,7 @@ import useStatus from '../../../../../../store/store.status';
 import DataGlobal from './component/form/global/golbal';
 import Submit from './component/submit/submit';
 
-const AddDataRole = ({ params }: { params: { id: string } }) => {
+const AddDataLevel = ({ params }: { params: { id: string } }) => {
   const id = params?.id;
   console.log(id);
 
@@ -27,4 +27,4 @@ const AddDataRole = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default AddDataRole;
+export default AddDataLevel;
