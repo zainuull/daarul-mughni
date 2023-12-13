@@ -20,7 +20,6 @@ const About = () => {
   const [detailUser] = useStoreDatas();
   const notifyService = new NotifyService();
   const user: IUser = detailUser?.data;
-  console.log(user);
 
   useEffect(() => {
     notifyService.showLoading();

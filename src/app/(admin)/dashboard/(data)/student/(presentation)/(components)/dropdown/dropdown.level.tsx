@@ -2,23 +2,25 @@
 import Select from 'react-select';
 import useDataStudent from '../../store/store.student';
 import { useEffect, useState } from 'react';
-import { getLevel } from '@/services/api';
+import useViewModel from '../../vm/view.model';
+import useStoreLevel from '../../store/store.level';
 
 export const DropdownLevel = () => {
+  const { getLevel } = useViewModel();
   const [data, setData] = useDataStudent();
-  const [level, setLevel] = useState([]);
+  const [dataStore] = useStoreLevel();
+  const level = dataStore?.data;
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getLevel();
-      setLevel(res?.data);
+      await getLevel();
     };
     fetchData();
   }, []);
 
   const levelOption = level?.map((obj: any) => ({
     value: obj?.id,
-    label: obj?.levelName,
+    label: obj?.name,
   }));
 
   const handleLevel = (option: any) => {
@@ -32,7 +34,7 @@ export const DropdownLevel = () => {
     <Select
       closeMenuOnSelect={true}
       options={levelOption}
-      value={levelOption.find((option) => option.label === data?.levelName) || ''}
+      value={levelOption?.find((option) => option.label === data?.levelName) || ''}
       isClearable={true}
       onChange={handleLevel}
       placeholder="MTs"

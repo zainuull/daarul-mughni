@@ -3,6 +3,7 @@ import { IStudentDataModel, IStudentModel, IStudentQuery } from '../../domain/mo
 import {
   CreateStudentUseCase,
   DeleteStudentUseCase,
+  GetLevelUseCase,
   GetStudentByClassUseCase,
   GetStudentByIdUseCase,
   GetStudentsUseCase,
@@ -13,9 +14,11 @@ import useStoreDatas from '../store/store.datas';
 import useResultFilter from '../store/store.result.filter';
 import { useState } from 'react';
 import { DeleteImageUseCase } from '../../domain/useCase/delete-image.useCase';
+import useStoreLevel from '../store/store.level';
 
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
+  const [, setLevel] = useStoreLevel();
   const [, setResultFilter] = useResultFilter();
   const [detailStudent, setDetailStudent] = useState<IStudentModel>();
 
@@ -28,6 +31,8 @@ export default function ViewModel() {
   const deleteStudentUseCase = new DeleteStudentUseCase(studentDataSourceImpl);
   const deleteImageUseCase = new DeleteImageUseCase(studentDataSourceImpl);
   const updateStudentUseCase = new UpdateStudentUseCase(studentDataSourceImpl);
+  //level
+  const getLevelUseCase = new GetLevelUseCase(studentDataSourceImpl);
 
   async function getStudents(query?: IStudentQuery) {
     setDatas(await getStudentsUseCase.invoke(query));
@@ -57,6 +62,11 @@ export default function ViewModel() {
     await updateStudentUseCase.invoke(id, data);
   }
 
+  //Level
+  async function getLevel() {
+    setLevel(await getLevelUseCase.invoke());
+  }
+
   return {
     getStudents,
     getStudentById,
@@ -66,5 +76,6 @@ export default function ViewModel() {
     updateStudent,
     detailStudent,
     deleteImage,
+    getLevel,
   };
 }

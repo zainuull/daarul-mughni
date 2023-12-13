@@ -142,7 +142,7 @@ model Student {
     status_payment String?
     address String?
     levelName String?
-    level Level? @relation(fields: [levelName], references: [levelName])
+    level Level? @relation(fields: [levelName], references: [name])
     className String?
     class Class? @relation(fields: [className], references: [className])
     classTypeName String?
@@ -176,7 +176,7 @@ model Class {
   className  String   @unique
   classType ClassType[]
   levelName  String?
-  level      Level?   @relation(fields: [levelName], references: [levelName])
+  level      Level?   @relation(fields: [levelName], references: [name])
   students   Student[]
   absensi Absensi[]
   studentIDs String[] @db.ObjectId
@@ -195,14 +195,14 @@ model Lesson {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
   levelName  String?
-  level      Level?   @relation(fields: [levelName], references: [levelName])
+  level      Level?   @relation(fields: [levelName], references: [name])
   recapitulation Recapitulation[]
 }
 
 
 model Level {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  levelName String   @unique
+  name String   @unique
   class     Class[]
   students  Student[]
   lesson Lesson[]

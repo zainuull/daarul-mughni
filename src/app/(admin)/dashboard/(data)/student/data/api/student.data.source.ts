@@ -37,4 +37,10 @@ export default class StudentAPIDataSourceImol implements StudentRepository {
     const res = await Http.put(`/api/students/${id}`, data);
     return res.data;
   }
+
+  //Level
+  async getLevel() {
+    const res = await Http.get('/api/level');
+    return res.data;
+  }
 }
