@@ -13,8 +13,8 @@ export default class AbsensiAPIDataSourceImpl implements AbsensiRepository {
     return res.data?.data;
   }
 
-  async getStudentsByClassTypeName(classTypeName: string) {
-    const res: any = await Http.get(`/api/class-type/${classTypeName}`);
+  async getStudentsByClassTypeName(id: string) {
+    const res: any = await Http.get(`/api/class-type/${id}`);
     return res.data?.data?.students;
   }
 
@@ -53,6 +53,23 @@ export default class AbsensiAPIDataSourceImpl implements AbsensiRepository {
 
   async updateRecapitulation(id: string, data: IRecapitulationModel) {
     const res = await Http.put(`/api/recapitulation/${id}`, data);
+    return res.data;
+  }
+
+  //Level
+  async getLevel() {
+    const res = await Http.get('/api/level');
+    return res.data;
+  }
+
+  async getLevelById(id: string) {
+    const res = await Http.get(`/api/level/${id}`);
+    return res.data;
+  }
+
+  //Class
+  async getClassById(id: string) {
+    const res = await Http.get(`/api/class/${id}`);
     return res.data;
   }
 }

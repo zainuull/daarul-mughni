@@ -1,28 +1,27 @@
 'use client';
 import Select from 'react-select';
 import useDataStudent from '../../store/store.student';
-import { useEffect, useState } from 'react';
-import { getClassTypeByClassName } from '@/services/api';
+import { useEffect } from 'react';
+import useViewModel from '../../vm/view.model';
 
 export const DropdownClassType = () => {
+  const { getClassById, detailClass } = useViewModel();
   const [studentForm, setStudentForm] = useDataStudent();
-  const [classType, setClassType] = useState([]);
+  const classType = detailClass?.data?.classType;
 
   useEffect(() => {
-    fetchData();
-  }, [studentForm?.className]);
+    fetchData(studentForm?.className_id);
+  }, [studentForm?.className_id]);
 
-  const fetchData = () => {
-    getClassTypeByClassName(studentForm?.className).then((res) => {
-      setClassType(res?.data?.classType);
-    });
+  const fetchData = (id: string) => {
+    getClassById(id);
   };
 
   // Check if datas is an array before using map
   const Option = Array.isArray(classType)
-    ? classType.map((obj: { classTypeName: string; id: string }) => ({
+    ? classType.map((obj: { name: string; id: string }) => ({
         value: obj?.id,
-        label: obj?.classTypeName,
+        label: obj?.name,
       }))
     : [];
 

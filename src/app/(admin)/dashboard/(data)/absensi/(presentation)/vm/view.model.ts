@@ -7,6 +7,9 @@ import {
   GetAbsensiByClassUseCase,
   GetAbsensiByIdUseCase,
   GetAbsensiUseCase,
+  GetClassByIdUseCase,
+  GetLevelByIdUseCase,
+  GetLevelUseCase,
   GetStudentsByClassTypeNameUseCase,
   UpdateAbsensiUseCase,
 } from '../../domain/useCase';
@@ -15,13 +18,17 @@ import useResultFilter from '../store/store.result.filter';
 import { CreateRecapitulationUseCase } from '../../domain/useCase/create-recapitulation.useCase';
 import { GetRecapitulationByIdUseCase } from '../../domain/useCase/get-recapitulation-byid.useCase';
 import { UpdateRecapitulationUseCase } from '../../domain/useCase/update-recapitulation.useCase';
+import useStoreLevel from '../store/store.level';
 
 export default function ViewModel() {
   const [, setDatas] = useStoreDatas();
   const [, setResultFilter] = useResultFilter();
   const [detailAbsensi, setDetailAbsensi] = useState<any>();
   const [detailRecap, setDetailRecap] = useState<IRecapitulationModel>();
+  const [, setLevel] = useStoreLevel();
   const [dataStudents, setDataStudents] = useState<any>();
+  const [detailLevel, setDetailLevel] = useState<any>();
+  const [detailClass, setDetailClass] = useState<any>();
 
   const absensiDataSourceImpl = new AbsensiAPIDataSourceImpl();
 
@@ -39,6 +46,11 @@ export default function ViewModel() {
   const getStudentsByClassTypeNameUseCase = new GetStudentsByClassTypeNameUseCase(
     absensiDataSourceImpl
   );
+  //level
+  const getLevelUseCase = new GetLevelUseCase(absensiDataSourceImpl);
+  const getLevelByIdUseCase = new GetLevelByIdUseCase(absensiDataSourceImpl);
+  //Class
+  const getClassByIdUseCase = new GetClassByIdUseCase(absensiDataSourceImpl);
 
   async function getAbsensi(query?: IAbsensiQuery) {
     setDatas(await getAbsensiUseCase.invoke(query));
@@ -78,8 +90,22 @@ export default function ViewModel() {
   }
 
   //Students
-  async function getStudentsByClassTypeName(classTypeName: string) {
-    setDataStudents(await getStudentsByClassTypeNameUseCase.invoke(classTypeName));
+  async function getStudentsByClassTypeName(id: string) {
+    setDataStudents(await getStudentsByClassTypeNameUseCase.invoke(id));
+  }
+
+  //Level
+  async function getLevel() {
+    setLevel(await getLevelUseCase.invoke());
+  }
+
+  async function getLevelById(id: string) {
+    setDetailLevel(await getLevelByIdUseCase.invoke(id));
+  }
+
+  //Class
+  async function getClassById(id: string) {
+    setDetailClass(await getClassByIdUseCase.invoke(id));
   }
 
   return {
@@ -96,5 +122,10 @@ export default function ViewModel() {
     updateRecapitulation,
     getStudentsByClassTypeName,
     dataStudents,
+    getLevel,
+    getLevelById,
+    detailLevel,
+    getClassById,
+    detailClass,
   };
 }

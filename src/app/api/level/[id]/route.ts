@@ -43,4 +43,4 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
     console.log(error);
     return NextResponse.json({ status_code: 500, message: 'Some error occurred', error });
   }
-}
+};

@@ -2,7 +2,9 @@ import { atom, useAtom } from 'jotai';
 
 const store = atom({
   id: '',
+  level_id: '',
   levelName: '',
+  className_id: '',
   className: '',
   classTypeName: '',
   teacher: '',

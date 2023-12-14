@@ -1,3 +1,5 @@
+import { IClassDataModel } from '../../../classes/domain/model/IModel';
+import { ILevelDataModel, ILevelModel } from '../../../level/domain/model/IModel';
 import { IStudentDataModel, IStudentModel, IStudentQuery } from '../model/IModel';
 
 export interface StudentRepository {
@@ -9,5 +11,8 @@ export interface StudentRepository {
   deleteImage(publicId: string): Promise<any>;
   updateStudent(id: string, data: IStudentDataModel): Promise<IStudentModel>;
   //level
-  getLevel(): Promise<any>;
+  getLevel(): Promise<ILevelModel>;
+  getLevelById(id: string): Promise<ILevelDataModel>;
+  //Class
+  getClassById(id: string): Promise<IClassDataModel>;
 }

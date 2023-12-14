@@ -144,9 +144,9 @@ model Student {
     levelName String?
     level Level? @relation(fields: [levelName], references: [name])
     className String?
-    class Class? @relation(fields: [className], references: [className])
+    class Class? @relation(fields: [className], references: [name])
     classTypeName String?
-    classType ClassType? @relation(fields: [classTypeName], references: [classTypeName])
+    classType ClassType? @relation(fields: [classTypeName], references: [name])
     image String?
     recapitulation Recapitulation[]
     createdAt DateTime @default(now())
@@ -173,10 +173,10 @@ model RecapitulationAbsensi {
 
 model Class {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  className  String   @unique
-  classType ClassType[]
+  name  String   @unique
   levelName  String?
   level      Level?   @relation(fields: [levelName], references: [name])
+  classType ClassType[]
   students   Student[]
   absensi Absensi[]
   studentIDs String[] @db.ObjectId
@@ -184,9 +184,9 @@ model Class {
 
 model ClassType {
    id         String   @id @default(auto()) @map("_id") @db.ObjectId
-   classTypeName String @unique
+   name String @unique
    className String?
-   class Class? @relation(fields: [className], references: [className])
+   class Class? @relation(fields: [className], references: [name])
    students Student[]
    absensi  Absensi[]
 }
@@ -214,9 +214,9 @@ model Absensi {
    id        String   @id @default(auto()) @map("_id") @db.ObjectId
    levelName String 
    className String 
-   class      Class?   @relation(fields: [className], references: [className])
+   class      Class?   @relation(fields: [className], references: [name])
    classTypeName String?
-   classType ClassType?   @relation(fields: [classTypeName], references: [classTypeName])
+   classType ClassType?   @relation(fields: [classTypeName], references: [name])
    teacher String?
    Teacher Teacher? @relation(fields: [teacher],references: [name])
    lesson String

@@ -18,17 +18,18 @@ const DetailAbsensi = ({ params }: { params: { id: string } }) => {
   const notifyService = new NotifyService();
   const [menu] = useStatus();
   const lesson = detailAbsensi?.lesson;
+  
 
   useEffect(() => {
     notifyService.showLoading();
     fetchData();
-  }, [detailAbsensi?.classTypeName]);
+  }, [detailAbsensi?.classType?.id]);
 
   const fetchData = () => {
     getAbsensiById(id)
       .then(() => {
         Swal.close();
-        getStudentsByClassTypeName(detailAbsensi?.classTypeName).catch((err) => {
+        getStudentsByClassTypeName(detailAbsensi?.classType?.id).catch((err) => {
           HandleError(err);
         });
       })

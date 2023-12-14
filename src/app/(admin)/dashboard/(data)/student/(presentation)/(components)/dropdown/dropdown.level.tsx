@@ -1,7 +1,7 @@
 'use client';
 import Select from 'react-select';
 import useDataStudent from '../../store/store.student';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useViewModel from '../../vm/view.model';
 import useStoreLevel from '../../store/store.level';
 
@@ -26,6 +26,7 @@ export const DropdownLevel = () => {
   const handleLevel = (option: any) => {
     setData({
       ...data,
+      level_id: option?.value,
       levelName: option?.label,
     });
   };

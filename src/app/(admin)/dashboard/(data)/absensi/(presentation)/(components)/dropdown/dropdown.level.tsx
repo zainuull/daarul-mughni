@@ -1,29 +1,32 @@
 'use client';
 import Select from 'react-select';
-import useDataAbsensi from '../../store/store.absensi';
-import { useEffect, useState } from 'react';
-import { getLevel } from '@/services/api';
+import useData from '../../store/store.absensi';
+import { useEffect } from 'react';
+import useViewModel from '../../vm/view.model';
+import useStoreLevel from '../../store/store.level';
 
 export const DropdownLevel = () => {
-  const [data, setData] = useDataAbsensi();
-  const [level, setLevel] = useState([]);
+  const { getLevel } = useViewModel();
+  const [data, setData] = useData();
+  const [dataStore] = useStoreLevel();
+  const level = dataStore?.data;
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getLevel();
-      setLevel(res?.data);
+      await getLevel();
     };
     fetchData();
   }, []);
 
-  const nOption = level?.map((obj: { id: string; levelName: string }) => ({
+  const levelOption = level?.map((obj: any) => ({
     value: obj?.id,
-    label: obj?.levelName,
+    label: obj?.name,
   }));
 
-  const handle = (option: any) => {
+  const handleLevel = (option: any) => {
     setData({
       ...data,
+      level_id: option?.value,
       levelName: option?.label,
     });
   };
@@ -31,11 +34,11 @@ export const DropdownLevel = () => {
   return (
     <Select
       closeMenuOnSelect={true}
-      options={nOption}
-      value={nOption?.find((option) => option.label === data?.levelName) || ''}
+      options={levelOption}
+      value={levelOption?.find((option) => option.label === data?.levelName) || ''}
       isClearable={true}
-      onChange={handle}
-      placeholder="Pilih tingkatan"
+      onChange={handleLevel}
+      placeholder="MTs"
     />
   );
 };

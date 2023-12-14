@@ -1,33 +1,33 @@
 'use client';
 import Select from 'react-select';
-import useDataAbsensi from '../../store/store.absensi';
-import { useEffect, useState } from 'react';
-import { getClassTypeByClassName } from '@/services/api';
+import useDataStudent from '../../store/store.absensi';
+import { useEffect } from 'react';
+import useViewModel from '../../vm/view.model';
 
-export const DropdownCodeClass = () => {
-  const [data, setData] = useDataAbsensi();
-  const [classType, setClassType] = useState([]);
+export const DropdownClassType = () => {
+  const { getClassById, detailClass } = useViewModel();
+  const [studentForm, setStudentForm] = useDataStudent();
+  const classType = detailClass?.data?.classType;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getClassTypeByClassName(data?.className);
+    fetchData(studentForm?.className_id);
+  }, [studentForm?.className_id]);
 
-      setClassType(res?.data?.classType);
-    };
-    fetchData();
-  }, [data?.className]);
+  const fetchData = (id: string) => {
+    getClassById(id);
+  };
 
-
+  // Check if datas is an array before using map
   const Option = Array.isArray(classType)
-    ? classType.map((obj: { id: string; classTypeName: string }) => ({
+    ? classType.map((obj: { name: string; id: string }) => ({
         value: obj?.id,
-        label: obj?.classTypeName,
+        label: obj?.name,
       }))
     : [];
 
-  const handle = (option: any) => {
-    setData({
-      ...data,
+  const handleClass = (option: any) => {
+    setStudentForm({
+      ...studentForm,
       classTypeName: option?.label,
     });
   };
@@ -36,9 +36,10 @@ export const DropdownCodeClass = () => {
     <Select
       closeMenuOnSelect={true}
       options={Option}
-      value={Option?.find((option) => option.label === data?.classTypeName) || ''}
+      value={Option?.find((option) => option.label === studentForm?.classTypeName) || ''}
       isClearable={true}
-      onChange={handle}
+      onChange={handleClass}
+      isDisabled={studentForm?.className ? false : true}
       placeholder="MTs-01-1A"
     />
   );

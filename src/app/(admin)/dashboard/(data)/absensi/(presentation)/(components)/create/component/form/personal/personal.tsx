@@ -1,6 +1,6 @@
 'use client';
 import useDataAbsensi from '../../../../..//store/store.absensi';
-import {DropdownClass,DropdownCodeClass,DropdownLesson,DropdownLevel,DropdownTeacher} from '../../../../dropdown/index';
+import {DropdownClass,DropdownClassType,DropdownLesson,DropdownLevel,DropdownTeacher} from '../../../../dropdown/index';
 
 const DataPersonal = () => {
   const [formAbsensi, setFormAbsensi] = useDataAbsensi();
@@ -24,7 +24,7 @@ const DataPersonal = () => {
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Kode Kelas</h1>
-        <DropdownCodeClass />
+        <DropdownClassType />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Pengajar</h1>

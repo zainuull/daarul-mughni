@@ -1,32 +1,36 @@
 'use client';
 import Select from 'react-select';
-import useDataAbsensi from '../../store/store.absensi';
-import { useEffect, useState } from 'react';
-import { getClassByLevel } from '@/services/api';
+import useDataAbsensi from '../../store/store.absensi'
+import { useEffect } from 'react';
+import useViewModel from '../../vm/view.model';
 
 export const DropdownClass = () => {
-  const [data, setData] = useDataAbsensi();
-  const [classes, setClasses] = useState([]);
+  const { getLevelById, detailLevel } = useViewModel();
+  const [studentForm, setStudentForm] = useDataAbsensi();
+  const classes = detailLevel?.data?.class;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getClassByLevel(data?.levelName);
-      setClasses(res?.data?.class);
-    };
+    fetchData(studentForm?.level_id);
+  }, [studentForm?.level_id]);
 
-    fetchData();
-  }, [data?.levelName]);
+  const fetchData = async (id: string) => {
+    await getLevelById(id);
+  };
 
+  // Check if datas is an array before using map
   const Option = Array.isArray(classes)
-    ? classes.map((obj: { id: string; className: string }) => ({
+    ? classes.map((obj: { name: string; id: string }) => ({
         value: obj?.id,
-        label: obj?.className,
+        label: obj?.name,
       }))
     : [];
 
-  const handle = (option: any) => {
-    setData({
-      ...data,
+  const handleClass = (option: any) => {
+    console.log(option);
+
+    setStudentForm({
+      ...studentForm,
+      className_id: option?.value,
       className: option?.label,
     });
   };
@@ -35,10 +39,11 @@ export const DropdownClass = () => {
     <Select
       closeMenuOnSelect={true}
       options={Option}
-      value={Option?.find((option) => option.label === data?.className) || ''}
+      value={Option?.find((option) => option.label === studentForm?.className) || ''}
       isClearable={true}
-      onChange={handle}
-      placeholder="Pilih kelas"
+      onChange={handleClass}
+      isDisabled={studentForm?.levelName ? false : true}
+      placeholder="MTs-1"
     />
   );
 };

@@ -3,6 +3,8 @@ import { IStudentDataModel, IStudentModel, IStudentQuery } from '../../domain/mo
 import {
   CreateStudentUseCase,
   DeleteStudentUseCase,
+  GetClassByIdUseCase,
+  GetLevelByIdUseCase,
   GetLevelUseCase,
   GetStudentByClassUseCase,
   GetStudentByIdUseCase,
@@ -21,6 +23,8 @@ export default function ViewModel() {
   const [, setLevel] = useStoreLevel();
   const [, setResultFilter] = useResultFilter();
   const [detailStudent, setDetailStudent] = useState<IStudentModel>();
+  const [detailLevel, setDetailLevel] = useState<any>();
+  const [detailClass, setDetailClass] = useState<any>();
 
   const studentDataSourceImpl = new StudentAPIDataSourceImol();
 
@@ -33,6 +37,9 @@ export default function ViewModel() {
   const updateStudentUseCase = new UpdateStudentUseCase(studentDataSourceImpl);
   //level
   const getLevelUseCase = new GetLevelUseCase(studentDataSourceImpl);
+  const getLevelByIdUseCase = new GetLevelByIdUseCase(studentDataSourceImpl);
+  //Class
+  const getClassByIdUseCase = new GetClassByIdUseCase(studentDataSourceImpl);
 
   async function getStudents(query?: IStudentQuery) {
     setDatas(await getStudentsUseCase.invoke(query));
@@ -67,6 +74,15 @@ export default function ViewModel() {
     setLevel(await getLevelUseCase.invoke());
   }
 
+  async function getLevelById(id: string) {
+    setDetailLevel(await getLevelByIdUseCase.invoke(id));
+  }
+
+  //Class
+  async function getClassById(id: string) {
+    setDetailClass(await getClassByIdUseCase.invoke(id));
+  }
+
   return {
     getStudents,
     getStudentById,
@@ -77,5 +93,9 @@ export default function ViewModel() {
     detailStudent,
     deleteImage,
     getLevel,
+    getLevelById,
+    detailLevel,
+    getClassById,
+    detailClass,
   };
 }

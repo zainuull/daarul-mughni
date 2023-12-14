@@ -162,9 +162,9 @@ const Menu = () => {
                     <h1 className="sm:text-xs lg:text-base">Tingkatan</h1>
                   </Link>
                   <Link
-                    href={{ pathname: '/dashboard/class' }}
+                    href={{ pathname: '/dashboard/classes' }}
                     className={`${
-                      pathname.match(/^\/dashboard\/class/)
+                      pathname.match(/^\/dashboard\/classes/)
                         ? 'bg-primary transition-all duration-300 p-2'
                         : 'cursor-pointer'
                     } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>

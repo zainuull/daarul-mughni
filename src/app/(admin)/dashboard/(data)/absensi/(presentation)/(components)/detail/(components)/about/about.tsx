@@ -13,9 +13,7 @@ const About = ({ detailAbsensi }) => {
             <div className="flex gap-x-2">
               <FaRegCircleUser size={35} />
               <div className="flex flex-col leading-none">
-                <h1 className="text-xs lg:text-sm font-bold uppercase">
-                  {detailAbsensi?.teacher}
-                </h1>
+                <h1 className="text-xs lg:text-sm font-bold uppercase">{detailAbsensi?.teacher}</h1>
                 <h2 className="text-xs lg:text-sm">Guru</h2>
               </div>
             </div>
@@ -25,9 +23,7 @@ const About = ({ detailAbsensi }) => {
             <div className="flex gap-x-2">
               <FiBook size={35} />
               <div className="flex flex-col leading-none">
-                <h1 className="text-xs lg:text-sm font-bold uppercase">
-                  {detailAbsensi?.lesson}
-                </h1>
+                <h1 className="text-xs lg:text-sm font-bold uppercase">{detailAbsensi?.lesson}</h1>
                 <h2 className="text-xs lg:text-sm">Mata Pelajaran</h2>
               </div>
             </div>
@@ -40,7 +36,7 @@ const About = ({ detailAbsensi }) => {
               <PiHouseLine size={35} />
               <div className="flex flex-col leading-none">
                 <h1 className="text-xs lg:text-sm font-bold uppercase">
-                  {detailAbsensi?.className}
+                  {detailAbsensi?.classTypeName}
                 </h1>
                 <h2 className="text-xs lg:text-sm">Kelas</h2>
               </div>
@@ -72,9 +68,7 @@ const About = ({ detailAbsensi }) => {
               </div>
             </div>
             <div className="flex flex-col leading-none">
-              <h1 className="text-xs lg:text-sm font-bold uppercase">
-                {detailAbsensi?.end_time}
-              </h1>
+              <h1 className="text-xs lg:text-sm font-bold uppercase">{detailAbsensi?.end_time}</h1>
               <h2 className="text-xs">Jam Keluar</h2>
             </div>
           </div>

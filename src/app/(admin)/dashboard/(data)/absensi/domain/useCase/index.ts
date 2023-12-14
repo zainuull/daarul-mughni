@@ -5,3 +5,6 @@ export * from "./get-absensi-byid.useCase"
 export * from "./get-absensi.useCase"
 export * from "./update-absensi.useCase"
 export * from "./get-students-by-classTypeName.useCase"
+export * from './get-level.useCase';
+export * from './get-level-byId.useCase';
+export * from './get-class-byId.useCase';

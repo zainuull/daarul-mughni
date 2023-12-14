@@ -7,8 +7,7 @@ import useViewModel from '../../../../vm/view.model';
 import { NotifyService } from '@/core/services/notify/notifyService';
 
 const TableList = ({ students, lesson, resultSearchData }) => {
-  const { createRecapitulation, getRecapitulationById, detailRecap, updateRecapitulation } =
-    useViewModel();
+  const { createRecapitulation, getRecapitulationById, updateRecapitulation } = useViewModel();
   const router = useRouter();
   let obj = { id: '', lesson: '', student: '', present: false };
   const notifyService = new NotifyService();

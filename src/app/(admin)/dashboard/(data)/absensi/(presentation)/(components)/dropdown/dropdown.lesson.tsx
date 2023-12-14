@@ -1,20 +1,22 @@
 'use client';
 import Select from 'react-select';
 import useDataAbsensi from '../../store/store.absensi';
-import { useEffect, useState } from 'react';
-import { getLessonsByLevelName } from '@/services/api';
+import { useEffect } from 'react';
+import useviewModel from '../../vm/view.model';
 
 export const DropdownLesson = () => {
+  const { getLevelById, detailLevel } = useviewModel();
   const [data, setData] = useDataAbsensi();
-  const [lesson, setLesson] = useState([]);
+  const lesson = detailLevel?.data?.lesson;
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getLessonsByLevelName(data?.levelName);
-      setLesson(res?.data?.lesson);
-    };
-    fetchData();
-  }, [data?.levelName]);
+    fetchData(data?.level_id);
+  }, [data?.level_id]);
+
+  const fetchData = async (id: string) => {
+    getLevelById(id);
+  };
 
   const nOption = lesson?.map((obj: { id: string; name: string }) => ({
     value: obj?.id,
