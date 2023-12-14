@@ -2,6 +2,7 @@ import Image from "next/image";
 import banner from "../../../../public/assets/banner.png"
 import kyai from '../../../../public/assets/kyai.png';
 
+
 const HomePage = () => {
   return (
     <div className="w-full min-h-screen relative">
