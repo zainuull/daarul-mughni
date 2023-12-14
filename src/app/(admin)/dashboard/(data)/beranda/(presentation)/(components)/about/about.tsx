@@ -68,7 +68,7 @@ const About = () => {
             </div>
             <div className="flex items-center gap-x-2 text-sm lg:text-base">
               <BsGenderMale size={20} />
-              <h1>Status</h1>
+              <h1>Jabatan</h1>
             </div>
             <div className="flex items-center gap-x-2 text-sm lg:text-base">
               <HiOutlineMapPin size={20} />
@@ -79,7 +79,7 @@ const About = () => {
             <h1> : {user?.name}</h1>
             <h1> : {user?.nip}</h1>
             <h1> : {user?.email}</h1>
-            <h1> : {user?.positionName}</h1>
+            <h1> : {user?.role}</h1>
             <h1> : {user?.telp}</h1>
           </div>
         </div>

@@ -51,6 +51,8 @@ const TableList = ({ students, lesson, resultSearchData }) => {
   };
 
   const handleNotPresent = (data: IStudentDataModel, index: number) => {
+    console.log(data);
+
     notifyService.confirmationUpdate().then((res) => {
       if (res) {
         const tempArray = [...isPresent];

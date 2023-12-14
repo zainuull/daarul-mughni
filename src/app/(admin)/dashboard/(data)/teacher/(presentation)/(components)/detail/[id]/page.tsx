@@ -105,7 +105,7 @@ const DetailStudent = ({ params }: { params: { id: string } }) => {
             <div className="w-1/2 h-20 flex items-center justify-center gap-x-6 shadow-lg bg-white">
               <MdOutlinePayment size={35} />
               <button className="py-2 w-[150px] text-sm lg:w-[200px] lg:text-base bg-green-400 rounded-lg hover:bg-green-500 transition-all duration-300">
-                Mutasi Pembayaran
+                Mutasi Penggajian
               </button>
             </div>
           </div>
