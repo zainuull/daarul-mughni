@@ -1,5 +1,5 @@
-import { IClassDataModel } from '../../../classes/domain/model/IModel';
-import { ILevelDataModel, ILevelModel } from '../../../level/domain/model/IModel';
+import { IClassDataModel } from '../../../../(master)/classes/domain/model/IModel';
+import { ILevelDataModel, ILevelModel } from '../../../../(master)/level/domain/model/IModel';
 import {
   IAbsensiDataModel,
   IAbsensiModel,

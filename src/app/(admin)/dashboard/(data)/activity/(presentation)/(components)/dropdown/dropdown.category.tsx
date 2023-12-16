@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import useDataEvents from '../../store/store.events';
-import { getCategories } from '@/services/api';
+import { getCategories } from '@/services/integrate/categories';
 
 export const DropdownCategory = () => {
   const [data, setData] = useDataEvents();

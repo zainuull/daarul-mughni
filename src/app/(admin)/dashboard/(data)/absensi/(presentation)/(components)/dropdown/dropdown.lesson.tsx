@@ -9,7 +9,6 @@ export const DropdownLesson = () => {
   const [data, setData] = useDataAbsensi();
   const lesson = detailLevel?.data?.lesson;
 
-
   useEffect(() => {
     fetchData(data?.level_id);
   }, [data?.level_id]);
@@ -37,6 +36,7 @@ export const DropdownLesson = () => {
       value={nOption?.find((option) => option.label === data?.lesson) || ''}
       isClearable={true}
       onChange={handle}
+      isDisabled={data?.levelName ? false : true}
       placeholder="Pilih pelajaran"
     />
   );

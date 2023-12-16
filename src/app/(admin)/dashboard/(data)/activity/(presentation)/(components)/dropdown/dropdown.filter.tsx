@@ -2,7 +2,7 @@
 import Select, { StylesConfig } from 'react-select';
 import { useEffect, useState } from 'react';
 import useDataEvents from '../../store/store.events';
-import { getCategories } from '@/services/api';
+import { getCategories } from '@/services/integrate/categories';
 
 export const DropdownFilter = () => {
   const [data, setData] = useDataEvents();
@@ -49,4 +49,3 @@ export const DropdownFilter = () => {
     />
   );
 };
-

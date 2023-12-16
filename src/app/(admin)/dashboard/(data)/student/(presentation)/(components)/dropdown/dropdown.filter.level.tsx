@@ -1,51 +1,44 @@
 'use client';
-import Select, { StylesConfig } from 'react-select';
-import { useEffect, useState } from 'react';
+import Select from 'react-select';
 import useDataStudent from '../../store/store.student';
-import { getLevel } from '@/services/api';
+import { useEffect } from 'react';
+import useViewModel from '../../vm/view.model';
+import useStoreLevel from '../../store/store.level';
 
 export const DropdownFilterLevel = () => {
+  const { getLevel } = useViewModel();
   const [data, setData] = useDataStudent();
-  const [level, setLevel] = useState([]);
+  const [dataStore] = useStoreLevel();
+  const level = dataStore?.data;
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getLevel();
-      setLevel(res?.data);
+      await getLevel();
     };
     fetchData();
   }, []);
 
   const levelOption = level?.map((obj: any) => ({
     value: obj?.id,
-    label: obj?.levelName,
+    label: obj?.name,
   }));
 
   const handleLevel = (option: any) => {
     setData({
       ...data,
-      filter_by_level: option?.label,
+      level_id: option?.value,
+      levelName: option?.label,
     });
-  };
-
-  // Define custom styles for the dropdown
-  const customStyles: StylesConfig = {
-    control: (provided) => ({
-      ...provided,
-      backgroundColor: '#f1f5f9',
-      borderColor: 'black',
-    }),
   };
 
   return (
     <Select
       closeMenuOnSelect={true}
       options={levelOption}
-      value={levelOption.find((option) => option.label === data?.filter_by_level) || ''}
+      value={levelOption?.find((option) => option.label === data?.levelName) || ''}
       isClearable={true}
       onChange={handleLevel}
-      styles={customStyles}
-      placeholder="Tingkatan"
+      placeholder="MTs"
     />
   );
 };

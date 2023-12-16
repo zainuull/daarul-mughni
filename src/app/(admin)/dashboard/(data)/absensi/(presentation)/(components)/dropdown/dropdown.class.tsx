@@ -1,6 +1,6 @@
 'use client';
 import Select from 'react-select';
-import useDataAbsensi from '../../store/store.absensi'
+import useDataAbsensi from '../../store/store.absensi';
 import { useEffect } from 'react';
 import useViewModel from '../../vm/view.model';
 
@@ -26,8 +26,6 @@ export const DropdownClass = () => {
     : [];
 
   const handleClass = (option: any) => {
-    console.log(option);
-
     setStudentForm({
       ...studentForm,
       className_id: option?.value,

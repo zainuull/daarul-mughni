@@ -70,9 +70,7 @@ const Menu = () => {
               {/* ------------ Teacher --------------- */}
               <div
                 onClick={() => handleDropDown('teacher')}
-                className={`w-full ${
-                  isOpen.teacher ? 'bg-amber-300' : 'bg-none'
-                } rounded-lg py-2 flex items-center justify-between px-1 cursor-pointer`}>
+                className={`w-full rounded-lg py-2 flex items-center justify-between px-1 cursor-pointer`}>
                 <div className="flex items-center gap-x-3 lg:gap-x-5">
                   <BiCubeAlt size={30} />
                   {menu ? null : <h1 className="sm:text-xs lg:text-base">Guru</h1>}
@@ -106,9 +104,7 @@ const Menu = () => {
               {/* ------------ Student --------------- */}
               <div
                 onClick={() => handleDropDown('student')}
-                className={`w-full ${
-                  isOpen.student ? 'bg-amber-300' : 'bg-none'
-                } rounded-lg py-2 flex items-center justify-between px-1 cursor-pointer`}>
+                className={`w-full rounded-lg py-2 flex items-center justify-between px-1 cursor-pointer`}>
                 <div className="flex items-center gap-x-3 lg:gap-x-5">
                   <TbUserSquareRounded size={30} />
                   {menu ? null : <h1 className="sm:text-xs lg:text-base">Siswa</h1>}
@@ -141,9 +137,7 @@ const Menu = () => {
               {/* ------------ Class --------------- */}
               <div
                 onClick={() => handleDropDown('classes')}
-                className={`w-full ${
-                  isOpen.classes ? 'bg-amber-300' : 'bg-none'
-                } rounded-lg py-2 flex items-center justify-between px-1 cursor-pointer`}>
+                className={`w-full rounded-lg py-2 flex items-center justify-between px-1 cursor-pointer`}>
                 <div className="flex items-center gap-x-3 lg:gap-x-5">
                   <MdOutlineClass size={30} />
                   {menu ? null : <h1 className="sm:text-xs lg:text-base">Kelas</h1>}
@@ -168,7 +162,7 @@ const Menu = () => {
                         ? 'bg-primary transition-all duration-300 p-2'
                         : 'cursor-pointer'
                     } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
-                    <h1 className="sm:text-xs lg:text-base">Kelas</h1>
+                    <h1 className="sm:text-xs lg:text-base">Nama Kelas</h1>
                   </Link>
                   <Link
                     href={{ pathname: '/dashboard/class-type' }}
@@ -178,6 +172,15 @@ const Menu = () => {
                         : 'cursor-pointer'
                     } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
                     <h1 className="sm:text-xs lg:text-base">Kode Kelas</h1>
+                  </Link>
+                  <Link
+                    href={{ pathname: '/dashboard/lesson' }}
+                    className={`${
+                      pathname.match(/^\/dashboard\/lesson/)
+                        ? 'bg-primary transition-all duration-300 p-2'
+                        : 'cursor-pointer'
+                    } w-full flex items-center justify-between p-0 rounded-lg lg:p-3`}>
+                    <h1 className="sm:text-xs lg:text-base">Mata Pelajaran</h1>
                   </Link>
                 </div>
               )}

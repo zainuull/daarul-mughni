@@ -1,58 +1,49 @@
 'use client';
-import Select, { StylesConfig } from 'react-select';
-import useDataAbsensi from '../../store/store.absensi';
-import { useEffect, useState } from 'react';
-import { getClassByLevel } from '@/services/api';
-import Swal from 'sweetalert2';
+import Select from 'react-select';
+import useData from '../../store/store.absensi';
+import { useEffect } from 'react';
+import useViewModel from '../../vm/view.model';
 
 export const DropdownFilterClass = () => {
-  const [formAbsensi, setFormAbsensi] = useDataAbsensi();
-  const [classes, setClasses] = useState([]);
+  const { getLevelById, detailLevel } = useViewModel();
+  const [form, setForm] = useData();
+  const classes = detailLevel?.data?.class;
 
   useEffect(() => {
-    fetchData();
-  }, [formAbsensi?.filter_by_level]);
+    fetchData(form?.level_id);
+  }, [form?.level_id]);
 
-  const fetchData = () => {
-    getClassByLevel(formAbsensi?.filter_by_level).then((res) => {
-      setClasses(res?.data?.class);
-    });
+  const fetchData = async (id: string) => {
+    await getLevelById(id);
   };
 
   // Check if datas is an array before using map
   const Option = Array.isArray(classes)
-    ? classes.map((obj: { className: string; id: string }) => ({
+    ? classes.map((obj: { name: string; id: string }) => ({
         value: obj?.id,
-        label: obj?.className,
+        label: obj?.name,
       }))
     : [];
 
-  const handlePosition = (option: any) => {
-    setFormAbsensi({
-      ...formAbsensi,
-      filter_by_class: option?.label || '',
-    });
-  };
+  const handleClass = (option: any) => {
+    console.log(option);
 
-  // Define custom styles for the dropdown
-  const customStyles: StylesConfig = {
-    control: (provided) => ({
-      ...provided,
-      backgroundColor: '#f1f5f9',
-      borderColor: 'black',
-    }),
+    setForm({
+      ...form,
+      className_id: option?.value,
+      className: option?.label,
+    });
   };
 
   return (
     <Select
       closeMenuOnSelect={true}
       options={Option}
-      value={Option.find((option) => option.label === formAbsensi?.filter_by_class) || ''}
+      value={Option?.find((option) => option.label === form?.className) || ''}
       isClearable={true}
-      onChange={handlePosition}
-      styles={customStyles}
-      placeholder="Kelas"
-      isDisabled={formAbsensi?.filter_by_level ? false : true}
+      onChange={handleClass}
+      isDisabled={form?.levelName ? false : true}
+      placeholder="MTs-1"
     />
   );
 };

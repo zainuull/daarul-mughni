@@ -35,12 +35,12 @@ const DataPersonal = () => {
             <DropdownClassType />
           </div>
           <div className="flex flex-col gap-y-2 col-span-1">
-            <h1 className="uppercase">Pengajar</h1>
-            <DropdownTeacher />
-          </div>
-          <div className="flex flex-col gap-y-2 col-span-1">
             <h1 className="uppercase">Nama Pelajaran</h1>
             <DropdownLesson />
+          </div>
+          <div className="flex flex-col gap-y-2 col-span-1">
+            <h1 className="uppercase">Pengajar</h1>
+            <DropdownTeacher />
           </div>
           <div className="flex flex-col gap-y-2 col-span-1">
             <h1 className="uppercase">Jam Mulai</h1>

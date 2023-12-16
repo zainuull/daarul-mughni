@@ -51,7 +51,7 @@ const DataPersonal = () => {
         <input
           onChange={handleChange}
           id="email"
-          type="mail"
+          type="email"
           className=" outline-none border border-black rounded-md h-10 px-4"
           placeholder="user@gmail.com"
           required

@@ -27,12 +27,12 @@ const DataPersonal = () => {
         <DropdownClassType />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
-        <h1 className="uppercase">Pengajar</h1>
-        <DropdownTeacher />
-      </div>
-      <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Nama Pelajaran</h1>
         <DropdownLesson />
+      </div>
+      <div className="flex flex-col gap-y-2 col-span-1">
+        <h1 className="uppercase">Pengajar</h1>
+        <DropdownTeacher />
       </div>
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Jam Mulai</h1>
@@ -48,7 +48,7 @@ const DataPersonal = () => {
       <div className="flex flex-col gap-y-2 col-span-1">
         <h1 className="uppercase">Jam Selesai</h1>
         <input
-          id='end_time'
+          id="end_time"
           onChange={handleChange}
           type="time"
           className=" outline-none border border-black rounded-md h-10 px-4"
